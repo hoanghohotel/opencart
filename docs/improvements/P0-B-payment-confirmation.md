@@ -68,3 +68,13 @@ Stripe response fixture dùng amount đơn vị nhỏ nhất, amount_received, c
 5. Cần Sandbox acceptance với merchant thật (test keys qua cấu hình bảo mật), gateway success/decline/action/timeout + amount/currency, browser end-to-end và recovery trước release. Không yêu cầu gửi secret trong chat.
 
 Nhóm này chặn các đường hoàn tất đơn không proof đã tìm thấy tại checkout/legacy; **chưa đóng PAY-01 như một integration hoàn chỉnh cho mọi provider**. Sau review/nghiệm thu mới chuyển nhóm; chưa tự động sửa CSRF/P1.
+
+## Bổ sung review — kiểm tra kiểu dữ liệu của proof
+
+Sau commit `b633f46`, thêm **14 case trước sửa** và tái hiện **65 test / 14 failures** trên validator cũ. Stripe ép `(int)` có thể biến `2000.9` hoặc chuỗi `2000junk` thành `2000`; ID dạng array/số/whitespace cũng từng được coi là có transaction ID. Currency dạng array làm validator ném lỗi thay vì trả kết quả từ chối có cấu trúc. Braintree cũng chấp nhận ID sai kiểu và chuỗi số tiền dạng scientific notation. Đây là robustness của hợp đồng phản hồi provider, **không phải bằng chứng người ngoài có thể sửa phản hồi TLS hoặc đã khai thác production**.
+
+Sửa trong `system/library/payment_gateway.php`: Stripe yêu cầu amount/amount_received là integer đúng theo hợp đồng PaymentIntent; transaction ID phải là chuỗi có nội dung, không whitespace/control characters; currency phải là chuỗi trước normalize. Braintree yêu cầu Amount là số thập phân đúng định dạng, tối đa hai chữ số lẻ trong phạm vi đang hỗ trợ, và currency đúng kiểu; provider zero-decimal vẫn có thể serialize whole units thành `20.00`. Không đổi các response hợp lệ, route, schema, gateway status policy hoặc lifecycle thanh toán.
+
+File bổ sung thay đổi: gateway, `tests/regression/payment_confirmation.php`, README test, tài liệu trạng thái P0-B và mô tả kiến trúc hiện hành. Sau sửa **65/65 test provider/controller pass**; các suite result-page và template callback được kiểm tra lại theo biên bản. Chưa sửa SEC-01/PAY-03/DB-01.
+
+Đã kiểm tra metadata cấu hình môi trường và trạng thái có/không của credential trong instance phát triển: không có binding/runtime variable gateway; Stripe test secret, Braintree sandbox keys/merchant account và PayPal sandbox client/secret đều rỗng trong app settings. Chỉ đọc tên và trạng thái, không xuất giá trị. Vì vậy **sandbox acceptance chưa chạy do thiếu cấu hình test credentials**, ngoài cổng review/nghiệm thu P0-B còn chờ. Cần cung cấp qua kênh cấu hình bảo mật, không gửi secret trong chat. Không dùng placeholder/test fixture làm credential để gọi provider thật.

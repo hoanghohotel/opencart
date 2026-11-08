@@ -25,3 +25,5 @@ Trong cùng P0, chọn PAY-02 trước vì đường lỗi nhỏ, có test xác 
 [P0-A — kết quả, test, compatibility và các file thay đổi](P0-A-result-pages.md).
 
 [P0-B — kết quả và các giới hạn integration](P0-B-payment-confirmation.md). Chưa triển khai nhóm P0-C.
+
+Review tiếp trong cùng P0-B: 14 test proof sai kiểu được viết trước sửa, hiện suite provider/controller đạt 65/65. Chưa chuyển P0-C; sandbox chưa chạy vì test credentials chưa có cấu hình. Xem phần bổ sung của biên bản P0-B.

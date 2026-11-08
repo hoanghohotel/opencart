@@ -455,13 +455,28 @@ class PaymentGateway {
 		if (!empty($intent['error'])) {
 			return array('error' => isset($intent['error']['message']) ? $intent['error']['message'] : 'Stripe payment failed.');
 		}
-		if (empty($intent['id']) || ($intent['status'] ?? '') !== 'succeeded'
+		if (!is_array($intent) || !$this->validTransactionId($intent['id'] ?? null) || ($intent['status'] ?? '') !== 'succeeded'
 			|| !isset($intent['amount'], $intent['amount_received'], $intent['currency'], $intent['livemode'])
-			|| (int)$intent['amount'] !== $cents || (int)$intent['amount_received'] !== $cents
+			|| !is_int($intent['amount']) || !is_int($intent['amount_received']) || !is_string($intent['currency'])
+			|| $intent['amount'] !== $cents || $intent['amount_received'] !== $cents
 			|| strtoupper($intent['currency']) !== $currency || $intent['livemode'] !== ($cfg['environment'] === 'live')) {
 			return array('error' => 'Stripe has not confirmed the expected captured payment. Check payment status before retrying.');
 		}
 		return array('success' => true, 'verified' => true, 'transaction_id' => $intent['id'], 'status' => $intent['status']);
+	}
+
+	private function validTransactionId($id) {
+		return is_string($id) && $id !== '' && !preg_match('/[\x00-\x20\x7f]/', $id);
+	}
+
+	private function validTransactionAmount($amount, $currency) {
+		if (!is_string($amount) && !is_int($amount) && !is_float($amount)) {
+			return false;
+		}
+		// A GraphQL Amount is a decimal value, not scientific notation. Permit
+		// zero-decimal providers to serialize whole units as e.g. "20.00".
+		$pattern = $this->currencyPrecision($currency) === 0 ? '/^[0-9]+(?:\.0{1,2})?$/D' : '/^[0-9]+(?:\.[0-9]{1,2})?$/D';
+		return preg_match($pattern, (string)$amount) === 1;
 	}
 
 	private function currencyPrecision($currency) {
@@ -702,9 +717,10 @@ class PaymentGateway {
 			'transaction' => array('amount' => number_format((float)$amount, $this->currencyPrecision($currency), '.', ''), 'merchantAccountId' => $cfg['merchant_account_id']))));
 		if (!empty($res['error'])) { return array('error' => $res['error']); }
 		$tx = $res['data']['chargePaymentMethod']['transaction'] ?? array();
-		if (empty($tx['id']) || !in_array($tx['status'] ?? '', array('SUBMITTED_FOR_SETTLEMENT','SETTLING','SETTLED','SETTLEMENT_PENDING'), true)
+		if (!is_array($tx) || !$this->validTransactionId($tx['id'] ?? null) || !in_array($tx['status'] ?? '', array('SUBMITTED_FOR_SETTLEMENT','SETTLING','SETTLED','SETTLEMENT_PENDING'), true)
 			|| !isset($tx['amount']['value'], $tx['amount']['currencyCode'], $tx['merchantAccountId'])
-			|| !is_numeric($tx['amount']['value']) || abs((float)$tx['amount']['value'] - (float)$amount) > 0.00001 || number_format((float)$tx['amount']['value'], $this->currencyPrecision($currency), '.', '') !== number_format((float)$amount, $this->currencyPrecision($currency), '.', '')
+			|| !is_string($tx['amount']['currencyCode']) || !$this->validTransactionAmount($tx['amount']['value'], $currency)
+			|| abs((float)$tx['amount']['value'] - (float)$amount) > 0.00001 || number_format((float)$tx['amount']['value'], $this->currencyPrecision($currency), '.', '') !== number_format((float)$amount, $this->currencyPrecision($currency), '.', '')
 			|| strtoupper($tx['amount']['currencyCode']) !== $currency || $tx['merchantAccountId'] !== $cfg['merchant_account_id']) {
 			return array('error' => 'Braintree has not confirmed the expected payment. Check payment status before retrying.');
 		}

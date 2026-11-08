@@ -220,4 +220,30 @@ runCase('Braintree malformed fractional response fails',function() {
     check(!empty($g->chargeBraintree('payment-fixture',20,'USD')['error']),'fraction rounded into matching proof');
 });
 
+
+// Provider payloads must match the API types, not merely cast to the quote.
+foreach (array(
+    array('amount', 2000.9), array('amount', '2000junk'), array('amount', 2000.0),
+    array('amount_received', 2000.9), array('amount_received', '2e3'),
+    array('id', array('pi_bad')), array('id', 123), array('id', '   '),
+    array('currency', array('usd'))
+) as $i=>$case) {
+    runCase('Stripe malformed proof type '.$i,function() use($case) {
+        $r=fixture();keys($r);$g=new ConfirmationGateway($r);$g->stripe=stripeResult();$g->stripe[$case[0]]=$case[1];
+        $out=$g->chargeStripe('pm_Fixture123',20,'USD');
+        check(!empty($out['error']) && empty($out['verified']),'malformed proof accepted');
+    });
+}
+foreach (array(
+    array('id', array('bt_bad')), array('id', 123), array('id', '   '),
+    array('amount', array('value'=>'2e1','currencyCode'=>'USD')),
+    array('amount', array('value'=>'20.00','currencyCode'=>array('USD')))
+) as $i=>$case) {
+    runCase('Braintree malformed proof type '.$i,function() use($case) {
+        $r=fixture();keys($r);$g=new ConfirmationGateway($r);$g->bt=btResult();$g->bt['data']['chargePaymentMethod']['transaction'][$case[0]]=$case[1];
+        $out=$g->chargeBraintree('payment-fixture',20,'USD');
+        check(!empty($out['error']) && empty($out['verified']),'malformed proof accepted');
+    });
+}
+
 echo "$tests tests, $failures failures\n";exit($failures?1:0);
