@@ -1,0 +1,1817 @@
+file,page,node,label,source
+01-project-structure,01 · Gốc repository,n1,opencartvn · 7fcbe3b27bb7,index.php:1
+01-project-structure,01 · Gốc repository,n2,index.php + config.php,index.php:1
+01-project-structure,01 · Gốc repository,n3,admin/ · backend MVC-L,admin/index.php:1
+01-project-structure,01 · Gốc repository,n4,application/ · frontend MVC-L,application/controller/common/home.php:1
+01-project-structure,01 · Gốc repository,n5,"system/ · engine, library, config, storage",system/framework.php:1
+01-project-structure,01 · Gốc repository,n6,"install/ · CLI, web, schema + seed",install/opencart.sql:1
+01-project-structure,01 · Gốc repository,n7,"image/ · catalog, cache, assets",application/model/tool/image.php:1
+01-project-structure,01 · Gốc repository,n8,composer.json + composer.lock,composer.json:1
+01-project-structure,01 · Gốc repository,n9,.htaccess + php.ini + robots.txt,.htaccess:1
+01-project-structure,application · MVC-L và module,n1,application/,application/controller/startup/router.php:1
+01-project-structure,admin · MVC-L và module,n1,admin/,admin/controller/startup/router.php:1
+01-project-structure,system · kernel và thư viện,n1,"engine/
+Action, Controller, Event, Loader, Model, Proxy, Registry, Router",system/engine/loader.php:1
+01-project-structure,system · kernel và thư viện,n2,"config/
+default.php, application.php, admin.php, install.php",system/config/default.php:1
+01-project-structure,system · kernel và thư viện,n3,"library/
+DB, Cache, Session, Template, Language, Request, Response, Url",system/library/db.php:1
+01-project-structure,system · kernel và thư viện,n4,"library/cart/
+Member, User, Currency; không có class Cart giỏ hàng",system/library/cart/member.php:1
+01-project-structure,system · kernel và thư viện,n5,"helper/
+general.php, utf8.php, bbcode.php",system/helper/general.php:1
+01-project-structure,system · kernel và thư viện,n6,"library/
+PaymentGateway, CloudStorage, Mail",system/library/payment_gateway.php:1
+01-project-structure,system · kernel và thư viện,n7,"storage/
+cache, logs, download, upload, session, modification, vendor",system/startup.php:1
+01-project-structure,system · kernel và thư viện,n8,"vendor/
+Twig, Braintree, Cardinity, Divido, SCSSPHP, WeChat
++ phụ thuộc bắc cầu theo composer.lock",composer.lock:1
+02-system-architecture,Kiến trúc phân lớp,n1,"Client / Browser
+HTML, AJAX, SDK thanh toán JS",application/view/template/marketplace/extension_info.twig:1
+02-system-architecture,Kiến trúc phân lớp,n2,"Web Server
+.htaccess rewrite / static assets",.htaccess:1
+02-system-architecture,Kiến trúc phân lớp,n3,"Entry + Bootstrap
+index.php / admin/index.php → start()",system/startup.php:103
+02-system-architecture,Kiến trúc phân lớp,n4,"Registry + Config + DB + Session
+framework.php",system/framework.php:1
+02-system-architecture,Kiến trúc phân lớp,n5,"Router → pre-actions → startup/router
+Action::execute()",system/engine/router.php:42
+02-system-architecture,Kiến trúc phân lớp,n6,"Controller frontend / admin
+Business logic nằm cả trong controller",application/controller/checkout/payment.php:217
+02-system-architecture,Kiến trúc phân lớp,n7,"Loader → Proxy → Model
+SQL trực tiếp, không ORM",system/engine/loader.php:239
+02-system-architecture,Kiến trúc phân lớp,n8,"MySQL / MariaDB
+59 bảng trong SQL seed; không FK khai báo",install/opencart.sql:1
+02-system-architecture,Kiến trúc phân lớp,n9,"Cache
+Cache\File mặc định",system/config/default.php:1
+02-system-architecture,Kiến trúc phân lớp,n10,"Session\DB
+oc_session; close() lúc shutdown",system/library/session.php:1
+02-system-architecture,Kiến trúc phân lớp,n11,"Event + Loader hooks
+controller/model/view/language/config",system/engine/event.php:1
+02-system-architecture,Kiến trúc phân lớp,n12,"Template → Twig → Response
+setOutput() → output()",system/library/template/twig.php:1
+02-system-architecture,Dịch vụ ngoài và ranh giới chứng cứ,n1,"PaymentGateway → Stripe HTTP API / Braintree GraphQL / PayPal OAuth
+Được triển khai trong PHP; cấu hình bật/tắt lấy từ settings",system/library/payment_gateway.php:1
+02-system-architecture,Dịch vụ ngoài và ranh giới chứng cứ,n2,"Browser JS → Braintree / PayPal SDK
+Không suy ra capture server thành công từ callback trình duyệt",application/view/template/checkout/paypal.twig:1
+02-system-architecture,Dịch vụ ngoài và ranh giới chứng cứ,n3,"CloudStorage → Wasabi / R2 / S3 / GCS
+HMAC S3-compatible hoặc OAuth service account; tùy driver",system/library/cloud_storage.php:1
+02-system-architecture,Dịch vụ ngoài và ranh giới chứng cứ,n4,"Mail → mail hoặc smtp adapter
+Mail controller dựng nội dung; gateway không được kiểm thử live",system/library/mail.php:1
+02-system-architecture,Dịch vụ ngoài và ranh giới chứng cứ,n5,"Cloud subscription → SQL records / history / transaction / backup metadata
+Chưa xác minh có provision hạ tầng thật trong repository",application/model/account/subscription.php:27
+03-application-logic,Frontend · thứ tự khởi tạo,n1,index.php → config.php → system/startup.php → start(application),index.php:1
+03-application-logic,Frontend · thứ tự khởi tạo,n2,"startup.php: vendor autoload, library autoloader, engine classes, helpers
+framework.php: Registry → Config(default, application) → Log → Event → Loader",system/startup.php:1
+03-application-logic,Frontend · thứ tự khởi tạo,n3,"framework.php: Request → Response → DB (+ SET time_zone) → Session object
+Session chưa start vì application.session_autostart=false",system/framework.php:1
+03-application-logic,Frontend · thứ tự khởi tạo,n4,Cache → Language → Document → autoload → Router::dispatch(),system/framework.php:1
+03-application-logic,Frontend · thứ tự khởi tạo,n5,"pre-actions: startup/session → startup/startup → startup/error
+→ startup/event → startup/maintenance → startup/seo_url",system/config/application.php:1
+03-application-logic,Frontend · thứ tự khởi tạo,n6,"startup/startup: settings + store URL, language, Cart\Member, PIN/IP gate, currency
+Gán member_token từ session vào request khi đã đăng nhập",application/controller/startup/startup.php:3
+03-application-logic,Frontend · thứ tự khởi tạo,n7,"startup/router::index() → controller before → Action::execute()
+→ controller after → framework Response::output()",application/controller/startup/router.php:3
+03-application-logic,Frontend · thứ tự khởi tạo,n8,Shutdown: Session::close() → Session\DB::write() → oc_session,system/library/session.php:80
+03-application-logic,Admin · thứ tự và chặn truy cập,n1,admin/index.php → admin/config.php → start(admin) → framework.php,admin/index.php:1
+03-application-logic,Admin · thứ tự và chặn truy cập,n2,"framework.php khởi tạo DB; Session::start() + cookie OCSESSID
+Admin kế thừa session_autostart=true, engine=db",system/config/admin.php:1
+03-application-logic,Admin · thứ tự và chặn truy cập,n3,pre-actions: startup/startup → error → event → sass → login → permission,system/config/admin.php:1
+03-application-logic,Admin · thứ tự và chặn truy cập,n4,"startup/login: Cart\User → isLogged() → user_token
+Nếu không hợp lệ: trả Action(common/login), dừng vòng pre-action",admin/controller/startup/login.php:3
+03-application-logic,Admin · thứ tự và chặn truy cập,n5,"startup/permission: hasPermission(access, route)
+Nếu bị từ chối: Action(error/permission); dashboard thuộc ignore",admin/controller/startup/permission.php:3
+03-application-logic,Admin · thứ tự và chặn truy cập,n6,"startup/router → Action → admin controller/model/view
+Mặc định common/dashboard; từng write controller kiểm tra modify",admin/controller/marketplace/extension.php:431
+03-application-logic,Admin · thứ tự và chặn truy cập,n7,Response::output() → HTTP; shutdown ghi oc_session,system/framework.php:1
+03-application-logic,"Event, localization và modification",n1,framework.php đăng ký action_event từ config; Event::register() sắp theo priority,system/engine/event.php:37
+03-application-logic,"Event, localization và modification",n2,"startup/event → setting/event::getEvents() → oc_event
+Frontend lọc application/*; admin lọc admin/*; bỏ prefix trước register",application/model/setting/event.php:3
+03-application-logic,"Event, localization và modification",n3,"Loader::controller/model/view/language/config phát before/after
+Event::trigger() gọi Action; kết quả non-null có thể thay thế xử lý",system/engine/loader.php:1
+03-application-logic,"Event, localization và modification",n4,"Frontend event/language before/after backup/restore; view inject language
+language/*/after → event/translation → design/translation → oc_translation",application/controller/event/translation.php:3
+03-application-logic,"Event, localization và modification",n5,"Admin config có 2 khóa view/*/before: PHP giữ khóa sau
+Vì vậy event/theme ở khóa trước không được kích hoạt qua config này",system/config/admin.php:1
+03-application-logic,"Event, localization và modification",n6,"startup.php::modification() tìm file thay thế trong DIR_MODIFICATION
+Có oc_modification; chưa xác minh pipeline cài đặt/refresh OCMOD đầy đủ",system/startup.php:49
+04-frontend-flow,"Trang chủ, danh mục, tìm kiếm, chi tiết",n1,"common/home::index() → common/footer + common/header → common/home.twig
+Controller trang chủ không load model riêng",application/controller/common/home.php:3
+04-frontend-flow,"Trang chủ, danh mục, tìm kiếm, chi tiết",n2,"Danh mục / search dùng cùng marketplace/extension::index()
+GET filter_category_id, filter_search, filter_download_id, license, rating, sort",application/controller/marketplace/extension.php:3
+04-frontend-flow,"Trang chủ, danh mục, tìm kiếm, chi tiết",n3,"ModelMarketplaceExtension::getTotalExtensions() → getExtensions()
+SQL oc_extension + category + member; EXISTS download_path theo version",application/model/marketplace/extension.php:21
+04-frontend-flow,"Trang chủ, danh mục, tìm kiếm, chi tiết",n4,load->view(marketplace/extension_list) → Response::setOutput(),application/controller/marketplace/extension.php:3
+04-frontend-flow,"Trang chủ, danh mục, tìm kiếm, chi tiết",n5,"Chi tiết: marketplace/extension/info → getExtension() + ảnh/download/rating
+load->view(marketplace/extension_info); comments AJAX là request riêng",application/controller/marketplace/extension.php:308
+04-frontend-flow,"Trang chủ, danh mục, tìm kiếm, chi tiết",n6,"Không có checkout/cart hoặc class Cart quản lý giỏ hàng trong checkout này
+Nút Buy mở AJAX checkout/checkout cho 1 extension_id + quantity",application/view/template/marketplace/extension_info.twig:1
+04-frontend-flow,"Đăng ký, đăng nhập, tài khoản và đơn đã mua",n1,"account/register::index() POST → validate() → account/member::addMember()
+oc_member verified=0; tùy notify cập nhật oc_newsletter",application/controller/account/register.php:5
+04-frontend-flow,"Đăng ký, đăng nhập, tài khoản và đơn đã mua",n2,"getMember() → mail/register → redirect account/success
+Xác minh email xử lý riêng tại account/verify",application/controller/account/verify.php:3
+04-frontend-flow,"Đăng ký, đăng nhập, tài khoản và đơn đã mua",n3,"account/login::validate() → getMemberByLogin() → Cart\Member::login()
+Kiểm tra status/verified; sai → addLoginAttempt; đúng → deleteLoginAttempts",application/controller/account/login.php:123
+04-frontend-flow,"Đăng ký, đăng nhập, tài khoản và đơn đã mua",n4,"Cart\Member::login(): query oc_member, tạo member_id/member_token trong session
+Cập nhật IP → query oc_member_ip; controller kiểm tra hasPin()/isIpVerified()",system/library/cart/member.php:86
+04-frontend-flow,"Đăng ký, đăng nhập, tài khoản và đơn đã mua",n5,"account/account → menu và các trang profile, seller, extension, payment, subscription
+Không gọi đây là oc_customer: identity thực là oc_member",application/controller/account/account.php:3
+04-frontend-flow,"Đăng ký, đăng nhập, tài khoản và đơn đã mua",n6,"account/order::index()/info() → account/order getOrders/getOrder
+History hóa đơn số và trạng thái; không tìm thấy tracking vận chuyển",application/controller/account/order.php:3
+04-frontend-flow,Checkout hiện hành · mua trực tiếp extension,n1,extension_info.twig #button-purchase AJAX → checkout/checkout::index(),application/view/template/marketplace/extension_info.twig:1
+04-frontend-flow,Checkout hiện hành · mua trực tiếp extension,n2,"Gate isLogged + member_token; sai → HTTP 401 + Location login
+Lưu redirect về marketplace/extension/info?purchase=1",application/controller/checkout/checkout.php:3
+04-frontend-flow,Checkout hiện hành · mua trực tiếp extension,n3,"getExtension() → getPayments() → PaymentGateway enable/config
+Render checkout/checkout; chọn vaulted/card/paypal",application/controller/checkout/checkout.php:3
+04-frontend-flow,Checkout hiện hành · mua trực tiếp extension,n4,"Card: checkout/payment/card → prepare()
+getPayment() hoặc vaultStripeCard/vaultBraintreeCard → pending_extension_order",application/controller/checkout/payment.php:89
+04-frontend-flow,Checkout hiện hành · mua trực tiếp extension,n5,"confirm(): nếu pending stripe/braintree → chargeStripe/chargeBraintree
+Nếu không lỗi → unset pending → account/order::addOrder() → JSON",application/controller/checkout/payment.php:217
+04-frontend-flow,Checkout hiện hành · mua trực tiếp extension,n6,"Nhánh khác: confirm không có pending → addOrder trực tiếp, transaction token
+PayPal pending không đi qua nhánh chargeStripe/chargeBraintree",application/controller/checkout/payment.php:217
+04-frontend-flow,Checkout hiện hành · mua trực tiếp extension,n7,"checkout/checkout/success cũng addOrder nếu còn pending + đã đăng nhập
+Không có gọi xác minh gateway trong method success() này",application/controller/checkout/checkout.php:83
+04-frontend-flow,Nhánh legacy và các module khác,n1,"marketplace/purchase::index() → purchase.twig
+marketplace/braintree::payment() → addOrder trực tiếp",application/controller/marketplace/braintree.php:33
+04-frontend-flow,Nhánh legacy và các module khác,n2,"marketplace/paypal::send() → addOrder; callback() chỉ redirect success
+Không gộp các nhánh này với charge server trong checkout/payment",application/controller/marketplace/paypal.php:30
+04-frontend-flow,Nhánh legacy và các module khác,n3,"CMS: blog, download, information, showcase, sitemap
+Support: enquiry/contact, partner, guide và các trang thông tin",application/controller/cms/blog.php:3
+04-frontend-flow,Nhánh legacy và các module khác,n4,"Seller: account/extension CRUD + upload → CloudStorage
+Buyer download: marketplace/download → kiểm tra quyền mua → outputFile()",application/controller/marketplace/download.php:81
+04-frontend-flow,Nhánh legacy và các module khác,n5,"Cloud: account/subscription → account/subscription model → SQL, history, transaction
+cloud/store hiển thị subscription; provision hạ tầng chưa xác minh",application/model/account/subscription.php:27
+05-admin-flow,Đăng nhập quản trị và phân quyền,n1,GET /admin → pre-action startup/login → common/login::index(),admin/controller/startup/login.php:3
+05-admin-flow,Đăng nhập quản trị và phân quyền,n2,"POST common/login → validate() → user/user::getLoginAttempts()
+Chặn nếu vượt max_attempts trong một giờ",admin/controller/common/login.php:87
+05-admin-flow,Đăng nhập quản trị và phân quyền,n3,"Cart\User::login() → oc_user; lưu session user_id
+Request kế tiếp: User::__construct() đọc oc_user_group.permission JSON",system/library/cart/user.php:42
+05-admin-flow,Đăng nhập quản trị và phân quyền,n4,"Request kế tiếp: startup/login kiểm tra session + user_token
+startup/permission kiểm tra access; write controller kiểm tra modify",admin/controller/startup/permission.php:3
+05-admin-flow,Đăng nhập quản trị và phân quyền,n5,"common/dashboard::index() query trực tiếp extension/member/order/partner/showcase
+KPI + recent orders/members/extensions → common/dashboard.twig",admin/controller/common/dashboard.php:3
+05-admin-flow,"Quản lý extension, category, member và order",n1,"marketplace/extension index/add/edit/delete → ModelMarketplaceExtension
+validateForm/validateDelete kiểm tra modify + dữ liệu",admin/controller/marketplace/extension.php:35
+05-admin-flow,"Quản lý extension, category, member và order",n2,"editExtension(): UPDATE oc_extension → thay ảnh → thay downloads + version paths
+Đây là sản phẩm số; không có admin/catalog/product trong checkout",admin/model/marketplace/extension.php:33
+05-admin-flow,"Quản lý extension, category, member và order",n3,"marketplace/category → marketplace/category model → oc_extension_category
+member/member, member/seller, member/partner quản lý identity/profile",admin/controller/marketplace/category.php:5
+05-admin-flow,"Quản lý extension, category, member và order",n4,"sale/order::index()/info() → sale/order model
+Thông tin đơn / update trạng thái; xem method inventory cho endpoint chính xác",admin/controller/sale/order.php:5
+05-admin-flow,"Quản lý extension, category, member và order",n5,"setting/payment + setting/setting: gateway, SMTP, cloud storage settings
+Không tìm thấy controller shipping; không dựng quy trình vận chuyển",admin/controller/setting/payment.php:5
+05-admin-flow,Admin · danh mục controller 1,n1,"cloud/subscription.php
+ControllerCloudSubscription
+index, add, edit, delete, getFilterUrl, getList, getForm, validateForm, validateDelete",admin/controller/cloud/subscription.php:1
+05-admin-flow,Admin · danh mục controller 1,n2,"cms/blog.php
+ControllerCmsBlog
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/cms/blog.php:1
+05-admin-flow,Admin · danh mục controller 1,n3,"cms/blog_category.php
+ControllerCmsBlogCategory
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/cms/blog_category.php:1
+05-admin-flow,Admin · danh mục controller 1,n4,"cms/blog_comment.php
+ControllerCmsBlogComment
+index, edit, approve, delete, getList, getForm, validateForm, validateDelete",admin/controller/cms/blog_comment.php:1
+05-admin-flow,Admin · danh mục controller 1,n5,"cms/download.php
+ControllerCmsDownload
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/cms/download.php:1
+05-admin-flow,Admin · danh mục controller 1,n6,"cms/information.php
+ControllerCmsInformation
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/cms/information.php:1
+05-admin-flow,Admin · danh mục controller 1,n7,"cms/showcase.php
+ControllerCmsShowcase
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/cms/showcase.php:1
+05-admin-flow,Admin · danh mục controller 1,n8,"common/column_left.php
+ControllerCommonColumnLeft
+index",admin/controller/common/column_left.php:1
+05-admin-flow,Admin · danh mục controller 1,n9,"common/dashboard.php
+ControllerCommonDashboard
+index",admin/controller/common/dashboard.php:1
+05-admin-flow,Admin · danh mục controller 1,n10,"common/developer.php
+ControllerCommonDeveloper
+index, edit, theme, sass",admin/controller/common/developer.php:1
+05-admin-flow,Admin · danh mục controller 1,n11,"common/filemanager.php
+ControllerCommonFileManager
+index, upload, folder, delete",admin/controller/common/filemanager.php:1
+05-admin-flow,Admin · danh mục controller 1,n12,"common/footer.php
+ControllerCommonFooter
+index",admin/controller/common/footer.php:1
+05-admin-flow,Admin · danh mục controller 2,n1,"common/forgotten.php
+ControllerCommonForgotten
+index, validate",admin/controller/common/forgotten.php:1
+05-admin-flow,Admin · danh mục controller 2,n2,"common/header.php
+ControllerCommonHeader
+index",admin/controller/common/header.php:1
+05-admin-flow,Admin · danh mục controller 2,n3,"common/login.php
+ControllerCommonLogin
+index, validate",admin/controller/common/login.php:1
+05-admin-flow,Admin · danh mục controller 2,n4,"common/logout.php
+ControllerCommonLogout
+index",admin/controller/common/logout.php:1
+05-admin-flow,Admin · danh mục controller 2,n5,"common/profile.php
+ControllerCommonProfile
+index, validateForm",admin/controller/common/profile.php:1
+05-admin-flow,Admin · danh mục controller 2,n6,"common/reset.php
+ControllerCommonReset
+index, validate",admin/controller/common/reset.php:1
+05-admin-flow,Admin · danh mục controller 2,n7,"common/security.php
+ControllerCommonSecurity
+index, move",admin/controller/common/security.php:1
+05-admin-flow,Admin · danh mục controller 2,n8,"design/banner.php
+ControllerDesignBanner
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/design/banner.php:1
+05-admin-flow,Admin · danh mục controller 2,n9,"design/seo_url.php
+ControllerDesignSeoUrl
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/design/seo_url.php:1
+05-admin-flow,Admin · danh mục controller 2,n10,"error/not_found.php
+ControllerErrorNotFound
+index",admin/controller/error/not_found.php:1
+05-admin-flow,Admin · danh mục controller 2,n11,"error/permission.php
+ControllerErrorPermission
+index",admin/controller/error/permission.php:1
+05-admin-flow,Admin · danh mục controller 2,n12,"event/language.php
+ControllerEventLanguage
+index, before, after",admin/controller/event/language.php:1
+05-admin-flow,Admin · danh mục controller 3,n1,"event/statistics.php
+ControllerEventStatistics
+removeReview, removeReturn",admin/controller/event/statistics.php:1
+05-admin-flow,Admin · danh mục controller 3,n2,"event/theme.php
+ControllerEventTheme
+index",admin/controller/event/theme.php:1
+05-admin-flow,Admin · danh mục controller 3,n3,"localisation/country.php
+ControllerLocalisationCountry
+index, add, edit, delete, getList, getForm, validateForm, validateDelete, country",admin/controller/localisation/country.php:1
+05-admin-flow,Admin · danh mục controller 3,n4,"localisation/currency.php
+ControllerLocalisationCurrency
+index, add, edit, delete, refresh, getList, getForm, validateForm, validateDelete, validateRefresh",admin/controller/localisation/currency.php:1
+05-admin-flow,Admin · danh mục controller 3,n5,"localisation/language.php
+ControllerLocalisationLanguage
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/localisation/language.php:1
+05-admin-flow,Admin · danh mục controller 3,n6,"localisation/order_status.php
+ControllerLocalisationOrderStatus
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/localisation/order_status.php:1
+05-admin-flow,Admin · danh mục controller 3,n7,"localisation/zone.php
+ControllerLocalisationZone
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/localisation/zone.php:1
+05-admin-flow,Admin · danh mục controller 3,n8,"mail/affiliate.php
+ControllerMailAffiliate
+approve, deny",admin/controller/mail/affiliate.php:1
+05-admin-flow,Admin · danh mục controller 3,n9,"mail/customer.php
+ControllerMailCustomer
+approve, deny",admin/controller/mail/customer.php:1
+05-admin-flow,Admin · danh mục controller 3,n10,"mail/forgotten.php
+ControllerMailForgotten
+index",admin/controller/mail/forgotten.php:1
+05-admin-flow,Admin · danh mục controller 3,n11,"mail/return.php
+ControllerMailReturn
+index",admin/controller/mail/return.php:1
+05-admin-flow,Admin · danh mục controller 3,n12,"mail/reward.php
+ControllerMailReward
+index",admin/controller/mail/reward.php:1
+05-admin-flow,Admin · danh mục controller 4,n1,"mail/transaction.php
+ControllerMailTransaction
+index",admin/controller/mail/transaction.php:1
+05-admin-flow,Admin · danh mục controller 4,n2,"marketplace/category.php
+ControllerMarketplaceCategory
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/marketplace/category.php:1
+05-admin-flow,Admin · danh mục controller 4,n3,"marketplace/comment.php
+ControllerMarketplaceComment
+index, edit, approve, delete, getList, getForm, validateForm, validateDelete",admin/controller/marketplace/comment.php:1
+05-admin-flow,Admin · danh mục controller 4,n4,"marketplace/extension.php
+ControllerMarketplaceExtension
+index, add, edit, delete, getFilterUrl, getList, getForm, validateForm, validateDelete",admin/controller/marketplace/extension.php:1
+05-admin-flow,Admin · danh mục controller 4,n5,"marketplace/promotion.php
+ControllerMarketplacePromotion
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/marketplace/promotion.php:1
+05-admin-flow,Admin · danh mục controller 4,n6,"member/member.php
+ControllerMemberMember
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/member/member.php:1
+05-admin-flow,Admin · danh mục controller 4,n7,"member/partner.php
+ControllerMemberPartner
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/member/partner.php:1
+05-admin-flow,Admin · danh mục controller 4,n8,"member/seller.php
+ControllerMemberSeller
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/member/seller.php:1
+05-admin-flow,Admin · danh mục controller 4,n9,"sale/order.php
+ControllerSaleOrder
+index, add, edit, delete, getList, info, getForm, validateForm, validateDelete, getStatusClass",admin/controller/sale/order.php:1
+05-admin-flow,Admin · danh mục controller 4,n10,"setting/payment.php
+ControllerSettingPayment
+index, testStripe, testBraintree, testPaypal, validate",admin/controller/setting/payment.php:1
+05-admin-flow,Admin · danh mục controller 4,n11,"setting/setting.php
+ControllerSettingSetting
+index, validate, testSmtp, testStorage",admin/controller/setting/setting.php:1
+05-admin-flow,Admin · danh mục controller 4,n12,"setting/store.php
+ControllerSettingStore
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/setting/store.php:1
+05-admin-flow,Admin · danh mục controller 5,n1,"startup/error.php
+ControllerStartupError
+index, handler",admin/controller/startup/error.php:1
+05-admin-flow,Admin · danh mục controller 5,n2,"startup/event.php
+ControllerStartupEvent
+index",admin/controller/startup/event.php:1
+05-admin-flow,Admin · danh mục controller 5,n3,"startup/login.php
+ControllerStartupLogin
+index",admin/controller/startup/login.php:1
+05-admin-flow,Admin · danh mục controller 5,n4,"startup/permission.php
+ControllerStartupPermission
+index",admin/controller/startup/permission.php:1
+05-admin-flow,Admin · danh mục controller 5,n5,"startup/router.php
+ControllerStartupRouter
+index",admin/controller/startup/router.php:1
+05-admin-flow,Admin · danh mục controller 5,n6,"startup/sass.php
+ControllerStartupSass
+index",admin/controller/startup/sass.php:1
+05-admin-flow,Admin · danh mục controller 5,n7,"startup/startup.php
+ControllerStartupStartup
+index",admin/controller/startup/startup.php:1
+05-admin-flow,Admin · danh mục controller 5,n8,"support/enquiry.php
+ControllerSupportEnquiry
+index, info, delete, getFilterUrl, getList, validateDelete",admin/controller/support/enquiry.php:1
+05-admin-flow,Admin · danh mục controller 5,n9,"tool/backup.php
+ControllerToolBackup
+index, import, export",admin/controller/tool/backup.php:1
+05-admin-flow,Admin · danh mục controller 5,n10,"tool/log.php
+ControllerToolLog
+index, download, clear",admin/controller/tool/log.php:1
+05-admin-flow,Admin · danh mục controller 5,n11,"tool/upload.php
+ControllerToolUpload
+index, delete, getList, validateDelete, download, upload",admin/controller/tool/upload.php:1
+05-admin-flow,Admin · danh mục controller 5,n12,"user/api.php
+ControllerUserApi
+index, add, edit, delete, getList, getForm, validateForm, validateDelete, deleteSession",admin/controller/user/api.php:1
+05-admin-flow,Admin · danh mục controller 6,n1,"user/user.php
+ControllerUserUser
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/user/user.php:1
+05-admin-flow,Admin · danh mục controller 6,n2,"user/user_permission.php
+ControllerUserUserPermission
+index, add, edit, delete, getList, getForm, validateForm, validateDelete",admin/controller/user/user_permission.php:1
+06-sequence-diagrams,Request frontend → response,n2,index / framework,system/framework.php:1
+06-sequence-diagrams,Request frontend → response,n3,Router / Action,system/engine/action.php:1
+06-sequence-diagrams,Request frontend → response,n4,Controller / Loader,application/controller/startup/router.php:1
+06-sequence-diagrams,Request frontend → response,n5,Model / DB,application/model/marketplace/extension.php:1
+06-sequence-diagrams,Request frontend → response,n6,Template / Response,system/library/template/twig.php:1
+06-sequence-diagrams,Request frontend → response,n13,,index.php:1
+06-sequence-diagrams,Request frontend → response,n15,,system/framework.php:1
+06-sequence-diagrams,Request frontend → response,n17,,application/controller/startup/router.php:3
+06-sequence-diagrams,Request frontend → response,n19,,application/controller/marketplace/extension.php:3
+06-sequence-diagrams,Request frontend → response,n21,,application/model/marketplace/extension.php:21
+06-sequence-diagrams,Request frontend → response,n23,,application/controller/marketplace/extension.php:3
+06-sequence-diagrams,Request frontend → response,n25,,application/controller/startup/router.php:3
+06-sequence-diagrams,Request frontend → response,n27,,system/framework.php:1
+06-sequence-diagrams,Request frontend → response,n29,,system/library/response.php:892
+06-sequence-diagrams,Đăng nhập member · nhánh thành công,n2,AccountLogin,application/controller/account/login.php:1
+06-sequence-diagrams,Đăng nhập member · nhánh thành công,n3,ModelAccountMember,application/model/account/member.php:1
+06-sequence-diagrams,Đăng nhập member · nhánh thành công,n4,Cart\Member,system/library/cart/member.php:1
+06-sequence-diagrams,Đăng nhập member · nhánh thành công,n5,DB / Session,system/library/session/db.php:1
+06-sequence-diagrams,Đăng nhập member · nhánh thành công,n11,,application/controller/account/login.php:5
+06-sequence-diagrams,Đăng nhập member · nhánh thành công,n13,,application/controller/account/login.php:123
+06-sequence-diagrams,Đăng nhập member · nhánh thành công,n15,,application/model/account/member.php:99
+06-sequence-diagrams,Đăng nhập member · nhánh thành công,n17,,application/controller/account/login.php:123
+06-sequence-diagrams,Đăng nhập member · nhánh thành công,n19,,system/library/cart/member.php:86
+06-sequence-diagrams,Đăng nhập member · nhánh thành công,n21,,application/controller/account/login.php:123
+06-sequence-diagrams,Đăng nhập member · nhánh thành công,n23,,application/controller/account/login.php:5
+06-sequence-diagrams,Đăng nhập member · nhánh thành công,n25,,application/controller/account/login.php:5
+06-sequence-diagrams,Yêu cầu thêm giỏ hàng · không có triển khai,n2,"Hành vi có thật: extension_info.twig Buy → AJAX checkout/checkout
+Truyền extension_id và quantity trực tiếp, không lưu basket",application/view/template/marketplace/extension_info.twig:1
+06-sequence-diagrams,Checkout · chọn phương thức thanh toán,n1,Browser / modal,application/view/template/marketplace/extension_info.twig:1
+06-sequence-diagrams,Checkout · chọn phương thức thanh toán,n2,CheckoutCheckout,application/controller/checkout/checkout.php:1
+06-sequence-diagrams,Checkout · chọn phương thức thanh toán,n3,Extension model,application/model/marketplace/extension.php:1
+06-sequence-diagrams,Checkout · chọn phương thức thanh toán,n4,Payment model,application/model/account/payment.php:1
+06-sequence-diagrams,Checkout · chọn phương thức thanh toán,n5,PaymentGateway,system/library/payment_gateway.php:1
+06-sequence-diagrams,Checkout · chọn phương thức thanh toán,n11,,application/view/template/marketplace/extension_info.twig:1
+06-sequence-diagrams,Checkout · chọn phương thức thanh toán,n13,,application/controller/checkout/checkout.php:3
+06-sequence-diagrams,Checkout · chọn phương thức thanh toán,n15,,application/controller/checkout/checkout.php:3
+06-sequence-diagrams,Checkout · chọn phương thức thanh toán,n17,,application/controller/checkout/checkout.php:3
+06-sequence-diagrams,Checkout · chọn phương thức thanh toán,n19,,application/controller/checkout/checkout.php:3
+06-sequence-diagrams,Checkout · chọn phương thức thanh toán,n21,,application/controller/checkout/checkout.php:3
+06-sequence-diagrams,Tạo đơn · ModelAccountOrder::addOrder,n1,Caller,application/controller/checkout/payment.php:217
+06-sequence-diagrams,Tạo đơn · ModelAccountOrder::addOrder,n2,ModelAccountOrder,application/model/account/order.php:1
+06-sequence-diagrams,Tạo đơn · ModelAccountOrder::addOrder,n3,DB,system/library/db/mysqli.php:1
+06-sequence-diagrams,Tạo đơn · ModelAccountOrder::addOrder,n4,Mail controller,application/controller/mail/order.php:1
+06-sequence-diagrams,Tạo đơn · ModelAccountOrder::addOrder,n9,,application/controller/checkout/payment.php:217
+06-sequence-diagrams,Tạo đơn · ModelAccountOrder::addOrder,n11,,application/model/account/order.php:3
+06-sequence-diagrams,Tạo đơn · ModelAccountOrder::addOrder,n13,,application/model/account/order.php:3
+06-sequence-diagrams,Tạo đơn · ModelAccountOrder::addOrder,n15,,application/model/account/order.php:3
+06-sequence-diagrams,Tạo đơn · ModelAccountOrder::addOrder,n17,,application/model/account/order.php:3
+06-sequence-diagrams,Tạo đơn · ModelAccountOrder::addOrder,n19,,application/model/account/order.php:3
+06-sequence-diagrams,Tạo đơn · ModelAccountOrder::addOrder,n21,,application/model/account/order.php:3
+06-sequence-diagrams,Thanh toán thẻ · confirm pending stripe/braintree,n1,Browser,application/view/template/checkout/confirm.twig:1
+06-sequence-diagrams,Thanh toán thẻ · confirm pending stripe/braintree,n2,CheckoutPayment,application/controller/checkout/payment.php:1
+06-sequence-diagrams,Thanh toán thẻ · confirm pending stripe/braintree,n3,PaymentGateway,system/library/payment_gateway.php:1
+06-sequence-diagrams,Thanh toán thẻ · confirm pending stripe/braintree,n5,ModelAccountOrder,application/model/account/order.php:1
+06-sequence-diagrams,Thanh toán thẻ · confirm pending stripe/braintree,n11,,application/controller/checkout/payment.php:217
+06-sequence-diagrams,Thanh toán thẻ · confirm pending stripe/braintree,n13,,application/controller/checkout/payment.php:217
+06-sequence-diagrams,Thanh toán thẻ · confirm pending stripe/braintree,n15,,system/library/payment_gateway.php:1
+06-sequence-diagrams,Thanh toán thẻ · confirm pending stripe/braintree,n19,,application/controller/checkout/payment.php:217
+06-sequence-diagrams,Thanh toán thẻ · confirm pending stripe/braintree,n21,,application/controller/checkout/payment.php:217
+06-sequence-diagrams,Thanh toán thẻ · confirm pending stripe/braintree,n23,,application/controller/checkout/payment.php:217
+06-sequence-diagrams,Admin cập nhật “sản phẩm” = extension,n2,Pre-actions,system/config/admin.php:1
+06-sequence-diagrams,Admin cập nhật “sản phẩm” = extension,n3,MarketplaceExtension,admin/controller/marketplace/extension.php:1
+06-sequence-diagrams,Admin cập nhật “sản phẩm” = extension,n4,ModelMarketplaceExtension,admin/model/marketplace/extension.php:1
+06-sequence-diagrams,Admin cập nhật “sản phẩm” = extension,n5,DB,install/opencart.sql:1
+06-sequence-diagrams,Admin cập nhật “sản phẩm” = extension,n11,,admin/controller/marketplace/extension.php:35
+06-sequence-diagrams,Admin cập nhật “sản phẩm” = extension,n13,,admin/controller/startup/permission.php:3
+06-sequence-diagrams,Admin cập nhật “sản phẩm” = extension,n15,,admin/controller/marketplace/extension.php:35
+06-sequence-diagrams,Admin cập nhật “sản phẩm” = extension,n17,,admin/controller/marketplace/extension.php:35
+06-sequence-diagrams,Admin cập nhật “sản phẩm” = extension,n19,,admin/model/marketplace/extension.php:33
+06-sequence-diagrams,Admin cập nhật “sản phẩm” = extension,n21,,admin/model/marketplace/extension.php:33
+06-sequence-diagrams,Admin cập nhật “sản phẩm” = extension,n23,,admin/controller/marketplace/extension.php:35
+07-database-er,Quan hệ logic đã có bằng chứng 1,n1,"oc_member
+PK member_id",install/opencart.sql:1448
+07-database-er,Quan hệ logic đã có bằng chứng 1,n2,"oc_extension
+PK extension_id",install/opencart.sql:578
+07-database-er,Quan hệ logic đã có bằng chứng 1,n3,application/model/marketplace/extension.php::getExtension(),application/model/marketplace/extension.php:15
+07-database-er,Quan hệ logic đã có bằng chứng 1,n4,"oc_extension_category
+PK extension_category_id",install/opencart.sql:655
+07-database-er,Quan hệ logic đã có bằng chứng 1,n5,"oc_extension
+PK extension_id",install/opencart.sql:578
+07-database-er,Quan hệ logic đã có bằng chứng 1,n6,application/model/marketplace/extension.php::getExtension(),application/model/marketplace/extension.php:15
+07-database-er,Quan hệ logic đã có bằng chứng 1,n7,"oc_extension
+PK extension_id",install/opencart.sql:578
+07-database-er,Quan hệ logic đã có bằng chứng 1,n8,"oc_extension_download
+PK extension_download_id",install/opencart.sql:708
+07-database-er,Quan hệ logic đã có bằng chứng 1,n9,admin/model/marketplace/extension.php::editExtension(),admin/model/marketplace/extension.php:33
+07-database-er,Quan hệ logic đã có bằng chứng 1,n10,"oc_extension_download
+PK extension_download_id",install/opencart.sql:708
+07-database-er,Quan hệ logic đã có bằng chứng 1,n11,"oc_extension_download_path
+PK extension_download_id, download_id",install/opencart.sql:765
+07-database-er,Quan hệ logic đã có bằng chứng 1,n12,admin/model/marketplace/extension.php::editExtension(),admin/model/marketplace/extension.php:33
+07-database-er,Quan hệ logic đã có bằng chứng 2,n1,"oc_download
+PK download_id",install/opencart.sql:469
+07-database-er,Quan hệ logic đã có bằng chứng 2,n2,"oc_extension_download_path
+PK extension_download_id, download_id",install/opencart.sql:765
+07-database-er,Quan hệ logic đã có bằng chứng 2,n3,admin/model/marketplace/extension.php::editExtension(),admin/model/marketplace/extension.php:33
+07-database-er,Quan hệ logic đã có bằng chứng 2,n4,"oc_member
+PK member_id",install/opencart.sql:1448
+07-database-er,Quan hệ logic đã có bằng chứng 2,n5,"oc_order
+PK order_id",install/opencart.sql:1738
+07-database-er,Quan hệ logic đã có bằng chứng 2,n6,application/model/account/order.php::getOrder(),application/model/account/order.php:67
+07-database-er,Quan hệ logic đã có bằng chứng 2,n7,"oc_member
+PK member_id",install/opencart.sql:1448
+07-database-er,Quan hệ logic đã có bằng chứng 2,n8,"oc_order
+PK order_id",install/opencart.sql:1738
+07-database-er,Quan hệ logic đã có bằng chứng 2,n9,application/model/account/order.php::getOrder(),application/model/account/order.php:67
+07-database-er,Quan hệ logic đã có bằng chứng 2,n10,"oc_extension
+PK extension_id",install/opencart.sql:578
+07-database-er,Quan hệ logic đã có bằng chứng 2,n11,"oc_order
+PK order_id",install/opencart.sql:1738
+07-database-er,Quan hệ logic đã có bằng chứng 2,n12,application/model/account/order.php::getOrder(),application/model/account/order.php:67
+07-database-er,Quan hệ logic đã có bằng chứng 3,n1,"oc_member
+PK member_id",install/opencart.sql:1448
+07-database-er,Quan hệ logic đã có bằng chứng 3,n2,"oc_member_transaction
+PK member_transaction_id",install/opencart.sql:1687
+07-database-er,Quan hệ logic đã có bằng chứng 3,n3,application/model/account/order.php::addOrder(),application/model/account/order.php:3
+07-database-er,Quan hệ logic đã có bằng chứng 3,n4,"oc_order
+PK order_id",install/opencart.sql:1738
+07-database-er,Quan hệ logic đã có bằng chứng 3,n5,"oc_member_transaction
+PK member_transaction_id",install/opencart.sql:1687
+07-database-er,Quan hệ logic đã có bằng chứng 3,n6,application/model/account/order.php::addOrder(),application/model/account/order.php:3
+07-database-er,Quan hệ logic đã có bằng chứng 3,n7,"oc_member
+PK member_id",install/opencart.sql:1448
+07-database-er,Quan hệ logic đã có bằng chứng 3,n8,"oc_member_seller
+PK member_seller_id",install/opencart.sql:1626
+07-database-er,Quan hệ logic đã có bằng chứng 3,n9,application/model/account/order.php::addOrder(),application/model/account/order.php:3
+07-database-er,Quan hệ logic đã có bằng chứng 3,n10,"oc_member
+PK member_id",install/opencart.sql:1448
+07-database-er,Quan hệ logic đã có bằng chứng 3,n11,"oc_subscription
+PK subscription_id",install/opencart.sql:2006
+07-database-er,Quan hệ logic đã có bằng chứng 3,n12,application/model/account/subscription.php::addSubscription(),application/model/account/subscription.php:27
+07-database-er,Quan hệ logic đã có bằng chứng 4,n1,"oc_subscription_plan
+PK subscription_plan_id",install/opencart.sql:2087
+07-database-er,Quan hệ logic đã có bằng chứng 4,n2,"oc_subscription
+PK subscription_id",install/opencart.sql:2006
+07-database-er,Quan hệ logic đã có bằng chứng 4,n3,application/model/account/subscription.php::addSubscription(),application/model/account/subscription.php:27
+07-database-er,Quan hệ logic đã có bằng chứng 4,n4,"oc_member_payment
+PK member_payment_id",install/opencart.sql:1607
+07-database-er,Quan hệ logic đã có bằng chứng 4,n5,"oc_subscription
+PK subscription_id",install/opencart.sql:2006
+07-database-er,Quan hệ logic đã có bằng chứng 4,n6,application/model/account/subscription.php::addSubscription(),application/model/account/subscription.php:27
+07-database-er,Quan hệ logic đã có bằng chứng 4,n7,"oc_subscription
+PK subscription_id",install/opencart.sql:2006
+07-database-er,Quan hệ logic đã có bằng chứng 4,n8,"oc_subscription_history
+PK subscription_history_id",install/opencart.sql:2069
+07-database-er,Quan hệ logic đã có bằng chứng 4,n9,application/model/account/subscription.php::addSubscriptionHistory(),application/model/account/subscription.php:241
+07-database-er,Quan hệ logic đã có bằng chứng 4,n10,"oc_user_group
+PK user_group_id",install/opencart.sql:2231
+07-database-er,Quan hệ logic đã có bằng chứng 4,n11,"oc_user
+PK user_id",install/opencart.sql:2206
+07-database-er,Quan hệ logic đã có bằng chứng 4,n12,system/library/cart/user.php::__construct(),system/library/cart/user.php:12
+07-database-er,Quan hệ logic đã có bằng chứng 5,n1,"oc_extension
+PK extension_id",install/opencart.sql:578
+07-database-er,Quan hệ logic đã có bằng chứng 5,n2,"oc_extension_image
+PK extension_image_id",install/opencart.sql:1250
+07-database-er,Quan hệ logic đã có bằng chứng 5,n3,admin/model/marketplace/extension.php::editExtension(),admin/model/marketplace/extension.php:33
+07-database-er,Quan hệ logic đã có bằng chứng 5,n4,"oc_extension
+PK extension_id",install/opencart.sql:578
+07-database-er,Quan hệ logic đã có bằng chứng 5,n5,"oc_extension_comment
+PK extension_comment_id",install/opencart.sql:684
+07-database-er,Quan hệ logic đã có bằng chứng 5,n6,application/model/marketplace/extension.php::getExtension(),application/model/marketplace/extension.php:15
+07-database-er,Quan hệ logic đã có bằng chứng 5,n7,"oc_member
+PK member_id",install/opencart.sql:1448
+07-database-er,Quan hệ logic đã có bằng chứng 5,n8,"oc_member_payment
+PK member_payment_id",install/opencart.sql:1607
+07-database-er,Quan hệ logic đã có bằng chứng 5,n9,application/model/account/payment.php::getPayments(),application/model/account/payment.php:101
+07-database-er,Quan hệ logic đã có bằng chứng 5,n10,"oc_member
+PK member_id",install/opencart.sql:1448
+07-database-er,Quan hệ logic đã có bằng chứng 5,n11,"oc_member_partner
+PK member_partner_id",install/opencart.sql:1527
+07-database-er,Quan hệ logic đã có bằng chứng 5,n12,application/model/account/partner.php::getPartner(),application/model/account/partner.php:3
+07-database-er,Quan hệ logic đã có bằng chứng 6,n1,"oc_member_partner_type
+PK member_partner_type_id",install/opencart.sql:1590
+07-database-er,Quan hệ logic đã có bằng chứng 6,n2,"oc_member_partner
+PK member_partner_id",install/opencart.sql:1527
+07-database-er,Quan hệ logic đã có bằng chứng 6,n3,application/model/account/partner.php::getPartner(),application/model/account/partner.php:3
+07-database-er,Quan hệ logic đã có bằng chứng 6,n4,"oc_member_partner_status
+PK member_partner_status_id",install/opencart.sql:1572
+07-database-er,Quan hệ logic đã có bằng chứng 6,n5,"oc_member_partner
+PK member_partner_id",install/opencart.sql:1527
+07-database-er,Quan hệ logic đã có bằng chứng 6,n6,application/model/account/partner.php::getPartner(),application/model/account/partner.php:3
+07-database-er,Quan hệ logic đã có bằng chứng 6,n7,"oc_country
+PK country_id",install/opencart.sql:173
+07-database-er,Quan hệ logic đã có bằng chứng 6,n8,"oc_member_partner
+PK member_partner_id",install/opencart.sql:1527
+07-database-er,Quan hệ logic đã có bằng chứng 6,n9,application/model/account/partner.php::getPartner(),application/model/account/partner.php:3
+07-database-er,Quan hệ logic đã có bằng chứng 6,n10,"oc_zone
+PK zone_id",install/opencart.sql:2246
+07-database-er,Quan hệ logic đã có bằng chứng 6,n11,"oc_member_partner
+PK member_partner_id",install/opencart.sql:1527
+07-database-er,Quan hệ logic đã có bằng chứng 6,n12,application/model/account/partner.php::getPartner(),application/model/account/partner.php:3
+07-database-er,Quan hệ logic đã có bằng chứng 7,n1,"oc_information
+PK information_id",install/opencart.sql:1357
+07-database-er,Quan hệ logic đã có bằng chứng 7,n2,"oc_information_description
+PK information_id, language_id",install/opencart.sql:1374
+07-database-er,Quan hệ logic đã có bằng chứng 7,n3,application/model/cms/information.php::getInformation(),application/model/cms/information.php:3
+07-database-er,Quan hệ logic đã có bằng chứng 7,n4,"oc_banner
+PK banner_id",install/opencart.sql:55
+07-database-er,Quan hệ logic đã có bằng chứng 7,n5,"oc_banner_image
+PK banner_image_id",install/opencart.sql:70
+07-database-er,Quan hệ logic đã có bằng chứng 7,n6,application/model/design/banner.php::getBanner(),application/model/design/banner.php:3
+07-database-er,Quan hệ logic đã có bằng chứng 7,n7,"oc_member
+PK member_id",install/opencart.sql:1448
+07-database-er,Quan hệ logic đã có bằng chứng 7,n8,"oc_blog_comment
+PK blog_comment_id",install/opencart.sql:151
+07-database-er,Quan hệ logic đã có bằng chứng 7,n9,application/model/cms/blog.php::getComment(),application/model/cms/blog.php:119
+07-database-er,Quan hệ logic đã có bằng chứng 7,n10,"oc_blog
+PK blog_id",install/opencart.sql:89
+07-database-er,Quan hệ logic đã có bằng chứng 7,n11,"oc_blog_comment
+PK blog_comment_id",install/opencart.sql:151
+07-database-er,Quan hệ logic đã có bằng chứng 7,n12,application/model/cms/blog.php::getCommentsByBlogId(),application/model/cms/blog.php:125
+07-database-er,Quan hệ logic đã có bằng chứng 8,n1,"oc_showcase_category
+PK showcase_category_id",install/opencart.sql:1953
+07-database-er,Quan hệ logic đã có bằng chứng 8,n2,"oc_showcase
+PK showcase_id",install/opencart.sql:1913
+07-database-er,Quan hệ logic đã có bằng chứng 8,n3,application/model/cms/showcase.php::getShowcase(),application/model/cms/showcase.php:15
+07-database-er,Quan hệ logic đã có bằng chứng 8,n4,"oc_subscription
+PK subscription_id",install/opencart.sql:2006
+07-database-er,Quan hệ logic đã có bằng chứng 8,n5,"oc_subscription_domain
+PK subscription_domain_id",install/opencart.sql:2049
+07-database-er,Quan hệ logic đã có bằng chứng 8,n6,application/model/account/subscription.php::getSubscriptionDomains(),application/model/account/subscription.php:221
+07-database-er,Quan hệ logic đã có bằng chứng 8,n7,"oc_subscription
+PK subscription_id",install/opencart.sql:2006
+07-database-er,Quan hệ logic đã có bằng chứng 8,n8,"oc_subscription_backup
+PK backup_id",install/opencart.sql:2030
+07-database-er,Quan hệ logic đã có bằng chứng 8,n9,application/model/account/subscription.php::getSubscriptionBackups(),application/model/account/subscription.php:343
+07-database-er,Quan hệ logic đã có bằng chứng 8,n10,"oc_subscription
+PK subscription_id",install/opencart.sql:2006
+07-database-er,Quan hệ logic đã có bằng chứng 8,n11,"oc_subscription_transaction
+PK subscription_transaction_id",install/opencart.sql:2125
+07-database-er,Quan hệ logic đã có bằng chứng 8,n12,application/model/account/subscription.php::getSubscriptionTransactions(),application/model/account/subscription.php:281
+07-database-er,Từ điển bảng 01,n1,"oc_api
+PK: api_id
+api_id
+6 cột · MyISAM
+FK: không khai báo",install/opencart.sql:13
+07-database-er,Từ điển bảng 01,n2,"oc_api_ip
+PK: api_ip_id
+api_ip_id
+api_id
+3 cột · MyISAM
+FK: không khai báo",install/opencart.sql:28
+07-database-er,Từ điển bảng 01,n3,"oc_api_session
+PK: api_session_id
+api_session_id
+api_id
+session_id
+6 cột · MyISAM
+FK: không khai báo",install/opencart.sql:40
+07-database-er,Từ điển bảng 01,n4,"oc_banner
+PK: banner_id
+banner_id
+3 cột · MyISAM
+FK: không khai báo",install/opencart.sql:55
+07-database-er,Từ điển bảng 01,n5,"oc_banner_image
+PK: banner_image_id
+banner_image_id
+banner_id
+language_id
+7 cột · MyISAM
+FK: không khai báo",install/opencart.sql:70
+07-database-er,Từ điển bảng 01,n6,"oc_blog
+PK: blog_id
+blog_id
+blog_category_id
+12 cột · MyISAM
+FK: không khai báo",install/opencart.sql:89
+07-database-er,Từ điển bảng 02,n1,"oc_blog_category
+PK: blog_category_id
+blog_category_id
+4 cột · MyISAM
+FK: không khai báo",install/opencart.sql:131
+07-database-er,Từ điển bảng 02,n2,"oc_blog_comment
+PK: blog_comment_id
+blog_comment_id
+blog_id
+parent_id
+member_id
+7 cột · MyISAM
+FK: không khai báo",install/opencart.sql:151
+07-database-er,Từ điển bảng 02,n3,"oc_country
+PK: country_id
+country_id
+7 cột · MyISAM
+FK: không khai báo",install/opencart.sql:173
+07-database-er,Từ điển bảng 02,n4,"oc_currency
+PK: currency_id
+currency_id
+9 cột · MyISAM
+FK: không khai báo",install/opencart.sql:446
+07-database-er,Từ điển bảng 02,n5,"oc_download
+PK: download_id
+download_id
+7 cột · MyISAM
+FK: không khai báo",install/opencart.sql:469
+07-database-er,Từ điển bảng 02,n6,"oc_event
+PK: event_id
+event_id
+6 cột · MyISAM
+FK: không khai báo",install/opencart.sql:563
+07-database-er,Từ điển bảng 03,n1,"oc_extension
+PK: extension_id
+extension_id
+member_id
+extension_category_id
+28 cột · MyISAM
+FK: không khai báo",install/opencart.sql:578
+07-database-er,Từ điển bảng 03,n2,"oc_extension_category
+PK: extension_category_id
+extension_category_id
+4 cột · MyISAM
+FK: không khai báo",install/opencart.sql:655
+07-database-er,Từ điển bảng 03,n3,"oc_extension_comment
+PK: extension_comment_id
+extension_comment_id
+extension_id
+parent_id
+member_id
+7 cột · MyISAM
+FK: không khai báo",install/opencart.sql:684
+07-database-er,Từ điển bảng 03,n4,"oc_extension_download
+PK: extension_download_id
+extension_download_id
+extension_id
+9 cột · MyISAM
+FK: không khai báo",install/opencart.sql:708
+07-database-er,Từ điển bảng 03,n5,"oc_extension_download_path
+PK: extension_download_id, download_id
+extension_download_id
+download_id
+2 cột · MyISAM
+FK: không khai báo",install/opencart.sql:765
+07-database-er,Từ điển bảng 03,n6,"oc_extension_image
+PK: extension_image_id
+extension_image_id
+extension_id
+4 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1250
+07-database-er,Từ điển bảng 04,n1,"oc_extension_promotion
+PK: promotion_id
+promotion_id
+extension_id
+member_id
+transaction_id
+order_status_id
+12 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1302
+07-database-er,Từ điển bảng 04,n2,"oc_extension_rating
+PK: extension_rating_id
+extension_rating_id
+extension_id
+member_id
+order_id
+13 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1329
+07-database-er,Từ điển bảng 04,n3,"oc_information
+PK: information_id
+information_id
+4 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1357
+07-database-er,Từ điển bảng 04,n4,"oc_information_description
+PK: information_id, language_id
+information_id
+language_id
+7 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1374
+07-database-er,Từ điển bảng 04,n5,"oc_information_to_store
+PK: information_id, store_id
+information_id
+store_id
+2 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1394
+07-database-er,Từ điển bảng 04,n6,"oc_language
+PK: language_id
+language_id
+8 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1409
+07-database-er,Từ điển bảng 05,n1,"oc_mail_log
+PK: mail_log_id
+mail_log_id
+9 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1430
+07-database-er,Từ điển bảng 05,n2,"oc_member
+PK: member_id
+member_id
+tax_id
+country_id
+25 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1448
+07-database-er,Từ điển bảng 05,n3,"oc_member_ip
+PK: member_ip_id
+member_ip_id
+member_id
+4 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1491
+07-database-er,Từ điển bảng 05,n4,"oc_member_login
+PK: member_login_id
+member_login_id
+6 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1510
+07-database-er,Từ điển bảng 05,n5,"oc_member_partner
+PK: member_partner_id
+member_partner_id
+member_id
+member_partner_type_id
+member_partner_status_id
+country_id
+zone_id
+25 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1527
+07-database-er,Từ điển bảng 05,n6,"oc_member_partner_status
+PK: member_partner_status_id
+member_partner_status_id
+4 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1572
+07-database-er,Từ điển bảng 06,n1,"oc_member_partner_type
+PK: member_partner_type_id
+member_partner_type_id
+3 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1590
+07-database-er,Từ điển bảng 06,n2,"oc_member_payment
+PK: member_payment_id
+member_payment_id
+member_id
+9 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1607
+07-database-er,Từ điển bảng 06,n3,"oc_member_seller
+PK: member_seller_id
+member_seller_id
+member_id
+country_id
+zone_id
+26 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1626
+07-database-er,Từ điển bảng 06,n4,"oc_member_store
+PK: member_store_id
+member_store_id
+member_id
+7 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1667
+07-database-er,Từ điển bảng 06,n5,"oc_member_transaction
+PK: member_transaction_id
+member_transaction_id
+member_id
+order_id
+6 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1687
+07-database-er,Từ điển bảng 06,n6,"oc_modification
+PK: modification_id
+modification_id
+extension_install_id
+10 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1707
+07-database-er,Từ điển bảng 07,n1,"oc_newsletter
+PK: newsletter_id
+newsletter_id
+3 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1726
+07-database-er,Từ điển bảng 07,n2,"oc_order
+PK: order_id
+order_id
+member_id
+seller_id
+extension_id
+transaction_id
+order_status_id
+14 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1738
+07-database-er,Từ điển bảng 07,n3,"oc_order_status
+PK: order_status_id, language_id
+order_status_id
+language_id
+3 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1768
+07-database-er,Từ điển bảng 07,n4,"oc_seo_url
+PK: seo_url_id
+seo_url_id
+store_id
+language_id
+5 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1789
+07-database-er,Từ điển bảng 07,n5,"oc_session
+PK: session_id
+session_id
+3 cột · InnoDB
+FK: không khai báo",install/opencart.sql:1805
+07-database-er,Từ điển bảng 07,n6,"oc_setting
+PK: setting_id
+setting_id
+store_id
+6 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1817
+07-database-er,Từ điển bảng 08,n1,"oc_showcase
+PK: showcase_id
+showcase_id
+member_id
+showcase_category_id
+9 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1913
+07-database-er,Từ điển bảng 08,n2,"oc_showcase_category
+PK: showcase_category_id
+showcase_category_id
+4 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1953
+07-database-er,Từ điển bảng 08,n3,"oc_statistics
+PK: statistics_id
+statistics_id
+3 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1975
+07-database-er,Từ điển bảng 08,n4,"oc_store
+PK: store_id
+store_id
+4 cột · MyISAM
+FK: không khai báo",install/opencart.sql:1993
+07-database-er,Từ điển bảng 08,n5,"oc_subscription
+PK: subscription_id
+subscription_id
+member_id
+subscription_plan_id
+member_payment_id
+subscription_status_id
+11 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2006
+07-database-er,Từ điển bảng 08,n6,"oc_subscription_backup
+PK: backup_id
+backup_id
+subscription_id
+5 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2030
+07-database-er,Từ điển bảng 09,n1,"oc_subscription_domain
+PK: subscription_domain_id
+subscription_domain_id
+subscription_id
+member_id
+7 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2049
+07-database-er,Từ điển bảng 09,n2,"oc_subscription_history
+PK: subscription_history_id
+subscription_history_id
+subscription_id
+5 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2069
+07-database-er,Từ điển bảng 09,n3,"oc_subscription_plan
+PK: subscription_plan_id
+subscription_plan_id
+7 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2087
+07-database-er,Từ điển bảng 09,n4,"oc_subscription_status
+PK: subscription_status_id
+subscription_status_id
+2 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2108
+07-database-er,Từ điển bảng 09,n5,"oc_subscription_transaction
+PK: subscription_transaction_id
+subscription_transaction_id
+subscription_id
+member_id
+transaction_id
+9 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2125
+07-database-er,Từ điển bảng 09,n6,"oc_support_enquiry
+PK: enquiry_id
+enquiry_id
+partner_id
+country_id
+order_id
+version_id
+17 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2147
+07-database-er,Từ điển bảng 10,n1,"oc_translation
+PK: translation_id
+translation_id
+store_id
+language_id
+7 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2176
+07-database-er,Từ điển bảng 10,n2,"oc_upload
+PK: upload_id
+upload_id
+5 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2192
+07-database-er,Từ điển bảng 10,n3,"oc_user
+PK: user_id
+user_id
+user_group_id
+13 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2206
+07-database-er,Từ điển bảng 10,n4,"oc_user_group
+PK: user_group_id
+user_group_id
+3 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2231
+07-database-er,Từ điển bảng 10,n5,"oc_zone
+PK: zone_id
+zone_id
+country_id
+5 cột · MyISAM
+FK: không khai báo",install/opencart.sql:2246
+08-module-dependencies,admin/cloud · phụ thuộc 1,n1,"cloud/subscription.php
+index() · L10",admin/controller/cloud/subscription.php:10
+08-module-dependencies,admin/cloud · phụ thuộc 1,n2,"model/cloud/subscription
+đã có file",admin/model/cloud/subscription.php:1
+08-module-dependencies,admin/cms · phụ thuộc 1,n1,"cms/blog.php
+index() · L10",admin/controller/cms/blog.php:10
+08-module-dependencies,admin/cms · phụ thuộc 1,n2,"model/cms/blog
+đã có file",admin/model/cms/blog.php:1
+08-module-dependencies,admin/cms · phụ thuộc 1,n4,"cms/blog.php
+getForm() · L217",admin/controller/cms/blog.php:217
+08-module-dependencies,admin/cms · phụ thuộc 1,n5,"model/cms/blog_category
+đã có file",admin/model/cms/blog_category.php:1
+08-module-dependencies,admin/cms · phụ thuộc 1,n7,"cms/blog.php
+getForm() · L220",admin/controller/cms/blog.php:220
+08-module-dependencies,admin/cms · phụ thuộc 1,n8,"model/tool/image
+đã có file",admin/model/tool/image.php:1
+08-module-dependencies,admin/cms · phụ thuộc 1,n10,"cms/blog_category.php
+index() · L10",admin/controller/cms/blog_category.php:10
+08-module-dependencies,admin/cms · phụ thuộc 1,n11,"model/cms/blog_category
+đã có file",admin/model/cms/blog_category.php:1
+08-module-dependencies,admin/cms · phụ thuộc 1,n13,"cms/blog_comment.php
+index() · L10",admin/controller/cms/blog_comment.php:10
+08-module-dependencies,admin/cms · phụ thuộc 1,n14,"model/cms/blog_comment
+đã có file",admin/model/cms/blog_comment.php:1
+08-module-dependencies,admin/cms · phụ thuộc 1,n16,"cms/download.php
+index() · L10",admin/controller/cms/download.php:10
+08-module-dependencies,admin/cms · phụ thuộc 1,n17,"model/cms/download
+đã có file",admin/model/cms/download.php:1
+08-module-dependencies,admin/cms · phụ thuộc 1,n19,"cms/information.php
+index() · L10",admin/controller/cms/information.php:10
+08-module-dependencies,admin/cms · phụ thuộc 1,n20,"model/cms/information
+đã có file",admin/model/cms/information.php:1
+08-module-dependencies,admin/cms · phụ thuộc 2,n1,"cms/information.php
+getForm() · L198",admin/controller/cms/information.php:198
+08-module-dependencies,admin/cms · phụ thuộc 2,n2,"model/localisation/language
+đã có file",admin/model/localisation/language.php:1
+08-module-dependencies,admin/cms · phụ thuộc 2,n4,"cms/showcase.php
+index() · L10",admin/controller/cms/showcase.php:10
+08-module-dependencies,admin/cms · phụ thuộc 2,n5,"model/cms/showcase
+đã có file",admin/model/cms/showcase.php:1
+08-module-dependencies,admin/cms · phụ thuộc 2,n7,"cms/showcase.php
+getList() · L96",admin/controller/cms/showcase.php:96
+08-module-dependencies,admin/cms · phụ thuộc 2,n8,"model/tool/image
+đã có file",admin/model/tool/image.php:1
+08-module-dependencies,admin/common · phụ thuộc 1,n1,"common/column_left.php
+index() · L382",admin/controller/common/column_left.php:382
+08-module-dependencies,admin/common · phụ thuộc 1,n2,"model/sale/order
+đã có file",admin/model/sale/order.php:1
+08-module-dependencies,admin/common · phụ thuộc 1,n4,"common/developer.php
+index() · L20",admin/controller/common/developer.php:20
+08-module-dependencies,admin/common · phụ thuộc 1,n5,"model/setting/setting
+đã có file",admin/model/setting/setting.php:1
+08-module-dependencies,admin/common · phụ thuộc 1,n7,"common/filemanager.php
+index() · L37",admin/controller/common/filemanager.php:37
+08-module-dependencies,admin/common · phụ thuộc 1,n8,"model/tool/image
+đã có file",admin/model/tool/image.php:1
+08-module-dependencies,admin/common · phụ thuộc 1,n10,"common/forgotten.php
+index() · L18",admin/controller/common/forgotten.php:18
+08-module-dependencies,admin/common · phụ thuộc 1,n11,"model/user/user
+đã có file",admin/model/user/user.php:1
+08-module-dependencies,admin/common · phụ thuộc 1,n13,"common/header.php
+index() · L45",admin/controller/common/header.php:45
+08-module-dependencies,admin/common · phụ thuộc 1,n14,"model/user/user
+đã có file",admin/model/user/user.php:1
+08-module-dependencies,admin/common · phụ thuộc 1,n16,"common/header.php
+index() · L47",admin/controller/common/header.php:47
+08-module-dependencies,admin/common · phụ thuộc 1,n17,"model/tool/image
+đã có file",admin/model/tool/image.php:1
+08-module-dependencies,admin/common · phụ thuộc 1,n19,"common/login.php
+validate() · L91",admin/controller/common/login.php:91
+08-module-dependencies,admin/common · phụ thuộc 1,n20,"model/user/user
+đã có file",admin/model/user/user.php:1
+08-module-dependencies,admin/common · phụ thuộc 2,n1,"common/profile.php
+index() · L10",admin/controller/common/profile.php:10
+08-module-dependencies,admin/common · phụ thuộc 2,n2,"model/user/user
+đã có file",admin/model/user/user.php:1
+08-module-dependencies,admin/common · phụ thuộc 2,n4,"common/profile.php
+index() · L147",admin/controller/common/profile.php:147
+08-module-dependencies,admin/common · phụ thuộc 2,n5,"model/tool/image
+đã có file",admin/model/tool/image.php:1
+08-module-dependencies,admin/common · phụ thuộc 2,n7,"common/reset.php
+index() · L20",admin/controller/common/reset.php:20
+08-module-dependencies,admin/common · phụ thuộc 2,n8,"model/user/user
+đã có file",admin/model/user/user.php:1
+08-module-dependencies,admin/common · phụ thuộc 2,n10,"common/reset.php
+index() · L84",admin/controller/common/reset.php:84
+08-module-dependencies,admin/common · phụ thuộc 2,n11,"model/setting/setting
+đã có file",admin/model/setting/setting.php:1
+08-module-dependencies,admin/design · phụ thuộc 1,n1,"design/banner.php
+index() · L10",admin/controller/design/banner.php:10
+08-module-dependencies,admin/design · phụ thuộc 1,n2,"model/design/banner
+đã có file",admin/model/design/banner.php:1
+08-module-dependencies,admin/design · phụ thuộc 1,n4,"design/banner.php
+getForm() · L325",admin/controller/design/banner.php:325
+08-module-dependencies,admin/design · phụ thuộc 1,n5,"model/localisation/language
+đã có file",admin/model/localisation/language.php:1
+08-module-dependencies,admin/design · phụ thuộc 1,n7,"design/banner.php
+getForm() · L329",admin/controller/design/banner.php:329
+08-module-dependencies,admin/design · phụ thuộc 1,n8,"model/tool/image
+đã có file",admin/model/tool/image.php:1
+08-module-dependencies,admin/design · phụ thuộc 1,n10,"design/seo_url.php
+index() · L10",admin/controller/design/seo_url.php:10
+08-module-dependencies,admin/design · phụ thuộc 1,n11,"model/design/seo_url
+đã có file",admin/model/design/seo_url.php:1
+08-module-dependencies,admin/design · phụ thuộc 1,n13,"design/seo_url.php
+getList() · L376",admin/controller/design/seo_url.php:376
+08-module-dependencies,admin/design · phụ thuộc 1,n14,"model/setting/store
+đã có file",admin/model/setting/store.php:1
+08-module-dependencies,admin/design · phụ thuộc 1,n16,"design/seo_url.php
+getList() · L380",admin/controller/design/seo_url.php:380
+08-module-dependencies,admin/design · phụ thuộc 1,n17,"model/localisation/language
+đã có file",admin/model/localisation/language.php:1
+08-module-dependencies,admin/event · phụ thuộc 1,n1,"event/statistics.php
+removeReview() · L5",admin/controller/event/statistics.php:5
+08-module-dependencies,admin/localisation · phụ thuộc 1,n1,"localisation/country.php
+index() · L10",admin/controller/localisation/country.php:10
+08-module-dependencies,admin/localisation · phụ thuộc 1,n2,"model/localisation/country
+đã có file",admin/model/localisation/country.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 1,n4,"localisation/country.php
+validateDelete() · L375",admin/controller/localisation/country.php:375
+08-module-dependencies,admin/localisation · phụ thuộc 1,n5,"model/setting/store
+đã có file",admin/model/setting/store.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 1,n7,"localisation/country.php
+validateDelete() · L376",admin/controller/localisation/country.php:376
+08-module-dependencies,admin/localisation · phụ thuộc 1,n10,"localisation/country.php
+validateDelete() · L377",admin/controller/localisation/country.php:377
+08-module-dependencies,admin/localisation · phụ thuộc 1,n11,"model/localisation/zone
+đã có file",admin/model/localisation/zone.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 1,n13,"localisation/country.php
+validateDelete() · L378",admin/controller/localisation/country.php:378
+08-module-dependencies,admin/localisation · phụ thuộc 1,n16,"localisation/currency.php
+index() · L10",admin/controller/localisation/currency.php:10
+08-module-dependencies,admin/localisation · phụ thuộc 1,n17,"model/localisation/currency
+đã có file",admin/model/localisation/currency.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 1,n19,"localisation/currency.php
+validateDelete() · L428",admin/controller/localisation/currency.php:428
+08-module-dependencies,admin/localisation · phụ thuộc 1,n20,"model/setting/store
+đã có file",admin/model/setting/store.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 2,n1,"localisation/currency.php
+validateDelete() · L429",admin/controller/localisation/currency.php:429
+08-module-dependencies,admin/localisation · phụ thuộc 2,n2,"model/sale/order
+đã có file",admin/model/sale/order.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 2,n4,"localisation/language.php
+index() · L10",admin/controller/localisation/language.php:10
+08-module-dependencies,admin/localisation · phụ thuộc 2,n5,"model/localisation/language
+đã có file",admin/model/localisation/language.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 2,n7,"localisation/language.php
+validateDelete() · L407",admin/controller/localisation/language.php:407
+08-module-dependencies,admin/localisation · phụ thuộc 2,n8,"model/setting/store
+đã có file",admin/model/setting/store.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 2,n10,"localisation/language.php
+validateDelete() · L408",admin/controller/localisation/language.php:408
+08-module-dependencies,admin/localisation · phụ thuộc 2,n11,"model/sale/order
+đã có file",admin/model/sale/order.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 2,n13,"localisation/order_status.php
+index() · L10",admin/controller/localisation/order_status.php:10
+08-module-dependencies,admin/localisation · phụ thuộc 2,n14,"model/localisation/order_status
+đã có file",admin/model/localisation/order_status.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 2,n16,"localisation/order_status.php
+getForm() · L295",admin/controller/localisation/order_status.php:295
+08-module-dependencies,admin/localisation · phụ thuộc 2,n17,"model/localisation/language
+đã có file",admin/model/localisation/language.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 2,n19,"localisation/order_status.php
+validateDelete() · L333",admin/controller/localisation/order_status.php:333
+08-module-dependencies,admin/localisation · phụ thuộc 2,n20,"model/setting/store
+đã có file",admin/model/setting/store.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 3,n1,"localisation/order_status.php
+validateDelete() · L334",admin/controller/localisation/order_status.php:334
+08-module-dependencies,admin/localisation · phụ thuộc 3,n2,"model/sale/order
+đã có file",admin/model/sale/order.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 3,n4,"localisation/zone.php
+index() · L10",admin/controller/localisation/zone.php:10
+08-module-dependencies,admin/localisation · phụ thuộc 3,n5,"model/localisation/zone
+đã có file",admin/model/localisation/zone.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 3,n7,"localisation/zone.php
+getForm() · L335",admin/controller/localisation/zone.php:335
+08-module-dependencies,admin/localisation · phụ thuộc 3,n8,"model/localisation/country
+đã có file",admin/model/localisation/country.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 3,n10,"localisation/zone.php
+validateDelete() · L363",admin/controller/localisation/zone.php:363
+08-module-dependencies,admin/localisation · phụ thuộc 3,n11,"model/setting/store
+đã có file",admin/model/setting/store.php:1
+08-module-dependencies,admin/localisation · phụ thuộc 3,n13,"localisation/zone.php
+validateDelete() · L364",admin/controller/localisation/zone.php:364
+08-module-dependencies,admin/localisation · phụ thuộc 3,n16,"localisation/zone.php
+validateDelete() · L365",admin/controller/localisation/zone.php:365
+08-module-dependencies,admin/mail · phụ thuộc 1,n1,"mail/affiliate.php
+approve() · L4",admin/controller/mail/affiliate.php:4
+08-module-dependencies,admin/mail · phụ thuộc 1,n4,"mail/affiliate.php
+approve() · L9",admin/controller/mail/affiliate.php:9
+08-module-dependencies,admin/mail · phụ thuộc 1,n5,"model/setting/store
+đã có file",admin/model/setting/store.php:1
+08-module-dependencies,admin/mail · phụ thuộc 1,n7,"mail/affiliate.php
+approve() · L21",admin/controller/mail/affiliate.php:21
+08-module-dependencies,admin/mail · phụ thuộc 1,n8,"model/localisation/language
+đã có file",admin/model/localisation/language.php:1
+08-module-dependencies,admin/mail · phụ thuộc 1,n10,"mail/customer.php
+approve() · L4",admin/controller/mail/customer.php:4
+08-module-dependencies,admin/mail · phụ thuộc 1,n13,"mail/customer.php
+approve() · L9",admin/controller/mail/customer.php:9
+08-module-dependencies,admin/mail · phụ thuộc 1,n14,"model/setting/store
+đã có file",admin/model/setting/store.php:1
+08-module-dependencies,admin/mail · phụ thuộc 1,n16,"mail/customer.php
+approve() · L21",admin/controller/mail/customer.php:21
+08-module-dependencies,admin/mail · phụ thuộc 1,n17,"model/localisation/language
+đã có file",admin/model/localisation/language.php:1
+08-module-dependencies,admin/mail · phụ thuộc 1,n19,"mail/return.php
+index() · L29",admin/controller/mail/return.php:29
+08-module-dependencies,admin/mail · phụ thuộc 2,n1,"mail/reward.php
+index() · L28",admin/controller/mail/reward.php:28
+08-module-dependencies,admin/mail · phụ thuộc 2,n4,"mail/reward.php
+index() · L35",admin/controller/mail/reward.php:35
+08-module-dependencies,admin/mail · phụ thuộc 2,n5,"model/setting/store
+đã có file",admin/model/setting/store.php:1
+08-module-dependencies,admin/mail · phụ thuộc 2,n7,"mail/transaction.php
+index() · L28",admin/controller/mail/transaction.php:28
+08-module-dependencies,admin/mail · phụ thuộc 2,n10,"mail/transaction.php
+index() · L35",admin/controller/mail/transaction.php:35
+08-module-dependencies,admin/mail · phụ thuộc 2,n11,"model/setting/store
+đã có file",admin/model/setting/store.php:1
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n1,"marketplace/category.php
+index() · L10",admin/controller/marketplace/category.php:10
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n2,"model/marketplace/category
+đã có file",admin/model/marketplace/category.php:1
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n4,"marketplace/comment.php
+index() · L10",admin/controller/marketplace/comment.php:10
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n5,"model/marketplace/comment
+đã có file",admin/model/marketplace/comment.php:1
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n7,"marketplace/extension.php
+index() · L10",admin/controller/marketplace/extension.php:10
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n8,"model/marketplace/extension
+đã có file",admin/model/marketplace/extension.php:1
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n10,"marketplace/extension.php
+getList() · L151",admin/controller/marketplace/extension.php:151
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n11,"model/tool/image
+đã có file",admin/model/tool/image.php:1
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n13,"marketplace/extension.php
+getList() · L179",admin/controller/marketplace/extension.php:179
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n14,"model/marketplace/category
+đã có file",admin/model/marketplace/category.php:1
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n16,"marketplace/promotion.php
+index() · L10",admin/controller/marketplace/promotion.php:10
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n17,"model/marketplace/promotion
+đã có file",admin/model/marketplace/promotion.php:1
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n19,"marketplace/promotion.php
+getForm() · L213",admin/controller/marketplace/promotion.php:213
+08-module-dependencies,admin/marketplace · phụ thuộc 1,n20,"model/localisation/order_status
+đã có file",admin/model/localisation/order_status.php:1
+08-module-dependencies,admin/member · phụ thuộc 1,n1,"member/member.php
+index() · L10",admin/controller/member/member.php:10
+08-module-dependencies,admin/member · phụ thuộc 1,n2,"model/member/member
+đã có file",admin/model/member/member.php:1
+08-module-dependencies,admin/member · phụ thuộc 1,n4,"member/member.php
+getForm() · L227",admin/controller/member/member.php:227
+08-module-dependencies,admin/member · phụ thuộc 1,n5,"model/localisation/country
+đã có file",admin/model/localisation/country.php:1
+08-module-dependencies,admin/member · phụ thuộc 1,n7,"member/member.php
+getForm() · L230",admin/controller/member/member.php:230
+08-module-dependencies,admin/member · phụ thuộc 1,n8,"model/tool/image
+đã có file",admin/model/tool/image.php:1
+08-module-dependencies,admin/member · phụ thuộc 1,n10,"member/partner.php
+index() · L10",admin/controller/member/partner.php:10
+08-module-dependencies,admin/member · phụ thuộc 1,n11,"model/member/partner
+đã có file",admin/model/member/partner.php:1
+08-module-dependencies,admin/member · phụ thuộc 1,n13,"member/partner.php
+getList() · L96",admin/controller/member/partner.php:96
+08-module-dependencies,admin/member · phụ thuộc 1,n14,"model/tool/image
+đã có file",admin/model/tool/image.php:1
+08-module-dependencies,admin/member · phụ thuộc 1,n16,"member/partner.php
+getForm() · L237",admin/controller/member/partner.php:237
+08-module-dependencies,admin/member · phụ thuộc 1,n17,"model/localisation/country
+đã có file",admin/model/localisation/country.php:1
+08-module-dependencies,admin/member · phụ thuộc 1,n19,"member/seller.php
+index() · L10",admin/controller/member/seller.php:10
+08-module-dependencies,admin/member · phụ thuộc 1,n20,"model/member/seller
+đã có file",admin/model/member/seller.php:1
+08-module-dependencies,admin/member · phụ thuộc 2,n1,"member/seller.php
+getForm() · L217",admin/controller/member/seller.php:217
+08-module-dependencies,admin/member · phụ thuộc 2,n2,"model/localisation/country
+đã có file",admin/model/localisation/country.php:1
+08-module-dependencies,admin/sale · phụ thuộc 1,n1,"sale/order.php
+index() · L10",admin/controller/sale/order.php:10
+08-module-dependencies,admin/sale · phụ thuộc 1,n2,"model/sale/order
+đã có file",admin/model/sale/order.php:1
+08-module-dependencies,admin/sale · phụ thuộc 1,n4,"sale/order.php
+getList() · L310",admin/controller/sale/order.php:310
+08-module-dependencies,admin/sale · phụ thuộc 1,n5,"model/localisation/order_status
+đã có file",admin/model/localisation/order_status.php:1
+08-module-dependencies,admin/setting · phụ thuộc 1,n1,"setting/payment.php
+index() · L10",admin/controller/setting/payment.php:10
+08-module-dependencies,admin/setting · phụ thuộc 1,n2,"model/setting/setting
+đã có file",admin/model/setting/setting.php:1
+08-module-dependencies,admin/setting · phụ thuộc 1,n4,"setting/payment.php
+index() · L97",admin/controller/setting/payment.php:97
+08-module-dependencies,admin/setting · phụ thuộc 1,n5,"model/localisation/currency
+đã có file",admin/model/localisation/currency.php:1
+08-module-dependencies,admin/setting · phụ thuộc 1,n7,"setting/setting.php
+index() · L10",admin/controller/setting/setting.php:10
+08-module-dependencies,admin/setting · phụ thuộc 1,n8,"model/setting/setting
+đã có file",admin/model/setting/setting.php:1
+08-module-dependencies,admin/setting · phụ thuộc 1,n10,"setting/setting.php
+index() · L134",admin/controller/setting/setting.php:134
+08-module-dependencies,admin/setting · phụ thuộc 1,n11,"model/localisation/country
+đã có file",admin/model/localisation/country.php:1
+08-module-dependencies,admin/setting · phụ thuộc 1,n13,"setting/setting.php
+index() · L137",admin/controller/setting/setting.php:137
+08-module-dependencies,admin/setting · phụ thuộc 1,n14,"model/localisation/language
+đã có file",admin/model/localisation/language.php:1
+08-module-dependencies,admin/setting · phụ thuộc 1,n16,"setting/setting.php
+index() · L140",admin/controller/setting/setting.php:140
+08-module-dependencies,admin/setting · phụ thuộc 1,n17,"model/localisation/currency
+đã có file",admin/model/localisation/currency.php:1
+08-module-dependencies,admin/setting · phụ thuộc 1,n19,"setting/setting.php
+index() · L143",admin/controller/setting/setting.php:143
+08-module-dependencies,admin/setting · phụ thuộc 1,n20,"model/localisation/order_status
+đã có file",admin/model/localisation/order_status.php:1
+08-module-dependencies,admin/setting · phụ thuộc 2,n1,"setting/setting.php
+index() · L146",admin/controller/setting/setting.php:146
+08-module-dependencies,admin/setting · phụ thuộc 2,n2,"model/tool/image
+đã có file",admin/model/tool/image.php:1
+08-module-dependencies,admin/setting · phụ thuộc 2,n4,"setting/store.php
+index() · L10",admin/controller/setting/store.php:10
+08-module-dependencies,admin/setting · phụ thuộc 2,n5,"model/setting/store
+đã có file",admin/model/setting/store.php:1
+08-module-dependencies,admin/setting · phụ thuộc 2,n7,"setting/store.php
+index() · L12",admin/controller/setting/store.php:12
+08-module-dependencies,admin/setting · phụ thuộc 2,n8,"model/setting/setting
+đã có file",admin/model/setting/setting.php:1
+08-module-dependencies,admin/setting · phụ thuộc 2,n10,"setting/store.php
+getForm() · L314",admin/controller/setting/store.php:314
+08-module-dependencies,admin/setting · phụ thuộc 2,n13,"setting/store.php
+getForm() · L335",admin/controller/setting/store.php:335
+08-module-dependencies,admin/setting · phụ thuộc 2,n16,"setting/store.php
+getForm() · L403",admin/controller/setting/store.php:403
+08-module-dependencies,admin/setting · phụ thuộc 2,n17,"model/tool/image
+đã có file",admin/model/tool/image.php:1
+08-module-dependencies,admin/setting · phụ thuộc 2,n19,"setting/store.php
+getForm() · L431",admin/controller/setting/store.php:431
+08-module-dependencies,admin/setting · phụ thuộc 3,n1,"setting/store.php
+getForm() · L451",admin/controller/setting/store.php:451
+08-module-dependencies,admin/setting · phụ thuộc 3,n2,"model/localisation/country
+đã có file",admin/model/localisation/country.php:1
+08-module-dependencies,admin/setting · phụ thuộc 3,n4,"setting/store.php
+getForm() · L471",admin/controller/setting/store.php:471
+08-module-dependencies,admin/setting · phụ thuộc 3,n5,"model/localisation/language
+đã có file",admin/model/localisation/language.php:1
+08-module-dependencies,admin/setting · phụ thuộc 3,n7,"setting/store.php
+getForm() · L483",admin/controller/setting/store.php:483
+08-module-dependencies,admin/setting · phụ thuộc 3,n8,"model/localisation/currency
+đã có file",admin/model/localisation/currency.php:1
+08-module-dependencies,admin/setting · phụ thuộc 3,n10,"setting/store.php
+getForm() · L519",admin/controller/setting/store.php:519
+08-module-dependencies,admin/setting · phụ thuộc 3,n13,"setting/store.php
+getForm() · L547",admin/controller/setting/store.php:547
+08-module-dependencies,admin/setting · phụ thuộc 3,n16,"setting/store.php
+getForm() · L583",admin/controller/setting/store.php:583
+08-module-dependencies,admin/setting · phụ thuộc 3,n17,"model/localisation/order_status
+đã có file",admin/model/localisation/order_status.php:1
+08-module-dependencies,admin/setting · phụ thuộc 3,n19,"setting/store.php
+validateDelete() · L701",admin/controller/setting/store.php:701
+08-module-dependencies,admin/setting · phụ thuộc 3,n20,"model/sale/order
+đã có file",admin/model/sale/order.php:1
+08-module-dependencies,admin/startup · phụ thuộc 1,n1,"startup/event.php
+index() · L5",admin/controller/startup/event.php:5
+08-module-dependencies,admin/startup · phụ thuộc 1,n2,"model/setting/event
+đã có file",admin/model/setting/event.php:1
+08-module-dependencies,admin/support · phụ thuộc 1,n1,"support/enquiry.php
+index() · L10",admin/controller/support/enquiry.php:10
+08-module-dependencies,admin/support · phụ thuộc 1,n2,"model/support/enquiry
+đã có file",admin/model/support/enquiry.php:1
+08-module-dependencies,admin/tool · phụ thuộc 1,n1,"tool/backup.php
+index() · L32",admin/controller/tool/backup.php:32
+08-module-dependencies,admin/tool · phụ thuộc 1,n2,"model/tool/backup
+đã có file",admin/model/tool/backup.php:1
+08-module-dependencies,admin/tool · phụ thuộc 1,n4,"tool/upload.php
+index() · L10",admin/controller/tool/upload.php:10
+08-module-dependencies,admin/tool · phụ thuộc 1,n5,"model/tool/upload
+đã có file",admin/model/tool/upload.php:1
+08-module-dependencies,admin/user · phụ thuộc 1,n1,"user/api.php
+index() · L10",admin/controller/user/api.php:10
+08-module-dependencies,admin/user · phụ thuộc 1,n2,"model/user/api
+đã có file",admin/model/user/api.php:1
+08-module-dependencies,admin/user · phụ thuộc 1,n4,"user/user.php
+index() · L10",admin/controller/user/user.php:10
+08-module-dependencies,admin/user · phụ thuộc 1,n5,"model/user/user
+đã có file",admin/model/user/user.php:1
+08-module-dependencies,admin/user · phụ thuộc 1,n7,"user/user.php
+getForm() · L349",admin/controller/user/user.php:349
+08-module-dependencies,admin/user · phụ thuộc 1,n8,"model/user/user_group
+đã có file",admin/model/user/user_group.php:1
+08-module-dependencies,admin/user · phụ thuộc 1,n10,"user/user.php
+getForm() · L397",admin/controller/user/user.php:397
+08-module-dependencies,admin/user · phụ thuộc 1,n11,"model/tool/image
+đã có file",admin/model/tool/image.php:1
+08-module-dependencies,admin/user · phụ thuộc 1,n13,"user/user_permission.php
+index() · L10",admin/controller/user/user_permission.php:10
+08-module-dependencies,admin/user · phụ thuộc 1,n14,"model/user/user_group
+đã có file",admin/model/user/user_group.php:1
+08-module-dependencies,admin/user · phụ thuộc 1,n16,"user/user_permission.php
+validateDelete() · L397",admin/controller/user/user_permission.php:397
+08-module-dependencies,admin/user · phụ thuộc 1,n17,"model/user/user
+đã có file",admin/model/user/user.php:1
+08-module-dependencies,application/account · phụ thuộc 1,n1,"account/download.php
+index() · L26",application/controller/account/download.php:26
+08-module-dependencies,application/account · phụ thuộc 1,n2,"model/account/order
+đã có file",application/model/account/order.php:1
+08-module-dependencies,application/account · phụ thuộc 1,n4,"account/download.php
+index() · L27",application/controller/account/download.php:27
+08-module-dependencies,application/account · phụ thuộc 1,n5,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/account · phụ thuộc 1,n7,"account/download.php
+index() · L28",application/controller/account/download.php:28
+08-module-dependencies,application/account · phụ thuộc 1,n8,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/account · phụ thuộc 1,n10,"account/download.php
+info() · L114",application/controller/account/download.php:114
+08-module-dependencies,application/account · phụ thuộc 1,n11,"model/cms/download
+đã có file",application/model/cms/download.php:1
+08-module-dependencies,application/account · phụ thuộc 1,n13,"account/edit.php
+index() · L18",application/controller/account/edit.php:18
+08-module-dependencies,application/account · phụ thuộc 1,n14,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/account · phụ thuộc 1,n16,"account/edit.php
+index() · L126",application/controller/account/edit.php:126
+08-module-dependencies,application/account · phụ thuộc 1,n17,"model/localisation/country
+đã có file",application/model/localisation/country.php:1
+08-module-dependencies,application/account · phụ thuộc 1,n19,"account/edit.php
+index() · L138",application/controller/account/edit.php:138
+08-module-dependencies,application/account · phụ thuộc 1,n20,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/account · phụ thuộc 2,n1,"account/extension.php
+index() · L14",application/controller/account/extension.php:14
+08-module-dependencies,application/account · phụ thuộc 2,n2,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/account · phụ thuộc 2,n4,"account/extension.php
+getForm() · L319",application/controller/account/extension.php:319
+08-module-dependencies,application/account · phụ thuộc 2,n5,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/account · phụ thuộc 2,n7,"account/extension.php
+getForm() · L384",application/controller/account/extension.php:384
+08-module-dependencies,application/account · phụ thuộc 2,n8,"model/cms/download
+đã có file",application/model/cms/download.php:1
+08-module-dependencies,application/account · phụ thuộc 2,n10,"account/forgotten.php
+index() · L16",application/controller/account/forgotten.php:16
+08-module-dependencies,application/account · phụ thuộc 2,n11,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/account · phụ thuộc 2,n13,"account/login.php
+index() · L6",application/controller/account/login.php:6
+08-module-dependencies,application/account · phụ thuộc 2,n14,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/account · phụ thuộc 2,n16,"account/order.php
+index() · L37",application/controller/account/order.php:37
+08-module-dependencies,application/account · phụ thuộc 2,n17,"model/account/order
+đã có file",application/model/account/order.php:1
+08-module-dependencies,application/account · phụ thuộc 2,n19,"account/order.php
+index() · L38",application/controller/account/order.php:38
+08-module-dependencies,application/account · phụ thuộc 2,n20,"model/localisation/order_status
+đã có file",application/model/localisation/order_status.php:1
+08-module-dependencies,application/account · phụ thuộc 3,n1,"account/order.php
+info() · L135",application/controller/account/order.php:135
+08-module-dependencies,application/account · phụ thuộc 3,n2,"model/localisation/country
+đã có file",application/model/localisation/country.php:1
+08-module-dependencies,application/account · phụ thuộc 3,n4,"account/partner.php
+index() · L16",application/controller/account/partner.php:16
+08-module-dependencies,application/account · phụ thuộc 3,n5,"model/account/partner
+đã có file",application/model/account/partner.php:1
+08-module-dependencies,application/account · phụ thuộc 3,n7,"account/partner.php
+getForm() · L260",application/controller/account/partner.php:260
+08-module-dependencies,application/account · phụ thuộc 3,n8,"model/localisation/country
+đã có file",application/model/localisation/country.php:1
+08-module-dependencies,application/account · phụ thuộc 3,n10,"account/partner.php
+getForm() · L280",application/controller/account/partner.php:280
+08-module-dependencies,application/account · phụ thuộc 3,n11,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/account · phụ thuộc 3,n13,"account/password.php
+index() · L19",application/controller/account/password.php:19
+08-module-dependencies,application/account · phụ thuộc 3,n14,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/account · phụ thuộc 3,n16,"account/payment.php
+index() · L18",application/controller/account/payment.php:18
+08-module-dependencies,application/account · phụ thuộc 3,n17,"model/account/payment
+đã có file",application/model/account/payment.php:1
+08-module-dependencies,application/account · phụ thuộc 3,n19,"account/pin.php
+index() · L12",application/controller/account/pin.php:12
+08-module-dependencies,application/account · phụ thuộc 3,n20,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/account · phụ thuộc 4,n1,"account/promotion.php
+index() · L12",application/controller/account/promotion.php:12
+08-module-dependencies,application/account · phụ thuộc 4,n2,"model/account/promotion
+đã có file",application/model/account/promotion.php:1
+08-module-dependencies,application/account · phụ thuộc 4,n4,"account/promotion.php
+info() · L85",application/controller/account/promotion.php:85
+08-module-dependencies,application/account · phụ thuộc 4,n5,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/account · phụ thuộc 4,n7,"account/promotion.php
+info() · L86",application/controller/account/promotion.php:86
+08-module-dependencies,application/account · phụ thuộc 4,n8,"model/account/seller
+đã có file",application/model/account/seller.php:1
+08-module-dependencies,application/account · phụ thuộc 4,n10,"account/promotion.php
+info() · L87",application/controller/account/promotion.php:87
+08-module-dependencies,application/account · phụ thuộc 4,n11,"model/localisation/country
+đã có file",application/model/localisation/country.php:1
+08-module-dependencies,application/account · phụ thuộc 4,n13,"account/promotion.php
+info() · L88",application/controller/account/promotion.php:88
+08-module-dependencies,application/account · phụ thuộc 4,n14,"model/localisation/zone
+đã có file",application/model/localisation/zone.php:1
+08-module-dependencies,application/account · phụ thuộc 4,n16,"account/rating.php
+index() · L36",application/controller/account/rating.php:36
+08-module-dependencies,application/account · phụ thuộc 4,n17,"model/account/order
+đã có file",application/model/account/order.php:1
+08-module-dependencies,application/account · phụ thuộc 4,n19,"account/rating.php
+index() · L37",application/controller/account/rating.php:37
+08-module-dependencies,application/account · phụ thuộc 4,n20,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/account · phụ thuộc 5,n1,"account/register.php
+index() · L16",application/controller/account/register.php:16
+08-module-dependencies,application/account · phụ thuộc 5,n2,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/account · phụ thuộc 5,n4,"account/register.php
+index() · L104",application/controller/account/register.php:104
+08-module-dependencies,application/account · phụ thuộc 5,n5,"model/localisation/country
+đã có file",application/model/localisation/country.php:1
+08-module-dependencies,application/account · phụ thuộc 5,n7,"account/reset.php
+index() · L20",application/controller/account/reset.php:20
+08-module-dependencies,application/account · phụ thuộc 5,n8,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/account · phụ thuộc 5,n10,"account/sale.php
+index() · L12",application/controller/account/sale.php:12
+08-module-dependencies,application/account · phụ thuộc 5,n11,"model/account/order
+đã có file",application/model/account/order.php:1
+08-module-dependencies,application/account · phụ thuộc 5,n13,"account/security.php
+index() · L12",application/controller/account/security.php:12
+08-module-dependencies,application/account · phụ thuộc 5,n14,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/account · phụ thuộc 5,n16,"account/seller.php
+add() · L18",application/controller/account/seller.php:18
+08-module-dependencies,application/account · phụ thuộc 5,n17,"model/account/seller
+đã có file",application/model/account/seller.php:1
+08-module-dependencies,application/account · phụ thuộc 5,n19,"account/seller.php
+getForm() · L146",application/controller/account/seller.php:146
+08-module-dependencies,application/account · phụ thuộc 5,n20,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/account · phụ thuộc 6,n1,"account/seller.php
+getForm() · L278",application/controller/account/seller.php:278
+08-module-dependencies,application/account · phụ thuộc 6,n2,"model/localisation/country
+đã có file",application/model/localisation/country.php:1
+08-module-dependencies,application/account · phụ thuộc 6,n4,"account/showcase.php
+index() · L18",application/controller/account/showcase.php:18
+08-module-dependencies,application/account · phụ thuộc 6,n5,"model/cms/showcase
+đã có file",application/model/cms/showcase.php:1
+08-module-dependencies,application/account · phụ thuộc 6,n7,"account/showcase.php
+getForm() · L212",application/controller/account/showcase.php:212
+08-module-dependencies,application/account · phụ thuộc 6,n8,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/account · phụ thuộc 6,n10,"account/store.php
+index() · L18",application/controller/account/store.php:18
+08-module-dependencies,application/account · phụ thuộc 6,n11,"model/account/store
+đã có file",application/model/account/store.php:1
+08-module-dependencies,application/account · phụ thuộc 6,n13,"account/subscription.php
+index() · L14",application/controller/account/subscription.php:14
+08-module-dependencies,application/account · phụ thuộc 6,n14,"model/account/subscription
+đã có file",application/model/account/subscription.php:1
+08-module-dependencies,application/account · phụ thuộc 6,n16,"account/subscription.php
+add() · L185",application/controller/account/subscription.php:185
+08-module-dependencies,application/account · phụ thuộc 6,n17,"model/account/payment
+đã có file",application/model/account/payment.php:1
+08-module-dependencies,application/account · phụ thuộc 6,n19,"account/subscription.php
+invoice() · L911",application/controller/account/subscription.php:911
+08-module-dependencies,application/account · phụ thuộc 6,n20,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/account · phụ thuộc 7,n1,"account/subscription.php
+invoice() · L912",application/controller/account/subscription.php:912
+08-module-dependencies,application/account · phụ thuộc 7,n2,"model/localisation/country
+đã có file",application/model/localisation/country.php:1
+08-module-dependencies,application/account · phụ thuộc 7,n4,"account/transaction.php
+index() · L12",application/controller/account/transaction.php:12
+08-module-dependencies,application/account · phụ thuộc 7,n5,"model/account/transaction
+đã có file",application/model/account/transaction.php:1
+08-module-dependencies,application/account · phụ thuộc 7,n7,"account/transaction.php
+index() · L13",application/controller/account/transaction.php:13
+08-module-dependencies,application/account · phụ thuộc 7,n8,"model/account/seller
+đã có file",application/model/account/seller.php:1
+08-module-dependencies,application/account · phụ thuộc 7,n10,"account/verify.php
+index() · L6",application/controller/account/verify.php:6
+08-module-dependencies,application/account · phụ thuộc 7,n11,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/checkout · phụ thuộc 1,n1,"checkout/checkout.php
+index() · L14",application/controller/checkout/checkout.php:14
+08-module-dependencies,application/checkout · phụ thuộc 1,n2,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/checkout · phụ thuộc 1,n4,"checkout/checkout.php
+index() · L15",application/controller/checkout/checkout.php:15
+08-module-dependencies,application/checkout · phụ thuộc 1,n5,"model/account/payment
+đã có file",application/model/account/payment.php:1
+08-module-dependencies,application/checkout · phụ thuộc 1,n7,"checkout/checkout.php
+success() · L87",application/controller/checkout/checkout.php:87
+08-module-dependencies,application/checkout · phụ thuộc 1,n8,"model/account/order
+đã có file",application/model/account/order.php:1
+08-module-dependencies,application/checkout · phụ thuộc 1,n10,"checkout/payment.php
+paypal() · L37",application/controller/checkout/payment.php:37
+08-module-dependencies,application/checkout · phụ thuộc 1,n11,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/checkout · phụ thuộc 1,n13,"checkout/payment.php
+prepare() · L91",application/controller/checkout/payment.php:91
+08-module-dependencies,application/checkout · phụ thuộc 1,n14,"model/account/payment
+đã có file",application/model/account/payment.php:1
+08-module-dependencies,application/checkout · phụ thuộc 1,n16,"checkout/payment.php
+confirm() · L221",application/controller/checkout/payment.php:221
+08-module-dependencies,application/checkout · phụ thuộc 1,n17,"model/account/order
+đã có file",application/model/account/order.php:1
+08-module-dependencies,application/cloud · phụ thuộc 1,n1,"cloud/store.php
+index() · L11",application/controller/cloud/store.php:11
+08-module-dependencies,application/cloud · phụ thuộc 1,n2,"model/account/subscription
+đã có file",application/model/account/subscription.php:1
+08-module-dependencies,application/cms · phụ thuộc 1,n1,"cms/banner.php
+index() · L8",application/controller/cms/banner.php:8
+08-module-dependencies,application/cms · phụ thuộc 1,n2,"model/design/banner
+đã có file",application/model/design/banner.php:1
+08-module-dependencies,application/cms · phụ thuộc 1,n4,"cms/banner.php
+index() · L9",application/controller/cms/banner.php:9
+08-module-dependencies,application/cms · phụ thuộc 1,n5,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/cms · phụ thuộc 1,n7,"cms/blog.php
+index() · L6",application/controller/cms/blog.php:6
+08-module-dependencies,application/cms · phụ thuộc 1,n8,"model/cms/blog
+đã có file",application/model/cms/blog.php:1
+08-module-dependencies,application/cms · phụ thuộc 1,n10,"cms/blog.php
+index() · L7",application/controller/cms/blog.php:7
+08-module-dependencies,application/cms · phụ thuộc 1,n11,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/cms · phụ thuộc 1,n13,"cms/download.php
+index() · L6",application/controller/cms/download.php:6
+08-module-dependencies,application/cms · phụ thuộc 1,n14,"model/cms/download
+đã có file",application/model/cms/download.php:1
+08-module-dependencies,application/cms · phụ thuộc 1,n16,"cms/download.php
+index() · L7",application/controller/cms/download.php:7
+08-module-dependencies,application/cms · phụ thuộc 1,n17,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/cms · phụ thuộc 1,n19,"cms/download.php
+index() · L8",application/controller/cms/download.php:8
+08-module-dependencies,application/cms · phụ thuộc 1,n20,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/cms · phụ thuộc 2,n1,"cms/information.php
+index() · L4",application/controller/cms/information.php:4
+08-module-dependencies,application/cms · phụ thuộc 2,n2,"model/cms/information
+đã có file",application/model/cms/information.php:1
+08-module-dependencies,application/cms · phụ thuộc 2,n4,"cms/newsletter.php
+index() · L12",application/controller/cms/newsletter.php:12
+08-module-dependencies,application/cms · phụ thuộc 2,n5,"model/cms/newsletter
+đã có file",application/model/cms/newsletter.php:1
+08-module-dependencies,application/cms · phụ thuộc 2,n7,"cms/showcase.php
+index() · L6",application/controller/cms/showcase.php:6
+08-module-dependencies,application/cms · phụ thuộc 2,n8,"model/cms/showcase
+đã có file",application/model/cms/showcase.php:1
+08-module-dependencies,application/cms · phụ thuộc 2,n10,"cms/showcase.php
+index() · L7",application/controller/cms/showcase.php:7
+08-module-dependencies,application/cms · phụ thuộc 2,n11,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/cms · phụ thuộc 2,n13,"cms/sitemap.php
+index() · L37",application/controller/cms/sitemap.php:37
+08-module-dependencies,application/cms · phụ thuộc 2,n14,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/cms · phụ thuộc 2,n16,"cms/sitemap.php
+index() · L51",application/controller/cms/sitemap.php:51
+08-module-dependencies,application/cms · phụ thuộc 2,n17,"model/cms/blog
+đã có file",application/model/cms/blog.php:1
+08-module-dependencies,application/common · phụ thuộc 1,n1,"common/footer.php
+index() · L4",application/controller/common/footer.php:4
+08-module-dependencies,application/common · phụ thuộc 1,n2,"model/cms/information
+đã có file",application/model/cms/information.php:1
+08-module-dependencies,application/common · phụ thuộc 1,n4,"common/image.php
+index() · L67",application/controller/common/image.php:67
+08-module-dependencies,application/common · phụ thuộc 1,n5,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/event · phụ thuộc 1,n1,"event/translation.php
+index() · L4",application/controller/event/translation.php:4
+08-module-dependencies,application/event · phụ thuộc 1,n2,"model/design/translation
+đã có file",application/model/design/translation.php:1
+08-module-dependencies,application/localisation · phụ thuộc 1,n1,"localisation/country.php
+index() · L6",application/controller/localisation/country.php:6
+08-module-dependencies,application/localisation · phụ thuộc 1,n2,"model/localisation/country
+đã có file",application/model/localisation/country.php:1
+08-module-dependencies,application/localisation · phụ thuộc 1,n4,"localisation/country.php
+index() · L11",application/controller/localisation/country.php:11
+08-module-dependencies,application/localisation · phụ thuộc 1,n5,"model/localisation/zone
+đã có file",application/model/localisation/zone.php:1
+08-module-dependencies,application/mail · phụ thuộc 1,n1,"mail/comment.php
+index() · L11",application/controller/mail/comment.php:11
+08-module-dependencies,application/mail · phụ thuộc 1,n2,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/mail · phụ thuộc 1,n4,"mail/comment.php
+index() · L12",application/controller/mail/comment.php:12
+08-module-dependencies,application/mail · phụ thuộc 1,n5,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/mail · phụ thuộc 1,n7,"mail/extension.php
+index() · L9",application/controller/mail/extension.php:9
+08-module-dependencies,application/mail · phụ thuộc 1,n8,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/mail · phụ thuộc 1,n10,"mail/extension.php
+index() · L10",application/controller/mail/extension.php:10
+08-module-dependencies,application/mail · phụ thuộc 1,n11,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/mail · phụ thuộc 1,n13,"mail/order.php
+index() · L16",application/controller/mail/order.php:16
+08-module-dependencies,application/mail · phụ thuộc 1,n14,"model/account/order
+đã có file",application/model/account/order.php:1
+08-module-dependencies,application/mail · phụ thuộc 1,n16,"mail/order.php
+index() · L17",application/controller/mail/order.php:17
+08-module-dependencies,application/mail · phụ thuộc 1,n17,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/mail · phụ thuộc 1,n19,"mail/order.php
+index() · L18",application/controller/mail/order.php:18
+08-module-dependencies,application/mail · phụ thuộc 1,n20,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/mail · phụ thuộc 2,n1,"mail/order.php
+index() · L19",application/controller/mail/order.php:19
+08-module-dependencies,application/mail · phụ thuộc 2,n2,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/mail · phụ thuộc 2,n4,"mail/register.php
+index() · L5",application/controller/mail/register.php:5
+08-module-dependencies,application/mail · phụ thuộc 2,n5,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/mail · phụ thuộc 2,n7,"mail/register.php
+index() · L26",application/controller/mail/register.php:26
+08-module-dependencies,application/mail · phụ thuộc 2,n8,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/mail · phụ thuộc 2,n10,"mail/register.php
+index() · L27",application/controller/mail/register.php:27
+08-module-dependencies,application/mail · phụ thuộc 2,n11,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/mail · phụ thuộc 2,n13,"mail/seller.php
+index() · L9",application/controller/mail/seller.php:9
+08-module-dependencies,application/mail · phụ thuộc 2,n14,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/mail · phụ thuộc 2,n16,"mail/seller.php
+index() · L10",application/controller/mail/seller.php:10
+08-module-dependencies,application/mail · phụ thuộc 2,n17,"model/account/member
+đã có file",application/model/account/member.php:1
+08-module-dependencies,application/mail · phụ thuộc 2,n19,"mail/seller.php
+index() · L11",application/controller/mail/seller.php:11
+08-module-dependencies,application/mail · phụ thuộc 2,n20,"model/cms/download
+đã có file",application/model/cms/download.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 1,n1,"marketplace/braintree.php
+index() · L4",application/controller/marketplace/braintree.php:4
+08-module-dependencies,application/marketplace · phụ thuộc 1,n2,"model/account/payment
+đã có file",application/model/account/payment.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 1,n4,"marketplace/braintree.php
+payment() · L34",application/controller/marketplace/braintree.php:34
+08-module-dependencies,application/marketplace · phụ thuộc 1,n5,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 1,n7,"marketplace/braintree.php
+payment() · L35",application/controller/marketplace/braintree.php:35
+08-module-dependencies,application/marketplace · phụ thuộc 1,n8,"model/account/order
+đã có file",application/model/account/order.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 1,n10,"marketplace/download.php
+index() · L12",application/controller/marketplace/download.php:12
+08-module-dependencies,application/marketplace · phụ thuộc 1,n11,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 1,n13,"marketplace/download.php
+index() · L13",application/controller/marketplace/download.php:13
+08-module-dependencies,application/marketplace · phụ thuộc 1,n14,"model/cms/download
+đã có file",application/model/cms/download.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 1,n16,"marketplace/download.php
+index() · L14",application/controller/marketplace/download.php:14
+08-module-dependencies,application/marketplace · phụ thuộc 1,n17,"model/account/order
+đã có file",application/model/account/order.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 1,n19,"marketplace/download.php
+index() · L15",application/controller/marketplace/download.php:15
+08-module-dependencies,application/marketplace · phụ thuộc 1,n20,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 2,n1,"marketplace/extension.php
+index() · L6",application/controller/marketplace/extension.php:6
+08-module-dependencies,application/marketplace · phụ thuộc 2,n2,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 2,n4,"marketplace/extension.php
+index() · L7",application/controller/marketplace/extension.php:7
+08-module-dependencies,application/marketplace · phụ thuộc 2,n5,"model/cms/download
+đã có file",application/model/cms/download.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 2,n7,"marketplace/extension.php
+index() · L8",application/controller/marketplace/extension.php:8
+08-module-dependencies,application/marketplace · phụ thuộc 2,n8,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 2,n10,"marketplace/extension.php
+info() · L310",application/controller/marketplace/extension.php:310
+08-module-dependencies,application/marketplace · phụ thuộc 2,n11,"model/account/order
+đã có file",application/model/account/order.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 2,n13,"marketplace/paypal.php
+index() · L4",application/controller/marketplace/paypal.php:4
+08-module-dependencies,application/marketplace · phụ thuộc 2,n14,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 2,n16,"marketplace/paypal.php
+send() · L41",application/controller/marketplace/paypal.php:41
+08-module-dependencies,application/marketplace · phụ thuộc 2,n17,"model/account/order
+đã có file",application/model/account/order.php:1
+08-module-dependencies,application/marketplace · phụ thuộc 2,n19,"marketplace/purchase.php
+index() · L4",application/controller/marketplace/purchase.php:4
+08-module-dependencies,application/marketplace · phụ thuộc 2,n20,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/startup · phụ thuộc 1,n1,"startup/event.php
+index() · L4",application/controller/startup/event.php:4
+08-module-dependencies,application/startup · phụ thuộc 1,n2,"model/setting/event
+đã có file",application/model/setting/event.php:1
+08-module-dependencies,application/startup · phụ thuộc 1,n4,"startup/startup.php
+index() · L58",application/controller/startup/startup.php:58
+08-module-dependencies,application/startup · phụ thuộc 1,n5,"model/localisation/language
+đã có file",application/model/localisation/language.php:1
+08-module-dependencies,application/startup · phụ thuộc 1,n7,"startup/startup.php
+index() · L168",application/controller/startup/startup.php:168
+08-module-dependencies,application/startup · phụ thuộc 1,n8,"model/localisation/currency
+đã có file",application/model/localisation/currency.php:1
+08-module-dependencies,application/support · phụ thuộc 1,n1,"support/advertise.php
+send() · L31",application/controller/support/advertise.php:31
+08-module-dependencies,application/support · phụ thuộc 1,n2,"model/support/enquiry
+đã có file",application/model/support/enquiry.php:1
+08-module-dependencies,application/support · phụ thuộc 1,n4,"support/contact.php
+reason() · L31",application/controller/support/contact.php:31
+08-module-dependencies,application/support · phụ thuộc 1,n5,"model/localisation/country
+đã có file",application/model/localisation/country.php:1
+08-module-dependencies,application/support · phụ thuộc 1,n7,"support/contact.php
+reason() · L32",application/controller/support/contact.php:32
+08-module-dependencies,application/support · phụ thuộc 1,n8,"model/cms/download
+đã có file",application/model/cms/download.php:1
+08-module-dependencies,application/support · phụ thuộc 1,n10,"support/contact.php
+send() · L50",application/controller/support/contact.php:50
+08-module-dependencies,application/support · phụ thuộc 1,n11,"model/support/enquiry
+đã có file",application/model/support/enquiry.php:1
+08-module-dependencies,application/support · phụ thuộc 1,n13,"support/partner.php
+index() · L6",application/controller/support/partner.php:6
+08-module-dependencies,application/support · phụ thuộc 1,n14,"model/account/partner
+đã có file",application/model/account/partner.php:1
+08-module-dependencies,application/support · phụ thuộc 1,n16,"support/partner.php
+index() · L7",application/controller/support/partner.php:7
+08-module-dependencies,application/support · phụ thuộc 1,n17,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/support · phụ thuộc 1,n19,"support/partner.php
+info() · L182",application/controller/support/partner.php:182
+08-module-dependencies,application/support · phụ thuộc 1,n20,"model/cms/showcase
+đã có file",application/model/cms/showcase.php:1
+08-module-dependencies,application/support · phụ thuộc 2,n1,"support/partner.php
+send() · L331",application/controller/support/partner.php:331
+08-module-dependencies,application/support · phụ thuộc 2,n2,"model/support/enquiry
+đã có file",application/model/support/enquiry.php:1
+08-module-dependencies,application/support · phụ thuộc 2,n4,"support/seller.php
+index() · L20",application/controller/support/seller.php:20
+08-module-dependencies,application/support · phụ thuộc 2,n5,"model/marketplace/extension
+đã có file",application/model/marketplace/extension.php:1
+08-module-dependencies,application/support · phụ thuộc 2,n7,"support/seller.php
+index() · L21",application/controller/support/seller.php:21
+08-module-dependencies,application/support · phụ thuộc 2,n8,"model/cms/download
+đã có file",application/model/cms/download.php:1
+08-module-dependencies,application/support · phụ thuộc 2,n10,"support/seller.php
+index() · L22",application/controller/support/seller.php:22
+08-module-dependencies,application/support · phụ thuộc 2,n11,"model/tool/image
+đã có file",application/model/tool/image.php:1
+08-module-dependencies,application/support · phụ thuộc 2,n13,"support/seller.php
+send() · L112",application/controller/support/seller.php:112
+08-module-dependencies,application/support · phụ thuộc 2,n14,"model/support/enquiry
+đã có file",application/model/support/enquiry.php:1
+08-module-dependencies,Phụ thuộc dùng chung và hook,n1,"checkout/payment + checkout/checkout → PaymentGateway
+Settings quyết định gateway; HTTP Stripe/Braintree, PayPal frontend SDK",application/controller/checkout/payment.php:217
+08-module-dependencies,Phụ thuộc dùng chung và hook,n2,"account/extension::upload + marketplace/download::download → CloudStorage
+File local hoặc object storage theo settings",application/controller/marketplace/download.php:81
+08-module-dependencies,Phụ thuộc dùng chung và hook,n3,"ModelAccountOrder::addOrder → Loader::controller(mail/order) → Mail
+Model cũng có thể gọi controller; không phải phân lớp một chiều tuyệt đối",application/model/account/order.php:3
+08-module-dependencies,Phụ thuộc dùng chung và hook,n4,"Loader::model → Proxy::__call → callback → Model + Event before/after
+Registry cung cấp DB, Cache, Session, Config cho cả Controller và Model",system/engine/proxy.php:33
+08-module-dependencies,Phụ thuộc dùng chung và hook,n5,"startup/event → model setting/event → oc_event → Event::register
+Seed không có INSERT event: chưa có bằng chứng hook DB nào được bật mặc định",install/opencart.sql:1
+08-module-dependencies,Phụ thuộc dùng chung và hook,n6,"modification() → DIR_MODIFICATION override; bundled packages → vendor/autoload.php
+Marketplace extension là hàng hóa số, không đồng nghĩa plugin đã cài vào runtime",system/startup.php:49

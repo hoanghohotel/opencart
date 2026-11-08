@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="current-architecture" name="Kiến trúc hiện tại · source verified">
+    <mxGraphModel grid="1" page="1" pageWidth="1550" pageHeight="1250">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n0" value="Browser → index.php/admin/index.php&#10;index.php:1; admin/index.php:1" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="60" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n1" value="Bootstrap / Registry / pre-actions / Action&#10;system/framework.php:1; system/engine/action.php:1" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="560" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n2" value="Controller / Model / Library&#10;system/engine/loader.php:1" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="1060" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n3" value="Payment completion phân tán&#10;PAY-01, PAY-02; checkout/payment.php::confirm" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe4e4;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="60" y="400" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n4" value="SQL order/sales/commission; mail đồng bộ&#10;application/model/account/order.php:3" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="560" y="400" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n5" value="58 MyISAM; session InnoDB&#10;install/opencart.sql; DB-01" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="1060" y="400" width="420" height="155" />
+        </mxCell>
+        <mxCell id="title" value="Kiến trúc hiện tại · source verified&#10;Xanh: hiện tại; đỏ: finding; xanh lam: đề xuất; vàng: kế hoạch. Source audit, không benchmark." vertex="1" parent="1" style="text;whiteSpace=wrap;html=0;fontSize=22;align=left;">
+          <mxGeometry as="geometry" x="60" y="30" width="1420" height="100" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="n0" target="n1" value="HTTP/PHP" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="n1" target="n2" value="dispatch" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="n2" target="n3" value="checkout routes" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="n3" target="n4" value="addOrder" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="n4" target="n5" value="DB::query" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

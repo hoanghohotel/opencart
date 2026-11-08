@@ -1,0 +1,33 @@
+---
+title: application/cms · phụ thuộc 2
+---
+flowchart TB
+    n1["cms/information.php<br/>index() · L4"]
+    n2["model/cms/information<br/>đã có file"]
+    n3["oc_information, oc_information_description"]
+    n4["cms/newsletter.php<br/>index() · L12"]
+    n5["model/cms/newsletter<br/>đã có file"]
+    n6["oc_newsletter"]
+    n7["cms/showcase.php<br/>index() · L6"]
+    n8["model/cms/showcase<br/>đã có file"]
+    n9["oc_showcase, oc_showcase_category"]
+    n10["cms/showcase.php<br/>index() · L7"]
+    n11["model/tool/image<br/>đã có file"]
+    n12["Không có SQL literal được trích xuất"]
+    n13["cms/sitemap.php<br/>index() · L37"]
+    n14["model/marketplace/extension<br/>đã có file"]
+    n15["oc_download, oc_extension, oc_extension_category,<br/>oc_extension_comment, oc_extension_download,<br/>oc_extension_download_path, oc_extension_image,<br/>oc_extension_promotion, oc_extension_rating,<br/>oc_member, oc_member_seller"]
+    n16["cms/sitemap.php<br/>index() · L51"]
+    n17["model/cms/blog<br/>đã có file"]
+    n18["oc_blog, oc_blog_category, oc_blog_comment,<br/>oc_member"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6
+    n7 --> n8
+    n8 -.-> n9
+    n10 --> n11
+    n13 --> n14
+    n14 -.-> n15
+    n16 --> n17
+    n17 -.-> n18

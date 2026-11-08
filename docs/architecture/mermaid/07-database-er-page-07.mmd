@@ -1,0 +1,20 @@
+---
+title: Quan hệ logic đã có bằng chứng 7
+---
+flowchart TB
+    n1["oc_information<br/>PK information_id"]
+    n2["oc_information_description<br/>PK information_id, language_id"]
+    n3["application/model/cms/information.php::getInformation()"]
+    n4["oc_banner<br/>PK banner_id"]
+    n5["oc_banner_image<br/>PK banner_image_id"]
+    n6["application/model/design/banner.php::getBanner()"]
+    n7["oc_member<br/>PK member_id"]
+    n8["oc_blog_comment<br/>PK blog_comment_id"]
+    n9["application/model/cms/blog.php::getComment()"]
+    n10["oc_blog<br/>PK blog_id"]
+    n11["oc_blog_comment<br/>PK blog_comment_id"]
+    n12["application/model/cms/blog.php::getCommentsByBlogId()"]
+    n1 -.-> n2
+    n4 -.-> n5
+    n7 -.-> n8
+    n10 -.-> n11

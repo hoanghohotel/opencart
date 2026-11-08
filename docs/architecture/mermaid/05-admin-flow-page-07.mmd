@@ -1,0 +1,16 @@
+---
+title: Admin · danh mục controller 5
+---
+flowchart TB
+    n1["startup/error.php<br/>ControllerStartupError<br/>index, handler"]
+    n2["startup/event.php<br/>ControllerStartupEvent<br/>index"]
+    n3["startup/login.php<br/>ControllerStartupLogin<br/>index"]
+    n4["startup/permission.php<br/>ControllerStartupPermission<br/>index"]
+    n5["startup/router.php<br/>ControllerStartupRouter<br/>index"]
+    n6["startup/sass.php<br/>ControllerStartupSass<br/>index"]
+    n7["startup/startup.php<br/>ControllerStartupStartup<br/>index"]
+    n8["support/enquiry.php<br/>ControllerSupportEnquiry<br/>index, info, delete, getFilterUrl, getList, validateDelete"]
+    n9["tool/backup.php<br/>ControllerToolBackup<br/>index, import, export"]
+    n10["tool/log.php<br/>ControllerToolLog<br/>index, download, clear"]
+    n11["tool/upload.php<br/>ControllerToolUpload<br/>index, delete, getList, validateDelete, download, upload"]
+    n12["user/api.php<br/>ControllerUserApi<br/>index, add, edit, delete, getList, getForm, validateForm, validateDelete, deleteSession"]

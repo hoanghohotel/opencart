@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1113" viewBox="0 0 1440 1113">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1440" height="1113" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">Event, localization và modification</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Các cơ chế/nhánh độc lập; không có thứ tự gọi giữa các khối. Luồng cụ thể xem sequence và dẫn chiếu source.</text>
+<text x="50" y="1084" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">03-application-logic · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="60" y="150" width="1180" height="108" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="74" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">framework.php đăng ký action_event từ config; Event::register() sắp theo priority</text>
+<text x="74" y="246" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/engine/event.php:37</text>
+<rect x="60" y="305" width="1180" height="108" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="74" y="327" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">startup/event → setting/event::getEvents() → oc_event</text>
+<text x="74" y="347" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Frontend lọc application/*; admin lọc admin/*; bỏ prefix trước register</text>
+<text x="74" y="401" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/setting/event.php:3</text>
+<rect x="60" y="460" width="1180" height="108" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="74" y="482" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Loader::controller/model/view/language/config phát before/after</text>
+<text x="74" y="502" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Event::trigger() gọi Action; kết quả non-null có thể thay thế xử lý</text>
+<text x="74" y="556" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/engine/loader.php:1</text>
+<rect x="60" y="615" width="1180" height="108" rx="10" fill="#dcf4ec" stroke="#94a3b8"/>
+<text x="74" y="637" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Frontend event/language before/after backup/restore; view inject language</text>
+<text x="74" y="657" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">language/*/after → event/translation → design/translation → oc_translation</text>
+<text x="74" y="711" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/event/translation.php:3</text>
+<rect x="60" y="770" width="1180" height="108" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="792" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Admin config có 2 khóa view/*/before: PHP giữ khóa sau</text>
+<text x="74" y="812" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Vì vậy event/theme ở khóa trước không được kích hoạt qua config này</text>
+<text x="74" y="866" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/config/admin.php:1</text>
+<rect x="60" y="925" width="1180" height="108" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="947" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">startup.php::modification() tìm file thay thế trong DIR_MODIFICATION</text>
+<text x="74" y="967" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Có oc_modification; chưa xác minh pipeline cài đặt/refresh OCMOD đầy đủ</text>
+<text x="74" y="1021" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/startup.php:49</text>
+</svg>

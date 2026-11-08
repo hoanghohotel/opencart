@@ -1,0 +1,23 @@
+---
+title: admin/common · phụ thuộc 2
+---
+flowchart TB
+    n1["common/profile.php<br/>index() · L10"]
+    n2["model/user/user<br/>đã có file"]
+    n3["oc_member_login, oc_user, oc_user_group"]
+    n4["common/profile.php<br/>index() · L147"]
+    n5["model/tool/image<br/>đã có file"]
+    n6["Không có SQL literal được trích xuất"]
+    n7["common/reset.php<br/>index() · L20"]
+    n8["model/user/user<br/>đã có file"]
+    n9["oc_member_login, oc_user, oc_user_group"]
+    n10["common/reset.php<br/>index() · L84"]
+    n11["model/setting/setting<br/>đã có file"]
+    n12["oc_setting"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n7 --> n8
+    n8 -.-> n9
+    n10 --> n11
+    n11 -.-> n12

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="958" viewBox="0 0 1440 958">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1440" height="958" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">Dịch vụ ngoài và ranh giới chứng cứ</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Các cơ chế/nhánh độc lập; không có thứ tự gọi giữa các khối. Luồng cụ thể xem sequence và dẫn chiếu source.</text>
+<text x="50" y="929" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">02-system-architecture · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="60" y="150" width="1180" height="108" rx="10" fill="#dff3ff" stroke="#94a3b8"/>
+<text x="74" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PaymentGateway → Stripe HTTP API / Braintree GraphQL / PayPal OAuth</text>
+<text x="74" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Được triển khai trong PHP; cấu hình bật/tắt lấy từ settings</text>
+<text x="74" y="246" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/library/payment_gateway.php:1</text>
+<rect x="60" y="305" width="1180" height="108" rx="10" fill="#dff3ff" stroke="#94a3b8"/>
+<text x="74" y="327" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Browser JS → Braintree / PayPal SDK</text>
+<text x="74" y="347" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Không suy ra capture server thành công từ callback trình duyệt</text>
+<text x="74" y="401" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/view/template/checkout/paypal.twig:1</text>
+<rect x="60" y="460" width="1180" height="108" rx="10" fill="#dff3ff" stroke="#94a3b8"/>
+<text x="74" y="482" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">CloudStorage → Wasabi / R2 / S3 / GCS</text>
+<text x="74" y="502" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">HMAC S3-compatible hoặc OAuth service account; tùy driver</text>
+<text x="74" y="556" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/library/cloud_storage.php:1</text>
+<rect x="60" y="615" width="1180" height="108" rx="10" fill="#dff3ff" stroke="#94a3b8"/>
+<text x="74" y="637" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Mail → mail hoặc smtp adapter</text>
+<text x="74" y="657" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Mail controller dựng nội dung; gateway không được kiểm thử live</text>
+<text x="74" y="711" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/library/mail.php:1</text>
+<rect x="60" y="770" width="1180" height="108" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="792" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Cloud subscription → SQL records / history / transaction / backup metadata</text>
+<text x="74" y="812" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Chưa xác minh có provision hạ tầng thật trong repository</text>
+<text x="74" y="866" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/account/subscription.php:27</text>
+</svg>

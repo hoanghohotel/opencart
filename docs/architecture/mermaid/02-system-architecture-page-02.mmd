@@ -1,0 +1,9 @@
+---
+title: Dịch vụ ngoài và ranh giới chứng cứ
+---
+flowchart TB
+    n1["PaymentGateway → Stripe HTTP API / Braintree GraphQL / PayPal OAuth<br/>Được triển khai trong PHP; cấu hình bật/tắt lấy từ settings"]
+    n2["Browser JS → Braintree / PayPal SDK<br/>Không suy ra capture server thành công từ callback trình duyệt"]
+    n3["CloudStorage → Wasabi / R2 / S3 / GCS<br/>HMAC S3-compatible hoặc OAuth service account; tùy driver"]
+    n4["Mail → mail hoặc smtp adapter<br/>Mail controller dựng nội dung; gateway không được kiểm thử live"]
+    n5["Cloud subscription → SQL records / history / transaction / backup metadata<br/>Chưa xác minh có provision hạ tầng thật trong repository"]

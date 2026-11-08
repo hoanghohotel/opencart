@@ -1,0 +1,15 @@
+---
+title: Checkout · chọn phương thức thanh toán
+---
+sequenceDiagram
+    participant A0 as Browser / modal
+    participant A1 as CheckoutCheckout
+    participant A2 as Extension model
+    participant A3 as Payment model
+    participant A4 as PaymentGateway
+    A0->>A1: AJAX checkout/checkout + extension_id
+    A1->>A1: isLogged / member_token gate
+    A1->>A2: getExtension(extension_id)
+    A1->>A3: getPayments(member_id)
+    A1->>A4: isStripeEnabled / isBraintreeEnabled / isPayPalEnabled
+    A1->>A0: view checkout/checkout → modal HTML

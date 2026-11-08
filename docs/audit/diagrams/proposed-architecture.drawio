@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="proposed-architecture" name="Kiến trúc mục tiêu ĐỀ XUẤT · modular monolith">
+    <mxGraphModel grid="1" page="1" pageWidth="1550" pageHeight="1250">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n0" value="Front/admin/API adapters giữ route contract&#10;QUAL-03; OPS-02" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="60" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n1" value="Auth/CSRF/ownership policy&#10;SEC-01/04/05" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="560" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n2" value="Checkout / Order / Entitlement use-cases&#10;PAY-01/02/03" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="1060" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n3" value="Payment provider port + verified event&#10;SEC-02; PAY-01/03" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="60" y="400" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n4" value="Repository + InnoDB transaction + outbox&#10;DB-01; cần rehearsal migration" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="560" y="400" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n5" value="Worker mail/provision/scan + observability&#10;QUAL-04; BIZ-01; OPS-04" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="1060" y="400" width="420" height="155" />
+        </mxCell>
+        <mxCell id="title" value="Kiến trúc mục tiêu ĐỀ XUẤT · modular monolith&#10;Xanh: hiện tại; đỏ: finding; xanh lam: đề xuất; vàng: kế hoạch. Source audit, không benchmark." vertex="1" parent="1" style="text;whiteSpace=wrap;html=0;fontSize=22;align=left;">
+          <mxGeometry as="geometry" x="60" y="30" width="1420" height="100" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="n0" target="n1" value="validate" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="n1" target="n2" value="authorized intent" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="n2" target="n3" value="proof / idempotency" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="n2" target="n4" value="atomic state" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="n4" target="n5" value="committed outbox" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

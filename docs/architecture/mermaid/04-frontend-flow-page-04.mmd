@@ -1,0 +1,9 @@
+---
+title: Nhánh legacy và các module khác
+---
+flowchart TB
+    n1["marketplace/purchase::index() → purchase.twig<br/>marketplace/braintree::payment() → addOrder trực tiếp"]
+    n2["marketplace/paypal::send() → addOrder; callback() chỉ redirect success<br/>Không gộp các nhánh này với charge server trong checkout/payment"]
+    n3["CMS: blog, download, information, showcase, sitemap<br/>Support: enquiry/contact, partner, guide và các trang thông tin"]
+    n4["Seller: account/extension CRUD + upload → CloudStorage<br/>Buyer download: marketplace/download → kiểm tra quyền mua → outputFile()"]
+    n5["Cloud: account/subscription → account/subscription model → SQL, history, transaction<br/>cloud/store hiển thị subscription; provision hạ tầng chưa xác minh"]

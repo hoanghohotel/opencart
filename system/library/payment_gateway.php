@@ -231,7 +231,8 @@ class PaymentGateway {
 			'Content-Type: application/x-www-form-urlencoded'
 		));
 		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
 		$response = curl_exec($ch);
 		$curl_err = curl_error($ch);
@@ -240,6 +241,10 @@ class PaymentGateway {
 
 		if ($response === false) {
 			return array('error' => array('message' => 'Stripe API cURL Error: ' . $curl_err));
+		}
+
+		if ($http_code < 200 || $http_code >= 300) {
+			return array('error' => array('message' => 'Stripe API HTTP Error ' . $http_code));
 		}
 
 		$decoded = json_decode($response, true);
@@ -420,70 +425,76 @@ class PaymentGateway {
 
 	public function chargeStripe($payment_token_or_nonce, $amount, $currency = 'usd', $description = 'OpenCart Extension Purchase', $email = '', $name = '', $member_id = 0) {
 		$cfg = $this->getStripeConfig();
-		$secret_key = $cfg['secret_key'];
-
-		if (!empty($secret_key)) {
-			$customer_id = '';
-			$pm_id = '';
-
-			if (strpos($payment_token_or_nonce, 'stripe|') === 0) {
-				$parts = explode('|', $payment_token_or_nonce);
-				$customer_id = (!empty($parts[2]) && $parts[2] !== 'local') ? $parts[2] : '';
-				$pm_id = !empty($parts[3]) ? $parts[3] : '';
-			} elseif (strpos($payment_token_or_nonce, 'stripe_pm|') === 0) {
-				$parts = explode('|', $payment_token_or_nonce);
-				$pm_id = !empty($parts[1]) ? $parts[1] : '';
-			} elseif (strpos($payment_token_or_nonce, 'pm_') === 0) {
-				$pm_id = $payment_token_or_nonce;
-			}
-
-			if (!$pm_id || strpos($pm_id, 'pm_local_') === 0) {
-				if ($cfg['environment'] === 'test') {
-					$pm_create = $this->stripeRequest('POST', 'payment_methods', array(
-						'type' => 'card',
-						'card' => array('token' => 'tok_visa')
-					), $secret_key);
-					if (isset($pm_create['error'])) {
-						return array('error' => $pm_create['error']['message']);
-					}
-					$pm_id = $pm_create['id'];
-				} else {
-					return array('error' => 'A valid Stripe PaymentMethod is required in Live Mode.');
-				}
-			}
-
-			$cents = max(50, (int)round((float)$amount * 100));
-			$params = array(
-				'amount'               => $cents,
-				'currency'             => strtolower($currency ?: $cfg['currency']),
-				'payment_method'       => $pm_id,
-				'payment_method_types' => array('card'),
-				'confirm'              => 'true',
-				'capture_method'       => $cfg['capture_method'],
-				'description'          => $description
-			);
-
-			if ($customer_id) {
-				$params['customer'] = $customer_id;
-			}
-
-			$intent = $this->stripeRequest('POST', 'payment_intents', $params, $secret_key);
-			if (isset($intent['error'])) {
-				return array('error' => $intent['error']['message']);
-			}
-
-			return array(
-				'success'        => true,
-				'transaction_id' => $intent['id'],
-				'status'         => $intent['status']
-			);
+		if (!$cfg['status'] || !$cfg['secret_key']) {
+			return array('error' => 'Stripe is disabled or its Secret Key is not configured.');
 		}
+		$currency = strtoupper($currency);
+		if (!$this->validChargeAmount($amount, $currency) || $cfg['capture_method'] !== 'automatic') {
+			return array('error' => 'This amount, currency or capture mode requires a supported payment flow.');
+		}
+		$customer_id = '';
+		$pm_id = '';
+		if (strpos($payment_token_or_nonce, 'stripe|') === 0) {
+			$parts = explode('|', $payment_token_or_nonce);
+			$customer_id = (!empty($parts[2]) && $parts[2] !== 'local') ? $parts[2] : '';
+			$pm_id = isset($parts[3]) ? $parts[3] : '';
+		} elseif (strpos($payment_token_or_nonce, 'stripe_pm|') === 0) {
+			$parts = explode('|', $payment_token_or_nonce);
+			$pm_id = isset($parts[1]) ? $parts[1] : '';
+		} elseif (strpos($payment_token_or_nonce, 'pm_') === 0) {
+			$pm_id = $payment_token_or_nonce;
+		}
+		if (!preg_match('/^pm_[a-zA-Z0-9]+$/D', $pm_id) || strpos($pm_id, 'pm_local') === 0) {
+			return array('error' => 'A provider-issued Stripe PaymentMethod is required.');
+		}
+		$cents = (int)round((float)$amount * ($currency === 'ISK' ? 100 : pow(10, $this->currencyPrecision($currency))));
+		$params = array('amount' => $cents, 'currency' => strtolower($currency), 'payment_method' => $pm_id,
+			'payment_method_types' => array('card'), 'confirm' => 'true', 'capture_method' => 'automatic', 'description' => $description);
+		if ($customer_id) { $params['customer'] = $customer_id; }
+		$intent = $this->stripeRequest('POST', 'payment_intents', $params, $cfg['secret_key']);
+		if (!empty($intent['error'])) {
+			return array('error' => isset($intent['error']['message']) ? $intent['error']['message'] : 'Stripe payment failed.');
+		}
+		if (!is_array($intent) || !$this->validTransactionId($intent['id'] ?? null) || ($intent['status'] ?? '') !== 'succeeded'
+			|| !isset($intent['amount'], $intent['amount_received'], $intent['currency'], $intent['livemode'])
+			|| !is_int($intent['amount']) || !is_int($intent['amount_received']) || !is_string($intent['currency'])
+			|| $intent['amount'] !== $cents || $intent['amount_received'] !== $cents
+			|| strtoupper($intent['currency']) !== $currency || $intent['livemode'] !== ($cfg['environment'] === 'live')) {
+			return array('error' => 'Stripe has not confirmed the expected captured payment. Check payment status before retrying.');
+		}
+		return array('success' => true, 'verified' => true, 'transaction_id' => $intent['id'], 'status' => $intent['status']);
+	}
 
-		return array(
-			'success'        => true,
-			'transaction_id' => 'pi_' . strtolower(token(16)),
-			'status'         => 'succeeded'
-		);
+	private function validTransactionId($id) {
+		return is_string($id) && $id !== '' && !preg_match('/[\x00-\x20\x7f]/', $id);
+	}
+
+	private function validTransactionAmount($amount, $currency) {
+		if (!is_string($amount) && !is_int($amount) && !is_float($amount)) {
+			return false;
+		}
+		// A GraphQL Amount is a decimal value, not scientific notation. Permit
+		// zero-decimal providers to serialize whole units as e.g. "20.00".
+		$pattern = $this->currencyPrecision($currency) === 0 ? '/^[0-9]+(?:\.0{1,2})?$/D' : '/^[0-9]+(?:\.[0-9]{1,2})?$/D';
+		return preg_match($pattern, (string)$amount) === 1;
+	}
+
+	private function currencyPrecision($currency) {
+		if (in_array($currency, array('BIF','CLP','DJF','GNF','JPY','KMF','KRW','MGA','PYG','RWF','UGX','VND','VUV','XAF','XOF','XPF','ISK'), true)) {
+			return 0;
+		}
+		// The existing price/total schema has two decimal places. Do not
+		// silently round currencies requiring a different accounting contract.
+		if (in_array($currency, array('BHD','JOD','KWD','OMR','TND'), true)) { return -1; }
+		return 2;
+	}
+
+	private function validChargeAmount($amount, $currency) {
+		$precision = $this->currencyPrecision($currency);
+		$factor = pow(10, max(0, $precision));
+		return $precision >= 0 && is_numeric($amount) && is_finite((float)$amount) && (float)$amount > 0
+			&& (float)$amount < PHP_INT_MAX / 100 && preg_match('/^[A-Z]{3}$/D', $currency)
+			&& abs((float)$amount * $factor - round((float)$amount * $factor)) < 0.00001;
 	}
 
 	// =========================================================================
@@ -518,7 +529,8 @@ class PaymentGateway {
 			'Braintree-Version: 2023-05-01'
 		));
 		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
 		$response = curl_exec($ch);
 		$curl_err = curl_error($ch);
@@ -680,58 +692,39 @@ class PaymentGateway {
 		);
 	}
 
-	public function chargeBraintree($payment_token_or_nonce, $amount) {
+	public function chargeBraintree($payment_token_or_nonce, $amount, $currency = '') {
 		$cfg = $this->getBraintreeConfig();
-
-		if (!empty($cfg['public_key']) && !empty($cfg['private_key'])) {
-			$pm_id = $payment_token_or_nonce;
-			if (strpos($pm_id, 'braintree|') === 0) {
-				$parts = explode('|', $pm_id);
-				$pm_id = !empty($parts[2]) ? $parts[2] : 'fake-valid-visa-nonce';
-			} elseif (strpos($pm_id, 'bt_') === 0) {
-				$pm_id = 'fake-valid-visa-nonce';
-			}
-
-			$tx_input = array(
-				'amount' => number_format((float)$amount, 2, '.', '')
-			);
-			if (!empty($cfg['merchant_account_id'])) {
-				$tx_input['merchantAccountId'] = $cfg['merchant_account_id'];
-			}
-
-			$query = 'mutation ChargePaymentMethod($input: ChargePaymentMethodInput!) {
-				chargePaymentMethod(input: $input) {
-					transaction {
-						id
-						status
-					}
-				}
-			}';
-			$res = $this->braintreeGraphQL($query, array(
-				'input' => array(
-					'paymentMethodId' => $pm_id,
-					'transaction'     => $tx_input
-				)
-			));
-
-			if (isset($res['error'])) {
-				return array('error' => $res['error']);
-			}
-
-			if (!empty($res['data']['chargePaymentMethod']['transaction']['id'])) {
-				return array(
-					'success'        => true,
-					'transaction_id' => $res['data']['chargePaymentMethod']['transaction']['id'],
-					'status'         => $res['data']['chargePaymentMethod']['transaction']['status']
-				);
-			}
+		$currency = strtoupper($currency ?: (string)$this->config->get('config_currency'));
+		if (!$cfg['status'] || !$cfg['public_key'] || !$cfg['private_key'] || !$cfg['merchant_account_id']) {
+			return array('error' => 'Braintree requires API keys and an explicit merchant account.');
 		}
-
-		return array(
-			'success'        => true,
-			'transaction_id' => 'BT-' . strtoupper(token(10)),
-			'status'         => 'SUBMITTED_FOR_SETTLEMENT'
-		);
+		if (!$this->validChargeAmount($amount, $currency)) {
+			return array('error' => 'Unsupported payment amount or currency.');
+		}
+		$pm_id = $payment_token_or_nonce;
+		if (strpos($pm_id, 'braintree|') === 0) {
+			$parts = explode('|', $pm_id);
+			if (($parts[1] ?? '') !== $cfg['environment']) { return array('error' => 'Payment method environment mismatch.'); }
+			$pm_id = $parts[2] ?? '';
+		}
+		if (!$pm_id || strpos($pm_id, 'bt_') === 0 || strpos($pm_id, 'local_') === 0) {
+			return array('error' => 'A provider-issued Braintree payment method is required.');
+		}
+		$query = 'mutation ChargePaymentMethod($input: ChargePaymentMethodInput!) {
+			chargePaymentMethod(input: $input) { transaction { id status amount { value currencyCode } merchantAccountId } }
+		}';
+		$res = $this->braintreeGraphQL($query, array('input' => array('paymentMethodId' => $pm_id,
+			'transaction' => array('amount' => number_format((float)$amount, $this->currencyPrecision($currency), '.', ''), 'merchantAccountId' => $cfg['merchant_account_id']))));
+		if (!empty($res['error'])) { return array('error' => $res['error']); }
+		$tx = $res['data']['chargePaymentMethod']['transaction'] ?? array();
+		if (!is_array($tx) || !$this->validTransactionId($tx['id'] ?? null) || !in_array($tx['status'] ?? '', array('SUBMITTED_FOR_SETTLEMENT','SETTLING','SETTLED','SETTLEMENT_PENDING'), true)
+			|| !isset($tx['amount']['value'], $tx['amount']['currencyCode'], $tx['merchantAccountId'])
+			|| !is_string($tx['amount']['currencyCode']) || !$this->validTransactionAmount($tx['amount']['value'], $currency)
+			|| abs((float)$tx['amount']['value'] - (float)$amount) > 0.00001 || number_format((float)$tx['amount']['value'], $this->currencyPrecision($currency), '.', '') !== number_format((float)$amount, $this->currencyPrecision($currency), '.', '')
+			|| strtoupper($tx['amount']['currencyCode']) !== $currency || $tx['merchantAccountId'] !== $cfg['merchant_account_id']) {
+			return array('error' => 'Braintree has not confirmed the expected payment. Check payment status before retrying.');
+		}
+		return array('success' => true, 'verified' => true, 'transaction_id' => $tx['id'], 'status' => $tx['status']);
 	}
 
 	// =========================================================================
@@ -763,7 +756,8 @@ class PaymentGateway {
 			'Content-Type: application/x-www-form-urlencoded'
 		));
 		curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
 		$response = curl_exec($ch);
 		$curl_err = curl_error($ch);

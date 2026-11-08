@@ -1,0 +1,28 @@
+---
+title: application/support · phụ thuộc 2
+---
+flowchart TB
+    n1["support/partner.php<br/>send() · L331"]
+    n2["model/support/enquiry<br/>đã có file"]
+    n3["oc_support_enquiry"]
+    n4["support/seller.php<br/>index() · L20"]
+    n5["model/marketplace/extension<br/>đã có file"]
+    n6["oc_download, oc_extension, oc_extension_category,<br/>oc_extension_comment, oc_extension_download,<br/>oc_extension_download_path, oc_extension_image,<br/>oc_extension_promotion, oc_extension_rating,<br/>oc_member, oc_member_seller"]
+    n7["support/seller.php<br/>index() · L21"]
+    n8["model/cms/download<br/>đã có file"]
+    n9["oc_download"]
+    n10["support/seller.php<br/>index() · L22"]
+    n11["model/tool/image<br/>đã có file"]
+    n12["Không có SQL literal được trích xuất"]
+    n13["support/seller.php<br/>send() · L112"]
+    n14["model/support/enquiry<br/>đã có file"]
+    n15["oc_support_enquiry"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6
+    n7 --> n8
+    n8 -.-> n9
+    n10 --> n11
+    n13 --> n14
+    n14 -.-> n15

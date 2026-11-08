@@ -1,0 +1,16 @@
+---
+title: Admin · danh mục controller 2
+---
+flowchart TB
+    n1["common/forgotten.php<br/>ControllerCommonForgotten<br/>index, validate"]
+    n2["common/header.php<br/>ControllerCommonHeader<br/>index"]
+    n3["common/login.php<br/>ControllerCommonLogin<br/>index, validate"]
+    n4["common/logout.php<br/>ControllerCommonLogout<br/>index"]
+    n5["common/profile.php<br/>ControllerCommonProfile<br/>index, validateForm"]
+    n6["common/reset.php<br/>ControllerCommonReset<br/>index, validate"]
+    n7["common/security.php<br/>ControllerCommonSecurity<br/>index, move"]
+    n8["design/banner.php<br/>ControllerDesignBanner<br/>index, add, edit, delete, getList, getForm, validateForm, validateDelete"]
+    n9["design/seo_url.php<br/>ControllerDesignSeoUrl<br/>index, add, edit, delete, getList, getForm, validateForm, validateDelete"]
+    n10["error/not_found.php<br/>ControllerErrorNotFound<br/>index"]
+    n11["error/permission.php<br/>ControllerErrorPermission<br/>index"]
+    n12["event/language.php<br/>ControllerEventLanguage<br/>index, before, after"]

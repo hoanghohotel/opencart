@@ -1,0 +1,38 @@
+---
+title: application/support · phụ thuộc 1
+---
+flowchart TB
+    n1["support/advertise.php<br/>send() · L31"]
+    n2["model/support/enquiry<br/>đã có file"]
+    n3["oc_support_enquiry"]
+    n4["support/contact.php<br/>reason() · L31"]
+    n5["model/localisation/country<br/>đã có file"]
+    n6["oc_country"]
+    n7["support/contact.php<br/>reason() · L32"]
+    n8["model/cms/download<br/>đã có file"]
+    n9["oc_download"]
+    n10["support/contact.php<br/>send() · L50"]
+    n11["model/support/enquiry<br/>đã có file"]
+    n12["oc_support_enquiry"]
+    n13["support/partner.php<br/>index() · L6"]
+    n14["model/account/partner<br/>đã có file"]
+    n15["oc_country, oc_member, oc_member_partner,<br/>oc_member_partner_status, oc_member_partner_type,<br/>oc_zone"]
+    n16["support/partner.php<br/>index() · L7"]
+    n17["model/tool/image<br/>đã có file"]
+    n18["Không có SQL literal được trích xuất"]
+    n19["support/partner.php<br/>info() · L182"]
+    n20["model/cms/showcase<br/>đã có file"]
+    n21["oc_showcase, oc_showcase_category"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6
+    n7 --> n8
+    n8 -.-> n9
+    n10 --> n11
+    n11 -.-> n12
+    n13 --> n14
+    n14 -.-> n15
+    n16 --> n17
+    n19 --> n20
+    n20 -.-> n21

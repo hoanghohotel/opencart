@@ -1,0 +1,20 @@
+---
+title: Quan hệ logic đã có bằng chứng 4
+---
+flowchart TB
+    n1["oc_subscription_plan<br/>PK subscription_plan_id"]
+    n2["oc_subscription<br/>PK subscription_id"]
+    n3["application/model/account/subscription.php::addSubscription()"]
+    n4["oc_member_payment<br/>PK member_payment_id"]
+    n5["oc_subscription<br/>PK subscription_id"]
+    n6["application/model/account/subscription.php::addSubscription()"]
+    n7["oc_subscription<br/>PK subscription_id"]
+    n8["oc_subscription_history<br/>PK subscription_history_id"]
+    n9["application/model/account/subscription.php::addSubscriptionHistory()"]
+    n10["oc_user_group<br/>PK user_group_id"]
+    n11["oc_user<br/>PK user_id"]
+    n12["system/library/cart/user.php::__construct()"]
+    n1 -.-> n2
+    n4 -.-> n5
+    n7 -.-> n8
+    n10 -.-> n11

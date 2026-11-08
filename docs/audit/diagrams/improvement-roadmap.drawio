@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="improvement-roadmap" name="Roadmap ĐỀ XUẤT · phụ thuộc nghiệm thu">
+    <mxGraphModel grid="1" page="1" pageWidth="1550" pageHeight="1250">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n0" value="1. Stabilization · tuần 1–6&#10;PAY-01/02, SEC-01/02, proof tests&#10;10-development-roadmap.md" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="60" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n1" value="2. Modernization · tháng 2–4&#10;Atomic order, idempotency, CI, measured perf&#10;DB-01/PAY-03/OPS-02" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="560" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n2" value="3. Expansion · tháng 5–8&#10;API contracts, cloud lifecycle, admin UX&#10;BIZ-01; tenant isolation tests" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="1060" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n3" value="4. Intelligent Commerce · tháng 9–12&#10;Chỉ pilot có ROI/data/cost cap&#10;10-development-roadmap.md; không auto-charge AI" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="60" y="400" width="420" height="155" />
+        </mxCell>
+        <mxCell id="title" value="Roadmap ĐỀ XUẤT · phụ thuộc nghiệm thu&#10;Xanh: hiện tại; đỏ: finding; xanh lam: đề xuất; vàng: kế hoạch. Source audit, không benchmark." vertex="1" parent="1" style="text;whiteSpace=wrap;html=0;fontSize=22;align=left;">
+          <mxGeometry as="geometry" x="60" y="30" width="1420" height="100" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="n0" target="n1" value="đóng P0 + staging" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="n1" target="n2" value="reconcile/restore pass" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="n2" target="n3" value="data governance + business case" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

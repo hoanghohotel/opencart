@@ -1,0 +1,15 @@
+---
+title: Trang chủ, danh mục, tìm kiếm, chi tiết
+---
+flowchart TB
+    n1["common/home::index() → common/footer + common/header → common/home.twig<br/>Controller trang chủ không load model riêng"]
+    n2["Danh mục / search dùng cùng marketplace/extension::index()<br/>GET filter_category_id, filter_search, filter_download_id, license, rating, sort"]
+    n3["ModelMarketplaceExtension::getTotalExtensions() → getExtensions()<br/>SQL oc_extension + category + member; EXISTS download_path theo version"]
+    n4["load-&gt;view(marketplace/extension_list) → Response::setOutput()"]
+    n5["Chi tiết: marketplace/extension/info → getExtension() + ảnh/download/rating<br/>load-&gt;view(marketplace/extension_info); comments AJAX là request riêng"]
+    n6["Không có checkout/cart hoặc class Cart quản lý giỏ hàng trong checkout này<br/>Nút Buy mở AJAX checkout/checkout cho 1 extension_id + quantity"]
+    n1 --> n2
+    n2 --> n3
+    n3 --> n4
+    n4 --> n5
+    n5 --> n6

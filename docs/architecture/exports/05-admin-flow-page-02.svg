@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="958" viewBox="0 0 1440 958">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1440" height="958" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">Quản lý extension, category, member và order</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Các cơ chế/nhánh độc lập; không có thứ tự gọi giữa các khối. Luồng cụ thể xem sequence và dẫn chiếu source.</text>
+<text x="50" y="929" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">05-admin-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="60" y="150" width="1180" height="108" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="74" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">marketplace/extension index/add/edit/delete → ModelMarketplaceExtension</text>
+<text x="74" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">validateForm/validateDelete kiểm tra modify + dữ liệu</text>
+<text x="74" y="246" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/marketplace/extension.php:35</text>
+<rect x="60" y="305" width="1180" height="108" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="74" y="327" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">editExtension(): UPDATE oc_extension → thay ảnh → thay downloads + version paths</text>
+<text x="74" y="347" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Đây là sản phẩm số; không có admin/catalog/product trong checkout</text>
+<text x="74" y="401" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/model/marketplace/extension.php:33</text>
+<rect x="60" y="460" width="1180" height="108" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="74" y="482" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">marketplace/category → marketplace/category model → oc_extension_category</text>
+<text x="74" y="502" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">member/member, member/seller, member/partner quản lý identity/profile</text>
+<text x="74" y="556" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/marketplace/category.php:5</text>
+<rect x="60" y="615" width="1180" height="108" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="74" y="637" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">sale/order::index()/info() → sale/order model</text>
+<text x="74" y="657" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Thông tin đơn / update trạng thái; xem method inventory cho endpoint chính xác</text>
+<text x="74" y="711" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/sale/order.php:5</text>
+<rect x="60" y="770" width="1180" height="108" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="792" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">setting/payment + setting/setting: gateway, SMTP, cloud storage settings</text>
+<text x="74" y="812" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Không tìm thấy controller shipping; không dựng quy trình vận chuyển</text>
+<text x="74" y="866" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/setting/payment.php:5</text>
+</svg>

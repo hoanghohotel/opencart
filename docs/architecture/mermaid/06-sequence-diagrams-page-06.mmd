@@ -1,0 +1,16 @@
+---
+title: Thanh toán thẻ · confirm pending stripe/braintree
+---
+sequenceDiagram
+    participant A0 as Browser
+    participant A1 as CheckoutPayment
+    participant A2 as PaymentGateway
+    participant A3 as Gateway HTTP
+    participant A4 as ModelAccountOrder
+    A0->>A1: POST confirm → check isLogged + pending
+    A1->>A2: chargeStripe(...) hoặc chargeBraintree(...)
+    A2->>A3: Stripe API hoặc Braintree GraphQL
+    A3->>A2: error / transaction_id
+    A1->>A1: Nếu không lỗi: unset pending; gắn transaction_id nếu có
+    A1->>A4: addOrder(order_data)
+    A1->>A0: JSON error hoặc order_id + success

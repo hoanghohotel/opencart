@@ -1,0 +1,13 @@
+---
+title: application · MVC-L và module
+---
+flowchart TB
+    n1["application/"]
+    n2["controller/<br/>account, checkout, cloud, cms, common, error, event, localisation, mail, marketplace, startup, support, upgrade"]
+    n3["model/<br/>account, cms, design, localisation, marketplace, setting, support, tool"]
+    n4["view/template/<br/>account, checkout, cloud, cms, common, error, mail, marketplace, support"]
+    n5["language/en-gb/<br/>en-gb.php"]
+    n1 -.-> n2
+    n1 -.-> n3
+    n1 -.-> n4
+    n1 -.-> n5

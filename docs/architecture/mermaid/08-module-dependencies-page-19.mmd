@@ -1,0 +1,37 @@
+---
+title: admin/setting · phụ thuộc 3
+---
+flowchart TB
+    n1["setting/store.php<br/>getForm() · L451"]
+    n2["model/localisation/country<br/>đã có file"]
+    n3["oc_country"]
+    n4["setting/store.php<br/>getForm() · L471"]
+    n5["model/localisation/language<br/>đã có file"]
+    n6["oc_banner_image, oc_download_description,<br/>oc_extension_category_description,<br/>oc_information_description, oc_language,<br/>oc_order_status, oc_seo_url, oc_setting"]
+    n7["setting/store.php<br/>getForm() · L483"]
+    n8["model/localisation/currency<br/>đã có file"]
+    n9["oc_currency"]
+    n10["setting/store.php<br/>getForm() · L519"]
+    n11["model/customer/customer_group<br/>chưa có file đích"]
+    n12["Không có SQL literal được trích xuất"]
+    n13["setting/store.php<br/>getForm() · L547"]
+    n14["model/catalog/information<br/>chưa có file đích"]
+    n15["Không có SQL literal được trích xuất"]
+    n16["setting/store.php<br/>getForm() · L583"]
+    n17["model/localisation/order_status<br/>đã có file"]
+    n18["oc_order_status"]
+    n19["setting/store.php<br/>validateDelete() · L701"]
+    n20["model/sale/order<br/>đã có file"]
+    n21["oc_member, oc_order, oc_order_status"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6
+    n7 --> n8
+    n8 -.-> n9
+    n10 --> n11
+    n13 --> n14
+    n16 --> n17
+    n17 -.-> n18
+    n19 --> n20
+    n20 -.-> n21

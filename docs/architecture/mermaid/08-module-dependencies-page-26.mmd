@@ -1,0 +1,38 @@
+---
+title: application/account · phụ thuộc 3
+---
+flowchart TB
+    n1["account/order.php<br/>info() · L135"]
+    n2["model/localisation/country<br/>đã có file"]
+    n3["oc_country"]
+    n4["account/partner.php<br/>index() · L16"]
+    n5["model/account/partner<br/>đã có file"]
+    n6["oc_country, oc_member, oc_member_partner,<br/>oc_member_partner_status, oc_member_partner_type,<br/>oc_zone"]
+    n7["account/partner.php<br/>getForm() · L260"]
+    n8["model/localisation/country<br/>đã có file"]
+    n9["oc_country"]
+    n10["account/partner.php<br/>getForm() · L280"]
+    n11["model/tool/image<br/>đã có file"]
+    n12["Không có SQL literal được trích xuất"]
+    n13["account/password.php<br/>index() · L19"]
+    n14["model/account/member<br/>đã có file"]
+    n15["oc_member, oc_member_ip, oc_member_login,<br/>oc_newsletter"]
+    n16["account/payment.php<br/>index() · L18"]
+    n17["model/account/payment<br/>đã có file"]
+    n18["oc_member_payment"]
+    n19["account/pin.php<br/>index() · L12"]
+    n20["model/account/member<br/>đã có file"]
+    n21["oc_member, oc_member_ip, oc_member_login,<br/>oc_newsletter"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6
+    n7 --> n8
+    n8 -.-> n9
+    n10 --> n11
+    n13 --> n14
+    n14 -.-> n15
+    n16 --> n17
+    n17 -.-> n18
+    n19 --> n20
+    n20 -.-> n21

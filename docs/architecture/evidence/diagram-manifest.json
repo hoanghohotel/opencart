@@ -1,0 +1,655 @@
+{
+  "01-project-structure": [
+    {
+      "name": "01 · Gốc repository",
+      "width": 1440,
+      "height": 895,
+      "nodes": 9,
+      "edges": 8
+    },
+    {
+      "name": "application · MVC-L và module",
+      "width": 1440,
+      "height": 750,
+      "nodes": 5,
+      "edges": 4
+    },
+    {
+      "name": "admin · MVC-L và module",
+      "width": 1440,
+      "height": 750,
+      "nodes": 5,
+      "edges": 4
+    },
+    {
+      "name": "system · kernel và thư viện",
+      "width": 1440,
+      "height": 945,
+      "nodes": 8,
+      "edges": 0
+    }
+  ],
+  "02-system-architecture": [
+    {
+      "name": "Kiến trúc phân lớp",
+      "width": 1440,
+      "height": 970,
+      "nodes": 12,
+      "edges": 12
+    },
+    {
+      "name": "Dịch vụ ngoài và ranh giới chứng cứ",
+      "width": 1440,
+      "height": 958,
+      "nodes": 5,
+      "edges": 0
+    }
+  ],
+  "03-application-logic": [
+    {
+      "name": "Frontend · thứ tự khởi tạo",
+      "width": 1440,
+      "height": 1423,
+      "nodes": 8,
+      "edges": 7
+    },
+    {
+      "name": "Admin · thứ tự và chặn truy cập",
+      "width": 1440,
+      "height": 1268,
+      "nodes": 7,
+      "edges": 6
+    },
+    {
+      "name": "Event, localization và modification",
+      "width": 1440,
+      "height": 1113,
+      "nodes": 6,
+      "edges": 0
+    }
+  ],
+  "04-frontend-flow": [
+    {
+      "name": "Trang chủ, danh mục, tìm kiếm, chi tiết",
+      "width": 1440,
+      "height": 1113,
+      "nodes": 6,
+      "edges": 5
+    },
+    {
+      "name": "Đăng ký, đăng nhập, tài khoản và đơn đã mua",
+      "width": 1440,
+      "height": 1113,
+      "nodes": 6,
+      "edges": 5
+    },
+    {
+      "name": "Checkout hiện hành · mua trực tiếp extension",
+      "width": 1440,
+      "height": 1268,
+      "nodes": 7,
+      "edges": 6
+    },
+    {
+      "name": "Nhánh legacy và các module khác",
+      "width": 1440,
+      "height": 958,
+      "nodes": 5,
+      "edges": 0
+    }
+  ],
+  "05-admin-flow": [
+    {
+      "name": "Đăng nhập quản trị và phân quyền",
+      "width": 1440,
+      "height": 958,
+      "nodes": 5,
+      "edges": 4
+    },
+    {
+      "name": "Quản lý extension, category, member và order",
+      "width": 1440,
+      "height": 958,
+      "nodes": 5,
+      "edges": 0
+    },
+    {
+      "name": "Admin · danh mục controller 1",
+      "width": 1450,
+      "height": 990,
+      "nodes": 12,
+      "edges": 0
+    },
+    {
+      "name": "Admin · danh mục controller 2",
+      "width": 1450,
+      "height": 990,
+      "nodes": 12,
+      "edges": 0
+    },
+    {
+      "name": "Admin · danh mục controller 3",
+      "width": 1450,
+      "height": 990,
+      "nodes": 12,
+      "edges": 0
+    },
+    {
+      "name": "Admin · danh mục controller 4",
+      "width": 1450,
+      "height": 990,
+      "nodes": 12,
+      "edges": 0
+    },
+    {
+      "name": "Admin · danh mục controller 5",
+      "width": 1450,
+      "height": 990,
+      "nodes": 12,
+      "edges": 0
+    },
+    {
+      "name": "Admin · danh mục controller 6",
+      "width": 1440,
+      "height": 390,
+      "nodes": 2,
+      "edges": 0
+    }
+  ],
+  "06-sequence-diagrams": [
+    {
+      "name": "Request frontend → response",
+      "width": 1670,
+      "height": 1212,
+      "nodes": 30,
+      "edges": 15
+    },
+    {
+      "name": "Đăng nhập member · nhánh thành công",
+      "width": 1440,
+      "height": 1122,
+      "nodes": 26,
+      "edges": 13
+    },
+    {
+      "name": "Yêu cầu thêm giỏ hàng · không có triển khai",
+      "width": 1440,
+      "height": 493,
+      "nodes": 2,
+      "edges": 0
+    },
+    {
+      "name": "Checkout · chọn phương thức thanh toán",
+      "width": 1440,
+      "height": 942,
+      "nodes": 22,
+      "edges": 11
+    },
+    {
+      "name": "Tạo đơn · ModelAccountOrder::addOrder",
+      "width": 1440,
+      "height": 1032,
+      "nodes": 22,
+      "edges": 11
+    },
+    {
+      "name": "Thanh toán thẻ · confirm pending stripe/braintree",
+      "width": 1440,
+      "height": 1032,
+      "nodes": 24,
+      "edges": 12
+    },
+    {
+      "name": "Admin cập nhật “sản phẩm” = extension",
+      "width": 1440,
+      "height": 1032,
+      "nodes": 24,
+      "edges": 12
+    }
+  ],
+  "07-database-er": [
+    {
+      "name": "Quan hệ logic đã có bằng chứng 1",
+      "width": 1440,
+      "height": 1042,
+      "nodes": 12,
+      "edges": 4
+    },
+    {
+      "name": "Quan hệ logic đã có bằng chứng 2",
+      "width": 1440,
+      "height": 1042,
+      "nodes": 12,
+      "edges": 4
+    },
+    {
+      "name": "Quan hệ logic đã có bằng chứng 3",
+      "width": 1440,
+      "height": 1042,
+      "nodes": 12,
+      "edges": 4
+    },
+    {
+      "name": "Quan hệ logic đã có bằng chứng 4",
+      "width": 1440,
+      "height": 1042,
+      "nodes": 12,
+      "edges": 4
+    },
+    {
+      "name": "Quan hệ logic đã có bằng chứng 5",
+      "width": 1440,
+      "height": 1042,
+      "nodes": 12,
+      "edges": 4
+    },
+    {
+      "name": "Quan hệ logic đã có bằng chứng 6",
+      "width": 1440,
+      "height": 1042,
+      "nodes": 12,
+      "edges": 4
+    },
+    {
+      "name": "Quan hệ logic đã có bằng chứng 7",
+      "width": 1440,
+      "height": 1042,
+      "nodes": 12,
+      "edges": 4
+    },
+    {
+      "name": "Quan hệ logic đã có bằng chứng 8",
+      "width": 1440,
+      "height": 1042,
+      "nodes": 12,
+      "edges": 4
+    },
+    {
+      "name": "Từ điển bảng 01",
+      "width": 1450,
+      "height": 1055,
+      "nodes": 6,
+      "edges": 0
+    },
+    {
+      "name": "Từ điển bảng 02",
+      "width": 1450,
+      "height": 1055,
+      "nodes": 6,
+      "edges": 0
+    },
+    {
+      "name": "Từ điển bảng 03",
+      "width": 1450,
+      "height": 1055,
+      "nodes": 6,
+      "edges": 0
+    },
+    {
+      "name": "Từ điển bảng 04",
+      "width": 1450,
+      "height": 1055,
+      "nodes": 6,
+      "edges": 0
+    },
+    {
+      "name": "Từ điển bảng 05",
+      "width": 1450,
+      "height": 1055,
+      "nodes": 6,
+      "edges": 0
+    },
+    {
+      "name": "Từ điển bảng 06",
+      "width": 1450,
+      "height": 1055,
+      "nodes": 6,
+      "edges": 0
+    },
+    {
+      "name": "Từ điển bảng 07",
+      "width": 1450,
+      "height": 1055,
+      "nodes": 6,
+      "edges": 0
+    },
+    {
+      "name": "Từ điển bảng 08",
+      "width": 1450,
+      "height": 1055,
+      "nodes": 6,
+      "edges": 0
+    },
+    {
+      "name": "Từ điển bảng 09",
+      "width": 1450,
+      "height": 1055,
+      "nodes": 6,
+      "edges": 0
+    },
+    {
+      "name": "Từ điển bảng 10",
+      "width": 1450,
+      "height": 1055,
+      "nodes": 5,
+      "edges": 0
+    }
+  ],
+  "08-module-dependencies": [
+    {
+      "name": "admin/cloud · phụ thuộc 1",
+      "width": 1440,
+      "height": 360,
+      "nodes": 3,
+      "edges": 2
+    },
+    {
+      "name": "admin/cms · phụ thuộc 1",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 13
+    },
+    {
+      "name": "admin/cms · phụ thuộc 2",
+      "width": 1440,
+      "height": 635,
+      "nodes": 9,
+      "edges": 5
+    },
+    {
+      "name": "admin/common · phụ thuộc 1",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 12
+    },
+    {
+      "name": "admin/common · phụ thuộc 2",
+      "width": 1440,
+      "height": 790,
+      "nodes": 12,
+      "edges": 7
+    },
+    {
+      "name": "admin/design · phụ thuộc 1",
+      "width": 1440,
+      "height": 1100,
+      "nodes": 18,
+      "edges": 11
+    },
+    {
+      "name": "admin/event · phụ thuộc 1",
+      "width": 1440,
+      "height": 360,
+      "nodes": 3,
+      "edges": 1
+    },
+    {
+      "name": "admin/localisation · phụ thuộc 1",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 12
+    },
+    {
+      "name": "admin/localisation · phụ thuộc 2",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 14
+    },
+    {
+      "name": "admin/localisation · phụ thuộc 3",
+      "width": 1440,
+      "height": 1100,
+      "nodes": 18,
+      "edges": 10
+    },
+    {
+      "name": "admin/mail · phụ thuộc 1",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 11
+    },
+    {
+      "name": "admin/mail · phụ thuộc 2",
+      "width": 1440,
+      "height": 790,
+      "nodes": 12,
+      "edges": 6
+    },
+    {
+      "name": "admin/marketplace · phụ thuộc 1",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 13
+    },
+    {
+      "name": "admin/member · phụ thuộc 1",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 12
+    },
+    {
+      "name": "admin/member · phụ thuộc 2",
+      "width": 1440,
+      "height": 360,
+      "nodes": 3,
+      "edges": 2
+    },
+    {
+      "name": "admin/sale · phụ thuộc 1",
+      "width": 1440,
+      "height": 480,
+      "nodes": 6,
+      "edges": 4
+    },
+    {
+      "name": "admin/setting · phụ thuộc 1",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 14
+    },
+    {
+      "name": "admin/setting · phụ thuộc 2",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 9
+    },
+    {
+      "name": "admin/setting · phụ thuộc 3",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 12
+    },
+    {
+      "name": "admin/startup · phụ thuộc 1",
+      "width": 1440,
+      "height": 360,
+      "nodes": 3,
+      "edges": 2
+    },
+    {
+      "name": "admin/support · phụ thuộc 1",
+      "width": 1440,
+      "height": 360,
+      "nodes": 3,
+      "edges": 2
+    },
+    {
+      "name": "admin/tool · phụ thuộc 1",
+      "width": 1440,
+      "height": 480,
+      "nodes": 6,
+      "edges": 3
+    },
+    {
+      "name": "admin/user · phụ thuộc 1",
+      "width": 1440,
+      "height": 1100,
+      "nodes": 18,
+      "edges": 11
+    },
+    {
+      "name": "application/account · phụ thuộc 1",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 12
+    },
+    {
+      "name": "application/account · phụ thuộc 2",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 13
+    },
+    {
+      "name": "application/account · phụ thuộc 3",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 13
+    },
+    {
+      "name": "application/account · phụ thuộc 4",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 14
+    },
+    {
+      "name": "application/account · phụ thuộc 5",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 14
+    },
+    {
+      "name": "application/account · phụ thuộc 6",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 13
+    },
+    {
+      "name": "application/account · phụ thuộc 7",
+      "width": 1440,
+      "height": 790,
+      "nodes": 12,
+      "edges": 8
+    },
+    {
+      "name": "application/checkout · phụ thuộc 1",
+      "width": 1440,
+      "height": 1100,
+      "nodes": 18,
+      "edges": 12
+    },
+    {
+      "name": "application/cloud · phụ thuộc 1",
+      "width": 1440,
+      "height": 360,
+      "nodes": 3,
+      "edges": 2
+    },
+    {
+      "name": "application/cms · phụ thuộc 1",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 11
+    },
+    {
+      "name": "application/cms · phụ thuộc 2",
+      "width": 1440,
+      "height": 1100,
+      "nodes": 18,
+      "edges": 11
+    },
+    {
+      "name": "application/common · phụ thuộc 1",
+      "width": 1440,
+      "height": 480,
+      "nodes": 6,
+      "edges": 3
+    },
+    {
+      "name": "application/event · phụ thuộc 1",
+      "width": 1440,
+      "height": 360,
+      "nodes": 3,
+      "edges": 2
+    },
+    {
+      "name": "application/localisation · phụ thuộc 1",
+      "width": 1440,
+      "height": 480,
+      "nodes": 6,
+      "edges": 4
+    },
+    {
+      "name": "application/mail · phụ thuộc 1",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 13
+    },
+    {
+      "name": "application/mail · phụ thuộc 2",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 12
+    },
+    {
+      "name": "application/marketplace · phụ thuộc 1",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 13
+    },
+    {
+      "name": "application/marketplace · phụ thuộc 2",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 13
+    },
+    {
+      "name": "application/startup · phụ thuộc 1",
+      "width": 1440,
+      "height": 635,
+      "nodes": 9,
+      "edges": 6
+    },
+    {
+      "name": "application/support · phụ thuộc 1",
+      "width": 1440,
+      "height": 1255,
+      "nodes": 21,
+      "edges": 13
+    },
+    {
+      "name": "application/support · phụ thuộc 2",
+      "width": 1440,
+      "height": 945,
+      "nodes": 15,
+      "edges": 9
+    },
+    {
+      "name": "Phụ thuộc dùng chung và hook",
+      "width": 1440,
+      "height": 1113,
+      "nodes": 6,
+      "edges": 0
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "status": "implemented_local_pending_acceptance",
+  "provider_controller_tests": 65,
+  "prior_result_page_tests": 15,
+  "js_callback_scenarios": 8,
+  "paypal_unavailable_render_guard": "PASS",
+  "http_smoke": 5,
+  "http_error_or_restart_probes": 3,
+  "gateway_network_in_suite": "curl_init,curl_exec disabled; transport methods overridden",
+  "sandbox_live": "NOT RUN",
+  "database_migration": "NONE",
+  "known_open": [
+    "SEC-01",
+    "PAY-03",
+    "DB-01",
+    "PayPal server capture integration",
+    "provider sandbox and settlement recovery"
+  ],
+  "braintree_schema_reference": {
+    "repository": "braintree/graphql-api",
+    "commit": "b131626006b93a4ba1215b461b5e3e8437526c10",
+    "file": "schema.graphql",
+    "purpose": "request/response field and status contract review; not runtime acceptance"
+  },
+  "followup_review": {
+    "baseline_commit": "b633f46",
+    "additional_malformed_proof_cases": 14,
+    "before_fix": {
+      "tests": 65,
+      "failures": 14
+    },
+    "after_fix": {
+      "tests": 65,
+      "failures": 0
+    },
+    "scope": "provider proof types/format only; existing P0-B group"
+  },
+  "sandbox_prerequisites": {
+    "environment_gateway_bindings": "none configured",
+    "app_test_credentials": "empty; presence checked without printing values",
+    "acceptance": "pending reviewer and sandbox configuration"
+  }
+}

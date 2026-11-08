@@ -1,0 +1,9 @@
+---
+title: admin/support · phụ thuộc 1
+---
+flowchart TB
+    n1["support/enquiry.php<br/>index() · L10"]
+    n2["model/support/enquiry<br/>đã có file"]
+    n3["oc_country, oc_member_partner, oc_support_enquiry"]
+    n1 --> n2
+    n2 -.-> n3

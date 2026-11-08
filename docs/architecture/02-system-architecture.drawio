@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" agent="source-evidence-generator" version="24.7.17" type="device">
+  <diagram id="02-system-architecture-1" name="Kiến trúc phân lớp">
+    <mxGraphModel dx="1440" dy="970" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="970" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Kiến trúc phân lớp" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Đường liền: lời gọi/phụ thuộc; đường đứt: điều kiện hoặc đăng ký hook. Không áp đặt tầng service không tồn tại." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="02-system-architecture · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="928" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="Client / Browser&#10;HTML, AJAX, SDK thanh toán JS&#10;[application/view/template/marketplace/extension_info.twig:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dff3ff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="140" width="390" height="100" />
+        </mxCell>
+        <mxCell id="n2" value="Web Server&#10;.htaccess rewrite / static assets&#10;[.htaccess:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="140" width="390" height="100" />
+        </mxCell>
+        <mxCell id="n3" value="Entry + Bootstrap&#10;index.php / admin/index.php → start()&#10;[system/startup.php:103]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="140" width="390" height="100" />
+        </mxCell>
+        <mxCell id="n4" value="Registry + Config + DB + Session&#10;framework.php&#10;[system/framework.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="340" width="390" height="110" />
+        </mxCell>
+        <mxCell id="n5" value="Router → pre-actions → startup/router&#10;Action::execute()&#10;[system/engine/router.php:42]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="340" width="390" height="110" />
+        </mxCell>
+        <mxCell id="n6" value="Controller frontend / admin&#10;Business logic nằm cả trong controller&#10;[application/controller/checkout/payment.php:217]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="340" width="390" height="110" />
+        </mxCell>
+        <mxCell id="n7" value="Loader → Proxy → Model&#10;SQL trực tiếp, không ORM&#10;[system/engine/loader.php:239]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="560" width="390" height="110" />
+        </mxCell>
+        <mxCell id="n8" value="MySQL / MariaDB&#10;59 bảng trong SQL seed; không FK khai báo&#10;[install/opencart.sql:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="560" width="390" height="110" />
+        </mxCell>
+        <mxCell id="n9" value="Cache&#10;Cache\File mặc định&#10;[system/config/default.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="560" width="390" height="110" />
+        </mxCell>
+        <mxCell id="n10" value="Session\DB&#10;oc_session; close() lúc shutdown&#10;[system/library/session.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="780" width="390" height="110" />
+        </mxCell>
+        <mxCell id="n11" value="Event + Loader hooks&#10;controller/model/view/language/config&#10;[system/engine/event.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="780" width="390" height="110" />
+        </mxCell>
+        <mxCell id="n12" value="Template → Twig → Response&#10;setOutput() → output()&#10;[system/library/template/twig.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="780" width="390" height="110" />
+        </mxCell>
+        <mxCell id="e0" value="HTTP" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="PHP request" edge="1" parent="1" source="n2" target="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" value="" edge="1" parent="1" source="n5" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e5" value="model_* method" edge="1" parent="1" source="n6" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e6" value="" edge="1" parent="1" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e7" value="SQL trực tiếp" edge="1" parent="1" source="n6" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="470" y="395" />
+              <mxPoint x="470" y="510" />
+              <mxPoint x="715" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" value="khởi tạo" edge="1" parent="1" source="n4" target="n9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e9" value="" edge="1" parent="1" source="n4" target="n10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="1410" y="395" />
+              <mxPoint x="1410" y="835" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" value="" edge="1" parent="1" source="n5" target="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="930" y="395" />
+              <mxPoint x="930" y="835" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" value="" edge="1" parent="1" source="n6" target="n12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="25" y="395" />
+              <mxPoint x="25" y="835" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="02-system-architecture-2" name="Dịch vụ ngoài và ranh giới chứng cứ">
+    <mxGraphModel dx="1440" dy="958" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="958" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Dịch vụ ngoài và ranh giới chứng cứ" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Các cơ chế/nhánh độc lập; không có thứ tự gọi giữa các khối. Luồng cụ thể xem sequence và dẫn chiếu source." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="02-system-architecture · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="916" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="PaymentGateway → Stripe HTTP API / Braintree GraphQL / PayPal OAuth&#10;Được triển khai trong PHP; cấu hình bật/tắt lấy từ settings&#10;[system/library/payment_gateway.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dff3ff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n2" value="Browser JS → Braintree / PayPal SDK&#10;Không suy ra capture server thành công từ callback trình duyệt&#10;[application/view/template/checkout/paypal.twig:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dff3ff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="305" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n3" value="CloudStorage → Wasabi / R2 / S3 / GCS&#10;HMAC S3-compatible hoặc OAuth service account; tùy driver&#10;[system/library/cloud_storage.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dff3ff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="460" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n4" value="Mail → mail hoặc smtp adapter&#10;Mail controller dựng nội dung; gateway không được kiểm thử live&#10;[system/library/mail.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dff3ff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="615" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n5" value="Cloud subscription → SQL records / history / transaction / backup metadata&#10;Chưa xác minh có provision hạ tầng thật trong repository&#10;[application/model/account/subscription.php:27]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="770" width="1180" height="108" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

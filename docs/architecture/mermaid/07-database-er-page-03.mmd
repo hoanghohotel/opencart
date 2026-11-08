@@ -1,0 +1,20 @@
+---
+title: Quan hệ logic đã có bằng chứng 3
+---
+flowchart TB
+    n1["oc_member<br/>PK member_id"]
+    n2["oc_member_transaction<br/>PK member_transaction_id"]
+    n3["application/model/account/order.php::addOrder()"]
+    n4["oc_order<br/>PK order_id"]
+    n5["oc_member_transaction<br/>PK member_transaction_id"]
+    n6["application/model/account/order.php::addOrder()"]
+    n7["oc_member<br/>PK member_id"]
+    n8["oc_member_seller<br/>PK member_seller_id"]
+    n9["application/model/account/order.php::addOrder()"]
+    n10["oc_member<br/>PK member_id"]
+    n11["oc_subscription<br/>PK subscription_id"]
+    n12["application/model/account/subscription.php::addSubscription()"]
+    n1 -.-> n2
+    n4 -.-> n5
+    n7 -.-> n8
+    n10 -.-> n11

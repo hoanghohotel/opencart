@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="945" viewBox="0 0 1440 945">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1440" height="945" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">system · kernel và thư viện</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Mỗi khối là thành phần có trên đĩa; bundled vendor khác đường dẫn composer.json</text>
+<text x="50" y="916" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">01-project-structure · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="60" y="150" width="600" height="145" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="74" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">engine/</text>
+<text x="74" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Action, Controller, Event, Loader, Model, Proxy, Registry, Router</text>
+<text x="74" y="283" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/engine/loader.php:1</text>
+<rect x="740" y="150" width="600" height="145" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="754" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">config/</text>
+<text x="754" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">default.php, application.php, admin.php, install.php</text>
+<text x="754" y="283" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/config/default.php:1</text>
+<rect x="60" y="340" width="600" height="145" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="74" y="362" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">library/</text>
+<text x="74" y="382" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">DB, Cache, Session, Template, Language, Request, Response, Url</text>
+<text x="74" y="473" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/library/db.php:1</text>
+<rect x="740" y="340" width="600" height="145" rx="10" fill="#dcf4ec" stroke="#94a3b8"/>
+<text x="754" y="362" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">library/cart/</text>
+<text x="754" y="382" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Member, User, Currency; không có class Cart giỏ hàng</text>
+<text x="754" y="473" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/library/cart/member.php:1</text>
+<rect x="60" y="530" width="600" height="145" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="74" y="552" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">helper/</text>
+<text x="74" y="572" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">general.php, utf8.php, bbcode.php</text>
+<text x="74" y="663" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/helper/general.php:1</text>
+<rect x="740" y="530" width="600" height="145" rx="10" fill="#dff3ff" stroke="#94a3b8"/>
+<text x="754" y="552" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">library/</text>
+<text x="754" y="572" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PaymentGateway, CloudStorage, Mail</text>
+<text x="754" y="663" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/library/payment_gateway.php:1</text>
+<rect x="60" y="720" width="600" height="145" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="74" y="742" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">storage/</text>
+<text x="74" y="762" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">cache, logs, download, upload, session, modification, vendor</text>
+<text x="74" y="853" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/startup.php:1</text>
+<rect x="740" y="720" width="600" height="145" rx="10" fill="#dff3ff" stroke="#94a3b8"/>
+<text x="754" y="742" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">vendor/</text>
+<text x="754" y="762" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Twig, Braintree, Cardinity, Divido, SCSSPHP, WeChat</text>
+<text x="754" y="782" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">+ phụ thuộc bắc cầu theo composer.lock</text>
+<text x="754" y="853" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">composer.lock:1</text>
+</svg>

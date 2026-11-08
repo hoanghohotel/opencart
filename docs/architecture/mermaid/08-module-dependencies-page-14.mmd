@@ -1,0 +1,37 @@
+---
+title: admin/member · phụ thuộc 1
+---
+flowchart TB
+    n1["member/member.php<br/>index() · L10"]
+    n2["model/member/member<br/>đã có file"]
+    n3["oc_country, oc_member, oc_member_ip,<br/>oc_member_payment, oc_member_store,<br/>oc_member_transaction"]
+    n4["member/member.php<br/>getForm() · L227"]
+    n5["model/localisation/country<br/>đã có file"]
+    n6["oc_country"]
+    n7["member/member.php<br/>getForm() · L230"]
+    n8["model/tool/image<br/>đã có file"]
+    n9["Không có SQL literal được trích xuất"]
+    n10["member/partner.php<br/>index() · L10"]
+    n11["model/member/partner<br/>đã có file"]
+    n12["oc_country, oc_member, oc_member_partner,<br/>oc_member_partner_status, oc_member_partner_type"]
+    n13["member/partner.php<br/>getList() · L96"]
+    n14["model/tool/image<br/>đã có file"]
+    n15["Không có SQL literal được trích xuất"]
+    n16["member/partner.php<br/>getForm() · L237"]
+    n17["model/localisation/country<br/>đã có file"]
+    n18["oc_country"]
+    n19["member/seller.php<br/>index() · L10"]
+    n20["model/member/seller<br/>đã có file"]
+    n21["oc_country, oc_member, oc_member_seller"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6
+    n7 --> n8
+    n10 --> n11
+    n11 -.-> n12
+    n13 --> n14
+    n16 --> n17
+    n17 -.-> n18
+    n19 --> n20
+    n20 -.-> n21

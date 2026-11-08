@@ -1,0 +1,226 @@
+[
+  {
+    "parent": "oc_member",
+    "child": "oc_extension",
+    "relation": "member_id = member_id · 1:N",
+    "source": "application/model/marketplace/extension.php:15",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_extension_category",
+    "child": "oc_extension",
+    "relation": "extension_category_id · 1:N",
+    "source": "application/model/marketplace/extension.php:15",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_extension",
+    "child": "oc_extension_download",
+    "relation": "extension_id · 1:N",
+    "source": "admin/model/marketplace/extension.php:33",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_extension_download",
+    "child": "oc_extension_download_path",
+    "relation": "extension_download_id · 1:N",
+    "source": "admin/model/marketplace/extension.php:33",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_download",
+    "child": "oc_extension_download_path",
+    "relation": "download_id · 1:N (bảng nối version)",
+    "source": "admin/model/marketplace/extension.php:33",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_member",
+    "child": "oc_order",
+    "relation": "member_id (buyer) · 1:N",
+    "source": "application/model/account/order.php:67",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_member",
+    "child": "oc_order",
+    "relation": "seller_id (seller) · 1:N",
+    "source": "application/model/account/order.php:67",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_extension",
+    "child": "oc_order",
+    "relation": "extension_id · 1:N",
+    "source": "application/model/account/order.php:67",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_member",
+    "child": "oc_member_transaction",
+    "relation": "member_id · 1:N",
+    "source": "application/model/account/order.php:3",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_order",
+    "child": "oc_member_transaction",
+    "relation": "order_id · 1:N",
+    "source": "application/model/account/order.php:3",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_member",
+    "child": "oc_member_seller",
+    "relation": "member_id · N tối đa chưa khóa UNIQUE",
+    "source": "application/model/account/order.php:3",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_member",
+    "child": "oc_subscription",
+    "relation": "member_id · 1:N",
+    "source": "application/model/account/subscription.php:27",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_subscription_plan",
+    "child": "oc_subscription",
+    "relation": "subscription_plan_id · 1:N",
+    "source": "application/model/account/subscription.php:27",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_member_payment",
+    "child": "oc_subscription",
+    "relation": "member_payment_id · 1:N, có thể 0",
+    "source": "application/model/account/subscription.php:27",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_subscription",
+    "child": "oc_subscription_history",
+    "relation": "subscription_id · 1:N",
+    "source": "application/model/account/subscription.php:241",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_user_group",
+    "child": "oc_user",
+    "relation": "user_group_id · 1:N",
+    "source": "system/library/cart/user.php:12",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_extension",
+    "child": "oc_extension_image",
+    "relation": "extension_id · 1:N",
+    "source": "admin/model/marketplace/extension.php:33",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_extension",
+    "child": "oc_extension_comment",
+    "relation": "extension_id · 1:N",
+    "source": "application/model/marketplace/extension.php:15",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_member",
+    "child": "oc_member_payment",
+    "relation": "member_id · 1:N",
+    "source": "application/model/account/payment.php:101",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_member",
+    "child": "oc_member_partner",
+    "relation": "member_id · 1:N, không UNIQUE",
+    "source": "application/model/account/partner.php:3",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_member_partner_type",
+    "child": "oc_member_partner",
+    "relation": "member_partner_type_id · 1:N",
+    "source": "application/model/account/partner.php:3",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_member_partner_status",
+    "child": "oc_member_partner",
+    "relation": "member_partner_status_id · 1:N",
+    "source": "application/model/account/partner.php:3",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_country",
+    "child": "oc_member_partner",
+    "relation": "country_id · 1:N",
+    "source": "application/model/account/partner.php:3",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_zone",
+    "child": "oc_member_partner",
+    "relation": "zone_id · 1:N",
+    "source": "application/model/account/partner.php:3",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_information",
+    "child": "oc_information_description",
+    "relation": "information_id · 1:N theo language",
+    "source": "application/model/cms/information.php:3",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_banner",
+    "child": "oc_banner_image",
+    "relation": "banner_id · 1:N",
+    "source": "application/model/design/banner.php:3",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_member",
+    "child": "oc_blog_comment",
+    "relation": "member_id · 1:N",
+    "source": "application/model/cms/blog.php:119",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_blog",
+    "child": "oc_blog_comment",
+    "relation": "blog_id · 1:N",
+    "source": "application/model/cms/blog.php:125",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_showcase_category",
+    "child": "oc_showcase",
+    "relation": "showcase_category_id · 1:N",
+    "source": "application/model/cms/showcase.php:15",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_subscription",
+    "child": "oc_subscription_domain",
+    "relation": "subscription_id · 1:N",
+    "source": "application/model/account/subscription.php:221",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_subscription",
+    "child": "oc_subscription_backup",
+    "relation": "subscription_id · 1:N metadata",
+    "source": "application/model/account/subscription.php:343",
+    "kind": "logical_not_FK"
+  },
+  {
+    "parent": "oc_subscription",
+    "child": "oc_subscription_transaction",
+    "relation": "subscription_id · 1:N",
+    "source": "application/model/account/subscription.php:281",
+    "kind": "logical_not_FK"
+  }
+]

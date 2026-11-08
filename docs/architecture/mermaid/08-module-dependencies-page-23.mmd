@@ -1,0 +1,33 @@
+---
+title: admin/user · phụ thuộc 1
+---
+flowchart TB
+    n1["user/api.php<br/>index() · L10"]
+    n2["model/user/api<br/>đã có file"]
+    n3["oc_api, oc_api_ip, oc_api_session"]
+    n4["user/user.php<br/>index() · L10"]
+    n5["model/user/user<br/>đã có file"]
+    n6["oc_member_login, oc_user, oc_user_group"]
+    n7["user/user.php<br/>getForm() · L349"]
+    n8["model/user/user_group<br/>đã có file"]
+    n9["oc_user_group"]
+    n10["user/user.php<br/>getForm() · L397"]
+    n11["model/tool/image<br/>đã có file"]
+    n12["Không có SQL literal được trích xuất"]
+    n13["user/user_permission.php<br/>index() · L10"]
+    n14["model/user/user_group<br/>đã có file"]
+    n15["oc_user_group"]
+    n16["user/user_permission.php<br/>validateDelete() · L397"]
+    n17["model/user/user<br/>đã có file"]
+    n18["oc_member_login, oc_user, oc_user_group"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6
+    n7 --> n8
+    n8 -.-> n9
+    n10 --> n11
+    n13 --> n14
+    n14 -.-> n15
+    n16 --> n17
+    n17 -.-> n18

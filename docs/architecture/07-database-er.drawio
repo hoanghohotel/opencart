@@ -1,0 +1,870 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" agent="source-evidence-generator" version="24.7.17" type="device">
+  <diagram id="07-database-er-1" name="Quan hệ logic đã có bằng chứng 1">
+    <mxGraphModel dx="1440" dy="1042" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1042" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Quan hệ logic đã có bằng chứng 1" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Nét đứt = quan hệ ứng dụng, KHÔNG phải FK. 1:N mô tả lookup theo PK; orphan vẫn có thể tồn tại." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1000" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_member&#10;PK member_id&#10;[install/opencart.sql:1448]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n2" value="oc_extension&#10;PK extension_id&#10;[install/opencart.sql:578]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n3" value="application/model/marketplace/extension.php::getExtension()&#10;[application/model/marketplace/extension.php:15]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="280" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n4" value="oc_extension_category&#10;PK extension_category_id&#10;[install/opencart.sql:655]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n5" value="oc_extension&#10;PK extension_id&#10;[install/opencart.sql:578]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n6" value="application/model/marketplace/extension.php::getExtension()&#10;[application/model/marketplace/extension.php:15]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="490" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n7" value="oc_extension&#10;PK extension_id&#10;[install/opencart.sql:578]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n8" value="oc_extension_download&#10;PK extension_download_id&#10;[install/opencart.sql:708]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n9" value="admin/model/marketplace/extension.php::editExtension()&#10;[admin/model/marketplace/extension.php:33]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="700" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n10" value="oc_extension_download&#10;PK extension_download_id&#10;[install/opencart.sql:708]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n11" value="oc_extension_download_path&#10;PK extension_download_id, download_id&#10;[install/opencart.sql:765]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n12" value="admin/model/marketplace/extension.php::editExtension()&#10;[admin/model/marketplace/extension.php:33]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="910" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="e0" value="member_id = member_id · 1:N" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="extension_category_id · 1:N" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="extension_id · 1:N" edge="1" parent="1" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="extension_download_id · 1:N" edge="1" parent="1" source="n10" target="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-2" name="Quan hệ logic đã có bằng chứng 2">
+    <mxGraphModel dx="1440" dy="1042" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1042" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Quan hệ logic đã có bằng chứng 2" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Nét đứt = quan hệ ứng dụng, KHÔNG phải FK. 1:N mô tả lookup theo PK; orphan vẫn có thể tồn tại." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1000" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_download&#10;PK download_id&#10;[install/opencart.sql:469]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n2" value="oc_extension_download_path&#10;PK extension_download_id, download_id&#10;[install/opencart.sql:765]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n3" value="admin/model/marketplace/extension.php::editExtension()&#10;[admin/model/marketplace/extension.php:33]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="280" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n4" value="oc_member&#10;PK member_id&#10;[install/opencart.sql:1448]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n5" value="oc_order&#10;PK order_id&#10;[install/opencart.sql:1738]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n6" value="application/model/account/order.php::getOrder()&#10;[application/model/account/order.php:67]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="490" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n7" value="oc_member&#10;PK member_id&#10;[install/opencart.sql:1448]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n8" value="oc_order&#10;PK order_id&#10;[install/opencart.sql:1738]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n9" value="application/model/account/order.php::getOrder()&#10;[application/model/account/order.php:67]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="700" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n10" value="oc_extension&#10;PK extension_id&#10;[install/opencart.sql:578]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n11" value="oc_order&#10;PK order_id&#10;[install/opencart.sql:1738]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n12" value="application/model/account/order.php::getOrder()&#10;[application/model/account/order.php:67]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="910" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="e0" value="download_id · 1:N (bảng nối version)" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="member_id (buyer) · 1:N" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="seller_id (seller) · 1:N" edge="1" parent="1" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="extension_id · 1:N" edge="1" parent="1" source="n10" target="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-3" name="Quan hệ logic đã có bằng chứng 3">
+    <mxGraphModel dx="1440" dy="1042" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1042" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Quan hệ logic đã có bằng chứng 3" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Nét đứt = quan hệ ứng dụng, KHÔNG phải FK. 1:N mô tả lookup theo PK; orphan vẫn có thể tồn tại." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1000" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_member&#10;PK member_id&#10;[install/opencart.sql:1448]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n2" value="oc_member_transaction&#10;PK member_transaction_id&#10;[install/opencart.sql:1687]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n3" value="application/model/account/order.php::addOrder()&#10;[application/model/account/order.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="280" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n4" value="oc_order&#10;PK order_id&#10;[install/opencart.sql:1738]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n5" value="oc_member_transaction&#10;PK member_transaction_id&#10;[install/opencart.sql:1687]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n6" value="application/model/account/order.php::addOrder()&#10;[application/model/account/order.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="490" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n7" value="oc_member&#10;PK member_id&#10;[install/opencart.sql:1448]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n8" value="oc_member_seller&#10;PK member_seller_id&#10;[install/opencart.sql:1626]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n9" value="application/model/account/order.php::addOrder()&#10;[application/model/account/order.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="700" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n10" value="oc_member&#10;PK member_id&#10;[install/opencart.sql:1448]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n11" value="oc_subscription&#10;PK subscription_id&#10;[install/opencart.sql:2006]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n12" value="application/model/account/subscription.php::addSubscription()&#10;[application/model/account/subscription.php:27]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="910" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="e0" value="member_id · 1:N" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="order_id · 1:N" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="member_id · N tối đa chưa khóa UNIQUE" edge="1" parent="1" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="member_id · 1:N" edge="1" parent="1" source="n10" target="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-4" name="Quan hệ logic đã có bằng chứng 4">
+    <mxGraphModel dx="1440" dy="1042" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1042" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Quan hệ logic đã có bằng chứng 4" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Nét đứt = quan hệ ứng dụng, KHÔNG phải FK. 1:N mô tả lookup theo PK; orphan vẫn có thể tồn tại." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1000" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_subscription_plan&#10;PK subscription_plan_id&#10;[install/opencart.sql:2087]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n2" value="oc_subscription&#10;PK subscription_id&#10;[install/opencart.sql:2006]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n3" value="application/model/account/subscription.php::addSubscription()&#10;[application/model/account/subscription.php:27]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="280" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n4" value="oc_member_payment&#10;PK member_payment_id&#10;[install/opencart.sql:1607]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n5" value="oc_subscription&#10;PK subscription_id&#10;[install/opencart.sql:2006]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n6" value="application/model/account/subscription.php::addSubscription()&#10;[application/model/account/subscription.php:27]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="490" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n7" value="oc_subscription&#10;PK subscription_id&#10;[install/opencart.sql:2006]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n8" value="oc_subscription_history&#10;PK subscription_history_id&#10;[install/opencart.sql:2069]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n9" value="application/model/account/subscription.php::addSubscriptionHistory()&#10;[application/model/account/subscription.php:241]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="700" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n10" value="oc_user_group&#10;PK user_group_id&#10;[install/opencart.sql:2231]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n11" value="oc_user&#10;PK user_id&#10;[install/opencart.sql:2206]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n12" value="system/library/cart/user.php::__construct()&#10;[system/library/cart/user.php:12]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="910" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="e0" value="subscription_plan_id · 1:N" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="member_payment_id · 1:N, có thể 0" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="subscription_id · 1:N" edge="1" parent="1" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="user_group_id · 1:N" edge="1" parent="1" source="n10" target="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-5" name="Quan hệ logic đã có bằng chứng 5">
+    <mxGraphModel dx="1440" dy="1042" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1042" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Quan hệ logic đã có bằng chứng 5" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Nét đứt = quan hệ ứng dụng, KHÔNG phải FK. 1:N mô tả lookup theo PK; orphan vẫn có thể tồn tại." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1000" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_extension&#10;PK extension_id&#10;[install/opencart.sql:578]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n2" value="oc_extension_image&#10;PK extension_image_id&#10;[install/opencart.sql:1250]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n3" value="admin/model/marketplace/extension.php::editExtension()&#10;[admin/model/marketplace/extension.php:33]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="280" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n4" value="oc_extension&#10;PK extension_id&#10;[install/opencart.sql:578]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n5" value="oc_extension_comment&#10;PK extension_comment_id&#10;[install/opencart.sql:684]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n6" value="application/model/marketplace/extension.php::getExtension()&#10;[application/model/marketplace/extension.php:15]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="490" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n7" value="oc_member&#10;PK member_id&#10;[install/opencart.sql:1448]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n8" value="oc_member_payment&#10;PK member_payment_id&#10;[install/opencart.sql:1607]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n9" value="application/model/account/payment.php::getPayments()&#10;[application/model/account/payment.php:101]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="700" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n10" value="oc_member&#10;PK member_id&#10;[install/opencart.sql:1448]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n11" value="oc_member_partner&#10;PK member_partner_id&#10;[install/opencart.sql:1527]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n12" value="application/model/account/partner.php::getPartner()&#10;[application/model/account/partner.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="910" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="e0" value="extension_id · 1:N" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="extension_id · 1:N" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="member_id · 1:N" edge="1" parent="1" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="member_id · 1:N, không UNIQUE" edge="1" parent="1" source="n10" target="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-6" name="Quan hệ logic đã có bằng chứng 6">
+    <mxGraphModel dx="1440" dy="1042" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1042" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Quan hệ logic đã có bằng chứng 6" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Nét đứt = quan hệ ứng dụng, KHÔNG phải FK. 1:N mô tả lookup theo PK; orphan vẫn có thể tồn tại." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1000" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_member_partner_type&#10;PK member_partner_type_id&#10;[install/opencart.sql:1590]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n2" value="oc_member_partner&#10;PK member_partner_id&#10;[install/opencart.sql:1527]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n3" value="application/model/account/partner.php::getPartner()&#10;[application/model/account/partner.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="280" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n4" value="oc_member_partner_status&#10;PK member_partner_status_id&#10;[install/opencart.sql:1572]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n5" value="oc_member_partner&#10;PK member_partner_id&#10;[install/opencart.sql:1527]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n6" value="application/model/account/partner.php::getPartner()&#10;[application/model/account/partner.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="490" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n7" value="oc_country&#10;PK country_id&#10;[install/opencart.sql:173]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n8" value="oc_member_partner&#10;PK member_partner_id&#10;[install/opencart.sql:1527]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n9" value="application/model/account/partner.php::getPartner()&#10;[application/model/account/partner.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="700" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n10" value="oc_zone&#10;PK zone_id&#10;[install/opencart.sql:2246]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n11" value="oc_member_partner&#10;PK member_partner_id&#10;[install/opencart.sql:1527]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n12" value="application/model/account/partner.php::getPartner()&#10;[application/model/account/partner.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="910" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="e0" value="member_partner_type_id · 1:N" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="member_partner_status_id · 1:N" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="country_id · 1:N" edge="1" parent="1" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="zone_id · 1:N" edge="1" parent="1" source="n10" target="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-7" name="Quan hệ logic đã có bằng chứng 7">
+    <mxGraphModel dx="1440" dy="1042" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1042" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Quan hệ logic đã có bằng chứng 7" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Nét đứt = quan hệ ứng dụng, KHÔNG phải FK. 1:N mô tả lookup theo PK; orphan vẫn có thể tồn tại." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1000" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_information&#10;PK information_id&#10;[install/opencart.sql:1357]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n2" value="oc_information_description&#10;PK information_id, language_id&#10;[install/opencart.sql:1374]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n3" value="application/model/cms/information.php::getInformation()&#10;[application/model/cms/information.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="280" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n4" value="oc_banner&#10;PK banner_id&#10;[install/opencart.sql:55]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n5" value="oc_banner_image&#10;PK banner_image_id&#10;[install/opencart.sql:70]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n6" value="application/model/design/banner.php::getBanner()&#10;[application/model/design/banner.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="490" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n7" value="oc_member&#10;PK member_id&#10;[install/opencart.sql:1448]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n8" value="oc_blog_comment&#10;PK blog_comment_id&#10;[install/opencart.sql:151]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n9" value="application/model/cms/blog.php::getComment()&#10;[application/model/cms/blog.php:119]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="700" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n10" value="oc_blog&#10;PK blog_id&#10;[install/opencart.sql:89]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n11" value="oc_blog_comment&#10;PK blog_comment_id&#10;[install/opencart.sql:151]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n12" value="application/model/cms/blog.php::getCommentsByBlogId()&#10;[application/model/cms/blog.php:125]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="910" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="e0" value="information_id · 1:N theo language" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="banner_id · 1:N" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="member_id · 1:N" edge="1" parent="1" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="blog_id · 1:N" edge="1" parent="1" source="n10" target="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-8" name="Quan hệ logic đã có bằng chứng 8">
+    <mxGraphModel dx="1440" dy="1042" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1042" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Quan hệ logic đã có bằng chứng 8" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Nét đứt = quan hệ ứng dụng, KHÔNG phải FK. 1:N mô tả lookup theo PK; orphan vẫn có thể tồn tại." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1000" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_showcase_category&#10;PK showcase_category_id&#10;[install/opencart.sql:1953]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n2" value="oc_showcase&#10;PK showcase_id&#10;[install/opencart.sql:1913]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="160" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n3" value="application/model/cms/showcase.php::getShowcase()&#10;[application/model/cms/showcase.php:15]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="280" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n4" value="oc_subscription&#10;PK subscription_id&#10;[install/opencart.sql:2006]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n5" value="oc_subscription_domain&#10;PK subscription_domain_id&#10;[install/opencart.sql:2049]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="370" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n6" value="application/model/account/subscription.php::getSubscriptionDomains()&#10;[application/model/account/subscription.php:221]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="490" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n7" value="oc_subscription&#10;PK subscription_id&#10;[install/opencart.sql:2006]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n8" value="oc_subscription_backup&#10;PK backup_id&#10;[install/opencart.sql:2030]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="580" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n9" value="application/model/account/subscription.php::getSubscriptionBackups()&#10;[application/model/account/subscription.php:343]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="700" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="n10" value="oc_subscription&#10;PK subscription_id&#10;[install/opencart.sql:2006]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n11" value="oc_subscription_transaction&#10;PK subscription_transaction_id&#10;[install/opencart.sql:2125]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="920" y="790" width="400" height="100" />
+        </mxCell>
+        <mxCell id="n12" value="application/model/account/subscription.php::getSubscriptionTransactions()&#10;[application/model/account/subscription.php:281]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="910" width="1260" height="52" />
+        </mxCell>
+        <mxCell id="e0" value="showcase_category_id · 1:N" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="subscription_id · 1:N" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="subscription_id · 1:N metadata" edge="1" parent="1" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="subscription_id · 1:N" edge="1" parent="1" source="n10" target="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-9" name="Từ điển bảng 01">
+    <mxGraphModel dx="1450" dy="1055" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1055" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Từ điển bảng 01" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Tất cả 59 bảng được liệt kê; PK đúng theo DDL. Các cột còn lại xem evidence/schema.json và database-schema.md." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1013" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_api&#10;PK: api_id&#10;api_id&#10;6 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:13]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n2" value="oc_api_ip&#10;PK: api_ip_id&#10;api_ip_id&#10;api_id&#10;3 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:28]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n3" value="oc_api_session&#10;PK: api_session_id&#10;api_session_id&#10;api_id&#10;session_id&#10;6 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:40]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n4" value="oc_banner&#10;PK: banner_id&#10;banner_id&#10;3 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:55]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n5" value="oc_banner_image&#10;PK: banner_image_id&#10;banner_image_id&#10;banner_id&#10;language_id&#10;7 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:70]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n6" value="oc_blog&#10;PK: blog_id&#10;blog_id&#10;blog_category_id&#10;12 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:89]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="590" width="420" height="385" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-10" name="Từ điển bảng 02">
+    <mxGraphModel dx="1450" dy="1055" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1055" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Từ điển bảng 02" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Tất cả 59 bảng được liệt kê; PK đúng theo DDL. Các cột còn lại xem evidence/schema.json và database-schema.md." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1013" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_blog_category&#10;PK: blog_category_id&#10;blog_category_id&#10;4 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:131]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n2" value="oc_blog_comment&#10;PK: blog_comment_id&#10;blog_comment_id&#10;blog_id&#10;parent_id&#10;member_id&#10;7 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:151]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n3" value="oc_country&#10;PK: country_id&#10;country_id&#10;7 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:173]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n4" value="oc_currency&#10;PK: currency_id&#10;currency_id&#10;9 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:446]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n5" value="oc_download&#10;PK: download_id&#10;download_id&#10;7 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:469]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n6" value="oc_event&#10;PK: event_id&#10;event_id&#10;6 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:563]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="590" width="420" height="385" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-11" name="Từ điển bảng 03">
+    <mxGraphModel dx="1450" dy="1055" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1055" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Từ điển bảng 03" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Tất cả 59 bảng được liệt kê; PK đúng theo DDL. Các cột còn lại xem evidence/schema.json và database-schema.md." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1013" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_extension&#10;PK: extension_id&#10;extension_id&#10;member_id&#10;extension_category_id&#10;28 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:578]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n2" value="oc_extension_category&#10;PK: extension_category_id&#10;extension_category_id&#10;4 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:655]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n3" value="oc_extension_comment&#10;PK: extension_comment_id&#10;extension_comment_id&#10;extension_id&#10;parent_id&#10;member_id&#10;7 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:684]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n4" value="oc_extension_download&#10;PK: extension_download_id&#10;extension_download_id&#10;extension_id&#10;9 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:708]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n5" value="oc_extension_download_path&#10;PK: extension_download_id, download_id&#10;extension_download_id&#10;download_id&#10;2 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:765]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n6" value="oc_extension_image&#10;PK: extension_image_id&#10;extension_image_id&#10;extension_id&#10;4 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1250]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="590" width="420" height="385" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-12" name="Từ điển bảng 04">
+    <mxGraphModel dx="1450" dy="1055" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1055" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Từ điển bảng 04" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Tất cả 59 bảng được liệt kê; PK đúng theo DDL. Các cột còn lại xem evidence/schema.json và database-schema.md." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1013" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_extension_promotion&#10;PK: promotion_id&#10;promotion_id&#10;extension_id&#10;member_id&#10;transaction_id&#10;order_status_id&#10;12 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1302]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n2" value="oc_extension_rating&#10;PK: extension_rating_id&#10;extension_rating_id&#10;extension_id&#10;member_id&#10;order_id&#10;13 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1329]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n3" value="oc_information&#10;PK: information_id&#10;information_id&#10;4 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1357]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n4" value="oc_information_description&#10;PK: information_id, language_id&#10;information_id&#10;language_id&#10;7 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1374]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n5" value="oc_information_to_store&#10;PK: information_id, store_id&#10;information_id&#10;store_id&#10;2 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1394]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n6" value="oc_language&#10;PK: language_id&#10;language_id&#10;8 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1409]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="590" width="420" height="385" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-13" name="Từ điển bảng 05">
+    <mxGraphModel dx="1450" dy="1055" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1055" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Từ điển bảng 05" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Tất cả 59 bảng được liệt kê; PK đúng theo DDL. Các cột còn lại xem evidence/schema.json và database-schema.md." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1013" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_mail_log&#10;PK: mail_log_id&#10;mail_log_id&#10;9 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1430]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n2" value="oc_member&#10;PK: member_id&#10;member_id&#10;tax_id&#10;country_id&#10;25 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1448]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n3" value="oc_member_ip&#10;PK: member_ip_id&#10;member_ip_id&#10;member_id&#10;4 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1491]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n4" value="oc_member_login&#10;PK: member_login_id&#10;member_login_id&#10;6 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1510]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n5" value="oc_member_partner&#10;PK: member_partner_id&#10;member_partner_id&#10;member_id&#10;member_partner_type_id&#10;member_partner_status_id&#10;country_id&#10;zone_id&#10;25 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1527]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n6" value="oc_member_partner_status&#10;PK: member_partner_status_id&#10;member_partner_status_id&#10;4 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1572]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="590" width="420" height="385" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-14" name="Từ điển bảng 06">
+    <mxGraphModel dx="1450" dy="1055" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1055" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Từ điển bảng 06" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Tất cả 59 bảng được liệt kê; PK đúng theo DDL. Các cột còn lại xem evidence/schema.json và database-schema.md." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1013" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_member_partner_type&#10;PK: member_partner_type_id&#10;member_partner_type_id&#10;3 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1590]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n2" value="oc_member_payment&#10;PK: member_payment_id&#10;member_payment_id&#10;member_id&#10;9 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1607]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n3" value="oc_member_seller&#10;PK: member_seller_id&#10;member_seller_id&#10;member_id&#10;country_id&#10;zone_id&#10;26 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1626]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n4" value="oc_member_store&#10;PK: member_store_id&#10;member_store_id&#10;member_id&#10;7 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1667]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n5" value="oc_member_transaction&#10;PK: member_transaction_id&#10;member_transaction_id&#10;member_id&#10;order_id&#10;6 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1687]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n6" value="oc_modification&#10;PK: modification_id&#10;modification_id&#10;extension_install_id&#10;10 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1707]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="590" width="420" height="385" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-15" name="Từ điển bảng 07">
+    <mxGraphModel dx="1450" dy="1055" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1055" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Từ điển bảng 07" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Tất cả 59 bảng được liệt kê; PK đúng theo DDL. Các cột còn lại xem evidence/schema.json và database-schema.md." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1013" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_newsletter&#10;PK: newsletter_id&#10;newsletter_id&#10;3 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1726]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n2" value="oc_order&#10;PK: order_id&#10;order_id&#10;member_id&#10;seller_id&#10;extension_id&#10;transaction_id&#10;order_status_id&#10;14 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1738]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n3" value="oc_order_status&#10;PK: order_status_id, language_id&#10;order_status_id&#10;language_id&#10;3 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1768]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n4" value="oc_seo_url&#10;PK: seo_url_id&#10;seo_url_id&#10;store_id&#10;language_id&#10;5 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1789]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n5" value="oc_session&#10;PK: session_id&#10;session_id&#10;3 cột · InnoDB&#10;FK: không khai báo&#10;[install/opencart.sql:1805]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n6" value="oc_setting&#10;PK: setting_id&#10;setting_id&#10;store_id&#10;6 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1817]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="590" width="420" height="385" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-16" name="Từ điển bảng 08">
+    <mxGraphModel dx="1450" dy="1055" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1055" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Từ điển bảng 08" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Tất cả 59 bảng được liệt kê; PK đúng theo DDL. Các cột còn lại xem evidence/schema.json và database-schema.md." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1013" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_showcase&#10;PK: showcase_id&#10;showcase_id&#10;member_id&#10;showcase_category_id&#10;9 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1913]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n2" value="oc_showcase_category&#10;PK: showcase_category_id&#10;showcase_category_id&#10;4 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1953]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n3" value="oc_statistics&#10;PK: statistics_id&#10;statistics_id&#10;3 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1975]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n4" value="oc_store&#10;PK: store_id&#10;store_id&#10;4 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:1993]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n5" value="oc_subscription&#10;PK: subscription_id&#10;subscription_id&#10;member_id&#10;subscription_plan_id&#10;member_payment_id&#10;subscription_status_id&#10;11 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2006]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n6" value="oc_subscription_backup&#10;PK: backup_id&#10;backup_id&#10;subscription_id&#10;5 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2030]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="590" width="420" height="385" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-17" name="Từ điển bảng 09">
+    <mxGraphModel dx="1450" dy="1055" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1055" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Từ điển bảng 09" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Tất cả 59 bảng được liệt kê; PK đúng theo DDL. Các cột còn lại xem evidence/schema.json và database-schema.md." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1013" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_subscription_domain&#10;PK: subscription_domain_id&#10;subscription_domain_id&#10;subscription_id&#10;member_id&#10;7 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2049]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n2" value="oc_subscription_history&#10;PK: subscription_history_id&#10;subscription_history_id&#10;subscription_id&#10;5 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2069]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n3" value="oc_subscription_plan&#10;PK: subscription_plan_id&#10;subscription_plan_id&#10;7 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2087]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n4" value="oc_subscription_status&#10;PK: subscription_status_id&#10;subscription_status_id&#10;2 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2108]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n5" value="oc_subscription_transaction&#10;PK: subscription_transaction_id&#10;subscription_transaction_id&#10;subscription_id&#10;member_id&#10;transaction_id&#10;9 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2125]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n6" value="oc_support_enquiry&#10;PK: enquiry_id&#10;enquiry_id&#10;partner_id&#10;country_id&#10;order_id&#10;version_id&#10;17 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2147]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="590" width="420" height="385" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="07-database-er-18" name="Từ điển bảng 10">
+    <mxGraphModel dx="1450" dy="1055" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="1055" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Từ điển bảng 10" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Tất cả 59 bảng được liệt kê; PK đúng theo DDL. Các cột còn lại xem evidence/schema.json và database-schema.md." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1013" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="oc_translation&#10;PK: translation_id&#10;translation_id&#10;store_id&#10;language_id&#10;7 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2176]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n2" value="oc_upload&#10;PK: upload_id&#10;upload_id&#10;5 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2192]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n3" value="oc_user&#10;PK: user_id&#10;user_id&#10;user_group_id&#10;13 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2206]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n4" value="oc_user_group&#10;PK: user_group_id&#10;user_group_id&#10;3 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2231]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="590" width="420" height="385" />
+        </mxCell>
+        <mxCell id="n5" value="oc_zone&#10;PK: zone_id&#10;zone_id&#10;country_id&#10;5 cột · MyISAM&#10;FK: không khai báo&#10;[install/opencart.sql:2246]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="590" width="420" height="385" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,24 @@
+---
+title: application/account · phụ thuộc 7
+---
+flowchart TB
+    n1["account/subscription.php<br/>invoice() · L912"]
+    n2["model/localisation/country<br/>đã có file"]
+    n3["oc_country"]
+    n4["account/transaction.php<br/>index() · L12"]
+    n5["model/account/transaction<br/>đã có file"]
+    n6["oc_member_transaction"]
+    n7["account/transaction.php<br/>index() · L13"]
+    n8["model/account/seller<br/>đã có file"]
+    n9["oc_member, oc_member_seller"]
+    n10["account/verify.php<br/>index() · L6"]
+    n11["model/account/member<br/>đã có file"]
+    n12["oc_member, oc_member_ip, oc_member_login,<br/>oc_newsletter"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6
+    n7 --> n8
+    n8 -.-> n9
+    n10 --> n11
+    n11 -.-> n12

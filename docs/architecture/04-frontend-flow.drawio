@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" agent="source-evidence-generator" version="24.7.17" type="device">
+  <diagram id="04-frontend-flow-1" name="Trang chủ, danh mục, tìm kiếm, chi tiết">
+    <mxGraphModel dx="1440" dy="1113" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1113" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Trang chủ, danh mục, tìm kiếm, chi tiết" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="04-frontend-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1071" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="common/home::index() → common/footer + common/header → common/home.twig&#10;Controller trang chủ không load model riêng&#10;[application/controller/common/home.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n2" value="Danh mục / search dùng cùng marketplace/extension::index()&#10;GET filter_category_id, filter_search, filter_download_id, license, rating, sort&#10;[application/controller/marketplace/extension.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="305" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n3" value="ModelMarketplaceExtension::getTotalExtensions() → getExtensions()&#10;SQL oc_extension + category + member; EXISTS download_path theo version&#10;[application/model/marketplace/extension.php:21]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="460" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n4" value="load-&gt;view(marketplace/extension_list) → Response::setOutput()&#10;[application/controller/marketplace/extension.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="615" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n5" value="Chi tiết: marketplace/extension/info → getExtension() + ảnh/download/rating&#10;load-&gt;view(marketplace/extension_info); comments AJAX là request riêng&#10;[application/controller/marketplace/extension.php:308]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="770" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n6" value="Không có checkout/cart hoặc class Cart quản lý giỏ hàng trong checkout này&#10;Nút Buy mở AJAX checkout/checkout cho 1 extension_id + quantity&#10;[application/view/template/marketplace/extension_info.twig:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="925" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="e0" value="" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" edge="1" parent="1" source="n2" target="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" value="" edge="1" parent="1" source="n5" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="04-frontend-flow-2" name="Đăng ký, đăng nhập, tài khoản và đơn đã mua">
+    <mxGraphModel dx="1440" dy="1113" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1113" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Đăng ký, đăng nhập, tài khoản và đơn đã mua" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="04-frontend-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1071" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="account/register::index() POST → validate() → account/member::addMember()&#10;oc_member verified=0; tùy notify cập nhật oc_newsletter&#10;[application/controller/account/register.php:5]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n2" value="getMember() → mail/register → redirect account/success&#10;Xác minh email xử lý riêng tại account/verify&#10;[application/controller/account/verify.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="305" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n3" value="account/login::validate() → getMemberByLogin() → Cart\Member::login()&#10;Kiểm tra status/verified; sai → addLoginAttempt; đúng → deleteLoginAttempts&#10;[application/controller/account/login.php:123]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="460" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n4" value="Cart\Member::login(): query oc_member, tạo member_id/member_token trong session&#10;Cập nhật IP → query oc_member_ip; controller kiểm tra hasPin()/isIpVerified()&#10;[system/library/cart/member.php:86]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="615" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n5" value="account/account → menu và các trang profile, seller, extension, payment, subscription&#10;Không gọi đây là oc_customer: identity thực là oc_member&#10;[application/controller/account/account.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="770" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n6" value="account/order::index()/info() → account/order getOrders/getOrder&#10;History hóa đơn số và trạng thái; không tìm thấy tracking vận chuyển&#10;[application/controller/account/order.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="925" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="e0" value="" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" edge="1" parent="1" source="n2" target="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" value="" edge="1" parent="1" source="n5" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="04-frontend-flow-3" name="Checkout hiện hành · mua trực tiếp extension">
+    <mxGraphModel dx="1440" dy="1268" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1268" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Checkout hiện hành · mua trực tiếp extension" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="04-frontend-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1226" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="extension_info.twig #button-purchase AJAX → checkout/checkout::index()&#10;[application/view/template/marketplace/extension_info.twig:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n2" value="Gate isLogged + member_token; sai → HTTP 401 + Location login&#10;Lưu redirect về marketplace/extension/info?purchase=1&#10;[application/controller/checkout/checkout.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="305" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n3" value="getExtension() → getPayments() → PaymentGateway enable/config&#10;Render checkout/checkout; chọn vaulted/card/paypal&#10;[application/controller/checkout/checkout.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="460" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n4" value="Card: checkout/payment/card → prepare()&#10;getPayment() hoặc vaultStripeCard/vaultBraintreeCard → pending_extension_order&#10;[application/controller/checkout/payment.php:89]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="615" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n5" value="confirm(): nếu pending stripe/braintree → chargeStripe/chargeBraintree&#10;Nếu không lỗi → unset pending → account/order::addOrder() → JSON&#10;[application/controller/checkout/payment.php:217]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="770" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n6" value="Nhánh khác: confirm không có pending → addOrder trực tiếp, transaction token&#10;PayPal pending không đi qua nhánh chargeStripe/chargeBraintree&#10;[application/controller/checkout/payment.php:217]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="925" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n7" value="checkout/checkout/success cũng addOrder nếu còn pending + đã đăng nhập&#10;Không có gọi xác minh gateway trong method success() này&#10;[application/controller/checkout/checkout.php:83]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="1080" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="e0" value="" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" edge="1" parent="1" source="n2" target="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" value="" edge="1" parent="1" source="n5" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e5" value="" edge="1" parent="1" source="n6" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="04-frontend-flow-4" name="Nhánh legacy và các module khác">
+    <mxGraphModel dx="1440" dy="958" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="958" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Nhánh legacy và các module khác" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Các cơ chế/nhánh độc lập; không có thứ tự gọi giữa các khối. Luồng cụ thể xem sequence và dẫn chiếu source." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="04-frontend-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="916" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="marketplace/purchase::index() → purchase.twig&#10;marketplace/braintree::payment() → addOrder trực tiếp&#10;[application/controller/marketplace/braintree.php:33]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n2" value="marketplace/paypal::send() → addOrder; callback() chỉ redirect success&#10;Không gộp các nhánh này với charge server trong checkout/payment&#10;[application/controller/marketplace/paypal.php:30]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="305" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n3" value="CMS: blog, download, information, showcase, sitemap&#10;Support: enquiry/contact, partner, guide và các trang thông tin&#10;[application/controller/cms/blog.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="460" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n4" value="Seller: account/extension CRUD + upload → CloudStorage&#10;Buyer download: marketplace/download → kiểm tra quyền mua → outputFile()&#10;[application/controller/marketplace/download.php:81]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="615" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n5" value="Cloud: account/subscription → account/subscription model → SQL, history, transaction&#10;cloud/store hiển thị subscription; provision hạ tầng chưa xác minh&#10;[application/model/account/subscription.php:27]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="770" width="1180" height="108" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="1055" viewBox="0 0 1450 1055">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1450" height="1055" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">Từ điển bảng 10</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Tất cả 59 bảng được liệt kê; PK đúng theo DDL. Các cột còn lại xem evidence/schema.json và database-schema.md.</text>
+<text x="50" y="1026" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="60" y="150" width="420" height="385" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="74" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_translation</text>
+<text x="74" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK: translation_id</text>
+<text x="74" y="212" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">translation_id</text>
+<text x="74" y="232" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">store_id</text>
+<text x="74" y="252" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">language_id</text>
+<text x="74" y="272" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">7 cột · MyISAM</text>
+<text x="74" y="292" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">FK: không khai báo</text>
+<text x="74" y="523" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:2176</text>
+<rect x="520" y="150" width="420" height="385" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="534" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_upload</text>
+<text x="534" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK: upload_id</text>
+<text x="534" y="212" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">upload_id</text>
+<text x="534" y="232" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">5 cột · MyISAM</text>
+<text x="534" y="252" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">FK: không khai báo</text>
+<text x="534" y="523" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:2192</text>
+<rect x="980" y="150" width="420" height="385" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="994" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_user</text>
+<text x="994" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK: user_id</text>
+<text x="994" y="212" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">user_id</text>
+<text x="994" y="232" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">user_group_id</text>
+<text x="994" y="252" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">13 cột · MyISAM</text>
+<text x="994" y="272" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">FK: không khai báo</text>
+<text x="994" y="523" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:2206</text>
+<rect x="60" y="590" width="420" height="385" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="74" y="612" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_user_group</text>
+<text x="74" y="632" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK: user_group_id</text>
+<text x="74" y="652" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">user_group_id</text>
+<text x="74" y="672" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">3 cột · MyISAM</text>
+<text x="74" y="692" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">FK: không khai báo</text>
+<text x="74" y="963" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:2231</text>
+<rect x="520" y="590" width="420" height="385" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="534" y="612" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_zone</text>
+<text x="534" y="632" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK: zone_id</text>
+<text x="534" y="652" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">zone_id</text>
+<text x="534" y="672" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">country_id</text>
+<text x="534" y="692" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">5 cột · MyISAM</text>
+<text x="534" y="712" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">FK: không khai báo</text>
+<text x="534" y="963" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:2246</text>
+</svg>

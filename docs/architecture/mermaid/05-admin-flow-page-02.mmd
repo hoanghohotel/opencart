@@ -1,0 +1,9 @@
+---
+title: Quản lý extension, category, member và order
+---
+flowchart TB
+    n1["marketplace/extension index/add/edit/delete → ModelMarketplaceExtension<br/>validateForm/validateDelete kiểm tra modify + dữ liệu"]
+    n2["editExtension(): UPDATE oc_extension → thay ảnh → thay downloads + version paths<br/>Đây là sản phẩm số; không có admin/catalog/product trong checkout"]
+    n3["marketplace/category → marketplace/category model → oc_extension_category<br/>member/member, member/seller, member/partner quản lý identity/profile"]
+    n4["sale/order::index()/info() → sale/order model<br/>Thông tin đơn / update trạng thái; xem method inventory cho endpoint chính xác"]
+    n5["setting/payment + setting/setting: gateway, SMTP, cloud storage settings<br/>Không tìm thấy controller shipping; không dựng quy trình vận chuyển"]

@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1042" viewBox="0 0 1440 1042">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1440" height="1042" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">Quan hệ logic đã có bằng chứng 4</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Nét đứt = quan hệ ứng dụng, KHÔNG phải FK. 1:N mô tả lookup theo PK; orphan vẫn có thể tồn tại.</text>
+<text x="50" y="1013" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="60" y="160" width="400" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="74" y="182" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_subscription_plan</text>
+<text x="74" y="202" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK subscription_plan_id</text>
+<text x="74" y="248" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:2087</text>
+<rect x="920" y="160" width="400" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="934" y="182" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_subscription</text>
+<text x="934" y="202" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK subscription_id</text>
+<text x="934" y="248" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:2006</text>
+<rect x="60" y="280" width="1260" height="52" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="302" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">application/model/account/subscription.php::addSubscription()</text>
+<text x="74" y="320" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/account/subscription.php:27</text>
+<rect x="60" y="370" width="400" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="74" y="392" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_member_payment</text>
+<text x="74" y="412" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK member_payment_id</text>
+<text x="74" y="458" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:1607</text>
+<rect x="920" y="370" width="400" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="934" y="392" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_subscription</text>
+<text x="934" y="412" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK subscription_id</text>
+<text x="934" y="458" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:2006</text>
+<rect x="60" y="490" width="1260" height="52" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="512" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">application/model/account/subscription.php::addSubscription()</text>
+<text x="74" y="530" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/account/subscription.php:27</text>
+<rect x="60" y="580" width="400" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="74" y="602" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_subscription</text>
+<text x="74" y="622" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK subscription_id</text>
+<text x="74" y="668" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:2006</text>
+<rect x="920" y="580" width="400" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="934" y="602" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_subscription_history</text>
+<text x="934" y="622" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK subscription_history_id</text>
+<text x="934" y="668" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:2069</text>
+<rect x="60" y="700" width="1260" height="52" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="722" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">application/model/account/subscription.php::addSubscriptionHistory()</text>
+<text x="74" y="740" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/account/subscription.php:241</text>
+<rect x="60" y="790" width="400" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="74" y="812" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_user_group</text>
+<text x="74" y="832" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK user_group_id</text>
+<text x="74" y="878" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:2231</text>
+<rect x="920" y="790" width="400" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="934" y="812" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_user</text>
+<text x="934" y="832" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK user_id</text>
+<text x="934" y="878" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:2206</text>
+<rect x="60" y="910" width="1260" height="52" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="932" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">system/library/cart/user.php::__construct()</text>
+<text x="74" y="950" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/library/cart/user.php:12</text>
+<polyline points="460,210.0 920,210.0" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="617.2" y="202.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">subscription_plan_id · 1:N</text>
+<polyline points="460,420.0 920,420.0" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="597.6" y="412.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">member_payment_id · 1:N, có thể 0</text>
+<polyline points="460,630.0 920,630.0" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="631.2" y="622.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">subscription_id · 1:N</text>
+<polyline points="460,840.0 920,840.0" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="636.8" y="832.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">user_group_id · 1:N</text>
+</svg>

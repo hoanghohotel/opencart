@@ -1,0 +1,37 @@
+---
+title: admin/common · phụ thuộc 1
+---
+flowchart TB
+    n1["common/column_left.php<br/>index() · L382"]
+    n2["model/sale/order<br/>đã có file"]
+    n3["oc_member, oc_order, oc_order_status"]
+    n4["common/developer.php<br/>index() · L20"]
+    n5["model/setting/setting<br/>đã có file"]
+    n6["oc_setting"]
+    n7["common/filemanager.php<br/>index() · L37"]
+    n8["model/tool/image<br/>đã có file"]
+    n9["Không có SQL literal được trích xuất"]
+    n10["common/forgotten.php<br/>index() · L18"]
+    n11["model/user/user<br/>đã có file"]
+    n12["oc_member_login, oc_user, oc_user_group"]
+    n13["common/header.php<br/>index() · L45"]
+    n14["model/user/user<br/>đã có file"]
+    n15["oc_member_login, oc_user, oc_user_group"]
+    n16["common/header.php<br/>index() · L47"]
+    n17["model/tool/image<br/>đã có file"]
+    n18["Không có SQL literal được trích xuất"]
+    n19["common/login.php<br/>validate() · L91"]
+    n20["model/user/user<br/>đã có file"]
+    n21["oc_member_login, oc_user, oc_user_group"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6
+    n7 --> n8
+    n10 --> n11
+    n11 -.-> n12
+    n13 --> n14
+    n14 -.-> n15
+    n16 --> n17
+    n19 --> n20
+    n20 -.-> n21

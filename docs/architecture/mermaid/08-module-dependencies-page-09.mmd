@@ -1,0 +1,39 @@
+---
+title: admin/localisation · phụ thuộc 2
+---
+flowchart TB
+    n1["localisation/currency.php<br/>validateDelete() · L429"]
+    n2["model/sale/order<br/>đã có file"]
+    n3["oc_member, oc_order, oc_order_status"]
+    n4["localisation/language.php<br/>index() · L10"]
+    n5["model/localisation/language<br/>đã có file"]
+    n6["oc_banner_image, oc_download_description,<br/>oc_extension_category_description,<br/>oc_information_description, oc_language,<br/>oc_order_status, oc_seo_url, oc_setting"]
+    n7["localisation/language.php<br/>validateDelete() · L407"]
+    n8["model/setting/store<br/>đã có file"]
+    n9["oc_setting, oc_store"]
+    n10["localisation/language.php<br/>validateDelete() · L408"]
+    n11["model/sale/order<br/>đã có file"]
+    n12["oc_member, oc_order, oc_order_status"]
+    n13["localisation/order_status.php<br/>index() · L10"]
+    n14["model/localisation/order_status<br/>đã có file"]
+    n15["oc_order_status"]
+    n16["localisation/order_status.php<br/>getForm() · L295"]
+    n17["model/localisation/language<br/>đã có file"]
+    n18["oc_banner_image, oc_download_description,<br/>oc_extension_category_description,<br/>oc_information_description, oc_language,<br/>oc_order_status, oc_seo_url, oc_setting"]
+    n19["localisation/order_status.php<br/>validateDelete() · L333"]
+    n20["model/setting/store<br/>đã có file"]
+    n21["oc_setting, oc_store"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6
+    n7 --> n8
+    n8 -.-> n9
+    n10 --> n11
+    n11 -.-> n12
+    n13 --> n14
+    n14 -.-> n15
+    n16 --> n17
+    n17 -.-> n18
+    n19 --> n20
+    n20 -.-> n21

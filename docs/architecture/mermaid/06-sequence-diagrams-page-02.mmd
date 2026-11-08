@@ -1,0 +1,17 @@
+---
+title: Đăng nhập member · nhánh thành công
+---
+sequenceDiagram
+    participant A0 as Browser
+    participant A1 as AccountLogin
+    participant A2 as ModelAccountMember
+    participant A3 as Cart\Member
+    participant A4 as DB / Session
+    A0->>A1: POST email + password → validate()
+    A1->>A2: getMemberByLogin(email)
+    A2->>A4: SELECT oc_member
+    A1->>A3: login(email,password) nếu active + verified
+    A3->>A4: SELECT member; set session token; UPDATE ip; SELECT member_ip
+    A1->>A2: deleteLoginAttempts(email)
+    A1->>A3: hasPin() rồi isIpVerified()
+    A1->>A0: redirect PIN / security / saved redirect / account

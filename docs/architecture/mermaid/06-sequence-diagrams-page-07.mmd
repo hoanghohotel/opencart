@@ -1,0 +1,16 @@
+---
+title: Admin cập nhật “sản phẩm” = extension
+---
+sequenceDiagram
+    participant A0 as Admin browser
+    participant A1 as Pre-actions
+    participant A2 as MarketplaceExtension
+    participant A3 as ModelMarketplaceExtension
+    participant A4 as DB
+    A0->>A1: POST marketplace/extension/edit + user_token
+    A1->>A2: login + access gate → edit()
+    A2->>A2: load language/model → validateForm() [modify]
+    A2->>A3: editExtension(extension_id,post)
+    A3->>A4: UPDATE extension; DELETE/INSERT extension_image
+    A3->>A4: SELECT old downloads; DELETE paths/downloads; INSERT new rows
+    A2->>A0: session success → redirect list

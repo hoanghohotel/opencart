@@ -1,0 +1,156 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" agent="source-evidence-generator" version="24.7.17" type="device">
+  <diagram id="03-application-logic-1" name="Frontend · thứ tự khởi tạo">
+    <mxGraphModel dx="1440" dy="1423" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1423" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Frontend · thứ tự khởi tạo" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="03-application-logic · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1381" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="index.php → config.php → system/startup.php → start(application)&#10;[index.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n2" value="startup.php: vendor autoload, library autoloader, engine classes, helpers&#10;framework.php: Registry → Config(default, application) → Log → Event → Loader&#10;[system/startup.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="305" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n3" value="framework.php: Request → Response → DB (+ SET time_zone) → Session object&#10;Session chưa start vì application.session_autostart=false&#10;[system/framework.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="460" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n4" value="Cache → Language → Document → autoload → Router::dispatch()&#10;[system/framework.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="615" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n5" value="pre-actions: startup/session → startup/startup → startup/error&#10;→ startup/event → startup/maintenance → startup/seo_url&#10;[system/config/application.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="770" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n6" value="startup/startup: settings + store URL, language, Cart\Member, PIN/IP gate, currency&#10;Gán member_token từ session vào request khi đã đăng nhập&#10;[application/controller/startup/startup.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="925" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n7" value="startup/router::index() → controller before → Action::execute()&#10;→ controller after → framework Response::output()&#10;[application/controller/startup/router.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="1080" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n8" value="Shutdown: Session::close() → Session\DB::write() → oc_session&#10;[system/library/session.php:80]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="1235" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="e0" value="" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" edge="1" parent="1" source="n2" target="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" value="" edge="1" parent="1" source="n5" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e5" value="" edge="1" parent="1" source="n6" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e6" value="" edge="1" parent="1" source="n7" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="03-application-logic-2" name="Admin · thứ tự và chặn truy cập">
+    <mxGraphModel dx="1440" dy="1268" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1268" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Admin · thứ tự và chặn truy cập" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="03-application-logic · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1226" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="admin/index.php → admin/config.php → start(admin) → framework.php&#10;[admin/index.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n2" value="framework.php khởi tạo DB; Session::start() + cookie OCSESSID&#10;Admin kế thừa session_autostart=true, engine=db&#10;[system/config/admin.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="305" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n3" value="pre-actions: startup/startup → error → event → sass → login → permission&#10;[system/config/admin.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="460" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n4" value="startup/login: Cart\User → isLogged() → user_token&#10;Nếu không hợp lệ: trả Action(common/login), dừng vòng pre-action&#10;[admin/controller/startup/login.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="615" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n5" value="startup/permission: hasPermission(access, route)&#10;Nếu bị từ chối: Action(error/permission); dashboard thuộc ignore&#10;[admin/controller/startup/permission.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="770" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n6" value="startup/router → Action → admin controller/model/view&#10;Mặc định common/dashboard; từng write controller kiểm tra modify&#10;[admin/controller/marketplace/extension.php:431]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="925" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n7" value="Response::output() → HTTP; shutdown ghi oc_session&#10;[system/framework.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="1080" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="e0" value="" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" edge="1" parent="1" source="n2" target="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" value="" edge="1" parent="1" source="n5" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e5" value="" edge="1" parent="1" source="n6" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="03-application-logic-3" name="Event, localization và modification">
+    <mxGraphModel dx="1440" dy="1113" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1113" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Event, localization và modification" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Các cơ chế/nhánh độc lập; không có thứ tự gọi giữa các khối. Luồng cụ thể xem sequence và dẫn chiếu source." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="03-application-logic · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1071" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="framework.php đăng ký action_event từ config; Event::register() sắp theo priority&#10;[system/engine/event.php:37]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n2" value="startup/event → setting/event::getEvents() → oc_event&#10;Frontend lọc application/*; admin lọc admin/*; bỏ prefix trước register&#10;[application/model/setting/event.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="305" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n3" value="Loader::controller/model/view/language/config phát before/after&#10;Event::trigger() gọi Action; kết quả non-null có thể thay thế xử lý&#10;[system/engine/loader.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="460" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n4" value="Frontend event/language before/after backup/restore; view inject language&#10;language/*/after → event/translation → design/translation → oc_translation&#10;[application/controller/event/translation.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="615" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n5" value="Admin config có 2 khóa view/*/before: PHP giữ khóa sau&#10;Vì vậy event/theme ở khóa trước không được kích hoạt qua config này&#10;[system/config/admin.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="770" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n6" value="startup.php::modification() tìm file thay thế trong DIR_MODIFICATION&#10;Có oc_modification; chưa xác minh pipeline cài đặt/refresh OCMOD đầy đủ&#10;[system/startup.php:49]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="925" width="1180" height="108" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

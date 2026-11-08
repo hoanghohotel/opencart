@@ -1,0 +1,56 @@
+{
+  "drawio_files": [
+    {
+      "file": "01-project-structure.drawio",
+      "pages": 4,
+      "xml": "PASS",
+      "references": "PASS"
+    },
+    {
+      "file": "02-system-architecture.drawio",
+      "pages": 2,
+      "xml": "PASS",
+      "references": "PASS"
+    },
+    {
+      "file": "03-application-logic.drawio",
+      "pages": 3,
+      "xml": "PASS",
+      "references": "PASS"
+    },
+    {
+      "file": "04-frontend-flow.drawio",
+      "pages": 4,
+      "xml": "PASS",
+      "references": "PASS"
+    },
+    {
+      "file": "05-admin-flow.drawio",
+      "pages": 8,
+      "xml": "PASS",
+      "references": "PASS"
+    },
+    {
+      "file": "06-sequence-diagrams.drawio",
+      "pages": 7,
+      "xml": "PASS",
+      "references": "PASS"
+    },
+    {
+      "file": "07-database-er.drawio",
+      "pages": 18,
+      "xml": "PASS",
+      "references": "PASS"
+    },
+    {
+      "file": "08-module-dependencies.drawio",
+      "pages": 45,
+      "xml": "PASS",
+      "references": "PASS"
+    }
+  ],
+  "pages_rendered": 91,
+  "png": "PASS: dimensions, decode, nonblank",
+  "renderer": "SVG geometry → Chromium, not official draw.io/plugin export",
+  "editor_roundtrip": "NOT VERIFIED: draw.io plugin unavailable"
+}
