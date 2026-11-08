@@ -83,12 +83,9 @@ class ControllerCheckoutCheckout extends Controller {
 	public function success() {
 		$this->document->setTitle('Extension Purchase Success');
 
-		if ($this->member->isLogged() && !empty($this->session->data['pending_extension_order'])) {
-			$this->load->model('account/order');
-			$pending = $this->session->data['pending_extension_order'];
-			unset($this->session->data['pending_extension_order']);
-			$this->model_account_order->addOrder($pending);
-		}
+		// A result page is not payment confirmation. Order creation belongs to
+		// the payment flow; visiting or refreshing this page must not consume
+		// a pending checkout or grant a purchase without gateway verification.
 
 		$member_token = isset($this->session->data['member_token']) ? 'member_token=' . $this->session->data['member_token'] : '';
 

@@ -31,32 +31,10 @@ class ControllerMarketplaceBraintree extends Controller {
 	}
 
 	public function payment() {
-		$this->load->model('marketplace/extension');
-		$this->load->model('account/order');
-
-		$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 0;
-		$quantity = isset($this->request->get['quantity']) && (int)$this->request->get['quantity'] > 0 ? (int)$this->request->get['quantity'] : 1;
-
-		$extension_info = $this->model_marketplace_extension->getExtension($extension_id);
-
-		if ($this->member->isLogged() && $extension_info) {
-			$this->model_account_order->addOrder(array(
-				'member_id'       => $this->member->getId(),
-				'seller_id'       => $extension_info['member_id'],
-				'extension_id'    => $extension_id,
-				'extension'       => $extension_info['name'],
-				'quantity'        => $quantity,
-				'price'           => $extension_info['price'],
-				'total'           => (float)$extension_info['price'] * $quantity,
-				'payment_method'  => 'Credit Card (Braintree)',
-				'transaction_id'  => 'BT-' . strtoupper(token(10)),
-				'order_status_id' => 5
-			));
-
-			$this->response->redirect($this->url->link('marketplace/purchase/success', '', true));
-		} else {
-			$this->response->redirect($this->url->link('marketplace/purchase/failure', '', true));
-		}
+		// Legacy forms do not carry a server-bound prepared checkout. Never
+		// create a paid order from their nonce or a generated transaction ID.
+		$extension_id = (int)($this->request->get['extension_id'] ?? 0);
+		$this->response->redirect($this->url->link('marketplace/extension/info', 'extension_id=' . $extension_id . '&purchase=1', true));
 	}
 
 	public function vaulted() {
