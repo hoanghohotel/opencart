@@ -2,8 +2,8 @@
 <div id="account-edit">
   <div class="page-header">
     <div class="container">
-      <h1>Your Cloud Domains</h1>
-      <p>Check the status of your domain for Cloud Store</p>
+      <h1>{{ heading_your_domains }}</h1>
+      <p>{{ text_check_domain_lead }}</p>
     </div>
   </div>
   <div class="container">
@@ -16,13 +16,13 @@
           </div>
         {% endif %}
           <fieldset>
-            <legend>Domain Settings</legend>
+            <legend>{{ heading_domain_settings }}</legend>
             <div class="form-group">
-              <label for="input-domain">Domain Name</label>
+              <label for="input-domain">{{ entry_domain_name }}</label>
               <input type="text" disabled value="{{ domain.name }}" class="form-control"/>
             </div>
             <div class="form-group">
-              <label for="input-domain">Domain Status</label>
+              <label for="input-domain">{{ entry_domain_status }}</label>
               <div id="domain-status">
                 {% if domain.status == 'initalizing' %}
                 <span class="badge progress-bar-warning text-uppercase" style="padding: 10px; 20px;">{{ domain.status }}</span>
@@ -35,16 +35,16 @@
             </div>
             {% if domain.challenge %}
             <div class="form-group">
-              <label for="input-domain">Challenge</label>
+              <label for="input-domain">{{ entry_challenge }}</label>
               <div class="alert alert-info">
-                To get ready your domain to be used with your Cloud Store you should add this A records to domain DNS Settings:<br>
-                <strong>Type:</strong> A<br>
-                <strong>Records:</strong> {% for server in domain.challenge.servers %} {{ server }}{{ not loop.last ? ',' }} {% endfor %}<br>
+                {{ text_challenge_info }}<br>
+                <strong>{{ text_dns_type }}</strong> A<br>
+                <strong>{{ text_dns_records }}</strong> {% for server in domain.challenge.servers %} {{ server }}{{ not loop.last ? ',' }} {% endfor %}<br>
               </div>
             </div>
             {% endif %}
           </fieldset>
-          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a>
+          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a>
           </div>
       </div>
       <div class="col-sm-3 hidden-xs">{{ menu }}</div>
@@ -52,33 +52,3 @@
   </div>
 </div>
 {{ footer }}
-
-<script>
-{# setInterval(function() {
-    $.ajax({
-        url: '{{ validate }}',
-        dataType: 'json',
-        method: "get",
-        beforeSend: function () {
-            $('#validate-alert').html('<div class="alert alert-info"><i class="fa fa-exclamation-circle"></i> Sending validation request...</div>');
-        },
-        success: function (json) {
-            if(json['success']) {
-                $('#validate-alert').html('<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> ' + json['success'] + '</div>');
-                console.log(json['status'])
-                if(json['status'] == 'active') {
-                   $('#domain-status').html('<span class="badge progress-bar-success text-uppercase" style="padding: 10px; 20px;">' + json['status'] + '</span>');
-                }
-            }
-
-            if(json['error']) {
-                $('#validate-alert').html('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '</div>');
-            }
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-        }
-    });
-}, 1000 * 60 * 0.1); #}
-
-</script>

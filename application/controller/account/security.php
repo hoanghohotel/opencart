@@ -17,13 +17,15 @@ class ControllerAccountSecurity extends Controller {
 			$this->response->redirect($this->url->link('account/pin', '', true));
 		}
 
-		$this->document->setTitle('Account Security Pin Check');
+		$this->load->language('account/security');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$pin_total = isset($member_info['pin_attempts']) ? (int)$member_info['pin_attempts'] : 0;
 
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 			if ($pin_total >= 3) {
-				$this->error['warning'] = 'Warning: You have exceeded the maximum number of 3 PIN attempts! Please click Reset Pin below to receive a new PIN via email.';
+				$this->error['warning'] = $this->language->get('error_attempts');
 			} else {
 				$submitted_pin = isset($this->request->post['pin']) ? trim($this->request->post['pin']) : '';
 
@@ -56,7 +58,7 @@ class ControllerAccountSecurity extends Controller {
 
 					if ($pin_total < 3) {
 						$remaining = 3 - $pin_total;
-						$this->error['warning'] = 'Warning: The PIN you entered is incorrect! You have ' . $remaining . ' attempt(s) remaining before your PIN is locked.';
+						$this->error['warning'] = sprintf($this->language->get('error_pin_remaining'), $remaining);
 					}
 				}
 			}
@@ -101,10 +103,12 @@ class ControllerAccountSecurity extends Controller {
 	}
 
 	public function reset() {
+		$this->load->language('account/security');
+
 		$json = array();
 
 		if (!$this->member->isLogged()) {
-			$json['error'] = 'Warning: Your session has expired. Please log in again.';
+			$json['error'] = $this->language->get('error_session');
 		} else {
 			$this->load->model('account/member');
 
@@ -125,9 +129,9 @@ class ControllerAccountSecurity extends Controller {
 					'code'      => $code
 				));
 
-				$json['success'] = 'Success: A new 4-digit PIN has been sent to your email address (' . $member_info['email'] . ')! Please check your email and enter the new PIN above.';
+				$json['success'] = sprintf($this->language->get('text_reset_success'), $member_info['email']);
 			} else {
-				$json['error'] = 'Warning: Could not find account record!';
+				$json['error'] = $this->language->get('error_not_found');
 			}
 		}
 

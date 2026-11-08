@@ -1,6 +1,8 @@
 <?php
 class ControllerAccountLogout extends Controller {
 	public function index() {
+		$this->load->language('account/logout');
+
 		if ($this->member->isLogged()) {
 			$this->member->logout();
 

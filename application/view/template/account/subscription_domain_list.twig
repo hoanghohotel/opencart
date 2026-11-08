@@ -2,8 +2,8 @@
 <div id="account-order">
   <div class="page-header">
     <div class="container">
-      <h1>Cloud Domains</h1>
-      <p>View the cloud domains you have previously registered</p>
+      <h1>{{ heading_domains }}</h1>
+      <p>{{ text_domains_lead }}</p>
     </div>
   </div>
   <div class="container">
@@ -22,27 +22,27 @@
         <div class="alert alert-info">
          <p>
          <i class="fa fa-info-circle"></i> 
-          As soon as you add a domain, you will receive DNS records that must be added to your domain's DNS. You can find them by clicking the <strong>"Get Settings"</strong> button in the list of your domains.
+          {{ text_domain_info_1 }}
          </p>
          <p>
-          After the DNS records are added, our system will need time to validate the domain and once the process is completed, its status will change to "Active". This means that the domain is completely ready.
+          {{ text_domain_info_2 }}
          </p>
          <p>
-          You can connect a domain to the store by clicking <a href="{{ subscription_list }}">here</a>
+          {{ text_domain_connect_prefix }} <a href="{{ subscription_list }}">{{ text_here }}</a>
          </p>
          <p>
-          <strong>In case your domain status is "initalizing" you should visit this page in few minutes and after it becomes "pending" you would be able to get it's settings.</strong>
+          <strong>{{ text_domain_initializing_info }}</strong>
          </p>
 				</div>
         <fieldset>
-          <legend>Your Cloud Domains</legend>
+          <legend>{{ heading_your_domains }}</legend>
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th>Domain</th>
-                  <th>Status</th>
-                  <th class="text-right">Action</th>
+                  <th>{{ column_domain }}</th>
+                  <th>{{ column_status }}</th>
+                  <th class="text-right">{{ column_action }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -60,23 +60,22 @@
                         {% endif %}</td>
                       <td class="text-right">
                         {% if domain.status != 'initalizing' %}
-                        <a href="{{ domain.href }}" data-toggle="tooltip" title="Get Settings" class="btn btn-primary">Get Settings</a>
+                        <a href="{{ domain.href }}" data-toggle="tooltip" title="{{ button_get_settings }}" class="btn btn-primary">{{ button_get_settings }}</a>
                         {% endif %}
-                        <a href="{{ domain.delete }}" data-toggle="tooltip" title="Delete Domain" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
+                        <a href="{{ domain.delete }}" data-toggle="tooltip" title="{{ button_delete_domain }}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a>
                       </td>
                     </tr>
                   {% endfor %}
                 {% else %}
                   <tr>
-                    <td class="text-center" colspan="3">No results!</td>
+                    <td class="text-center" colspan="3">{{ text_no_results }}</td>
                   </tr>
                 {% endif %}
               </tbody>
             </table>
           </div>
           <nav>{{ pagination }}</nav>
-          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a> 
-          {# <a href="{{ add }}" class="btn btn-primary">Add Domain</a> #}
+          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a> 
           </div>
         </fieldset>
       </div>

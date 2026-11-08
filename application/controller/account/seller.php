@@ -13,14 +13,16 @@ class ControllerAccountSeller extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Apply Seller');
+		$this->load->language('account/seller');
+
+		$this->document->setTitle($this->language->get('heading_add'));
 
 		$this->load->model('account/seller');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate(true)) {
 			$this->model_account_seller->addSeller($this->request->post);
 
-			$this->session->data['success'] = 'Success: Your seller account has been created!';
+			$this->session->data['success'] = $this->language->get('text_success_add');
 
 			$this->response->redirect($this->url->link('account/account', 'member_token=' . $this->session->data['member_token'], true));
 		}
@@ -35,6 +37,8 @@ class ControllerAccountSeller extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
+		$this->load->language('account/seller');
+
 		$this->load->model('account/seller');
 
 		$seller_info = $this->model_account_seller->getSeller($this->member->getId());
@@ -43,12 +47,12 @@ class ControllerAccountSeller extends Controller {
 			$this->response->redirect($this->url->link('account/seller/add', 'member_token=' . $this->session->data['member_token'], true));
 		}
 
-		$this->document->setTitle('My Seller Account');
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate(false)) {
 			$this->model_account_seller->editSeller($this->request->post);
 
-			$this->session->data['success'] = 'Success: Your seller account has been updated!';
+			$this->session->data['success'] = $this->language->get('text_success_edit');
 
 			$this->response->redirect($this->url->link('account/account', 'member_token=' . $this->session->data['member_token'], true));
 		}
@@ -336,35 +340,35 @@ class ControllerAccountSeller extends Controller {
 
 	protected function validate($require_agree = false) {
 		if (!isset($this->request->post['firstname']) || (utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
-			$this->error['firstname'] = 'First Name must be between 1 and 32 characters!';
+			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
 
 		if (!isset($this->request->post['lastname']) || (utf8_strlen(trim($this->request->post['lastname'])) < 1) || (utf8_strlen(trim($this->request->post['lastname'])) > 32)) {
-			$this->error['lastname'] = 'Last Name must be between 1 and 32 characters!';
+			$this->error['lastname'] = $this->language->get('error_lastname');
 		}
 
 		if (!isset($this->request->post['email']) || (utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
-			$this->error['email'] = 'E-Mail Address does not appear to be valid!';
+			$this->error['email'] = $this->language->get('error_email');
 		}
 
 		if (!isset($this->request->post['support_email']) || (utf8_strlen($this->request->post['support_email']) > 96) || !filter_var($this->request->post['support_email'], FILTER_VALIDATE_EMAIL)) {
-			$this->error['support_email'] = 'Support E-Mail Address does not appear to be valid!';
+			$this->error['support_email'] = $this->language->get('error_support_email');
 		}
 
 		if (!isset($this->request->post['telephone']) || (utf8_strlen(trim($this->request->post['telephone'])) < 3) || (utf8_strlen(trim($this->request->post['telephone'])) > 32)) {
-			$this->error['telephone'] = 'Telephone must be between 3 and 32 characters!';
+			$this->error['telephone'] = $this->language->get('error_telephone');
 		}
 
 		if (!isset($this->request->post['payment_email']) || (utf8_strlen($this->request->post['payment_email']) > 96) || !filter_var($this->request->post['payment_email'], FILTER_VALIDATE_EMAIL)) {
-			$this->error['payment_email'] = 'Payment E-Mail Address does not appear to be valid!';
+			$this->error['payment_email'] = $this->language->get('error_payment_email');
 		}
 
 		if (!isset($this->request->post['address_1']) || (utf8_strlen(trim($this->request->post['address_1'])) < 3) || (utf8_strlen(trim($this->request->post['address_1'])) > 128)) {
-			$this->error['address_1'] = 'Address 1 must be between 3 and 128 characters!';
+			$this->error['address_1'] = $this->language->get('error_address_1');
 		}
 
 		if (!isset($this->request->post['city']) || (utf8_strlen(trim($this->request->post['city'])) < 2) || (utf8_strlen(trim($this->request->post['city'])) > 128)) {
-			$this->error['city'] = 'City must be between 2 and 128 characters!';
+			$this->error['city'] = $this->language->get('error_city');
 		}
 
 		$this->load->model('localisation/country');
@@ -373,26 +377,26 @@ class ControllerAccountSeller extends Controller {
 			$country_info = $this->model_localisation_country->getCountry($this->request->post['country_id']);
 
 			if ($country_info && $country_info['postcode_required'] && (utf8_strlen(trim($this->request->post['postcode'])) < 2 || utf8_strlen(trim($this->request->post['postcode'])) > 10)) {
-				$this->error['postcode'] = 'Postcode must be between 2 and 10 characters!';
+				$this->error['postcode'] = $this->language->get('error_postcode');
 			}
 		} else {
-			$this->error['country'] = 'Please select a country!';
+			$this->error['country'] = $this->language->get('error_country');
 		}
 
 		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] === '') {
-			$this->error['zone'] = 'Please select a region / state!';
+			$this->error['zone'] = $this->language->get('error_zone');
 		}
 
 		if (!empty($this->request->post['api_status']) && empty($this->request->post['api_url'])) {
-			$this->error['api_url'] = 'API URL is required when API Status is enabled!';
+			$this->error['api_url'] = $this->language->get('error_api_url');
 		}
 
 		if ($require_agree && empty($this->request->post['agree'])) {
-			$this->error['warning'] = 'Warning: You must agree to the Terms & Conditions!';
+			$this->error['warning'] = $this->language->get('error_agree');
 		}
 
 		if ($this->error && !isset($this->error['warning'])) {
-			$this->error['warning'] = 'Warning: Please check the form carefully for errors!';
+			$this->error['warning'] = $this->language->get('error_warning');
 		}
 
 		return !$this->error;

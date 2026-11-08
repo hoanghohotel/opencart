@@ -17,17 +17,19 @@ class ControllerAccountReset extends Controller {
 			$code = '';
 		}
 
+		$this->load->language('account/reset');
+
 		$this->load->model('account/member');
 
 		$member_info = $this->model_account_member->getMemberByCode($code);
 
 		if ($member_info) {
-			$this->document->setTitle('Reset Password');
+			$this->document->setTitle($this->language->get('heading_title'));
 
 			if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 				$this->model_account_member->editPassword($member_info['email'], $this->request->post['password']);
 
-				$this->session->data['success'] = 'Success: Your password has been successfully updated.';
+				$this->session->data['success'] = $this->language->get('text_success');
 
 				$this->response->redirect($this->url->link('account/login', '', true));
 			}
@@ -63,7 +65,7 @@ class ControllerAccountReset extends Controller {
 
 			$this->response->setOutput($this->load->view('account/reset', $data));
 		} else {
-			$this->session->data['error'] = 'Password reset code is invalid or was used previously!';
+			$this->session->data['error'] = $this->language->get('error_code');
 
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
@@ -71,11 +73,11 @@ class ControllerAccountReset extends Controller {
 
 	protected function validate() {
 		if (!isset($this->request->post['password']) || (utf8_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) < 4) || (utf8_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) > 40)) {
-			$this->error['password'] = 'Password must be between 4 and 40 characters!';
+			$this->error['password'] = $this->language->get('error_password');
 		}
 
 		if (!isset($this->request->post['confirm']) || ($this->request->post['confirm'] != $this->request->post['password'])) {
-			$this->error['confirm'] = 'Password and password confirmation do not match!';
+			$this->error['confirm'] = $this->language->get('error_confirm');
 		}
 
 		return !$this->error;

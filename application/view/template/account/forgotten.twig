@@ -3,31 +3,31 @@
   <div class="page-header">
     <div class="banner">
       <div class="container">
-        <h1>Forgotten Password</h1>
+        <h1>{{ text_banner_title }}</h1>
       </div>
     </div>
   </div>
   <div class="container">
     <div class="text-center">
-      <h2>Request a new password</h2>
+      <h2>{{ text_request }}</h2>
     </div>
     <form action="{{ action }}" method="post" enctype="multipart/form-data">
       <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
           <fieldset>
             <div class="form-group required">
-              <label class="control-label" for="input-email">E-Mail Address</label> <input type="email" name="email" value="{{ email }}" placeholder="E-Mail Address" id="input-email" class="form-control"/>
+              <label class="control-label" for="input-email">{{ entry_email }}</label> <input type="email" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control"/>
               {% if error_email %}
                 <div class="text-danger">{{ error_email }}</div>
               {% endif %}
               <p>
-                <small>Enter the e-mail address associated with your account. Click submit to have your password e-mailed to you</small>
+                <small>{{ text_email_help }}</small>
               </p>
             </div>
           </fieldset>
           <div>
-            <div class="text-center"><a href="{{ login }}" class="btn btn-link">Login?</a>
-              <button type="submit" class="btn btn-primary text-uppercase">Submit</button>
+            <div class="text-center"><a href="{{ login }}" class="btn btn-link">{{ text_login_link }}</a>
+              <button type="submit" class="btn btn-primary text-uppercase">{{ button_submit }}</button>
             </div>
           </div>
         </div>

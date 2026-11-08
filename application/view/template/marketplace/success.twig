@@ -2,19 +2,19 @@
 <div id="marketplace-purchase-success">
   <div class="page-header">
     <div class="container">
-      <h1>Extension Purchase Success</h1>
-      <p>Your order is successfully completed!</p>
+      <h1>{{ heading_success }}</h1>
+      <p>{{ text_success_subtitle }}</p>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-sm-10 col-sm-offset-2">
-        <h2>Your order has been successfully processed!</h2>
-        <p>You can view your order history by going to the <a href="{{ account }}">account</a> page and by clicking on <a href="{{ history }}">order history</a>.</p>
-        <p>Please direct any questions you have to <a href="{{ contact }}">OpenCart support</a>.</p>
-        <p>Thanks for shopping with us online!</p>
-        <p>Best Regards,<br />
-          <strong>OpenCart Team<strong></p>
+        <h2>{{ text_success_heading }}</h2>
+        <p>{{ text_success_history_1 }} <a href="{{ account }}">{{ text_success_account_link }}</a> {{ text_success_history_2 }} <a href="{{ history }}">{{ text_success_history_link }}</a>.</p>
+        <p>{{ text_success_support_1 }} <a href="{{ contact }}">{{ text_success_support_link }}</a>.</p>
+        <p>{{ text_success_thanks }}</p>
+        <p>{{ text_best_regards }}<br />
+          <strong>{{ text_team }}<strong></p>
       </div>
     </div>
   </div>

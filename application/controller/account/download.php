@@ -11,7 +11,9 @@ class ControllerAccountDownload extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('My Downloads');
+		$this->load->language('account/download');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
@@ -105,6 +107,8 @@ class ControllerAccountDownload extends Controller {
 		if (empty($this->session->data['member_token'])) {
 			$this->session->data['member_token'] = token(32);
 		}
+
+		$this->load->language('account/download');
 
 		$order_id = isset($this->request->get['order_id']) ? (int)$this->request->get['order_id'] : 0;
 		$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 0;
@@ -255,7 +259,9 @@ class ControllerAccountDownload extends Controller {
 						readfile($file, 'rb');
 						exit();
 					} else {
-						$content = "OpenCart Extension Package: " . $download_info['name'] . "\r\nFilename: " . $mask . "\r\n";
+						$this->load->language('account/download');
+
+						$content = sprintf($this->language->get('text_package_content'), $download_info['name'], $mask);
 						header('Content-Type: application/octet-stream');
 						header('Content-Disposition: attachment; filename="' . $mask . '"');
 						header('Content-Length: ' . strlen($content));

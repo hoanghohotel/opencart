@@ -2,23 +2,23 @@
 <div id="account-transaction">
 	<div class="page-header">
 		<div class="container">
-			<h1>Your Transactions</h1>
-			<p>View your commission rate for sales</p>
+			<h1>{{ heading_title }}</h1>
+			<p>{{ text_subtitle }}</p>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
-				<h2>Transactions</h2>
-				<p>Your seller group: <strong>{{ seller_group }}</strong>.</p>
-				<p>Your current balance is <strong>{{ balance }}</strong>.</p>
+				<h2>{{ text_transactions }}</h2>
+				<p>{{ text_seller_group }} <strong>{{ seller_group }}</strong>.</p>
+				<p>{{ text_balance }} <strong>{{ balance }}</strong>.</p>
 				<div class="table-responsive">
 					<table class="table table-bordered table-hover">
 						<thead>
 							<tr>
-								<th class="text-left">Date Added</th>
-								<th class="text-left">Description</th>
-								<th class="text-right">Amount</th>
+								<th class="text-left">{{ column_date_added }}</th>
+								<th class="text-left">{{ column_description }}</th>
+								<th class="text-right">{{ column_amount }}</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -32,7 +32,7 @@
 								{% endfor %}
 							{% else %}
 								<tr>
-									<td class="text-center" colspan="3">No results!</td>
+									<td class="text-center" colspan="3">{{ text_no_results }}</td>
 								</tr>
 							{% endif %}
 						</tbody>
@@ -44,4 +44,4 @@
 		</div>
 	</div>
 </div>
-{{ footer }} 
+{{ footer }}

@@ -1,7 +1,9 @@
 <?php
 class ControllerCmsCart2cart extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart - Cart2Cart Migration');
+		$this->load->language('cms/cart2cart');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');

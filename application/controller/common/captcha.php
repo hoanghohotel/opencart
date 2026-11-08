@@ -1,6 +1,8 @@
 <?php
 class ControllerCommonCaptcha extends Controller {
 	public function index() {
+		$this->load->language('common/captcha');
+
 		$json = array();
 
 		$this->session->data['captcha'] = false;
@@ -14,11 +16,20 @@ class ControllerCommonCaptcha extends Controller {
 			'bell' => '<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#25a9e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>'
 		);
 
+		$icon_labels = array(
+			'lock'  => $this->language->get('text_lock'),
+			'star'  => $this->language->get('text_star'),
+			'heart' => $this->language->get('text_heart'),
+			'home'  => $this->language->get('text_home_icon'),
+			'bell'  => $this->language->get('text_bell')
+		);
+
 		$keys = array_keys($icons);
 		$target_key = $keys[array_rand($keys)];
 		shuffle($keys);
 
-		$json['message'] = 'Please click on the <strong>' . ucfirst($target_key) . '</strong> icon to verify you are human:';
+		$target_label = isset($icon_labels[$target_key]) ? $icon_labels[$target_key] : ucfirst($target_key);
+		$json['message'] = sprintf($this->language->get('text_instruction'), $target_label);
 		$json['image'] = array();
 
 		foreach ($keys as $key) {
@@ -39,11 +50,13 @@ class ControllerCommonCaptcha extends Controller {
 	}
 
 	public function check() {
+		$this->load->language('common/captcha');
+
 		$json = array();
 
 		if (isset($this->request->get['code']) && isset($this->session->data['captcha_code']) && $this->request->get['code'] === $this->session->data['captcha_code']) {
 			$this->session->data['captcha'] = true;
-			$json['success'] = 'Verification complete!';
+			$json['success'] = $this->language->get('text_success');
 		} else {
 			if (!isset($this->session->data['captcha_tries'])) {
 				$this->session->data['captcha_tries'] = 3;
@@ -51,7 +64,7 @@ class ControllerCommonCaptcha extends Controller {
 
 			$this->session->data['captcha_tries']--;
 
-			$json['error'] = 'Verification failed! Please try again.';
+			$json['error'] = $this->language->get('error_captcha');
 			$json['total'] = max(0, (int)$this->session->data['captcha_tries']);
 		}
 

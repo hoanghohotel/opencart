@@ -2,8 +2,8 @@
 <div id="cloud-subscription">
   <div class="page-header">
     <div class="container">
-      <h1>Change Plan</h1>
-      <p>Choose a new plan for your Cloud Store</p>
+      <h1>{{ text_heading }}</h1>
+      <p>{{ text_subtitle }}</p>
     </div>
   </div>
   <div class="container">
@@ -12,11 +12,11 @@
         <div class="panel panel-default">
           <div class="panel-body">
             <div class="row">
-              <div class="col-sm-12 text-center"><strong>Cloud Store ID:</strong> #{{ store.store_id }} / <strong>Store Name: </strong> {{ store.store_name }}</div>
+              <div class="col-sm-12 text-center"><strong>{{ text_cloud_store_id }}</strong> #{{ store.store_id }} / <strong>{{ text_store_name_label }} </strong> {{ store.store_name }}</div>
             </div>
             {% if "now"|date('Y-m-d') < store.date_trial_expire|date('Y-m-d') %}
               <div class="row">
-                <div class="col-sm-12 text-center"><strong>Trial Expires:</strong> {{ store.date_trial_expire|date("d/m/Y") }}</div>
+                <div class="col-sm-12 text-center"><strong>{{ text_trial_expires }}</strong> {{ store.date_trial_expire|date("d/m/Y") }}</div>
               </div>
             {% endif %}
           </div>
@@ -28,19 +28,11 @@
                 <div class="feature-plan">
                   <i class="opencart-icon-cart icon-bronze"></i>
                   <div class="panel-body text-center">
-                    <h3>Bronze</h3>
+                    <h3>{{ text_bronze }}</h3>
                     <hr />
-                    <h5>5GB Storage</h5>
-                    <h5>Priority support</h5>
-                    <p>Compare all features</p><!--
-                    <hr />
-                    <h4>&pound;100.00</h4>
-                    <hr />
-                    <div class="form-group">
-                      <div class="radio"><label><input type="radio"> 1 Month</label></div>
-                      <div class="radio"><label><input type="radio"> 12 Months</label></div>
-                    </div>
-                    -->
+                    <h5>{{ text_bronze_storage }}</h5>
+                    <h5>{{ text_priority_support }}</h5>
+                    <p>{{ text_compare_features }}</p>
                   </div>
                 </div>
               </div>
@@ -51,19 +43,11 @@
                 <div class="feature-plan">
                   <i class="opencart-icon-cart icon-silver"></i>
                   <div class="panel-body text-center">
-                    <h3>Silver</h3>
+                    <h3>{{ text_silver }}</h3>
                     <hr />
-                    <h5>25GB Storage</h5>
-                    <h5>Priority support</h5>
-                    <p>Compare all features</p><!--
-                    <hr />
-                    <h4>&pound;100.00</h4>
-                    <hr />
-                    <div class="form-group">
-                      <div class="radio"><label><input type="radio"> 1 Month</label></div>
-                      <div class="radio"><label><input type="radio"> 12 Months</label></div>
-                    </div>
-                    -->
+                    <h5>{{ text_silver_storage }}</h5>
+                    <h5>{{ text_priority_support }}</h5>
+                    <p>{{ text_compare_features }}</p>
                   </div>
                 </div>
               </div>
@@ -74,41 +58,17 @@
                 <div class="feature-plan">
                   <i class="opencart-icon-cart icon-gold"></i>
                   <div class="panel-body text-center">
-                    <h3>Gold</h3>
+                    <h3>{{ text_gold }}</h3>
                     <hr />
-                    <h5>75GB Storage</h5>
-                    <h5>Priority support</h5>
-                    <p>Compare all features</p><!--
-                    <hr />
-                    <h4>&pound;100.00</h4>
-                    <hr />
-                    <div class="form-group">
-                      <div class="radio"><label><input type="radio"> 1 Month</label></div>
-                      <div class="radio"><label><input type="radio"> 12 Months</label></div>
-                    </div>
-                    -->
+                    <h5>{{ text_gold_storage }}</h5>
+                    <h5>{{ text_priority_support }}</h5>
+                    <p>{{ text_compare_features }}</p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
 
-<!--
-        <fieldset>
-          <legend>Payment Method</legend>
-          <div class="form-group">
-            <div class="radio"><label><input type="radio" /> Paypal (example@gmail.com)</label></div>
-            <div class="radio"><label><input type="radio" /> Braintree (example2@gmail.com)</label></div>
-          </div>
-
-          <a href="#" class="btn btn-primary">New payment method</a>
-        </fieldset>
-
-        <div class="text-right">
-          <a href="{{ cancel }}" class="btn btn-link">Cancel</a>
-          <button class="btn btn-primary">Purchase</button>
-        </div>
--->
       </div>
       <div class="col-md-3 hidden-xs">{{ menu }}</div>
     </div>

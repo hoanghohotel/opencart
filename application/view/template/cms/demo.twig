@@ -2,36 +2,36 @@
 <div id="cms-demo">
   <div class="page-header">
     <div class="container">
-      <h1>OpenCart Demonstration</h1>
-      <p>You can try OpenCart without having to install by clicking on one of the demo links below for the frontend and adminstration demo.</p>
+      <h1>{{ text_demo_heading }}</h1>
+      <p>{{ text_demo_description }}</p>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-sm-6 border-right">
         <div class="demonstration-box">
-          <a href="https://demo.opencart.com/" target="_blank" class="box-overlay">
-            <span>View Store Front</span>
+          <a href="{{ demo_store_url }}" target="_blank" class="box-overlay">
+            <span>{{ text_view_store_front }}</span>
           </a>
-          <h2>Store Front</h2>
+          <h2>{{ text_store_front }}</h2>
           <img src="application/view/image/demonstration/store-front.png" class="img-responsive" />
         </div>
       </div>
       <div class="col-sm-6">
         <div class="demonstration-box">
-          <a href="https://demo.opencart.com/TlbeVW/" target="_blank" class="box-overlay">
-            <span class="hidden-xs">View Administration
-              <br/>Login &amp; Password: <i>demo</i>
+          <a href="{{ demo_admin_url }}" target="_blank" class="box-overlay">
+            <span class="hidden-xs">{{ text_view_administration }}
+              <br/>{{ text_login_password }} <i>{{ text_demo_credentials }}</i>
             </span>
-            <span class="visible-xs-block">View Administration</span>
+            <span class="visible-xs-block">{{ text_view_administration }}</span>
           </a>
-          <h2>Administration</h2>
+          <h2>{{ text_administration }}</h2>
           <img src="application/view/image/demonstration/store-admin.png" class="img-responsive" />
-          <p class="visible-xs-block">Login &amp; Password: demo</p>
+          <p class="visible-xs-block">{{ text_login_password }} {{ text_demo_credentials }}</p>
         </div>
       </div>
       <div class="col-sm-12">
-        <div class="text-center demonstration-box"><a href="https://docs.opencart.com/" target="_blank" class="btn btn-lg btn-primary">Official Documentation</a></div>
+        <div class="text-center demonstration-box"><a href="{{ documentation }}" target="_blank" class="btn btn-lg btn-primary">{{ text_official_docs }}</a></div>
       </div>
     </div>
   </div>

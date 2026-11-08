@@ -2,17 +2,17 @@
 <div id="account-extension">
     <div class="page-header">
         <div class="container">
-            <h1>Extension</h1>
-            <p>Manage the extensions you have uploads</p>
+            <h1>{{ heading_header }}</h1>
+            <p>{{ text_lead }}</p>
         </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <h2>Extensions Comments</h2>
+                <h2>{{ heading_comments }}</h2>
                 <div class="row">
                     <div class="col-md-offset-2 col-md-8">
-                        <button type="button" data-toggle="collapse" data-target="#collapse-sale" class="btn btn-default btn-lg btn-block"><i class="fa fa-filter"></i> Filter</button>
+                        <button type="button" data-toggle="collapse" data-target="#collapse-sale" class="btn btn-default btn-lg btn-block"><i class="fa fa-filter"></i> {{ button_filter }}</button>
                     </div>
                 </div>
                 <br/>
@@ -21,19 +21,19 @@
                         <div class="row">
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                    <label class="control-label" for="input-extension">Extension</label> <input type="text" name="filter_extension" value="{{ filter_extension }}" placeholder="Extension" id="input-extension" class="form-control" />
+                                    <label class="control-label" for="input-extension">{{ entry_extension }}</label> <input type="text" name="filter_extension" value="{{ filter_extension }}" placeholder="{{ entry_extension }}" id="input-extension" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                    <label class="control-label" for="input-member">Member</label> <input type="text" name="filter_member" value="{{ filter_member }}" placeholder="Member" id="input-member" class="form-control" />
+                                    <label class="control-label" for="input-member">{{ entry_member }}</label> <input type="text" name="filter_member" value="{{ filter_member }}" placeholder="{{ entry_member }}" id="input-member" class="form-control" />
                                 </div>
                             </div>
                             <div class="col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                    <label class="control-label" for="input-date-added">Date Added</label>
+                                    <label class="control-label" for="input-date-added">{{ entry_date_added }}</label>
                                     <div class="input-group date">
-                                        <input type="text" name="filter_date_added" value="{{ filter_date_start }}" placeholder="Date Added" data-date-format="YYYY-MM-DD" id="input-date-added" class="form-control" />
+                                        <input type="text" name="filter_date_added" value="{{ filter_date_start }}" placeholder="{{ entry_date_added }}" data-date-format="YYYY-MM-DD" id="input-date-added" class="form-control" />
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                                         </div>
@@ -43,7 +43,7 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12 text-right">
-                                <button type="button" id="button-filter" class="btn btn-default"><i class="fa fa-search"></i> Filter</button>
+                                <button type="button" id="button-filter" class="btn btn-default"><i class="fa fa-search"></i> {{ button_filter }}</button>
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
 
         $(element).tooltip("hide");
 
-        if (confirm('Are you sure?')) {
+        if (confirm('{{ text_confirm }}')) {
             $.ajax({
                 url: $(element).attr('href'),
                 dataType: 'json',

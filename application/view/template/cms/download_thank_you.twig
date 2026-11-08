@@ -6,39 +6,39 @@
         <div class="thank-you-message">
           <div class="message">
             <img src="application/view/image/icon/download-cart.png" class="img-responsive"/>
-            <h2>Thank you</h2>
-            <h3>for downloading OpenCart!</h3>
-            <p>Your download will begin shortly. Or <a href="{{ download }}">click to download</a> manually.</p>
+            <h2>{{ text_thank_you }}</h2>
+            <h3>{{ text_for_downloading }}</h3>
+            <p>{{ text_download_begin }} <a href="{{ download }}">{{ text_click_to_download }}</a> {{ text_manually }}</p>
           </div>
 
           <hr/>
           <div class="follow">
             <p class="text-center">
-              If you want to receive the latest news from us,<br/> please follow our social media and subscribe our e-newsletter!
+              {{ text_follow_intro_1 }}<br/> {{ text_follow_intro_2 }}
             </p>
             <div class="row">
 
               <div class="col-sm-4">
-                <h3 class="text-center hidden">Facebook</h3>
-                <p class="h2 text-center"><a href="https://www.facebook.com/opencart/" target="_blank" class="btn btn-facebook btn-block btn-lg">
+                <h3 class="text-center hidden">{{ text_facebook }}</h3>
+                <p class="h2 text-center"><a href="https://www.facebook.com/" target="_blank" class="btn btn-facebook btn-block btn-lg">
                   <i class="fa fa-facebook-square fa-3x"></i><br/>
-                  Like our page now!</a>
+                  {{ text_like_page }}</a>
                 </p>
               </div>
 
               <div class="col-sm-4">
-                <h3 class="text-center hidden">Twitter</h3>
-                <p class="h2 text-center"><a href="https://twitter.com/OpenCart"  target="_blank" class="btn btn-twitter btn-block btn-lg" data-show-count="false" data-size="large"><i class="fa fa-twitter-square fa-3x"></i><br/>
-                Follow @OpenCart</a>
+                <h3 class="text-center hidden">{{ text_twitter }}</h3>
+                <p class="h2 text-center"><a href="https://twitter.com/"  target="_blank" class="btn btn-twitter btn-block btn-lg" data-show-count="false" data-size="large"><i class="fa fa-twitter-square fa-3x"></i><br/>
+                {{ text_follow_twitter }}</a>
                 </p>
                 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
               </div>
 
               <div class="col-sm-4">
-                <h3 class="text-center hidden">eNews</h3>
+                <h3 class="text-center hidden">{{ text_enews }}</h3>
                 <p class="h2 text-center"><a role="button" id="follow-subscribe-newsletter" class="btn btn-primary btn-block btn-lg subscribe">
                   <i class="fa fa-paper-plane fa-3x"></i><br/>
-                  OPENCART NEWSLETTER</a>
+                  {{ text_newsletter_btn }}</a>
                 </p>
               </div>
             </div>
@@ -49,31 +49,31 @@
         <div class="row">
           <div class="col-md-12">
             <div id="steps">
-              <h2>How to install OpenCart</h2>
+              <h2>{{ text_how_to_install }}</h2>
               <ul>
                 <li>
                   <h2>1</h2>
-                  <h4>Download OpenCart</h4>
-                  <p>The latest version of OpenCart can be downloaded from the OpenCart website (recommended)</p>
+                  <h4>{{ text_step_1_title }}</h4>
+                  <p>{{ text_step_1_desc }}</p>
                   <div class="arrow arrow-color"></div>
                   <div class="arrow arrow-border"></div>
                 </li>
                 <li>
                   <h2>2</h2>
-                  <h4>Upload files to your server</h4>
-                  <p>Upload to your web server established and the OpenCart archive extracted. We will now use File Transfer Protocol (FTP) client to upload these uncompressed files to a web server.</p>
+                  <h4>{{ text_step_2_title }}</h4>
+                  <p>{{ text_step_2_desc }}</p>
                   <div class="arrow arrow-color"></div>
                   <div class="arrow arrow-border"></div>
                 </li>
                 <li>
                   <h2>3</h2>
-                  <h4>Run automatic installer</h4>
-                  <p>Goto the OpenCart location and it will install automatically.</p>
+                  <h4>{{ text_step_3_title }}</h4>
+                  <p>{{ text_step_3_desc }}</p>
                 </li>
               </ul>
             </div>
             <div id="extension-list"> {% if extensions %}
-              <h2>Add extensions</h2>
+              <h2>{{ text_add_extensions }}</h2>
               <div class="row"> {% for extension in extensions %}
                 <div class="col-md-4">
                   <section>
@@ -92,7 +92,7 @@
                             {% endfor %}</div>
                         </div>
                         <div class="col-xs-6">
-                          <div class="text-right"><span>{{ extension.rating_total }} reviews</span></div>
+                          <div class="text-right"><span>{{ extension.rating_total }} {{ text_reviews }}</span></div>
                         </div>
                       </div>
                     </div>
@@ -102,7 +102,7 @@
               {% endif %}
 
               {% if themes %}
-              <h2>Choose a theme</h2>
+              <h2>{{ text_choose_theme }}</h2>
               <div class="row"> {% for theme in themes %}
                 <div class="col-md-4">
                   <section>
@@ -121,7 +121,7 @@
                             {% endfor %} </div>
                         </div>
                         <div class="col-xs-6">
-                          <div class="text-right"><span>{{ theme.rating_total }} reviews<span></div>
+                          <div class="text-right"><span>{{ theme.rating_total }} {{ text_reviews }}<span></div>
                         </div>
                       </div>
                     </div>
@@ -134,26 +134,26 @@
       </div>
       <div class="col-md-3">
         <div class="well">
-          <h3>Other download options</h3>
+          <h3>{{ text_other_options }}</h3>
           <div><img src="application/view/image/partner/github.png" alt="GitHub" title="GitHub" class="img-responsive" />
-            <p>Clone the latest OpenCart version from GitHub. <a href="https://github.com/opencart/opencart">Visit repository</a>.</p>
+            <p>{{ text_github_desc }} <a href="https://github.com/opencart/opencart">{{ text_visit_repo }}</a>.</p>
           </div>
           <div><img src="application/view/image/partner/softaculous.gif" alt="Softaculous" title="Softaculous" class="img-responsive" />
-            <p>Install OpenCart on your server via Softaculous. <a href="https://www.softaculous.com/softaculous/apps/ecommerce/OpenCart">Learn more</a>.</p>
+            <p>{{ text_softaculous_desc }} <a href="https://www.softaculous.com/softaculous/apps/ecommerce/OpenCart">{{ text_learn_more }}</a>.</p>
           </div>
           <div><img src="application/view/image/partner/amazon-webservices.png" class="img-responsive" />
-            <p>Download OpenCart in Amazon Web Services. <a href="https://aws.amazon.com/marketplace/search/results?x=0&y=0&searchTerms=opencart&page=1&ref_=nav_search_box">Learn more</a>.</p>
+            <p>{{ text_aws_desc }} <a href="https://aws.amazon.com/marketplace/search/results?x=0&y=0&searchTerms=opencart&page=1&ref_=nav_search_box">{{ text_learn_more }}</a>.</p>
           </div>
         </div>
         <div id="side-banner">{{ banner }}</div>
         <div class="well">
-          <h3>Requirements</h3>
-          <p>These are minimum requirements needed so that OpenCart can be installed and work properly.</p>
+          <h3>{{ text_requirements }}</h3>
+          <p>{{ text_requirements_desc }}</p>
           <ul class="list-check list-color-blue">
-            <li>Web Server (Apache suggested)</li>
-            <li>PHP (at least 5.4)</li>
-            <li>Curl enabled</li>
-            <li>Database (MySQLi suggested)</li>
+            <li>{{ text_req_webserver }}</li>
+            <li>{{ text_req_php }}</li>
+            <li>{{ text_req_curl }}</li>
+            <li>{{ text_req_db }}</li>
           </ul>
         </div>
       </div>
@@ -161,9 +161,9 @@
   </div>
   <div class="container-fluid">
     <div class="container">
-      <h2>Ready to jump start your OpenCart project?</h2>
-      <h3>View our expert OpenCart Partners list</h3>
-      <p> <a href="{{ partner }}" class="btn btn-primary btn-lg hidden-xs">View Partners</a> <a href="{{ partner }}" class="btn btn-primary btn-lg btn-block visible-xs-block">View Partners</a> </p>
+      <h2>{{ text_partner_cta_title }}</h2>
+      <h3>{{ text_partner_cta_subtitle }}</h3>
+      <p> <a href="{{ partner }}" class="btn btn-primary btn-lg hidden-xs">{{ button_view_partners }}</a> <a href="{{ partner }}" class="btn btn-primary btn-lg btn-block visible-xs-block">{{ button_view_partners }}</a> </p>
     </div>
   </div>
 </div>

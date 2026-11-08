@@ -118,8 +118,60 @@ final class Loader {
 				$data['member_token'] = $GLOBALS['__oc_active_member_token'];
 			}
 
+			// Auto-load matching language files for the view route and its base controller route
+			if ($this->registry->has('language') && defined('DIR_LANGUAGE')) {
+				$lang_obj = $this->registry->get('language');
+				$base_route = preg_replace('/_(list|info|form|history|comment|reply|success|confirm|reset|invoice_info|landing|agree|partner)$/', '', $route);
+				if ($base_route !== $route && is_file(DIR_LANGUAGE . 'en-gb/' . $base_route . '.php')) {
+					$lang_obj->load($base_route);
+				}
+				if (is_file(DIR_LANGUAGE . 'en-gb/' . $route . '.php')) {
+					$lang_obj->load($route);
+				}
+			}
+
+			// Auto-inject dynamic store configuration variables so templates never rely on hardcoded values
+			$cfg = $this->registry->has('config') ? $this->registry->get('config') : null;
+			$token_map = Language::getTokenMap($cfg);
+			$config_vars = array(
+				'store_name'        => $token_map['{store_name}'],
+				'store_owner'       => $token_map['{store_owner}'],
+				'store_domain'      => $token_map['{store_domain}'],
+				'store_url'         => $token_map['{store_url}'],
+				'store_email'       => $token_map['{store_email}'],
+				'store_telephone'   => $token_map['{store_telephone}'],
+				'store_address'     => $token_map['{store_address}'],
+				'store_address_raw' => $token_map['{store_address_raw}'],
+				'store_logo_url'    => $token_map['{store_logo_url}'],
+				'contact_support'   => $token_map['{contact_support}'],
+				'contact_partner'   => $token_map['{contact_partner}'],
+				'contact_marketing' => $token_map['{contact_marketing}'],
+				'contact_telephone' => $token_map['{contact_telephone}'],
+				'forum'             => $token_map['{forum}'],
+				'documentation'     => $token_map['{documentation}'],
+				'book'              => $token_map['{book}'],
+				'developer'         => $token_map['{developer}'],
+				'dedicated_support' => $token_map['{dedicated_support}'],
+				'demo_store_url'    => $token_map['{demo_store_url}'],
+				'demo_admin_url'    => $token_map['{demo_admin_url}']
+			);
+			foreach ($config_vars as $ck => $cv) {
+				if (!isset($data[$ck]) || $data[$ck] === '') {
+					$data[$ck] = $cv;
+				}
+			}
+
 			if (strpos($route, 'mail/') === 0 && empty($data['store'])) {
-				$data['store'] = html_entity_decode($this->registry->get('config')->get('config_name') ?: 'OpenCart', ENT_QUOTES, 'UTF-8');
+				$data['store'] = html_entity_decode($token_map['{store_name}'], ENT_QUOTES, 'UTF-8');
+			}
+
+			// Merge all loaded language strings into view data
+			if ($this->registry->has('language')) {
+				foreach ($this->registry->get('language')->all() as $lk => $lv) {
+					if (!isset($data[$lk])) {
+						$data[$lk] = is_string($lv) && strpos($lv, '{') !== false ? strtr($lv, $token_map) : $lv;
+					}
+				}
 			}
 		}
 		

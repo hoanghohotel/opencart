@@ -11,7 +11,9 @@ class ControllerAccountRegister extends Controller {
 			$this->response->redirect($this->url->link('account/account', 'member_token=' . $this->session->data['member_token'], true));
 		}
 
-		$this->document->setTitle('Register for OpenCart account');
+		$this->load->language('account/register');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/member');
 
@@ -130,31 +132,31 @@ class ControllerAccountRegister extends Controller {
 
 	protected function validate() {
 		if (!isset($this->request->post['username']) || (utf8_strlen(trim($this->request->post['username'])) < 3) || (utf8_strlen(trim($this->request->post['username'])) > 64)) {
-			$this->error['username'] = 'Username must be between 3 and 64 characters!';
+			$this->error['username'] = $this->language->get('error_username');
 		} elseif ($this->model_account_member->getTotalMembersByUsername($this->request->post['username'])) {
-			$this->error['username'] = 'Warning: Username is already registered!';
+			$this->error['username'] = $this->language->get('error_username_exists');
 		}
 
 		if (!isset($this->request->post['firstname']) || (utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
-			$this->error['firstname'] = 'First Name must be between 1 and 32 characters!';
+			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
 
 		if (!isset($this->request->post['lastname']) || (utf8_strlen(trim($this->request->post['lastname'])) < 1) || (utf8_strlen(trim($this->request->post['lastname'])) > 32)) {
-			$this->error['lastname'] = 'Last Name must be between 1 and 32 characters!';
+			$this->error['lastname'] = $this->language->get('error_lastname');
 		}
 
 		if (!isset($this->request->post['email']) || (utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
-			$this->error['email'] = 'E-Mail Address does not appear to be valid!';
+			$this->error['email'] = $this->language->get('error_email');
 		} elseif ($this->model_account_member->getTotalMembersByEmail($this->request->post['email'])) {
-			$this->error['email'] = 'Warning: E-Mail Address is already registered!';
+			$this->error['email'] = $this->language->get('error_email_exists');
 		}
 
 		if (empty($this->request->post['country_id'])) {
-			$this->error['country'] = 'Please select a country!';
+			$this->error['country'] = $this->language->get('error_country');
 		}
 
 		if (!isset($this->request->post['password']) || (utf8_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) < 4) || (utf8_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) > 40)) {
-			$this->error['password'] = 'Password must be between 4 and 40 characters!';
+			$this->error['password'] = $this->language->get('error_password');
 		}
 
 		return !$this->error;

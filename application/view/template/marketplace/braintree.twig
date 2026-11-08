@@ -1,18 +1,18 @@
 <div id="braintree-alert" class="alert alert-danger" style="display:none;"></div>
-<div id="braintree-loading" class="text-right"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span></div>
+<div id="braintree-loading" class="text-right"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">{{ text_loading }}</span></div>
 <div id="braintree-choose" style="display: none;" class="form-horizontal">
   {% if vaulted_payment_methods %}
   <div id="choose-card" class="form-group">
     <div class="col-sm-2">
       <label class="form-check-inline">
         <input class="form-check-input" type="radio" name="existing_card" value="1" checked="checked" />
-         &nbsp;&nbsp;Existing Card
+         &nbsp;&nbsp;{{ text_existing_card }}
       </label>
     </div>
     <div class="col-sm-2">
       <label class="form-check-inline">
         <input class="form-check-input" type="radio" name="existing_card" value="0"/>
-         &nbsp;&nbsp;New Card
+         &nbsp;&nbsp;{{ text_new_card }}
       </label>
     </div>
   </div>
@@ -21,7 +21,7 @@
 <form id="braintree-new" style="display:none;" method="post" action="{{ payment_url }}" class="form-horizontal" autocomplete="off">
   <fieldset>
     <div class="form-group">
-      <label class="col-sm-2 control-label" for="input-card-number">Credit Card</label>
+      <label class="col-sm-2 control-label" for="input-card-number">{{ entry_card_number }}</label>
       <div class="col-sm-5">
         <div id="input-card-number" class="form-control"></div>
       </div>
@@ -37,7 +37,7 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-2 control-label">Expires</label>
+      <label class="col-sm-2 control-label">{{ entry_expires }}</label>
       <div class="col-sm-3">
         <div id="input-card-expiration-month" class="form-control"></div>
       </div>
@@ -46,18 +46,18 @@
       </div>
     </div>
     <div class="form-group">
-      <label class="col-sm-2 control-label">Security Code</label>
+      <label class="col-sm-2 control-label">{{ entry_cvv }}</label>
       <div class="col-sm-2">
         <div id="input-card-cvv" class="form-control"></div>
       </div>
-      <label class="col-sm-2 control-label">Zip / Postcode</label>
+      <label class="col-sm-2 control-label">{{ entry_postcode }}</label>
       <div class="col-sm-2">
         <div id="input-card-postcode" class="form-control"></div>
       </div>
     </div>
 	{% if vault %}
     <div class="form-group row">
-      <label class="col-sm-2" style="text-align: right;">Remember My Card</label>
+      <label class="col-sm-2" style="text-align: right;">{{ entry_remember_card }}</label>
       <div class="col-sm-10">
         <div class="form-check">
           <label class="form-check-label">
@@ -70,7 +70,7 @@
   </fieldset>
   <div class="form-group">
     <div class="col-sm-12">
-      <button type="submit" id="button-submit-new" class="btn btn-primary button-submit pull-right">Complete Payment</button>
+      <button type="submit" id="button-submit-new" class="btn btn-primary button-submit pull-right">{{ button_submit }}</button>
     </div>
   </div>
 </form>
@@ -89,13 +89,13 @@
           </select>
       </div>
       <div class="col-sm-2">
-        <a id="button-delete" class="btn btn-primary">Delete</a>
+        <a id="button-delete" class="btn btn-primary">{{ button_delete }}</a>
       </div>
     </div>
   </fieldset>
   <div class="form-group">
     <div class="col-sm-12">
-      <a id="button-submit-existing" class="btn btn-primary button-submit pull-right">Complete Payment</a>
+      <a id="button-submit-existing" class="btn btn-primary button-submit pull-right">{{ button_submit }}</a>
     </div>
   </div>
   {% endif %}
@@ -138,17 +138,17 @@
           },
           expirationMonth: {
             selector: '#input-card-expiration-month',
-            placeholder: 'Month',
+            placeholder: '{{ entry_month|e("js") }}',
             select: true
           },
           expirationYear: {
             selector: '#input-card-expiration-year',
-            placeholder: 'Year',
+            placeholder: '{{ entry_year|e("js") }}',
             select: true
           },
           cvv: {
             selector: '#input-card-cvv',
-            placeholder: 'CVV2',
+            placeholder: '{{ entry_cvv_placeholder|e("js") }}',
             type: "123"
           },
           postalCode: {
@@ -195,22 +195,22 @@
         if (tokenizeErr) {
           switch (tokenizeErr.code) {
             case 'HOSTED_FIELDS_FIELDS_EMPTY':
-              $('#braintree-alert').text('All fields are empty! Please fill out the form.').show();
+              $('#braintree-alert').text('{{ error_fields_empty|e("js") }}').show();
               break;
             case 'HOSTED_FIELDS_FIELDS_INVALID':
-              $('#braintree-alert').text('Some fields are invalid, please check your information').show();
+              $('#braintree-alert').text('{{ error_fields_invalid|e("js") }}').show();
               break;
             case 'HOSTED_FIELDS_FAILED_TOKENIZATION':
-              $('#braintree-alert').text('Our payment provider did not recognise the card. Is the card valid?').show();
+              $('#braintree-alert').text('{{ error_failed_tokenization|e("js") }}').show();
               break;
             case 'HOSTED_FIELDS_TOKENIZATION_NETWORK_ERROR':
-              $('#braintree-alert').text('A network error occurred, please try again').show();
+              $('#braintree-alert').text('{{ error_network|e("js") }}').show();
               break;
             default:
-              $('#braintree-alert').text('An unknown error occurred, if the issue continued please contact support.').show();
+              $('#braintree-alert').text('{{ error_unknown|e("js") }}').show();
           }
 
-          $("#button-submit-new").prop( "disabled", false ).text('Complete Payment');
+          $("#button-submit-new").prop( "disabled", false ).text('{{ button_submit|e("js") }}');
 
           return;
         }
@@ -248,7 +248,7 @@
 
     var vaulted_payment_method = $('select[name=\'vaulted_payment_method\'] option:selected');
 
-    if (confirm('Remove saved card? \n' + vaulted_payment_method.text())) {
+    if (confirm('{{ text_confirm_remove|e("js") }}\n' + vaulted_payment_method.text())) {
       $.ajax({
         url: 'index.php?route=marketplace/braintree/remove',
         type: 'post',
@@ -260,7 +260,7 @@
           $("#button-delete").html('<i class="fa fa-spinner fa-pulse fa-fw"></i>');
         },
         complete: function () {
-          $("#button-delete").text('Delete');
+          $("#button-delete").text('{{ button_delete|e("js") }}');
         },
         success: function (json) {
           if (json.error) {
@@ -327,7 +327,7 @@
     $('#braintree-choose').hide();
 
     //Replace form with loading spinner
-    form.html('<div class="form-group" style="margin-bottom: 0px;"><i class="fa fa-spinner fa-pulse fa-2x fa-fw pull-right"></i><span class="sr-only">Loading...</span></div>');
+    form.html('<div class="form-group" style="margin-bottom: 0px;"><i class="fa fa-spinner fa-pulse fa-2x fa-fw pull-right"></i><span class="sr-only">{{ text_loading|e("js") }}</span></div>');
 
     //Add in back collected form data as hidden inputs
     form.append($(payment_method_nonce));

@@ -1,24 +1,27 @@
 <?php
 class ControllerMailCloudStore extends Controller {
 	public function index($args = array()) {
+		$this->load->language('mail/cloud_store');
+
 		$email = !empty($args['email']) ? $args['email'] : ($this->member->isLogged() ? $this->member->getEmail() : '');
 		if (!$email) {
 			return;
 		}
 
-		$store_name = html_entity_decode($this->config->get('config_name') ?: 'OpenCart', ENT_QUOTES, 'UTF-8');
+		$store_name = html_entity_decode($this->config->get('config_name') ?: 'Store', ENT_QUOTES, 'UTF-8');
 
 		$data['header'] = $this->load->controller('mail/header');
 		$data['footer'] = $this->load->controller('mail/footer');
 		$data['ip'] = isset($this->request->server['REMOTE_ADDR']) ? $this->request->server['REMOTE_ADDR'] : '127.0.0.1';
-		$data['name'] = !empty($args['name']) ? $args['name'] : 'OpenCart Cloud Store';
+		$data['name'] = !empty($args['name']) ? $args['name'] : $this->language->get('text_default_name');
 		$data['url'] = !empty($args['url']) ? $args['url'] : $this->url->link('account/subscription', '', true);
-		$data['text'] = !empty($args['text']) ? $args['text'] : 'Your OpenCart Cloud store "' . $data['name'] . '" has been provisioned and is ready!';
+		$data['text'] = !empty($args['text']) ? $args['text'] : sprintf($this->language->get('text_default_message'), $data['name']);
 		$data['store'] = $store_name;
 		$data['store_url'] = $this->url->link('common/home', '', true);
+		$data['text_team_formatted'] = sprintf($this->language->get('text_team'), $store_name);
 
 		$html = $this->load->view('mail/cloud_store', $data);
-		$text = $data['text'] . "\n\nStore Name: " . $data['name'] . "\nStore URL: " . $data['url'] . "\nIP: " . $data['ip'];
+		$text = $data['text'] . "\n\n" . sprintf($this->language->get('text_store_name'), $data['name']) . "\n" . sprintf($this->language->get('text_store_url'), $data['url']) . "\n" . sprintf($this->language->get('text_ip'), $data['ip']);
 
 		try {
 			$mail = new Mail($this->config->get('config_mail_engine') ?: 'mail');
@@ -30,9 +33,9 @@ class ControllerMailCloudStore extends Controller {
 			$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
 			$mail->setTo($email);
-			$mail->setFrom($this->config->get('config_email') ?: 'noreply@opencart.com');
-			$mail->setSender(html_entity_decode($this->config->get('config_name') ?: 'OpenCart', ENT_QUOTES, 'UTF-8'));
-			$mail->setSubject(html_entity_decode(($this->config->get('config_name') ?: 'OpenCart') . ' - Cloud Store: ' . $data['name'], ENT_QUOTES, 'UTF-8'));
+			$mail->setFrom($this->config->get('config_email') ?: ('noreply@' . (parse_url($this->config->get('config_url'), PHP_URL_HOST) ?: 'localhost')));
+			$mail->setSender($store_name);
+			$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_subject'), $store_name, $data['name']), ENT_QUOTES, 'UTF-8'));
 			$mail->setHtml($html);
 			$mail->setText($text);
 			$mail->send();

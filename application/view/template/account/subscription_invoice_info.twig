@@ -10,19 +10,17 @@
 			<div class="col-md-9">
 				<div class="row">
 					<div class="col-xs-6">
-						<div><img src="application/view/image/icon/opencart-logo.png" title="{{ title }}" alt="{{ logo }}"/></div>
-						<strong>From</strong>
+						<div><img src="{{ store_logo_url }}" title="{{ title }}" alt="{{ logo }}"/></div>
+						<strong>{{ text_from }}</strong>
 						<p>
-							<small><strong>OpenCart Limited</strong>
-								<br/>
-								Unit G, 2/F Tower 2 Avignon,
-								<br/>
-								1 Kwun Chui Road, So Kwun Wat, Tuen Mun, Hong Kong
-								<br/>
-								Email: support@opencart.com
+							<small><strong>{{ store_owner }}</strong>
+								<address>
+								{{ store_address }}
+								</address>
+								{{ text_email }}: {{ contact_support }}
 							</small>
 						</p>
-						<strong>To</strong>
+						<strong>{{ text_to }}</strong>
 						<p>
 							<small>
 								{% if member.company %}
@@ -48,42 +46,42 @@
 					</div>
 					<div class="col-xs-6">
 						<div class="text-right text-uppercase">
-							<h2>Invoice</h2>
+							<h2>{{ heading_invoice }}</h2>
 						</div>
 						<ul class="list-group">
 							<li class="list-group-item">
 								<div class="row">
-									<div class="col-xs-5">Invoice No.</div>
+									<div class="col-xs-5">{{ text_invoice_no }}</div>
 									<div class="col-xs-7"><strong>INV{{ transaction.subscription_transaction_id }}</strong></div>
 								</div>
 							</li>
 							<li class="list-group-item">
 								<div class="row">
-									<div class="col-xs-5">Due Date</div>
+									<div class="col-xs-5">{{ text_due_date }}</div>
 									<div class="col-xs-7">{{ transaction.date_added }}</div>
 								</div>
 							</li>
 							<li class="list-group-item">
 								<div class="row">
-									<div class="col-xs-5">Account ID</div>
+									<div class="col-xs-5">{{ text_account_id }}</div>
 									<div class="col-xs-7">{{ member.username }}</div>
 								</div>
 							</li>
 							<li class="list-group-item">
 								<div class="row">
-									<div class="col-xs-5">Purchased Via</div>
-									<div class="col-xs-7">Credit Card</div>
+									<div class="col-xs-5">{{ text_purchased_via }}</div>
+									<div class="col-xs-7">{{ text_credit_card }}</div>
 								</div>
 							</li>
 							<li class="list-group-item">
 								<div class="row">
-									<div class="col-xs-5">Transaction ID</div>
+									<div class="col-xs-5">{{ text_transaction_id }}</div>
 									<div class="col-xs-7">{{ transaction.transaction_id }}</div>
 								</div>
 							</li>
 							<li class="list-group-item list-group-item-info">
 								<div class="row">
-									<div class="col-xs-5">Total Due</div>
+									<div class="col-xs-5">{{ text_total_due }}</div>
 									<div class="col-xs-7"><strong>${{ transaction.amount }}</strong></div>
 								</div>
 							</li>
@@ -96,11 +94,11 @@
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
-									<th class="text-left">Cloud Store</th>
-									<th class="text-left">Plan</th>
-									<th class="text-left">Price</th>
-									<th class="text-left">Payment Method</th>
-									<th class="text-left">Total</th>
+									<th class="text-left">{{ column_cloud_store }}</th>
+									<th class="text-left">{{ column_plan }}</th>
+									<th class="text-left">{{ column_price }}</th>
+									<th class="text-left">{{ column_payment_method }}</th>
+									<th class="text-left">{{ column_total }}</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -117,7 +115,7 @@
 							</tbody>
 							<tfoot>
 								<tr>
-									<td class="text-right" colspan="5">Total Due: <span class="h2 text-info">${{ transaction.amount }}</span></td>
+									<td class="text-right" colspan="5">{{ text_total_due }}: <span class="h2 text-info">${{ transaction.amount }}</span></td>
 								</tr>
 							</tfoot>
 						</table>
@@ -125,14 +123,14 @@
 				</div>
 				<div class="text-center">
 					<p>
-						<small>If you have any question about this invoice, please contact our <a href="{{ support }}">support team</a>.</small>
+						<small>{{ text_invoice_question_prefix }} <a href="{{ support }}">{{ text_support_team }}</a>.</small>
 					</p>
-					<h3>Thank You For Your Business!</h3>
+					<h3>{{ text_thank_you }}</h3>
 					<hr/>
 					<div class="visible-print-block">
-						<small>&copy; Copyright {{ 'now'|date('Y') }} OpenCart</small>
+						<small>&copy; {{ text_copyright }} {{ 'now'|date('Y') }} {{ store_name }}</small>
 					</div>
-					<div class="hidden-print"><a href="{{ cancel }}" class="btn btn-link">Cancel</a> <button type="button" onclick="window.print();" class="btn btn-danger btn-lg"><i class="fa fa-print"></i> Print</button></div>
+					<div class="hidden-print"><a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a> <button type="button" onclick="window.print();" class="btn btn-danger btn-lg"><i class="fa fa-print"></i> {{ button_print }}</button></div>
 				</div>
 			</div>
 			<div class="col-md-3 hidden-xs">{{ menu }}</div>

@@ -1,6 +1,8 @@
 <?php
 class ControllerMarketplaceDownload extends Controller {
 	public function index() {
+		$this->load->language('marketplace/download');
+
 		$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 38358;
 
 		if (!$this->member->isLogged()) {
@@ -17,7 +19,7 @@ class ControllerMarketplaceDownload extends Controller {
 		$extension_info = $this->model_marketplace_extension->getExtension($extension_id);
 
 		if ($extension_info) {
-			$this->document->setTitle('Download - ' . $extension_info['name']);
+			$this->document->setTitle(sprintf($this->language->get('heading_title'), $extension_info['name']));
 
 			if ($extension_info['image']) {
 				$data['image'] = $this->model_tool_image->resize($extension_info['image'], 260, 152);
@@ -79,6 +81,8 @@ class ControllerMarketplaceDownload extends Controller {
 	}
 
 	public function download() {
+		$this->load->language('marketplace/download');
+
 		$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 38358;
 		$extension_download_id = isset($this->request->get['extension_download_id']) ? (int)$this->request->get['extension_download_id'] : 0;
 
@@ -138,7 +142,7 @@ class ControllerMarketplaceDownload extends Controller {
 					exit();
 				}
 			} else {
-				$content = "OpenCart Extension Package: " . $extension_info['name'] . " (" . $download_info['name'] . ")\r\n";
+				$content = $this->language->get('text_package_prefix') . ": " . $extension_info['name'] . " (" . $download_info['name'] . ")\r\n";
 				if (!headers_sent()) {
 					header('Content-Type: application/octet-stream');
 					header('Content-Disposition: attachment; filename="' . $mask . '"');

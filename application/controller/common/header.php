@@ -1,6 +1,8 @@
 <?php
 class ControllerCommonHeader extends Controller {
 	public function index() {
+		$this->load->language('common/header');
+
 		$data['title'] = $this->document->getTitle();
 
 		if ($this->request->server['HTTPS']) {
@@ -13,44 +15,44 @@ class ControllerCommonHeader extends Controller {
 		$payment_gateway = new PaymentGateway($this->registry);
 
 		$route = isset($this->request->get['route']) ? (string)$this->request->get['route'] : 'common/home';
-		$site_name = trim((string)$this->config->get('config_name')) ?: 'OpenCart';
+		$site_name = trim((string)$this->config->get('config_name')) ?: $this->language->get('text_site_name');
 
 		$description = $this->document->getDescription();
 		if (!$description) {
 			$config_meta_desc = trim((string)$this->config->get('config_meta_description'));
 			$default_descriptions = array(
-				'common/home'                => $config_meta_desc ?: ($site_name . ' is an open source PHP-based online e-commerce solution. Everything you need to create, scale and run your online store.'),
-				'cms/feature'                => 'Explore ' . $site_name . ' features: powerful store management, extensions, themes, payment gateways, shipping methods, and SEO-ready e-commerce tools.',
-				'cms/demo'                   => 'Try the official ' . $site_name . ' live demo. Experience the storefront and administration panel before downloading or launching your store.',
-				'marketplace/extension'      => 'Browse over 13,000+ ' . $site_name . ' extensions, modules, themes, payment gateways, shipping methods, and translations in the official ' . $site_name . ' Marketplace.',
-				'marketplace/extension/info' => 'Download and install verified ' . $site_name . ' extensions, themes, and modules from the official ' . $site_name . ' Marketplace.',
-				'cms/blog'                   => 'Read the latest e-commerce news, tutorials, release notes, and merchant tips on the official ' . $site_name . ' Blog.',
-				'cms/blog/info'              => 'Read detailed articles, e-commerce guides, and updates on the official ' . $site_name . ' Blog.',
-				'cms/download'               => 'Download the latest version of ' . $site_name . ' free and open-source e-commerce platform, or launch your store instantly on ' . $site_name . ' Cloud.',
-				'cms/download/download'      => 'Thank you for downloading ' . $site_name . '. Your download will begin shortly.',
-				'cms/download/history'       => 'Browse and download previous ' . $site_name . ' releases and historical versions.',
-				'cms/showcase'               => 'Discover successful online stores and brands powered by ' . $site_name . ' around the world.',
-				'support/partner'            => 'Find certified ' . $site_name . ' partners, developers, and e-commerce agencies for custom development, design, and technical support.',
-				'support/support'            => 'Get professional ' . $site_name . ' support, dedicated technical assistance, and community resources for your online store.',
-				'support/seller'             => 'Contact the extension developer or seller on ' . $site_name . ' Marketplace for technical support, questions, or order assistance.',
-				'support/contact'            => 'Contact the ' . $site_name . ' team for general inquiries, marketplace assistance, partnership opportunities, and technical support.',
-				'cloud/landing'              => 'Launch a fully hosted ' . $site_name . ' Cloud store in minutes with automated updates, cloud hosting, and pre-installed tools.',
-				'account/login'              => 'Log in to your ' . $site_name . ' account to manage your marketplace extensions, downloads, subscriptions, and store services.',
-				'account/register'           => 'Create a free ' . $site_name . ' account to download extensions, access community forums, and manage your e-commerce projects.'
+				'common/home'                => $config_meta_desc ?: $this->language->get('meta_description_home'),
+				'cms/feature'                => $this->language->get('meta_description_feature'),
+				'cms/demo'                   => $this->language->get('meta_description_demo'),
+				'marketplace/extension'      => $this->language->get('meta_description_market'),
+				'marketplace/extension/info' => $this->language->get('meta_description_ext_info'),
+				'cms/blog'                   => $this->language->get('meta_description_blog'),
+				'cms/blog/info'              => $this->language->get('meta_description_blog_info'),
+				'cms/download'               => $this->language->get('meta_description_download'),
+				'cms/download/download'      => $this->language->get('meta_description_dl_start'),
+				'cms/download/history'       => $this->language->get('meta_description_dl_hist'),
+				'cms/showcase'               => $this->language->get('meta_description_showcase'),
+				'support/partner'            => $this->language->get('meta_description_partner'),
+				'support/support'            => $this->language->get('meta_description_support'),
+				'support/seller'             => $this->language->get('meta_description_seller'),
+				'support/contact'            => $this->language->get('meta_description_contact'),
+				'cloud/landing'              => $this->language->get('meta_description_cloud'),
+				'account/login'              => $this->language->get('meta_description_login'),
+				'account/register'           => $this->language->get('meta_description_register')
 			);
 
 			if (isset($default_descriptions[$route])) {
 				$description = $default_descriptions[$route];
 			} else {
 				$page_title = trim($data['title']);
-				$description = ($page_title ? $page_title . ' - ' : '') . ($config_meta_desc ?: ($site_name . ' open-source e-commerce platform, marketplace extensions, cloud hosting, and developer resources.'));
+				$description = ($page_title ? $page_title . ' - ' : '') . ($config_meta_desc ?: $this->language->get('meta_description_default'));
 			}
 		}
 
 		$keywords = $this->document->getKeywords();
 		if (!$keywords) {
 			$config_meta_kw = trim((string)$this->config->get('config_meta_keyword'));
-			$keywords = $config_meta_kw ?: (strtolower($site_name) . ', ecommerce, open source, shopping cart, online store, marketplace, extensions, themes, php ecommerce');
+			$keywords = $config_meta_kw ?: (strtolower($site_name) . ', ' . $this->language->get('meta_keywords_default'));
 		}
 
 		$links = $this->document->getLinks();
@@ -98,11 +100,13 @@ class ControllerCommonHeader extends Controller {
 		$data['extension'] = $this->url->link('marketplace/extension');
 		$data['blog'] = $this->url->link('cms/blog');
 		$data['download'] = $this->url->link('cms/download');
-		$data['forum'] = 'https://forum.opencart.com';
-		$data['documentation'] = 'https://docs.opencart.com';
-		$data['book'] = 'https://docs.opencart.com/#additional-reading';
-		$data['bug_tracker'] = 'https://github.com/opencart/opencart/issues';
-		$data['developer'] = 'https://docs.opencart.com/developer/module/';
+		$data['forum'] = $this->config->get('config_forum_url') ?: $this->url->link('support/support');
+		$data['documentation'] = $this->config->get('config_docs_url') ?: $this->url->link('cms/guide');
+		$data['book'] = $this->config->get('config_book_url') ?: $this->url->link('cms/guide');
+		$data['github'] = $this->config->get('config_github_url') ?: 'https://github.com';
+		$data['bug_tracker'] = $this->config->get('config_bug_tracker_url') ?: 'https://github.com';
+		$data['facebook_community'] = $this->config->get('config_facebook_community_url') ?: 'https://www.facebook.com';
+		$data['developer'] = $this->config->get('config_developer_url') ?: $this->url->link('cms/information', 'information_id=2');
 		$data['cloud'] = $this->url->link('cloud/landing');
 		$data['partner'] = $this->url->link('support/partner');
 		$data['support'] = $this->url->link('support/support');

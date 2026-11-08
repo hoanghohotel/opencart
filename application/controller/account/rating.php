@@ -13,7 +13,9 @@ class ControllerAccountRating extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('Rate your downloads');
+		$this->load->language('account/rating');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (isset($this->session->data['success'])) {
 			$data['success'] = $this->session->data['success'];
@@ -103,7 +105,9 @@ class ControllerAccountRating extends Controller {
 			return;
 		}
 
-		$this->document->setTitle('Rate ' . $extension_info['name']);
+		$this->load->language('account/rating');
+
+		$this->document->setTitle(sprintf($this->language->get('heading_rate'), $extension_info['name']));
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$ref = new ReflectionMethod('ModelMarketplaceExtension', 'addRating');
@@ -114,7 +118,7 @@ class ControllerAccountRating extends Controller {
 				$this->model_marketplace_extension->addRating($extension_id, $this->request->post);
 			}
 
-			$this->session->data['success'] = 'Success: Thank you for rating this extension!';
+			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->response->redirect($this->url->link('account/rating', 'member_token=' . $this->session->data['member_token'], true));
 		}
@@ -166,27 +170,27 @@ class ControllerAccountRating extends Controller {
 
 	protected function validate() {
 		if (empty($this->request->post['functionality'])) {
-			$this->error['functionality'] = 'Please select a rating for Functionality!';
+			$this->error['functionality'] = $this->language->get('error_functionality');
 		}
 
 		if (empty($this->request->post['appearance'])) {
-			$this->error['appearance'] = 'Please select a rating for Appearance!';
+			$this->error['appearance'] = $this->language->get('error_appearance');
 		}
 
 		if (empty($this->request->post['user_friendly'])) {
-			$this->error['user_friendly'] = 'Please select a rating for User friendly!';
+			$this->error['user_friendly'] = $this->language->get('error_user_friendly');
 		}
 
 		if (empty($this->request->post['support'])) {
-			$this->error['support'] = 'Please select a rating for Support!';
+			$this->error['support'] = $this->language->get('error_support');
 		}
 
 		if (empty($this->request->post['documentation'])) {
-			$this->error['documentation'] = 'Please select a rating for Documentation!';
+			$this->error['documentation'] = $this->language->get('error_documentation');
 		}
 
 		if (!isset($this->request->post['comment']) || utf8_strlen(trim($this->request->post['comment'])) < 10) {
-			$this->error['comment'] = 'Feedback comment must be at least 10 characters!';
+			$this->error['comment'] = $this->language->get('error_comment');
 		}
 
 		return !$this->error;

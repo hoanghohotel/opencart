@@ -9,7 +9,9 @@ class ControllerAccountExtension extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Extensions');
+		$this->load->language('account/extension');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('marketplace/extension');
 
@@ -85,7 +87,9 @@ class ControllerAccountExtension extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Add Extension');
+		$this->load->language('account/extension');
+
+		$this->document->setTitle($this->language->get('heading_add'));
 
 		$this->load->model('marketplace/extension');
 
@@ -102,7 +106,7 @@ class ControllerAccountExtension extends Controller {
 
 			$this->model_marketplace_extension->addExtension($post_data);
 
-			$this->session->data['success'] = 'Success: You have added your extension!';
+			$this->session->data['success'] = $this->language->get('text_success_add');
 
 			$this->response->redirect($this->url->link('account/extension', 'member_token=' . $this->session->data['member_token'], true));
 		}
@@ -117,7 +121,9 @@ class ControllerAccountExtension extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Edit Extension');
+		$this->load->language('account/extension');
+
+		$this->document->setTitle($this->language->get('heading_edit'));
 
 		$this->load->model('marketplace/extension');
 
@@ -139,7 +145,7 @@ class ControllerAccountExtension extends Controller {
 				'comment'      => isset($post_data['comment']) ? $post_data['comment'] : ''
 			));
 
-			$this->session->data['success'] = 'Success: You have modified your extensions!';
+			$this->session->data['success'] = $this->language->get('text_success_edit');
 
 			$this->response->redirect($this->url->link('account/extension', 'member_token=' . $this->session->data['member_token'], true));
 		}
@@ -154,6 +160,8 @@ class ControllerAccountExtension extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
+		$this->load->language('account/extension');
+
 		$this->load->model('marketplace/extension');
 
 		if (isset($this->request->get['extension_id'])) {
@@ -162,7 +170,7 @@ class ControllerAccountExtension extends Controller {
 			if ($extension_info && $extension_info['member_id'] == $this->member->getId()) {
 				$this->model_marketplace_extension->deleteExtension($this->request->get['extension_id']);
 
-				$this->session->data['success'] = 'Success: You have modified your extensions!';
+				$this->session->data['success'] = $this->language->get('text_success_edit');
 			}
 		}
 
@@ -459,43 +467,45 @@ class ControllerAccountExtension extends Controller {
 
 	protected function validateForm() {
 		if (!isset($this->request->post['name']) || (utf8_strlen(trim($this->request->post['name'])) < 3) || (utf8_strlen(trim($this->request->post['name'])) > 128)) {
-			$this->error['name'] = 'Extension Name must be between 3 and 128 characters!';
+			$this->error['name'] = $this->language->get('error_name');
 		}
 
 		if (!isset($this->request->post['description']) || (utf8_strlen(trim($this->request->post['description'])) < 10)) {
-			$this->error['description'] = 'Description must be at least 10 characters!';
+			$this->error['description'] = $this->language->get('error_description');
 		}
 
 		if (empty($this->request->post['extension_category_id'])) {
-			$this->error['category'] = 'Please select a category!';
+			$this->error['category'] = $this->language->get('error_category');
 		}
 
 		if (!empty($this->request->post['license'])) {
 			if (!isset($this->request->post['price']) || (float)$this->request->post['price'] < 10) {
-				$this->error['price'] = 'Price must be at least $10.00 for paid extensions!';
+				$this->error['price'] = $this->language->get('error_price');
 			}
 		}
 
 		if (isset($this->request->post['extension_download']) && is_array($this->request->post['extension_download'])) {
 			foreach ($this->request->post['extension_download'] as $key => $value) {
 				if (!isset($value['name']) || (utf8_strlen($value['name']) < 3) || (utf8_strlen($value['name']) > 128)) {
-					$this->error['download'][$key] = 'Download Name must be between 3 and 128 characters!';
+					$this->error['download'][$key] = $this->language->get('error_download');
 				}
 			}
 		}
 
 		if ($this->error && !isset($this->error['warning'])) {
-			$this->error['warning'] = 'Warning: Please check the form carefully for errors!';
+			$this->error['warning'] = $this->language->get('error_warning');
 		}
 
 		return !$this->error;
 	}
 
 	public function upload() {
+		$this->load->language('account/extension');
+
 		$json = array();
 
 		if (!$this->member->isLogged() || (!isset($this->request->get['member_token']) || !isset($this->session->data['member_token']) || ($this->request->get['member_token'] != $this->session->data['member_token']))) {
-			$json['error'] = 'Warning: You do not have permission to upload files!';
+			$json['error'] = $this->language->get('error_permission_upload');
 		}
 
 		if (!$json) {
@@ -503,7 +513,7 @@ class ControllerAccountExtension extends Controller {
 				$filename = basename(html_entity_decode($this->request->files['download']['name'], ENT_QUOTES, 'UTF-8'));
 
 				if ((utf8_strlen($filename) < 3) || (utf8_strlen($filename) > 128)) {
-					$json['error'] = 'Filename must be between 3 and 128 characters!';
+					$json['error'] = $this->language->get('error_filename');
 				}
 
 				$allowed = array('zip', 'rar', 'ocmod.zip');
@@ -511,14 +521,14 @@ class ControllerAccountExtension extends Controller {
 				$ext = strtolower(substr(strrchr($filename, '.'), 1));
 
 				if (!in_array($ext, array('zip', 'rar'))) {
-					$json['error'] = 'Invalid file type! Only zip and rar files are allowed.';
+					$json['error'] = $this->language->get('error_filetype');
 				}
 
 				if ($this->request->files['download']['error'] != UPLOAD_ERR_OK) {
-					$json['error'] = 'Upload error code: ' . $this->request->files['download']['error'];
+					$json['error'] = sprintf($this->language->get('error_upload_code'), $this->request->files['download']['error']);
 				}
 			} else {
-				$json['error'] = 'File could not be uploaded!';
+				$json['error'] = $this->language->get('error_upload');
 			}
 		}
 
@@ -529,12 +539,12 @@ class ControllerAccountExtension extends Controller {
 			$cloud_storage = new CloudStorage($this->registry);
 
 			if (!$cloud_storage->storeUploadedFile($this->request->files['download']['tmp_name'], DIR_DOWNLOAD . $file, 'download', $file)) {
-				$json['error'] = 'Cloud Storage Error: ' . $cloud_storage->getLastError();
+				$json['error'] = sprintf($this->language->get('error_cloud_storage'), $cloud_storage->getLastError());
 			} else {
 				$json['filename'] = $file;
 				$json['mask'] = $filename;
 				$json['storage_driver'] = $cloud_storage->getDriver();
-				$json['success'] = 'Success: Your file has been uploaded!';
+				$json['success'] = $this->language->get('text_success_upload');
 			}
 		}
 
@@ -549,7 +559,9 @@ class ControllerAccountExtension extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Extension Comments');
+		$this->load->language('account/extension');
+
+		$this->document->setTitle($this->language->get('heading_comment'));
 
 		if (isset($this->request->get['filter_extension'])) {
 			$data['filter_extension'] = $this->request->get['filter_extension'];
@@ -584,6 +596,8 @@ class ControllerAccountExtension extends Controller {
 		if (!$this->member->isLogged() || (!isset($this->request->get['member_token']) || !isset($this->session->data['member_token']) || ($this->request->get['member_token'] != $this->session->data['member_token']))) {
 			return;
 		}
+
+		$this->load->language('account/extension');
 
 		if (isset($this->request->get['filter_extension'])) {
 			$filter_extension = $this->request->get['filter_extension'];
@@ -675,10 +689,12 @@ class ControllerAccountExtension extends Controller {
 	}
 
 	public function replyComment() {
+		$this->load->language('account/extension');
+
 		$json = array();
 
 		if (!$this->member->isLogged() || (!isset($this->request->get['member_token']) || !isset($this->session->data['member_token']) || ($this->request->get['member_token'] != $this->session->data['member_token']))) {
-			$json['error'] = 'Warning: You do not have permission to reply to comments!';
+			$json['error'] = $this->language->get('error_permission_reply');
 		}
 
 		$this->load->model('marketplace/extension');
@@ -692,12 +708,12 @@ class ControllerAccountExtension extends Controller {
 		$comment_info = $this->model_marketplace_extension->getComment($extension_comment_id);
 
 		if (!$comment_info) {
-			$json['error'] = 'Warning: Comment could not be found!';
+			$json['error'] = $this->language->get('error_comment_not_found');
 		} else {
 			$extension_info = $this->model_marketplace_extension->getExtension($comment_info['extension_id']);
 
 			if (!$extension_info || $extension_info['member_id'] != $this->member->getId()) {
-				$json['error'] = 'Warning: You do not have permission to reply to this comment!';
+				$json['error'] = $this->language->get('error_permission_reply_comment');
 			}
 		}
 
@@ -722,11 +738,11 @@ class ControllerAccountExtension extends Controller {
 		if (!$json) {
 			if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 				if (empty($this->request->post['comment']) || utf8_strlen(trim($this->request->post['comment'])) < 2) {
-					$json['error'] = 'Please enter a reply!';
+					$json['error'] = $this->language->get('error_reply');
 				} else {
 					$this->model_marketplace_extension->addComment($comment_info['extension_id'], $extension_comment_id, $this->request->post['comment']);
 
-					$json['success'] = 'Success: Your reply has been submitted!';
+					$json['success'] = $this->language->get('text_success_reply');
 				}
 			} else {
 				$data['comment'] = array(
@@ -746,10 +762,12 @@ class ControllerAccountExtension extends Controller {
 	}
 
 	public function deleteComment() {
+		$this->load->language('account/extension');
+
 		$json = array();
 
 		if (!$this->member->isLogged() || (!isset($this->request->get['member_token']) || !isset($this->session->data['member_token']) || ($this->request->get['member_token'] != $this->session->data['member_token']))) {
-			$json['error'] = 'Warning: You do not have permission to delete comments!';
+			$json['error'] = $this->language->get('error_permission_delete');
 		}
 
 		$this->load->model('marketplace/extension');
@@ -763,12 +781,12 @@ class ControllerAccountExtension extends Controller {
 		$comment_info = $this->model_marketplace_extension->getComment($extension_comment_id);
 
 		if (!$comment_info) {
-			$json['error'] = 'Warning: Comment could not be found!';
+			$json['error'] = $this->language->get('error_comment_not_found');
 		} else {
 			$extension_info = $this->model_marketplace_extension->getExtension($comment_info['extension_id']);
 
 			if (!$extension_info || $extension_info['member_id'] != $this->member->getId()) {
-				$json['error'] = 'Warning: You do not have permission to delete this comment!';
+				$json['error'] = $this->language->get('error_permission_delete_comment');
 			}
 		}
 
@@ -793,7 +811,7 @@ class ControllerAccountExtension extends Controller {
 		if (!$json) {
 			$this->model_marketplace_extension->deleteComment($extension_comment_id);
 
-			$json['success'] = 'Success: You have deleted the comment!';
+			$json['success'] = $this->language->get('text_success_delete_comment');
 			$json['url'] = str_replace('&amp;', '&', $this->url->link('account/extension/getCommentList', 'member_token=' . $this->session->data['member_token'] . $url, true));
 		}
 

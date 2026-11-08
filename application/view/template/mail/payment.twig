@@ -15,13 +15,13 @@
 
                           <!-- START OF HEADING-->
                           <tr>
-                            <td class="center" align="left" style="padding: 0px; font-weight: bold; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#6dc6dd; font-size:22px; line-height:32px; mso-line-height-rule: exactly;"><span> <a class="heading-link" href="#" style="color:#6dc6dd; text-decoration: none; font-style: normal; font-weight: bold;"> Payment changes</a></span></td>
+                            <td class="center" align="left" style="padding: 0px; font-weight: bold; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#6dc6dd; font-size:22px; line-height:32px; mso-line-height-rule: exactly;"><span> <a class="heading-link" href="#" style="color:#6dc6dd; text-decoration: none; font-style: normal; font-weight: bold;"> {{ text_heading }}</a></span></td>
                           </tr>
                           <!-- END OF HEADING-->
 
                           <!-- START OF TEXT-->
                           <tr>
-                            <td class="center" align="left" style="padding-bottom: 10px; margin: 0; font-size:11px ; font-style: italic; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 18px;mso-line-height-rule: exactly;"> Requested from IP address <span style="color:#6dc6dd; font-style: italic; ">{{ ip }}</span></td>
+                            <td class="center" align="left" style="padding-bottom: 10px; margin: 0; font-size:11px ; font-style: italic; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 18px;mso-line-height-rule: exactly;"> {{ text_requested_ip }} <span style="color:#6dc6dd; font-style: italic; ">{{ ip }}</span></td>
                           </tr>
                           <!-- END OF TEXT-->
 
@@ -37,7 +37,7 @@
                           <tr>
                             <td align="left" valign="top" style="padding-top: 17px;"><table border="0" align="left" cellpadding="0" cellspacing="0" style="border-radius: 2px; margin: 0;">
                                 <tr>
-                                  <td align="center" valign="middle" bgcolor="#6dc6dd" style="border-radius: 2px; padding: 6px 15px; font-weight: bold;  font-size: 13px; line-height: 18px; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#ffffff; margin: 0 !important; "><a href="{{ mail_link }}" style="border: none; font-weight: bold; font-style: normal; color:#ffffff; text-decoration: none;">Payments</a></td>
+                                  <td align="center" valign="middle" bgcolor="#6dc6dd" style="border-radius: 2px; padding: 6px 15px; font-weight: bold;  font-size: 13px; line-height: 18px; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#ffffff; margin: 0 !important; "><a href="{{ mail_link }}" style="border: none; font-weight: bold; font-style: normal; color:#ffffff; text-decoration: none;">{{ button_payments }}</a></td>
                                 </tr>
                               </table></td>
                           </tr>
@@ -46,8 +46,8 @@
                           <!-- START OF TEXT-->
                           <tr>
                             <td class="center" align="left" style="margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;mso-line-height-rule: exactly;"><p style="text-align:left;"><br />
-                                Many thanks,<br />
-                                The {{ store }} team</p></td>
+                                {{ text_thanks }}<br />
+                                {{ text_team_formatted }}</p></td>
                           </tr>
                           <!-- END OF TEXT-->
                         </table></td>

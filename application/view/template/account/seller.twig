@@ -3,11 +3,11 @@
   <div class="page-header">
     <div class="container">
       {% if route == 'account/seller/add' %}
-        <h1>Apply Seller</h1>
-        <p>Setup your seller information</p>
+        <h1>{{ heading_add }}</h1>
+        <p>{{ text_subtitle_add }}</p>
       {% else %}
-        <h1>My Seller Account</h1>
-        <p>Edit seller information</p>
+        <h1>{{ heading_title }}</h1>
+        <p>{{ text_subtitle_edit }}</p>
       {% endif %}</div>
   </div>
   <div class="container">
@@ -21,41 +21,41 @@
           {% endif %}
           {% if route == 'account/seller/add' %}
             <fieldset>
-              <legend>Register for a seller account</legend>
-              <p>You can sell your work through OpenCart's extension section. All you have to do is fill out the form below and submit it.</p>
-              <h4><strong>How it works</strong></h4>
+              <legend>{{ text_register_seller }}</legend>
+              <p>{{ text_register_seller_desc }}</p>
+              <h4><strong>{{ text_how_it_works }}</strong></h4>
 
             </fieldset>
           {% endif %}
           <fieldset>
             {% if route == 'account/seller/add' %}
-              <legend>Fill your Seller Details</legend>
+              <legend>{{ text_fill_details }}</legend>
             {% else %}
-              <legend>Edit your Seller Details</legend>
+              <legend>{{ text_edit_details }}</legend>
             {% endif %}
 
             <div class="alert alert-info">
               <ol>
-                <li>Upload a theme or extension to the extension section and set how much you want to sell your theme / extension for.</li>
-                <li>The payment will be made after the amount of your sales is at least 20 USD.</li>
-                <li>Every time you theme / extension is sold opencart will receive 50% commision.</li>
-                <li>You will be paid for each extension sold at the end of every month.</li>
-                <li>You can view every time some one buys your theme / extension on the transaction page.</li>
-                <li>The rating of the module is updated only after 5 reviews left by customers.</li>
+                <li>{{ text_rule_1 }}</li>
+                <li>{{ text_rule_2 }}</li>
+                <li>{{ text_rule_3 }}</li>
+                <li>{{ text_rule_4 }}</li>
+                <li>{{ text_rule_5 }}</li>
+                <li>{{ text_rule_6 }}</li>
               </ol>
             </div>
 
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-firstname">First Name</label> <input type="text" name="firstname" value="{{ firstname }}" placeholder="First Name" id="input-firstname" class="form-control"/>
+                  <label class="control-label" for="input-firstname">{{ entry_firstname }}</label> <input type="text" name="firstname" value="{{ firstname }}" placeholder="{{ entry_firstname }}" id="input-firstname" class="form-control"/>
                   {% if error_firstname %}
                     <div class="text-danger">{{ error_firstname }}</div>
                   {% endif %}</div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-lastname">Last Name</label> <input type="text" name="lastname" value="{{ lastname }}" placeholder="Last Name" id="input-lastname" class="form-control"/>
+                  <label class="control-label" for="input-lastname">{{ entry_lastname }}</label> <input type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}" id="input-lastname" class="form-control"/>
                   {% if error_lastname %}
                     <div class="text-danger">{{ error_lastname }}</div>
                   {% endif %}</div>
@@ -64,22 +64,22 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-email">E-Mail</label> <input type="text" name="email" value="{{ email }}" placeholder="E-Mail" id="input-email" class="form-control"/>
+                  <label class="control-label" for="input-email">{{ entry_email }}</label> <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control"/>
                   {% if error_email %}
                     <div class="text-danger">{{ error_email }}</div>
                   {% endif %}</div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-email">Support E-Mail</label> <input type="text" name="support_email" value="{{ support_email }}" placeholder="Support E-Mail" id="input-support-email" class="form-control"/>
+                  <label class="control-label" for="input-email">{{ entry_support_email }}</label> <input type="text" name="support_email" value="{{ support_email }}" placeholder="{{ entry_support_email }}" id="input-support-email" class="form-control"/>
                   {% if error_support_email %}
                     <div class="text-danger">{{ error_support_email }}</div>
                   {% endif %}</div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-telephone">Telephone</label> <input type="text" name="telephone" value="{{ telephone }}" placeholder="Telephone" id="input-telephone" class="form-control"/>
-                  <div class="help-block">(Include the country code)</div>
+                  <label class="control-label" for="input-telephone">{{ entry_telephone }}</label> <input type="text" name="telephone" value="{{ telephone }}" placeholder="{{ entry_telephone }}" id="input-telephone" class="form-control"/>
+                  <div class="help-block">{{ help_telephone }}</div>
                   {% if error_telephone %}
                     <div class="text-danger">{{ error_telephone }}</div>
                   {% endif %}</div>
@@ -88,26 +88,26 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label class="control-label" for="input-website">Web Site</label> <input type="text" name="website" value="{{ website }}" placeholder="Web Site" id="input-website" class="form-control"/>
+                  <label class="control-label" for="input-website">{{ entry_website }}</label> <input type="text" name="website" value="{{ website }}" placeholder="{{ entry_website }}" id="input-website" class="form-control"/>
                 </div>
               </div>
             </div>
           </fieldset>
           <fieldset>
-            <legend>Payment Information</legend>
-            <p>OpenCart uses the 3 following payment gateway to payout sellers. Click the image to sign up to then enter your payment email address to receive money. Payments only get sent out when your account balance reaches 20 USD or more.</p>
+            <legend>{{ text_payment_info }}</legend>
+            <p>{{ text_payment_info_desc }}</p>
             <div class="row hidden">
               <div class="col-sm-6 text-center">
-                <p><a href="https://www.paypal.com/uk/mrb/pal=V4T754QB63XXL" target="_blank" class="thumbnail"><img src="application/view/image/account/paypal-logo.png" alt="PayPal Signup" title="PayPal Signup"/></a></p>
+                <p><a href="https://www.paypal.com/uk/mrb/pal=V4T754QB63XXL" target="_blank" class="thumbnail"><img src="application/view/image/account/paypal-logo.png" alt="PayPal" title="PayPal"/></a></p>
               </div>
               <div class="col-sm-6 text-center">
-                <p><a href="https://share.payoneer.com/nav/AHlXyQ3JFmbjVlbUgLbWuERqzrcggDlctg_tnsHl3_oAgDZNkqXK0whqGuElt0n-fnats8u-rZqbzefA9ShMMw2" target="_blank" class="thumbnail"><img src="application/view/image/account/payoneer-logo.png" alt="PayPal Signup" title="Payoneer Signup"/></a></p>
+                <p><a href="https://share.payoneer.com/nav/AHlXyQ3JFmbjVlbUgLbWuERqzrcggDlctg_tnsHl3_oAgDZNkqXK0whqGuElt0n-fnats8u-rZqbzefA9ShMMw2" target="_blank" class="thumbnail"><img src="application/view/image/account/payoneer-logo.png" alt="Payoneer" title="Payoneer"/></a></p>
               </div>
             </div>
             <br/>
             <div class="row payment-method">
               <div class="col-sm-12">
-                <label class="control-label">Payment Method</label>
+                <label class="control-label">{{ entry_payment_method }}</label>
                 <div class="row">
                   <div class="col-sm-6">
                     {% if payment_method == 'paypal' %}
@@ -122,7 +122,7 @@
                   </div>
                   <div class="col-sm-6">
                     <div class="text-right">
-                      <small>(Signup <a href="https://www.paypal.com/uk/mrb/pal=V4T754QB63XXL" target="_blank">PayPal Account</a> now)</small>
+                      <small>({{ text_signup_before }} <a href="https://www.paypal.com/uk/mrb/pal=V4T754QB63XXL" target="_blank">{{ text_paypal_account }}</a> {{ text_signup_after }})</small>
                     </div>
                   </div>
                 </div>
@@ -140,7 +140,7 @@
                   </div>
                   <div class="col-sm-6">
                     <div class="text-right">
-                      <small>(Signup <a href="{{ payoneer }}" target="_blank">Payoneer Account</a> now)</small>
+                      <small>({{ text_signup_before }} <a href="{{ payoneer }}" target="_blank">{{ text_payoneer_account }}</a> {{ text_signup_after }})</small>
                     </div>
                   </div>
                 </div>
@@ -148,17 +148,17 @@
                   <div class="col-sm-8">
                     {% if payment_method == 'advcash' %}
                       <div class="radio">
-                        <label><input type="radio" name="payment_method" value="advcash" checked="checked"/> <img src="application/view/image/account/advcash-logo.png" alt="AdvCash" title="AdvCash"/><span class="text-danger"> (For Russian users only!)</span></label>
+                        <label><input type="radio" name="payment_method" value="advcash" checked="checked"/> <img src="application/view/image/account/advcash-logo.png" alt="AdvCash" title="AdvCash"/><span class="text-danger"> {{ text_advcash_note }}</span></label>
                       </div>
                     {% else %}
                       <div class="radio">
-                        <label><input type="radio" name="payment_method" value="advcash"/> <img src="application/view/image/account/advcash-logo.png" alt="AdvCash" title="AdvCash"/><span class="text-danger"> (For Russian users only!)</span></label>
+                        <label><input type="radio" name="payment_method" value="advcash"/> <img src="application/view/image/account/advcash-logo.png" alt="AdvCash" title="AdvCash"/><span class="text-danger"> {{ text_advcash_note }}</span></label>
                       </div>
                     {% endif %}
                   </div>
                   <div class="col-sm-4">
                     <div class="text-right">
-                      <small>(Signup <a href="https://wallet.advcash.com/register" target="_blank">AdvCash Account</a> now)</small>
+                      <small>({{ text_signup_before }} <a href="https://wallet.advcash.com/register" target="_blank">{{ text_advcash_account }}</a> {{ text_signup_after }})</small>
                     </div>
                   </div>
                 </div>
@@ -167,15 +167,15 @@
             {% if payoneer_token %}
             <div class="row">
               <div class="col-sm-6">
-                <label class="control-label" for="input-payment-email">Payoneer Token</label> 
+                <label class="control-label" for="input-payment-email">{{ entry_payoneer_token }}</label> 
                 <input type="text" value="{{ payoneer_token }}" disabled class="form-control"/>
               </div>
             </div>
             {% endif %}
             <div class="row">
               <div class="col-sm-6">
-                <label class="control-label" for="input-payment-email">Payment E-Mail</label> <input type="text" name="payment_email" value="{{ payment_email }}" placeholder="PayPal or Skrill email account" id="input-payment-email" class="form-control"/>
-                <div class="help-block">(Make sure you use your correct payment email address otherwise you won't receive payments)</div>
+                <label class="control-label" for="input-payment-email">{{ entry_payment_email }}</label> <input type="text" name="payment_email" value="{{ payment_email }}" placeholder="{{ entry_payment_placeholder }}" id="input-payment-email" class="form-control"/>
+                <div class="help-block">{{ help_payment_email }}</div>
                 {% if error_payment_email %}
                   <div class="text-danger">{{ error_payment_email }}</div>
                 {% endif %}
@@ -183,36 +183,36 @@
             </div>
           </fieldset>
           <fieldset>
-            <legend>Address</legend>
+            <legend>{{ text_address }}</legend>
             <div class="form-group">
-              <label class="control-label" for="input-company">Company</label> <input type="text" name="company" value="{{ company }}" placeholder="Company" id="input-company" class="form-control"/>
+              <label class="control-label" for="input-company">{{ entry_company }}</label> <input type="text" name="company" value="{{ company }}" placeholder="{{ entry_company }}" id="input-company" class="form-control"/>
             </div>
             <div class="form-group required">
-              <label class="control-label" for="input-address-1">Address 1</label> <input type="text" name="address_1" value="{{ address_1 }}" placeholder="Address 1" id="input-address-1" class="form-control"/>
+              <label class="control-label" for="input-address-1">{{ entry_address_1 }}</label> <input type="text" name="address_1" value="{{ address_1 }}" placeholder="{{ entry_address_1 }}" id="input-address-1" class="form-control"/>
               {% if error_address_1 %}
                 <div class="text-danger">{{ error_address_1 }}</div>
               {% endif %}</div>
             <div class="form-group">
-              <label class="control-label" for="input-address-2">Address 2</label> <input type="text" name="address_2" value="{{ address_2 }}" placeholder="Address 2" id="input-address-2" class="form-control"/>
+              <label class="control-label" for="input-address-2">{{ entry_address_2 }}</label> <input type="text" name="address_2" value="{{ address_2 }}" placeholder="{{ entry_address_2 }}" id="input-address-2" class="form-control"/>
             </div>
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-city">City</label> <input type="text" name="city" value="{{ city }}" placeholder="City" id="input-city" class="form-control"/>
+                  <label class="control-label" for="input-city">{{ entry_city }}</label> <input type="text" name="city" value="{{ city }}" placeholder="{{ entry_city }}" id="input-city" class="form-control"/>
                   {% if error_city %}
                     <div class="text-danger">{{ error_city }}</div>
                   {% endif %}</div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-postcode">Postcode</label> <input type="text" name="postcode" value="{{ postcode }}" placeholder="Postcode" id="input-postcode" class="form-control"/>
+                  <label class="control-label" for="input-postcode">{{ entry_postcode }}</label> <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}" id="input-postcode" class="form-control"/>
                   {% if error_postcode %}
                     <div class="text-danger">{{ error_postcode }}</div>
                   {% endif %}</div>
               </div>
             </div>
             <div class="form-group required">
-              <label class="control-label" for="input-country">Country</label> <select name="country_id" id="input-country" class="form-control">
+              <label class="control-label" for="input-country">{{ entry_country }}</label> <select name="country_id" id="input-country" class="form-control">
                 <option value=""></option>
                 {% for country in countries %}
                   {% if country.country_id == country_id %}
@@ -226,18 +226,18 @@
                 <div class="text-danger">{{ error_country }}</div>
               {% endif %}</div>
             <div class="form-group required">
-              <label class="control-label" for="input-zone">Region / State</label> <select name="zone_id" id="input-zone" class="form-control"></select>
+              <label class="control-label" for="input-zone">{{ entry_zone }}</label> <select name="zone_id" id="input-zone" class="form-control"></select>
               {% if error_zone %}
                 <div class="text-danger">{{ error_zone }}</div>
               {% endif %}</div>
           </fieldset>
           <fieldset>
-            <legend>Seller Preferences</legend>
+            <legend>{{ text_seller_preferences }}</legend>
             <div class="row">
               <div class="col-sm-6">
                 <dl>
-                  <dt>Notify Purchase</dt>
-                  <dd>I want to receive a email notifying me when some one buys my extensions.</dd>
+                  <dt>{{ text_notify_purchase }}</dt>
+                  <dd>{{ text_notify_purchase_desc }}</dd>
                 </dl>
               </div>
               <div class="col-sm-6 text-right">
@@ -245,18 +245,18 @@
                   <label class="radio-inline">
                     {% if notify %}
                       <input type="radio" name="notify" value="1" checked="checked"/>
-                      Yes
+                      {{ text_yes }}
                     {% else %}
                       <input type="radio" name="notify" value="1"/>
-                      Yes
+                      {{ text_yes }}
                     {% endif %}
                   </label> <label class="radio-inline">
                     {% if not notify %}
                       <input type="radio" name="notify" value="0" checked="checked"/>
-                      No
+                      {{ text_no }}
                     {% else %}
                       <input type="radio" name="notify" value="0"/>
-                      No
+                      {{ text_no }}
                     {% endif %}
                   </label>
                 </div>
@@ -264,60 +264,60 @@
             </div>
           </fieldset>
           <fieldset>
-            <legend>Seller API</legend>
+            <legend>{{ text_seller_api }}</legend>
             <div class="form-group required">
-              <label class="control-label" for="input-api-url">API Status</label>
+              <label class="control-label" for="input-api-url">{{ entry_api_status }}</label>
               <div class="radio">
                 <label class="radio-inline">
                   {% if api_status %}
                     <input type="radio" name="api_status" value="1" checked="checked"/>
-                    Yes
+                    {{ text_yes }}
                   {% else %}
                     <input type="radio" name="api_status" value="1"/>
-                    Yes
+                    {{ text_yes }}
                   {% endif %}
                 </label> <label class="radio-inline">
                   {% if not api_status %}
                     <input type="radio" name="api_status" value="0" checked="checked"/>
-                    No
+                    {{ text_no }}
                   {% else %}
                     <input type="radio" name="api_status" value="0"/>
-                    No
+                    {{ text_no }}
                   {% endif %}
                 </label>
               </div>
             </div>
             <div class="form-group required">
-              <label class="control-label" for="input-api-url">API URL</label> <input type="text" name="api_url" value="{{ api_url }}" placeholder="API URL" id="input-api-url" class="form-control"/>
+              <label class="control-label" for="input-api-url">{{ entry_api_url }}</label> <input type="text" name="api_url" value="{{ api_url }}" placeholder="{{ entry_api_url }}" id="input-api-url" class="form-control"/>
               {% if error_api_url %}
                 <div class="text-danger">{{ error_api_url }}</div>
               {% endif %}
             </div>
           </fieldset>
             <fieldset>
-              <legend>Terms &amp; Conditions</legend>
+              <legend>{{ text_terms }}</legend>
               <textarea class="form-control" rows="8" readonly="readonly">
-  By uploading extensions / templates you agree to:
+  {{ text_terms_intro }}
 
-  1. The work submitted must be your own. Incase its not, then you must provide an approved document from the original coder/designer stating your distributing rights.
+  {{ text_terms_1 }}
 
-  2. The work submitted has been tested for violability and functionality.
+  {{ text_terms_2 }}
 
-  3. Sellers must provide support as long as their work is on the opencart.com server.
+  {{ text_terms_3 }}
 
-  4. Free extensions must be usuable out-of-box and do not contain any pay-to-use links inside.
+  {{ text_terms_4 }}
 
-  5. Sellers should include their own terms & conditions as a secondary term of use.
+  {{ text_terms_5 }}
 
-  6. Incase sellers work wasn't functional for any reason or was violating our terms & conditions, then the work mentioned will be pulled out from the server and seller must refund 100% (covering opencart 20%) to clients who bought their work.
+  {{ text_terms_6 }}
 
-  7. Sellers has the right to authorize anyone else incase they can't provide support to their work, or work will be pulled out from server.
+  {{ text_terms_7 }}
   
-  8. The extension code must be clean and open. It shouldn't be encrypted in any way.
+  {{ text_terms_8 }}
 
-  9. Extension must not contain any links to developer's marketplace in it's code.
+  {{ text_terms_9 }}
 
-  10. Extension must not contain any links to developer's marketplace on it's landing page at opencart.com.
+  {{ text_terms_10 }}
   </textarea>
               {% if route == 'account/seller/add' %}
               <div class="checkbox">
@@ -327,12 +327,12 @@
                   {% else %}
                     <input type="checkbox" name="agree" value="1"/>
                   {% endif %}
-                  I agree with the above terms &amp; conditions</label>
+                  {{ text_agree }}</label>
               </div>
               {% endif %}
             </fieldset>
-          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a>
-            <button type="submit" class="btn btn-primary">Submit</button>
+          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a>
+            <button type="submit" class="btn btn-primary">{{ button_submit }}</button>
           </div>
         </form>
       </div>
@@ -371,7 +371,7 @@ $('select[name=\'country_id\']').on('change', function() {
 					html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {
-				html += '<option value="0" selected="selected"> --- None --- </option>';
+				html += '<option value="0" selected="selected">{{ text_none|e('js') }}</option>';
 			}
 
 			$('select[name=\'zone_id\']').html(html);

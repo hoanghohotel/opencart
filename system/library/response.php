@@ -367,16 +367,6 @@ class Response {
 				);
 			}
 
-			// Rewrite dead external banner image URLs to local cloud banner image
-			$html = str_replace(
-				array(
-					'https://image.opencart.com/original/59ae4157d77e2.jpg',
-					'https://image.opencart.com/original/6aaaf0de522d0.jpg'
-				),
-				'application/view/image/cloud/subscription_create.png',
-				$html
-			);
-
 			// Apply configured Store Logo (config_logo) to navbar-brand if set in Admin Settings
 			if ($config_logo !== '' && defined('DIR_IMAGE') && is_file(DIR_IMAGE . $config_logo)) {
 				$html = preg_replace(
@@ -407,8 +397,6 @@ class Response {
 
 				if (strpos($val, '/index.php?route=') === 0) {
 					$val = ltrim($val, '/');
-				} elseif (stripos($val, 'https://www.opencart.com/index.php?route=') === 0) {
-					$val = substr($val, strlen('https://www.opencart.com/'));
 				}
 
 				if ($active_token !== '' && strpos($val, 'member_token=') === false && !preg_match('/route=(account\/verify|account\/reset|account\/security\/confirm)\b/i', $val)) {

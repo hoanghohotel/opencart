@@ -1,7 +1,9 @@
 <?php
 class ControllerCmsRefund extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart - Refund Policy');
+		$this->load->language('cms/refund');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');

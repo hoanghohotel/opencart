@@ -1,0 +1,20 @@
+<?php
+// Heading
+$_['heading_title']   = 'Reset Password';
+
+// Text
+$_['text_subtitle']   = 'Reset your new password';
+$_['text_password']   = 'Enter the new password you wish to use.';
+$_['text_success']    = 'Success: Your password has been successfully updated.';
+
+// Entry
+$_['entry_password']  = 'Password';
+$_['entry_confirm']   = 'Confirm';
+
+// Button
+$_['button_continue'] = 'Continue';
+
+// Error
+$_['error_password']  = 'Password must be between 4 and 40 characters!';
+$_['error_confirm']   = 'Password and password confirmation do not match!';
+$_['error_code']      = 'Password reset code is invalid or was used previously!';

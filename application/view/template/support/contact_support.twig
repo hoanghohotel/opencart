@@ -1,24 +1,24 @@
 <div class="row">
 	<div class="col-md-5">
 		<div class="form-group required">
-			<label for="input-order-id" class="control-label">What is your order ID?</label> <input type="text" name="order_id" value="" placeholder="Order ID" id="input-order-id" class="form-control">
+			<label for="input-order-id" class="control-label">{{ entry_order_id }}</label> <input type="text" name="order_id" value="" placeholder="{{ placeholder_order_id }}" id="input-order-id" class="form-control">
 		</div>
 	</div>
 	<div class="col-md-7">
 		<div class="form-group">
-			<label for="input-website" class="control-label">Web Site</label> <input type="text" name="website" value="" placeholder="Web Site" id="input-website" class="form-control"/>
+			<label for="input-website" class="control-label">{{ entry_website }}</label> <input type="text" name="website" value="" placeholder="{{ placeholder_website }}" id="input-website" class="form-control"/>
 		</div>
 	</div>
 </div>
 <div class="row">
 	<div class="col-md-5">
 		<div class="form-group">
-			<label for="input-telephone" class="control-label">Phone</label> <input type="text" name="telephone" value="" placeholder="Phone" id="input-telephone" class="form-control"/>
+			<label for="input-telephone" class="control-label">{{ entry_telephone }}</label> <input type="text" name="telephone" value="" placeholder="{{ placeholder_telephone }}" id="input-telephone" class="form-control"/>
 		</div>
 	</div>
 	<div class="col-md-7">
 		<div class="form-group required">
-			<label for="input-country" class="control-label">Country</label> <select name="country_id" id="input-country" class="form-control">
+			<label for="input-country" class="control-label">{{ entry_country }}</label> <select name="country_id" id="input-country" class="form-control">
 				<option value=""></option>
 				{% for country in countries %}
 					{% if country.country_id == country_id %}
@@ -32,7 +32,7 @@
 	</div>
 </div>
 <div class="form-group required">
-	<label for="input-version" class="control-label">Which Opencart version are you using?</label> <select name="version_id" id="input-version" class="form-control">
+	<label for="input-version" class="control-label">{{ entry_version }}</label> <select name="version_id" id="input-version" class="form-control">
 		<option value=""></option>
 		{% for download in downloads %}
 			<option value="{{ download.download_id }}">{{ download.name }}</option>

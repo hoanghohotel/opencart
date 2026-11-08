@@ -17,8 +17,8 @@
   <input type="hidden" name="notify_url" value="{{ notify_url }}" />
   <input type="hidden" name="cancel_return" value="{{ cancel_return }}" />
   <input type="hidden" name="paymentaction" value="sale" />
-  <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a>
-    <button type="button" id="button-confirm" class="btn btn-primary">Confirm</button>
+  <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a>
+    <button type="button" id="button-confirm" class="btn btn-primary">{{ button_confirm }}</button>
   </div>
 </form>
 <script type="text/javascript"><!--

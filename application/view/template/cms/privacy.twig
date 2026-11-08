@@ -2,7 +2,7 @@
 <div id="cms-information">
   <div class="page-header">
     <div class="container">
-      <h1>Privacy Policy</h1>
+      <h1>{{ text_page_title }}</h1>
     </div>
   </div>
   <div id="information-details">
@@ -11,34 +11,34 @@
         <div class="row">
           <div class="col-md-12">
                 <article>
-                  <h2>Privacy Policy</h2>
+                  <h2>{{ text_page_title }}</h2>
                   <hr/>
-                  <p>It is necessary for you to supply OpenCart with personal data in connection with the application for and provision of insurance products and services as well as the carrying out by the Company of other services relating to the services.</p>
-                  <h3>Collection</h3>
-                  <p>During your use of the Services or third-party vendors contracted by us will collect, use, disclose, store, process, data that identifies you or may make you identifiable (collectively your "Personal Information").</p>
+                  <p>{{ text_privacy_intro }}</p>
+                  <h3>{{ text_collection_title }}</h3>
+                  <p>{{ text_collection_desc }}</p>
                   <ol>
-                    <li>Registration data you provided, including name, email, and/or avatar;</li>
-                    <li>In-Chat information you provided, such as your name, email address, and/or phone number;</li>
-                    <li>Business information like your company name, company size, and business type;</li>
-                    <li>Any other information you provide to us, such as, but not limited to, when you add a coworker to join the Services;</li>
-                    <li>Account information from Add-ons and other third-party services you use in conjunction with our Services;</li>
-                    <li>Data about your use of the Services.</li>
+                    <li>{{ text_collection_item_1 }}</li>
+                    <li>{{ text_collection_item_2 }}</li>
+                    <li>{{ text_collection_item_3 }}</li>
+                    <li>{{ text_collection_item_4 }}</li>
+                    <li>{{ text_collection_item_5 }}</li>
+                    <li>{{ text_collection_item_6 }}</li>
                   </ol>
 
-                  <h3>Use &amp; Purpose</h3>
-                  <p>OpenCart will not use your Personal Information for purposes other than those purposes described in this Policy or disclosed to you. From time to time OpenCart may request your permission to allow us to share your Personal Information with third parties. You can choose not to share your information with third parties.</p>
-                  <p>OpenCart use your Personal Information for the following purposes:</p>
+                  <h3>{{ text_use_title }}</h3>
+                  <p>{{ text_use_p1 }}</p>
+                  <p>{{ text_use_p2 }}</p>
                   <ol>
-                    <li>To provide the Services to you</li>
-                    <li>For identification, authentication and security</li>
-                    <li>To provide customer service</li>
-                    <li>To engage in marketing activities</li>
-                    <li>To enhance your experience on the Services</li>
+                    <li>{{ text_use_item_1 }}</li>
+                    <li>{{ text_use_item_2 }}</li>
+                    <li>{{ text_use_item_3 }}</li>
+                    <li>{{ text_use_item_4 }}</li>
+                    <li>{{ text_use_item_5 }}</li>
                   </ol>
-                  <h3>Data deletion</h3>
-                  <p>If you want to remove your data from the opencart.com - you should send the data deletion request on <a href="mailto:support@opencart.com">support@opencart.com</a> email address.</p>
+                  <h3>{{ text_deletion_title }}</h3>
+                  <p>{{ text_deletion_desc_1 }} <a href="mailto:{{ contact_support }}">{{ contact_support }}</a> {{ text_deletion_desc_2 }}</p>
                   <p><br/></p>
-                  <p class="text-right"><small><i>Last Updated on 06 June, 2024</i></small></p>
+                  <p class="text-right"><small><i>{{ text_last_updated }}</i></small></p>
                 </article>
           </div>
         </div>
@@ -48,5 +48,3 @@
   </div>
 </div>
 {{ footer }}
-
-

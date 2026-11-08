@@ -1,11 +1,11 @@
 <fieldset id="payment-credit-card">
-	<legend>Extension Details</legend>
+	<legend>{{ text_extension_details }}</legend>
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th class="text-left">Extension Name</th>
-				<th class="text-right">Quantity</th>
-				<th class="text-right">Total</th>
+				<th class="text-left">{{ column_extension_name }}</th>
+				<th class="text-right">{{ column_quantity }}</th>
+				<th class="text-right">{{ column_total }}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -18,11 +18,11 @@
 	</table>
 </fieldset>
 <fieldset>
-	<legend>Pay by Credit Card</legend>
+	<legend>{{ text_pay_credit_card }}</legend>
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th class="text-left">Credit Card</th>
+				<th class="text-left">{{ column_credit_card }}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -33,10 +33,10 @@
 	</table>
 </fieldset>
 <div class="text-right">
-	<button id="button-confirm" class="btn btn-lg btn-default">Continue</button>
+	<button id="button-confirm" class="btn btn-lg btn-default">{{ button_continue }}</button>
 </div>
 <div id="fadeLoader">
-	<div id="loader">Loading...</div>
+	<div id="loader">{{ text_loading }}</div>
 </div>
 <script><!--
 function showLoader() {
@@ -134,11 +134,8 @@ braintree.client.create({
             paypal: false
         }, function(err, dataCollectorInstance) {
             if (err) {
-                // Handle error in creation of data collector
                 return;
             }
-            // At this point, you should access the dataCollectorInstance.deviceData value and provide it
-            // to your server, e.g. by injecting it into your form as a hidden input.
             var deviceData = dataCollectorInstance.deviceData;
             $.ajax({
                 url: 'index.php?route=checkout/payment/confirm&member_token={{ member_token }}&extension_id={{ extension_id }}',

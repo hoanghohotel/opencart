@@ -4,24 +4,24 @@
     <div class="row">
       <div class="col-md-9">
         <div id="download-order">
-          <h1 class="pull-right">Order ID #{{ order_id }}</h1>
-          <a href="{{ cancel }}"><i class="fa fa-angle-left"></i> My Downloads</a></div>
+          <h1 class="pull-right">{{ text_order_id }}{{ order_id }}</h1>
+          <a href="{{ cancel }}"><i class="fa fa-angle-left"></i> {{ heading_title }}</a></div>
         <div id="downloads-list">
           <div class="row">
             <div class="col-sm-4"><img src="{{ image }}" alt="{{ extension }}" title="{{ extension }}" class="img-responsive"/></div>
             <div class="col-sm-8">
               <h3>{{ name }}</h3>
-              <p>Purchased on <strong>{{ date_added }}</strong></p>
-              <p><a href="{{ extension }}" class="btn btn-link">[Go to extension page]</a></p>
+              <p>{{ text_purchased_on }} <strong>{{ date_added }}</strong></p>
+              <p><a href="{{ extension }}" class="btn btn-link">{{ text_extension_page }}</a></p>
               {% if license %}
                 {% if valid %}
                   <div class="support-valid-date">
-                    <p>Support and Updates Available TILL</p>
+                    <p>{{ text_support_valid }}</p>
                     <h4>{{ date_valid }}</h4>
                   </div>
                 {% else %}
                   <div class="support-valid-date support-valid-date-expired">
-                    <p>Support and Updates Available TILL</p>
+                    <p>{{ text_support_valid }}</p>
                     <h4>{{ date_valid }}</h4>
                   </div>
                 {% endif %}
@@ -31,8 +31,8 @@
         <div id="downloads-details">
           <br/>
           <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab-download" data-toggle="tab">Downloads</a></li>
-            <li><a href="#tab-documentation" data-toggle="tab">Documentation</a></li>
+            <li class="active"><a href="#tab-download" data-toggle="tab">{{ tab_download }}</a></li>
+            <li><a href="#tab-documentation" data-toggle="tab">{{ tab_documentation }}</a></li>
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="tab-download">
@@ -40,9 +40,9 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>Download Name</th>
-                      <th>Compatibility</th>
-                      <th>Action</th>
+                      <th>{{ column_name }}</th>
+                      <th>{{ column_compatibility }}</th>
+                      <th>{{ column_action }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -51,14 +51,14 @@
                         <tr>
                           <td>{{ download.name }}</td>
                           <td>{{ download.compatibility }}</td>
-                          <td> {% if download.href %}<a href="{{ download.href }}" class="btn btn-primary btn-sm">Download</a>{% else %}
-                              <button type="button" class="btn btn-primary btn-sm" disabled="disabled">Download</button>
+                          <td> {% if download.href %}<a href="{{ download.href }}" class="btn btn-primary btn-sm">{{ button_download }}</a>{% else %}
+                              <button type="button" class="btn btn-primary btn-sm" disabled="disabled">{{ button_download }}</button>
                             {% endif %}</td>
                         </tr>
                       {% endfor %}
                     {% else %}
                       <tr>
-                        <td colspan="3">No results!</td>
+                        <td colspan="3">{{ text_no_results }}</td>
                       </tr>
                     {% endif %}
                   </tbody>
@@ -75,4 +75,4 @@
     </div>
   </div>
 </div>
-{{ footer }} 
+{{ footer }}

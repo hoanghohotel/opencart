@@ -5,6 +5,51 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v1.0.1] — 2026-11-08 (Full Internationalization, Config-Driven Branding & Marketplace Enhancements)
+
+### Highlights (English)
+
+#### 1. Full Internationalization (i18n) & Multi-Language Architecture
+- **100% Language-File-Driven UI (`application/language/en-gb/**`, `admin/language/en-gb/**`)**:
+  - Created and structured **120 Frontend Language Files** (`account/`, `checkout/`, `cloud/`, `cms/`, `common/`, `error/`, `mail/`, `marketplace/`, `support/`) and **55 Admin Language Files**.
+  - Eliminated hardcoded English strings across all PHP controllers (`application/controller/**`, `admin/controller/**`) and Twig templates (`application/view/template/**`, `admin/view/template/**`), enabling effortless translation into any target language.
+- **Automatic View Language & Config Injection (`Loader::view()`, `Language::getTokenMap()`)**:
+  - `Loader::view()` automatically loads both base controller language files and view-specific language files, merges all language keys into `$data`, and injects dynamic store configuration variables (`store_name`, `store_owner`, `store_domain`, `store_url`, `store_email`, `store_telephone`, `store_address`, `store_logo_url`, `contact_support`, `contact_partner`, `contact_marketing`, `forum`, `documentation`, `book`, `developer`, `dedicated_support`, `demo_store_url`, `demo_admin_url`).
+  - Built-in dynamic placeholder interpolation (`{store_name}`, `{store_owner}`, `{store_domain}`, `{store_url}`, `{contact_support}`, etc.) inside language strings.
+
+#### 2. 100% Config-Driven Contact Details, Domains & Local Assets
+- **Zero Hardcoded Branding, Emails, Addresses, or Phone Numbers**:
+  - Removed all hardcoded `@opencart.com` email addresses (`support@opencart.com`, `info@opencart.com`, `partners@opencart.com`, `media@opencart.com`, `noreply@opencart.com`), hardcoded `opencart.com` URLs, `OpenCart Limited` legal names, Hong Kong physical addresses, and `+852 2499 0996` phone numbers from controllers, templates, invoices (`account/order_info`, `account/promotion_info`, `account/subscription_invoice_info`), legal pages, and email templates (`mail/*`).
+  - Added configurable Resource & Demo URLs (`config_forum_url`, `config_docs_url`, `config_book_url`, `config_developer_url`, `config_dedicated_support_url`, `config_demo_store_url`, `config_demo_admin_url`) in `Admin -> System -> Settings -> Store`.
+  - Localized all external `image.opencart.com` assets into `application/view/image/cms/`.
+
+#### 3. Marketplace Contact Seller, Official Release Sync & Admin Rich-Text Editor
+- **Authenticated Contact Seller Workflow (`support/seller`, `mail/seller`)**:
+  - Added `support/seller` controller, language file, and templates (`support/seller.twig`, `support/seller_success.twig`) requiring member login + PIN/IP security verification (`marketplace/extension/info` -> `Get Support`), storing enquiries in `oc_support_enquiry` (`type = 'seller'`) and dispatching formatted HTML + Plaintext email notifications (`ControllerMailSeller`) with `Reply-To` set to the buyer.
+- **Official GitHub Releases Integration (`cms/download`, `cms/download/download`, `cms/download/history`)**:
+  - Mapped official GitHub release archive URLs (`download_url`) across all 53 OpenCart releases (`1.4.8` through `4.1.0.4`) and added the Thank-You auto-download page (`cms/download/download`) with dynamic latest version resolution.
+- **Admin Rich-Text Editor (Summernote + CodeMirror) & PHP 8.5 Compatibility**:
+  - Restored Summernote WYSIWYG editor and CodeMirror syntax highlighting across all Admin CMS, Marketplace, and Partner forms (`admin/view/javascript/summernote/opencart.js`) with jQuery 3.7 compatibility.
+  - Added strict null-safe casting in `system/engine/action.php` and `system/helper/utf8.php` for PHP 8.1+ / 8.5 `preg_replace()` compliance.
+
+---
+
+### Tóm tắt Phiên bản [v1.0.1] — 2026-11-08 (Tiếng Việt)
+
+1. **Đa ngôn ngữ hóa (i18n) toàn diện (120 file ngôn ngữ Frontend & 55 file ngôn ngữ Admin)**:
+   - Tách toàn bộ văn bản tiếng Anh cứng trong PHP Controller và giao diện `.twig` sang hệ thống file ngôn ngữ `application/language/en-gb/**` và `admin/language/en-gb/**`.
+   - Nâng cấp `Loader::view()` và `Language::getTokenMap()` tự động nạp file ngôn ngữ theo route và tự động nội suy các biến cấu hình (`{store_name}`, `{store_owner}`, `{store_domain}`, `{contact_support}`...) ngay trong chuỗi dịch.
+2. **Loại bỏ 100% Email, Tên miền, Địa chỉ, Điện thoại cứng — Động hóa hoàn toàn theo `Settings`**:
+   - Xóa bỏ hoàn toàn các email `@opencart.com`, tên miền `opencart.com`, tên công ty `OpenCart Limited`, địa chỉ Hong Kong và số điện thoại `+852 2499 0996` trên mọi trang (Liên hệ, Quảng cáo, Điều khoản, Chính sách, Hóa đơn `order_info`/`promotion_info`/`subscription_invoice_info`, và Email `mail/*`).
+   - Bổ sung cấu hình URL Diễn đàn, Tài liệu, Sách, Nhà phát triển, Hỗ trợ chuyên sâu và Link Demo trực tiếp trong `Admin -> System -> Settings -> Store`.
+   - Tải toàn bộ hình ảnh từ `image.opencart.com` về thư mục nội bộ `application/view/image/cms/`.
+3. **Tính năng Liên hệ Seller (`support/seller`), Trình soạn thảo Admin & Tương thích PHP 8.5**:
+   - Bổ sung trang Liên hệ Nhà bán hàng (`support/seller`) bắt buộc đăng nhập từ trang chi tiết Extension, lưu lịch sử vào `oc_support_enquiry` và gửi email thông báo tự động (`mail/seller`) tới email của Seller.
+   - Đồng bộ toàn bộ 53 bản phát hành OpenCart chính thức từ GitHub (`1.4.8` – `4.1.0.4`) kèm trang Thank You tự động tải xuống (`cms/download/download`).
+   - Khôi phục trình soạn thảo văn bản phong phú Summernote + CodeMirror trong Admin (tương thích jQuery 3.7) và xử lý triệt để cảnh báo `preg_replace()` trên PHP 8.1+ / 8.5.
+
+---
+
 ## [v1.0.0] — 2026-11-07 (Initial Commercial Core Release)
 
 ### Highlights (English)

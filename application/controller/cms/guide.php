@@ -1,7 +1,9 @@
 <?php
 class ControllerCmsGuide extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart - Quick Guide');
+		$this->load->language('cms/guide');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['home'] = $this->url->link('common/home');
 

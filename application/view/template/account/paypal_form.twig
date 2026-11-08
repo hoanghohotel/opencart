@@ -3,7 +3,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
-				<h2>Register new payment method</h2>
+				<h2>{{ heading_register_method }}</h2>
 
 				{% if success %}
 					<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }}
@@ -19,12 +19,12 @@
 
 				<form id="form-paypal" class="mb-3">
 					{# <fieldset id="payment-paypal"> #}
-                    <label for="paypal">Click the button to add your paypal account to opencart.com</label>
+                    <label for="paypal">{{ text_paypal_connect }}</label>
 						<div id="paypal"></div>
 					{# </fieldset> #}
 					<input type="hidden" name="nonce" value="" id="input-nonce"/>
 					<div class="text-left">
-						<a href="{{ cancel }}" class="btn btn btn-danger btn-lg">Cancel</a>&nbsp;&nbsp;
+						<a href="{{ cancel }}" class="btn btn btn-danger btn-lg">{{ button_cancel }}</a>&nbsp;&nbsp;
 					</div>
 				</form>
 			</div>
@@ -55,7 +55,7 @@ braintree.client.create({
     createBillingAgreement: function () {
       return paypalCheckoutInstance.createPayment({
         flow: 'vault',
-        billingAgreementDescription: 'Allow Opencart to store your paypal account',
+        billingAgreementDescription: '{{ text_paypal_agreement|e('js') }}',
       });
     },
     onApprove: function (data, actions) {

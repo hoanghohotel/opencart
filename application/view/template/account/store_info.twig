@@ -3,8 +3,8 @@
   <div class="container">
     <div class="row">
       <div class="col-sm-9">
-        <h2>Your Stores</h2>
-        <p>Register your store to get access to the marketplace API</p>
+        <h2>{{ heading_title }}</h2>
+        <p>{{ text_subtitle }}</p>
 
 
         {% if error_warning %}
@@ -14,23 +14,23 @@
         {% endif %}
         <form action="{{ action }}" method="post" enctype="multipart/form-data">
           <fieldset>
-            <legend>Your Store API Information</legend>
+            <legend>{{ text_api_info }}</legend>
             <div class="form-group">
-              <label for="input-domain">Domain Name</label>
+              <label for="input-domain">{{ entry_domain }}</label>
               <div>{{ domain }}</div>
             </div>
             <div class="form-group">
-              <label for="input-username">API Username</label>
+              <label for="input-username">{{ entry_username }}</label>
               <div>{{ username }}</div>
             </div>
             <div class="form-group">
-              <label for="input-secret">API Secret</label><textarea type="text" name="secret" rows="8" id="input-secret" placeholder="API Secret" readonly class="form-control">{{ secret }}</textarea>
+              <label for="input-secret">{{ entry_secret }}</label><textarea type="text" name="secret" rows="8" id="input-secret" placeholder="{{ entry_secret }}" readonly class="form-control">{{ secret }}</textarea>
             </div>
           </fieldset>
           <div class="text-right">
-            <a href="{{ cancel }}" class="btn btn-link">Cancel</a>
-            <button type="button" id="button-secret" class="btn btn-warning btn-lg">Generate API Secret</button>
-            <button type="button" id="button-copy" data-toggle="tooltip" data-title="Copy to clipboard" class="btn btn-info btn-lg"><i class="fa fa-copy"></i></button>
+            <a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a>
+            <button type="button" id="button-secret" class="btn btn-warning btn-lg">{{ button_secret }}</button>
+            <button type="button" id="button-copy" data-toggle="tooltip" data-title="{{ button_copy }}" class="btn btn-info btn-lg"><i class="fa fa-copy"></i></button>
           </div>
         </form>
       </div>

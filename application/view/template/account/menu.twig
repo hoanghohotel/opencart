@@ -1,40 +1,6 @@
-{# <div class="panel-group" id="collapse-menu">
-  <div class="panel panel-default">
-    <div class="panel-heading"><a href="{{ account }}" class="panel-title"><i class="fa fa-home fa-fw"></i> Dashboard</a></div>
-  </div>
-  {% set i = 0 %}
-  {% for menu in menus %}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-
-        <a href="#collapse-menu{{ i }}" data-toggle="collapse" data-parent="#collapse-menu" class="panel-title collapsed">
-                 <i class="fa fa-plus-square-o fa-fw"></i>{{ menu.text }}
-        </a>
-      </div>
-      {% if menu.children %}
-        <div id="collapse-menu{{ i }}" class="panel-collapse collapse">
-          <table class="table table-hover" style="margin-bottom: 0;">
-            {% for child in menu.children %}
-              {% if child.value == route %}
-                <tr class="warning">
-                  <td><a href="{{ child.href }}" data-toggle="tooltip" title="{{ child.tooltip }}" class="text-warning active"><i class="fa fa-{{ child.icon }} fa-fw"></i> {{ child.text }}</a></td>
-                </tr>
-              {% else %}
-                <tr>
-                  <td><a href="{{ child.href }}" data-toggle="tooltip" title="{{ child.tooltip }}"><i class="fa fa-{{ child.icon }} fa-fw"></i> {{ child.text }}</a></td>
-                </tr>
-              {% endif %}
-            {% endfor %}
-          </table>
-        </div>
-      {% endif %}
-    </div>
-    {% set i = i + 1 %}
-  {% endfor %}
-</div> #}
 <div class="panel-group" id="collapse-menu">
   <div class="panel panel-default">
-    <div class="panel-heading"><a href="{{ account }}" class="panel-title"><i class="fa fa-home fa-fw"></i> Dashboard</a></div>
+    <div class="panel-heading"><a href="{{ account }}" class="panel-title"><i class="fa fa-home fa-fw"></i> {{ text_menu_dashboard }}</a></div>
   </div>
   {% set i = 0 %}
   {% for menu in menus %}

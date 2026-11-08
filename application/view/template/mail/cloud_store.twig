@@ -24,7 +24,7 @@
                                                         <td class="center" align="left"
                                                             style="padding: 0px; font-weight: bold; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#6dc6dd; font-size:22px; line-height:32px; mso-line-height-rule: exactly;">
                                                             <span> <a class="heading-link" href="#"
-                                                                      style="color:#6dc6dd; text-decoration: none; font-style: normal; font-weight: bold;"> Cloud Store</a></span>
+                                                                      style="color:#6dc6dd; text-decoration: none; font-style: normal; font-weight: bold;"> {{ text_heading }}</a></span>
                                                         </td>
                                                     </tr>
                                                     <!-- END OF HEADING-->
@@ -33,7 +33,7 @@
                                                     <tr>
                                                         <td class="center" align="left"
                                                             style="padding-bottom: 10px; margin: 0; font-size:11px ; font-style: italic; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 18px;mso-line-height-rule: exactly;">
-                                                            Requested from IP address <span
+                                                            {{ text_requested_ip }} <span
                                                                     style="color:#6dc6dd; font-style: italic; ">{{ ip }}</span>
                                                         </td>
                                                     </tr>
@@ -66,8 +66,8 @@
                                                         <td class="center" align="left"
                                                             style="margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;mso-line-height-rule: exactly;">
                                                             <p style="text-align:left;"><br/>
-                                                                Many thanks,<br/>
-                                                                The {{ store }} team</p></td>
+                                                                {{ text_thanks }}<br/>
+                                                                {{ text_team_formatted }}</p></td>
                                                     </tr>
                                                     <!-- END OF TEXT-->
                                                 </table>

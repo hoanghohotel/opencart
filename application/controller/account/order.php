@@ -11,7 +11,9 @@ class ControllerAccountOrder extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('Order History');
+		$this->load->language('account/order');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (isset($this->session->data['success'])) {
 			$data['success'] = $this->session->data['success'];
@@ -60,7 +62,7 @@ class ControllerAccountOrder extends Controller {
 		}
 
 		foreach ($results as $result) {
-			$status_name = !empty($result['status']) ? $result['status'] : (!empty($result['order_status']) ? $result['order_status'] : (isset($order_statuses[$result['order_status_id']]) ? $order_statuses[$result['order_status_id']] : 'Complete'));
+			$status_name = !empty($result['status']) ? $result['status'] : (!empty($result['order_status']) ? $result['order_status'] : (isset($order_statuses[$result['order_status_id']]) ? $order_statuses[$result['order_status_id']] : $this->language->get('text_complete')));
 
 			$data['orders'][] = array(
 				'order_id'        => $result['order_id'],
@@ -99,6 +101,8 @@ class ControllerAccountOrder extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
+		$this->load->language('account/order');
+
 		if (isset($this->request->get['order_id'])) {
 			$order_id = (int)$this->request->get['order_id'];
 		} else {
@@ -110,7 +114,7 @@ class ControllerAccountOrder extends Controller {
 		$order_info = $this->model_account_order->getOrder($order_id, $this->member->getId());
 
 		if ($order_info && (int)$order_info['member_id'] === (int)$this->member->getId()) {
-			$this->document->setTitle('Order #' . $order_info['order_id']);
+			$this->document->setTitle(sprintf($this->language->get('text_order_info'), $order_info['order_id']));
 
 			if (isset($this->session->data['success'])) {
 				$data['success'] = $this->session->data['success'];
@@ -120,7 +124,7 @@ class ControllerAccountOrder extends Controller {
 				$data['success'] = '';
 			}
 
-			$data['title'] = 'Order #' . $order_info['order_id'];
+			$data['title'] = sprintf($this->language->get('text_order_info'), $order_info['order_id']);
 			$data['logo'] = $this->config->get('config_name');
 
 			$data['company'] = $this->member->getCompany();

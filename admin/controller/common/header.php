@@ -70,9 +70,13 @@ class ControllerCommonHeader extends Controller {
 			$data['stores'] = array();
 
 			$data['stores'][] = array(
-				'name' => $this->config->get('config_name') ? $this->config->get('config_name') : 'OpenCart.com',
+				'name' => $this->config->get('config_name') ? $this->config->get('config_name') : 'OpenCart',
 				'href' => HTTP_CATALOG
 			);
+
+			$data['homepage_url'] = HTTP_CATALOG;
+			$data['documentation_url'] = $this->config->get('config_docs_url') ? $this->config->get('config_docs_url') : (HTTP_CATALOG . 'index.php?route=cms/guide');
+			$data['support_url'] = $this->config->get('config_forum_url') ? $this->config->get('config_forum_url') : (HTTP_CATALOG . 'index.php?route=support/support');
 		}
 
 		return $this->load->view('common/header', $data);

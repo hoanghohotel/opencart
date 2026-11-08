@@ -1,6 +1,8 @@
 <?php
 class ControllerMarketplacePurchase extends Controller {
 	public function index() {
+		$this->load->language('marketplace/purchase');
+
 		$this->load->model('marketplace/extension');
 
 		$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 0;
@@ -13,7 +15,7 @@ class ControllerMarketplacePurchase extends Controller {
 		$extension_info = $this->model_marketplace_extension->getExtension($extension_id);
 
 		if ($extension_info) {
-			$this->document->setTitle('Purchase License - ' . $extension_info['name']);
+			$this->document->setTitle(sprintf($this->language->get('heading_title'), $extension_info['name']));
 
 			$quantity = isset($this->request->post['quantity']) && (int)$this->request->post['quantity'] > 0 ? (int)$this->request->post['quantity'] : (isset($this->request->get['quantity']) && (int)$this->request->get['quantity'] > 0 ? (int)$this->request->get['quantity'] : 1);
 
@@ -40,11 +42,15 @@ class ControllerMarketplacePurchase extends Controller {
 	}
 
 	public function terms() {
+		$this->load->language('marketplace/purchase');
+
 		$this->response->setOutput($this->load->view('marketplace/terms'));
 	}
 
 	public function success() {
-		$this->document->setTitle('Extension Purchase Success');
+		$this->load->language('marketplace/purchase');
+
+		$this->document->setTitle($this->language->get('heading_success'));
 
 		$member_token = isset($this->session->data['member_token']) ? 'member_token=' . $this->session->data['member_token'] : '';
 
@@ -59,7 +65,9 @@ class ControllerMarketplacePurchase extends Controller {
 	}
 
 	public function failure() {
-		$this->document->setTitle('Extension Purchase Failure');
+		$this->load->language('marketplace/purchase');
+
+		$this->document->setTitle($this->language->get('heading_failure'));
 
 		$data['contact'] = $this->url->link('support/contact');
 

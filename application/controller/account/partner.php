@@ -35,14 +35,16 @@ class ControllerAccountPartner extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('Partner Up');
+		$this->load->language('account/partner');
+
+		$this->document->setTitle($this->language->get('heading_add'));
 
 		$this->load->model('account/partner');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm('add')) {
 			$this->savePartnerData($this->request->post);
 
-			$this->session->data['success'] = 'Success: Your partner application has been submitted!';
+			$this->session->data['success'] = $this->language->get('text_success_add');
 
 			$this->response->redirect($this->url->link('account/account', 'member_token=' . $this->session->data['member_token'], true));
 		}
@@ -61,14 +63,16 @@ class ControllerAccountPartner extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('My Partner Info');
+		$this->load->language('account/partner');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/partner');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm('edit')) {
 			$this->savePartnerData($this->request->post);
 
-			$this->session->data['success'] = 'Success: Your partner information has been updated!';
+			$this->session->data['success'] = $this->language->get('text_success_edit');
 
 			$this->response->redirect($this->url->link('account/account', 'member_token=' . $this->session->data['member_token'], true));
 		}
@@ -326,59 +330,59 @@ class ControllerAccountPartner extends Controller {
 
 	protected function validateForm($mode = 'edit') {
 		if (!isset($this->request->post['firstname']) || (utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
-			$this->error['firstname'] = 'First Name must be between 1 and 32 characters!';
+			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
 
 		if (!isset($this->request->post['lastname']) || (utf8_strlen(trim($this->request->post['lastname'])) < 1) || (utf8_strlen(trim($this->request->post['lastname'])) > 32)) {
-			$this->error['lastname'] = 'Last Name must be between 1 and 32 characters!';
+			$this->error['lastname'] = $this->language->get('error_lastname');
 		}
 
 		if (empty($this->request->post['company'])) {
-			$this->error['company'] = 'Company is required!';
+			$this->error['company'] = $this->language->get('error_company');
 		}
 
 		if (empty($this->request->post['website'])) {
-			$this->error['website'] = 'Website is required!';
+			$this->error['website'] = $this->language->get('error_website');
 		}
 
 		if (!isset($this->request->post['email']) || (utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
-			$this->error['email'] = 'E-Mail Address does not appear to be valid!';
+			$this->error['email'] = $this->language->get('error_email');
 		}
 
 		if (!isset($this->request->post['telephone']) || (utf8_strlen(trim($this->request->post['telephone'])) < 3) || (utf8_strlen(trim($this->request->post['telephone'])) > 32)) {
-			$this->error['telephone'] = 'Telephone must be between 3 and 32 characters!';
+			$this->error['telephone'] = $this->language->get('error_telephone');
 		}
 
 		if (empty($this->request->post['member_partner_type_id'])) {
-			$this->error['partner_type'] = 'Please select a partner type!';
+			$this->error['partner_type'] = $this->language->get('error_partner_type');
 		}
 
 		if (empty($this->request->post['description_short'])) {
-			$this->error['description_short'] = 'Short description is required!';
+			$this->error['description_short'] = $this->language->get('error_description_short');
 		}
 
 		if (empty($this->request->post['description_long'])) {
-			$this->error['description_long'] = 'Long description is required!';
+			$this->error['description_long'] = $this->language->get('error_description_long');
 		}
 
 		if (!isset($this->request->post['address_1']) || (utf8_strlen(trim($this->request->post['address_1'])) < 3) || (utf8_strlen(trim($this->request->post['address_1'])) > 128)) {
-			$this->error['address_1'] = 'Address 1 must be between 3 and 128 characters!';
+			$this->error['address_1'] = $this->language->get('error_address_1');
 		}
 
 		if (!isset($this->request->post['city']) || (utf8_strlen(trim($this->request->post['city'])) < 2) || (utf8_strlen(trim($this->request->post['city'])) > 128)) {
-			$this->error['city'] = 'City must be between 2 and 128 characters!';
+			$this->error['city'] = $this->language->get('error_city');
 		}
 
 		if (empty($this->request->post['country_id'])) {
-			$this->error['country'] = 'Please select a country!';
+			$this->error['country'] = $this->language->get('error_country');
 		}
 
 		if (!isset($this->request->post['zone_id']) || $this->request->post['zone_id'] === '') {
-			$this->error['zone'] = 'Please select a region / state!';
+			$this->error['zone'] = $this->language->get('error_zone');
 		}
 
 		if ($mode === 'add' && empty($this->request->post['agree'])) {
-			$this->error['warning'] = 'Warning: You must agree to the Terms & Conditions!';
+			$this->error['warning'] = $this->language->get('error_agree');
 		}
 
 		return !$this->error;

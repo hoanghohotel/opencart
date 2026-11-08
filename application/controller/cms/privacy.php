@@ -1,7 +1,9 @@
 <?php
 class ControllerCmsPrivacy extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart - Privacy Policy');
+		$this->load->language('cms/privacy');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');

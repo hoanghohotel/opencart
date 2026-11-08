@@ -1,6 +1,8 @@
 <?php
 class ControllerCmsNewsletter extends Controller {
 	public function index() {
+		$this->load->language('cms/newsletter');
+
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 			$this->subscribe();
 			return;
@@ -21,6 +23,8 @@ class ControllerCmsNewsletter extends Controller {
 	}
 
 	public function subscribe() {
+		$this->load->language('cms/newsletter');
+
 		$json = array();
 
 		$this->load->model('cms/newsletter');
@@ -28,15 +32,15 @@ class ControllerCmsNewsletter extends Controller {
 		$email = isset($this->request->post['newsletter']) ? trim($this->request->post['newsletter']) : (isset($this->request->post['email']) ? trim($this->request->post['email']) : (isset($this->request->post['EMAIL']) ? trim($this->request->post['EMAIL']) : ''));
 
 		if ((utf8_strlen($email) > 96) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-			$json['error'] = 'Please enter a valid email address!';
+			$json['error'] = $this->language->get('error_email');
 		} elseif ($this->model_cms_newsletter->getTotalNewslettersByEmail($email)) {
-			$json['error'] = 'This email address is already subscribed to our newsletter!';
+			$json['error'] = $this->language->get('error_exists');
 		}
 
 		if (!$json) {
 			$this->model_cms_newsletter->addNewsletter($email);
 
-			$json['success'] = 'Thank you for subscribing to our newsletter!';
+			$json['success'] = $this->language->get('text_success');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -44,7 +48,9 @@ class ControllerCmsNewsletter extends Controller {
 	}
 
 	public function unsubscribe() {
-		$this->document->setTitle('OpenCart - Unsubscribe Newsletter');
+		$this->load->language('cms/newsletter');
+
+		$this->document->setTitle($this->language->get('heading_unsubscribe'));
 
 		$this->load->model('cms/newsletter');
 

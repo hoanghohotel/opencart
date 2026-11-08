@@ -9,7 +9,9 @@ class ControllerAccountSubscription extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Cloud Stores');
+		$this->load->language('account/subscription');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/subscription');
 
@@ -85,10 +87,12 @@ class ControllerAccountSubscription extends Controller {
 	}
 
 	public function add() {
+		$this->load->language('account/subscription');
+
 		if (!$this->member->isLogged() || (!isset($this->request->get['member_token']) || !isset($this->session->data['member_token']) || ($this->request->get['member_token'] != $this->session->data['member_token']))) {
 			if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 				$this->response->addHeader('Content-Type: application/json');
-				$this->response->setOutput(json_encode(array('error' => array('warning' => 'Session expired. Please log in again.'))));
+				$this->response->setOutput(json_encode(array('error' => array('warning' => $this->language->get('error_session_expired')))));
 				return;
 			}
 
@@ -102,19 +106,19 @@ class ControllerAccountSubscription extends Controller {
 			$json = array();
 
 			if (empty($this->request->post['name']) || utf8_strlen(trim($this->request->post['name'])) < 3 || utf8_strlen(trim($this->request->post['name'])) > 32) {
-				$json['error']['name'] = 'Store Name must be between 3 and 32 characters!';
+				$json['error']['name'] = $this->language->get('error_store_name');
 			}
 
 			if (empty($this->request->post['admin_email']) || !filter_var($this->request->post['admin_email'], FILTER_VALIDATE_EMAIL)) {
-				$json['error']['admin_email'] = 'Store Admin Email does not appear to be valid!';
+				$json['error']['admin_email'] = $this->language->get('error_admin_email');
 			}
 
 			if (empty($this->request->post['admin_username']) || utf8_strlen(trim($this->request->post['admin_username'])) < 3) {
-				$json['error']['admin_username'] = 'Store Admin Username must be at least 3 characters!';
+				$json['error']['admin_username'] = $this->language->get('error_admin_username');
 			}
 
 			if (empty($this->request->post['agree']) || $this->request->post['agree'] != '1') {
-				$json['error']['agree'] = 'You must agree to the Terms and Conditions!';
+				$json['error']['agree'] = $this->language->get('error_agree');
 			}
 
 			if (!$json) {
@@ -126,12 +130,12 @@ class ControllerAccountSubscription extends Controller {
 					'admin_username'       => $this->request->post['admin_username']
 				));
 
-				$domain_name = strtolower(preg_replace('/[^a-zA-Z0-9\-]/', '', $this->request->post['name'])) . '.opencart.shop';
+				$domain_name = strtolower(preg_replace('/[^a-zA-Z0-9\-]/', '', $this->request->post['name'])) . $this->language->get('text_cloud_subdomain');
 				$this->model_account_subscription->addDomain($subscription_id, $domain_name);
 
 				$this->load->controller('mail/subscription', array(
 					'email'     => $this->member->getEmail(),
-					'text'      => 'Your OpenCart Cloud subscription for "' . trim($this->request->post['name']) . '" has been activated.',
+					'text'      => sprintf($this->language->get('text_mail_subscription'), trim($this->request->post['name'])),
 					'mail_link' => $this->url->link('account/subscription/info', 'member_token=' . $this->session->data['member_token'] . '&subscription_id=' . $subscription_id, true)
 				));
 
@@ -139,16 +143,16 @@ class ControllerAccountSubscription extends Controller {
 					'email' => $this->request->post['admin_email'],
 					'name'  => trim($this->request->post['name']),
 					'url'   => 'https://' . $domain_name,
-					'text'  => 'Your OpenCart Cloud store "' . trim($this->request->post['name']) . '" has been provisioned and is ready!'
+					'text'  => sprintf($this->language->get('text_mail_cloud_store'), trim($this->request->post['name']))
 				));
 
-				$json['success'] = 'Your Cloud Store has been created!';
+				$json['success'] = $this->language->get('text_success_create');
 				$json['redirect'] = str_replace('&amp;', '&', $this->url->link('account/subscription/info', 'member_token=' . $this->session->data['member_token'] . '&subscription_id=' . $subscription_id, true));
 				$json['process_statuses'] = array(
-					'Provisioning cloud instance...',
-					'Setting up database...',
-					'Installing OpenCart...',
-					'Finalizing store configuration...'
+					$this->language->get('text_process_status_1'),
+					$this->language->get('text_process_status_2'),
+					$this->language->get('text_process_status_3'),
+					$this->language->get('text_process_status_4')
 				);
 			}
 
@@ -157,7 +161,7 @@ class ControllerAccountSubscription extends Controller {
 			return;
 		}
 
-		$this->document->setTitle('Create Cloud Store');
+		$this->document->setTitle($this->language->get('heading_create'));
 
 		$data['error_warning'] = '';
 		$data['success'] = '';
@@ -197,7 +201,7 @@ class ControllerAccountSubscription extends Controller {
 			);
 		}
 
-		$data['subscription_payment_create_info'] = 'Add new Payment Method';
+		$data['subscription_payment_create_info'] = $this->language->get('text_add_payment_method');
 		$data['subscription_payment_create_url'] = $this->url->link('account/payment/add', 'member_token=' . $this->session->data['member_token'], true);
 		$data['subscription_terms'] = $this->url->link('cloud/terms', '', true);
 		$data['banner'] = '';
@@ -216,6 +220,8 @@ class ControllerAccountSubscription extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
+		$this->load->language('account/subscription');
+
 		if (isset($this->request->get['subscription_id'])) {
 			$subscription_id = (int)$this->request->get['subscription_id'];
 		} else {
@@ -230,7 +236,7 @@ class ControllerAccountSubscription extends Controller {
 			$this->response->redirect($this->url->link('account/subscription', 'member_token=' . $this->session->data['member_token'], true));
 		}
 
-		$this->document->setTitle('Store Details');
+		$this->document->setTitle($this->language->get('heading_details'));
 
 		if (isset($this->session->data['error'])) {
 			$data['error_warning'] = $this->session->data['error'];
@@ -324,10 +330,12 @@ class ControllerAccountSubscription extends Controller {
 	}
 
 	public function update() {
+		$this->load->language('account/subscription');
+
 		$json = array();
 
 		if (!$this->member->isLogged() || (!isset($this->request->get['member_token']) || !isset($this->session->data['member_token']) || ($this->request->get['member_token'] != $this->session->data['member_token']))) {
-			$json['error'] = 'Warning: You do not have permission to modify subscriptions!';
+			$json['error'] = $this->language->get('error_permission');
 		}
 
 		$this->load->model('account/subscription');
@@ -337,18 +345,18 @@ class ControllerAccountSubscription extends Controller {
 		$subscription_info = $this->model_account_subscription->getSubscription($subscription_id);
 
 		if (!$subscription_info) {
-			$json['error'] = 'Warning: Subscription could not be found!';
+			$json['error'] = $this->language->get('error_not_found');
 		}
 
 		if (!$json) {
 			if (isset($this->request->post['payment_id'])) {
 				$this->model_account_subscription->editSubscriptionPayment($subscription_id, (int)$this->request->post['payment_id']);
-				$json['success'] = 'Success: Your active payment method has been updated!';
+				$json['success'] = $this->language->get('text_success_payment_update');
 			} elseif (isset($this->request->post['subscription_plan_id'])) {
 				$this->model_account_subscription->editSubscriptionPlan($subscription_id, (int)$this->request->post['subscription_plan_id']);
-				$json['success'] = 'Success: Your subscription plan has been updated!';
+				$json['success'] = $this->language->get('text_success_plan_update');
 			} else {
-				$json['error'] = 'Please select an option to update!';
+				$json['error'] = $this->language->get('error_select_update');
 			}
 		}
 
@@ -357,6 +365,8 @@ class ControllerAccountSubscription extends Controller {
 	}
 
 	public function cancelSubscription() {
+		$this->load->language('account/subscription');
+
 		$json = array();
 
 		if ($this->member->isLogged() && isset($this->request->get['member_token']) && isset($this->session->data['member_token']) && ($this->request->get['member_token'] == $this->session->data['member_token'])) {
@@ -369,7 +379,7 @@ class ControllerAccountSubscription extends Controller {
 			if ($subscription_info) {
 				$this->model_account_subscription->cancelSubscription($subscription_id);
 
-				$this->session->data['success'] = 'Success: Your subscription has been cancelled!';
+				$this->session->data['success'] = $this->language->get('text_success_cancel');
 				$json['redirect'] = str_replace('&amp;', '&', $this->url->link('account/subscription/info', 'member_token=' . $this->session->data['member_token'] . '&subscription_id=' . $subscription_id, true));
 			}
 		}
@@ -379,6 +389,8 @@ class ControllerAccountSubscription extends Controller {
 	}
 
 	public function renewSubscription() {
+		$this->load->language('account/subscription');
+
 		$json = array();
 
 		if ($this->member->isLogged() && isset($this->request->get['member_token']) && isset($this->session->data['member_token']) && ($this->request->get['member_token'] == $this->session->data['member_token'])) {
@@ -394,9 +406,9 @@ class ControllerAccountSubscription extends Controller {
 					'store_status'           => 'Active'
 				));
 
-				$this->model_account_subscription->addSubscriptionHistory($subscription_id, 'Active', 'Subscription renewed by member.');
+				$this->model_account_subscription->addSubscriptionHistory($subscription_id, 'Active', $this->language->get('text_history_renewed'));
 
-				$this->session->data['success'] = 'Success: Your subscription has been renewed!';
+				$this->session->data['success'] = $this->language->get('text_success_renew');
 				$json['redirect'] = str_replace('&amp;', '&', $this->url->link('account/subscription/info', 'member_token=' . $this->session->data['member_token'] . '&subscription_id=' . $subscription_id, true));
 			}
 		}
@@ -416,6 +428,8 @@ class ControllerAccountSubscription extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
+		$this->load->language('account/subscription');
+
 		if (isset($this->request->get['subscription_id'])) {
 			$subscription_id = (int)$this->request->get['subscription_id'];
 		} else {
@@ -430,7 +444,7 @@ class ControllerAccountSubscription extends Controller {
 			$this->response->redirect($this->url->link('account/subscription', 'member_token=' . $this->session->data['member_token'], true));
 		}
 
-		$this->document->setTitle('Subscription History');
+		$this->document->setTitle($this->language->get('heading_history'));
 
 		if (isset($this->request->get['page'])) {
 			$page = (int)$this->request->get['page'];
@@ -479,9 +493,11 @@ class ControllerAccountSubscription extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
+		$this->load->language('account/subscription');
+
 		$subscription_id = isset($this->request->get['subscription_id']) ? (int)$this->request->get['subscription_id'] : 0;
 
-		$this->document->setTitle('Cloud Store Backup');
+		$this->document->setTitle($this->language->get('heading_backup'));
 
 		$data['get_backup_list'] = str_replace('&amp;', '&', $this->url->link('account/subscription/getBackupList', 'member_token=' . $this->session->data['member_token'] . '&subscription_id=' . $subscription_id, true));
 		$data['get_backup_restore_list'] = str_replace('&amp;', '&', $this->url->link('account/subscription/getBackupList', 'member_token=' . $this->session->data['member_token'] . '&subscription_id=' . $subscription_id, true));
@@ -494,10 +510,14 @@ class ControllerAccountSubscription extends Controller {
 	}
 
 	public function getBackupList() {
+		$this->load->language('account/subscription');
+
 		$this->response->setOutput($this->renderBackupList('Manual', 'account/subscription_backup_list'));
 	}
 
 	public function createBackup() {
+		$this->load->language('account/subscription');
+
 		$subscription_id = isset($this->request->get['subscription_id']) ? (int)$this->request->get['subscription_id'] : 0;
 
 		$this->load->model('account/subscription');
@@ -507,7 +527,7 @@ class ControllerAccountSubscription extends Controller {
 		}
 
 		$json = array(
-			'html' => $this->renderBackupList('Manual', 'account/subscription_backup_list', 'Success: A new backup has been created!')
+			'html' => $this->renderBackupList('Manual', 'account/subscription_backup_list', $this->language->get('text_success_backup_create'))
 		);
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -515,8 +535,10 @@ class ControllerAccountSubscription extends Controller {
 	}
 
 	public function restoreBackup() {
+		$this->load->language('account/subscription');
+
 		$json = array(
-			'html' => $this->renderBackupList('Manual', 'account/subscription_backup_list', 'Success: Backup restore has been initiated!')
+			'html' => $this->renderBackupList('Manual', 'account/subscription_backup_list', $this->language->get('text_success_backup_restore'))
 		);
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -543,9 +565,11 @@ class ControllerAccountSubscription extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
+		$this->load->language('account/subscription');
+
 		$subscription_id = isset($this->request->get['subscription_id']) ? (int)$this->request->get['subscription_id'] : 0;
 
-		$this->document->setTitle('Cloud Store Database Backup');
+		$this->document->setTitle($this->language->get('heading_database_backup'));
 
 		$data['get_database_backup_list'] = str_replace('&amp;', '&', $this->url->link('account/subscription/getDatabaseBackupList', 'member_token=' . $this->session->data['member_token'] . '&subscription_id=' . $subscription_id, true));
 		$data['get_database_backup_restore_list'] = str_replace('&amp;', '&', $this->url->link('account/subscription/getDatabaseBackupList', 'member_token=' . $this->session->data['member_token'] . '&subscription_id=' . $subscription_id, true));
@@ -558,10 +582,14 @@ class ControllerAccountSubscription extends Controller {
 	}
 
 	public function getDatabaseBackupList() {
+		$this->load->language('account/subscription');
+
 		$this->response->setOutput($this->renderBackupList('Database', 'account/subscription_database_backup_list'));
 	}
 
 	public function createDatabaseBackup() {
+		$this->load->language('account/subscription');
+
 		$subscription_id = isset($this->request->get['subscription_id']) ? (int)$this->request->get['subscription_id'] : 0;
 
 		$this->load->model('account/subscription');
@@ -571,7 +599,7 @@ class ControllerAccountSubscription extends Controller {
 		}
 
 		$json = array(
-			'html' => $this->renderBackupList('Database', 'account/subscription_database_backup_list', 'Success: A new database backup has been created!')
+			'html' => $this->renderBackupList('Database', 'account/subscription_database_backup_list', $this->language->get('text_success_db_backup_create'))
 		);
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -579,8 +607,10 @@ class ControllerAccountSubscription extends Controller {
 	}
 
 	public function restoreDatabaseBackup() {
+		$this->load->language('account/subscription');
+
 		$json = array(
-			'html' => $this->renderBackupList('Database', 'account/subscription_database_backup_list', 'Success: Database restore has been initiated!')
+			'html' => $this->renderBackupList('Database', 'account/subscription_database_backup_list', $this->language->get('text_success_db_backup_restore'))
 		);
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -601,6 +631,8 @@ class ControllerAccountSubscription extends Controller {
 	}
 
 	protected function renderBackupList($type, $template, $success = '') {
+		$this->load->language('account/subscription');
+
 		$subscription_id = isset($this->request->get['subscription_id']) ? (int)$this->request->get['subscription_id'] : 0;
 
 		$this->load->model('account/subscription');
@@ -650,7 +682,9 @@ class ControllerAccountSubscription extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Cloud Domains');
+		$this->load->language('account/subscription');
+
+		$this->document->setTitle($this->language->get('heading_domains'));
 
 		if (isset($this->session->data['error'])) {
 			$data['error_warning'] = $this->session->data['error'];
@@ -723,7 +757,9 @@ class ControllerAccountSubscription extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Your Cloud Domains');
+		$this->load->language('account/subscription');
+
+		$this->document->setTitle($this->language->get('heading_your_domains'));
 
 		$this->load->model('account/subscription');
 
@@ -738,11 +774,11 @@ class ControllerAccountSubscription extends Controller {
 
 		if ($this->request->server['REQUEST_METHOD'] == 'POST') {
 			if (empty($this->request->post['cloud_domain']) || utf8_strlen(trim($this->request->post['cloud_domain'])) < 4) {
-				$this->error['cloud_domain'] = 'Please enter a valid domain name!';
+				$this->error['cloud_domain'] = $this->language->get('error_cloud_domain');
 			} else {
 				$this->model_account_subscription->addDomain($subscription_id, trim($this->request->post['cloud_domain']));
 
-				$this->session->data['success'] = 'Success: Your domain has been registered!';
+				$this->session->data['success'] = $this->language->get('text_success_domain_register');
 
 				if (isset($this->request->get['subscription_id'])) {
 					$this->response->redirect($this->url->link('account/subscription/info', 'member_token=' . $this->session->data['member_token'] . '&subscription_id=' . (int)$this->request->get['subscription_id'], true));
@@ -777,7 +813,9 @@ class ControllerAccountSubscription extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Edit Your Store Domain');
+		$this->load->language('account/subscription');
+
+		$this->document->setTitle($this->language->get('heading_edit_domain'));
 
 		$subscription_id = isset($this->request->get['subscription_id']) ? (int)$this->request->get['subscription_id'] : 0;
 
@@ -787,7 +825,7 @@ class ControllerAccountSubscription extends Controller {
 
 		$data['error_warning'] = '';
 		$data['subscription_store_subdomain'] = $subscription_info ? $subscription_info['name'] : '';
-		$data['cloud_store_subdomain'] = '.opencart.shop';
+		$data['cloud_store_subdomain'] = $this->language->get('text_cloud_subdomain');
 		$data['subscription_store_id'] = $subscription_id;
 		$data['back_url'] = $this->url->link('account/subscription/info', 'member_token=' . $this->session->data['member_token'] . '&subscription_id=' . $subscription_id, true);
 		$data['member_token'] = $this->session->data['member_token'];
@@ -806,7 +844,9 @@ class ControllerAccountSubscription extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Domain Settings');
+		$this->load->language('account/subscription');
+
+		$this->document->setTitle($this->language->get('heading_domain_settings'));
 
 		$this->load->model('account/subscription');
 
@@ -838,12 +878,14 @@ class ControllerAccountSubscription extends Controller {
 	}
 
 	public function deleteDomain() {
+		$this->load->language('account/subscription');
+
 		if ($this->member->isLogged() && isset($this->request->get['member_token']) && isset($this->session->data['member_token']) && ($this->request->get['member_token'] == $this->session->data['member_token'])) {
 			$this->load->model('account/subscription');
 
 			if (isset($this->request->get['subscription_domain_id'])) {
 				$this->model_account_subscription->deleteDomain((int)$this->request->get['subscription_domain_id']);
-				$this->session->data['success'] = 'Success: Domain has been removed!';
+				$this->session->data['success'] = $this->language->get('text_success_domain_remove');
 			}
 		}
 
@@ -855,10 +897,12 @@ class ControllerAccountSubscription extends Controller {
 	}
 
 	public function pointDomain() {
+		$this->load->language('account/subscription');
+
 		if ($this->member->isLogged() && isset($this->request->get['member_token']) && isset($this->session->data['member_token']) && ($this->request->get['member_token'] == $this->session->data['member_token'])) {
 			if (isset($this->request->get['subscription_domain_id'])) {
 				$this->db->query("UPDATE `" . DB_PREFIX . "subscription_domain` SET pointed = '1', status = 'Active' WHERE subscription_domain_id = '" . (int)$this->request->get['subscription_domain_id'] . "' AND member_id = '" . (int)$this->member->getId() . "'");
-				$this->session->data['success'] = 'Success: Domain has been connected to your store!';
+				$this->session->data['success'] = $this->language->get('text_success_domain_connect');
 			}
 		}
 
@@ -867,10 +911,12 @@ class ControllerAccountSubscription extends Controller {
 	}
 
 	public function unpointDomain() {
+		$this->load->language('account/subscription');
+
 		if ($this->member->isLogged() && isset($this->request->get['member_token']) && isset($this->session->data['member_token']) && ($this->request->get['member_token'] == $this->session->data['member_token'])) {
 			if (isset($this->request->get['subscription_domain_id'])) {
 				$this->db->query("UPDATE `" . DB_PREFIX . "subscription_domain` SET pointed = '0' WHERE subscription_domain_id = '" . (int)$this->request->get['subscription_domain_id'] . "' AND member_id = '" . (int)$this->member->getId() . "'");
-				$this->session->data['success'] = 'Success: Domain has been disconnected from your store!';
+				$this->session->data['success'] = $this->language->get('text_success_domain_disconnect');
 			}
 		}
 
@@ -885,6 +931,8 @@ class ControllerAccountSubscription extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
+		$this->load->language('account/subscription');
+
 		$this->load->model('account/subscription');
 
 		if (isset($this->request->get['subscription_transaction_id'])) {
@@ -895,7 +943,7 @@ class ControllerAccountSubscription extends Controller {
 		}
 
 		if ($transaction_info) {
-			$this->document->setTitle('Cloud Invoice #INV' . $transaction_info['subscription_transaction_id']);
+			$this->document->setTitle(sprintf($this->language->get('heading_invoice_title'), $transaction_info['subscription_transaction_id']));
 
 			if (isset($this->session->data['success'])) {
 				$data['success'] = $this->session->data['success'];
@@ -905,7 +953,7 @@ class ControllerAccountSubscription extends Controller {
 				$data['success'] = '';
 			}
 
-			$data['title'] = 'Cloud Invoice #INV' . $transaction_info['subscription_transaction_id'];
+			$data['title'] = sprintf($this->language->get('heading_invoice_title'), $transaction_info['subscription_transaction_id']);
 			$data['logo'] = $this->config->get('config_name');
 
 			$this->load->model('account/member');
@@ -934,7 +982,7 @@ class ControllerAccountSubscription extends Controller {
 
 			$data['subscription'] = array(
 				'name'       => $subscription_info ? $subscription_info['name'] : $transaction_info['store_name'],
-				'plan_name'  => $subscription_info ? $subscription_info['plan_name'] : 'Standard',
+				'plan_name'  => $subscription_info ? $subscription_info['plan_name'] : $this->language->get('text_standard_plan'),
 				'plan_price' => number_format((float)($subscription_info ? $subscription_info['plan_price'] : $transaction_info['amount']), 2)
 			);
 
@@ -957,7 +1005,7 @@ class ControllerAccountSubscription extends Controller {
 
 			$this->response->setOutput($this->load->view('account/subscription_invoice_info', $data));
 		} else {
-			$this->document->setTitle('Cloud Invoice');
+			$this->document->setTitle($this->language->get('heading_invoice_default'));
 
 			$data['menu'] = $this->load->controller('account/menu');
 			$data['footer'] = $this->load->controller('common/footer');

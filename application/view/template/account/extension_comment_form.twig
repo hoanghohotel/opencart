@@ -2,18 +2,18 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Reply Form</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="{{ button_close }}"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">{{ heading_reply_form }}</h4>
       </div>
       <div class="modal-body">
             <div id="form-alert"></div>
-            <label>Extension comment from {{ comment.username }}</label>
+            <label>{{ text_comment_from }} {{ comment.username }}</label>
             <textarea disabled rows="4" class="form-control">{{ comment.comment }}</textarea><br>
-            <label>Your reply</label>
+            <label>{{ text_your_reply }}</label>
             <textarea rows="4" id="text-reply" class="form-control"></textarea>
       </div>
       <div class="modal-footer">
-        <button type="button" id="send-reply" class="btn btn-primary"><i class="fa fa-reply"></i> Reply</button>
+        <button type="button" id="send-reply" class="btn btn-primary"><i class="fa fa-reply"></i> {{ button_reply }}</button>
       </div>
     </div>
   </div>

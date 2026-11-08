@@ -7,7 +7,9 @@ class ControllerAccountPromotion extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Promote Your Extension');
+		$this->load->language('account/promotion');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/promotion');
 
@@ -75,12 +77,14 @@ class ControllerAccountPromotion extends Controller {
 			$promotion_id = 0;
 		}
 
+		$this->load->language('account/promotion');
+
 		$this->load->model('account/promotion');
 
 		$promotion_info = $this->model_account_promotion->getPromotion($promotion_id);
 
 		if ($promotion_info) {
-			$this->document->setTitle('Promotion Invoice #INV' . $promotion_info['promotion_id']);
+			$this->document->setTitle(sprintf($this->language->get('text_invoice_title'), $promotion_info['promotion_id']));
 
 			$this->load->model('account/member');
 			$this->load->model('account/seller');
@@ -90,7 +94,7 @@ class ControllerAccountPromotion extends Controller {
 			$member_info = $this->model_account_member->getMember($this->member->getId());
 			$seller_info = $this->model_account_seller->getSeller($this->member->getId());
 
-			$data['title'] = 'Promotion Invoice #INV' . $promotion_info['promotion_id'];
+			$data['title'] = sprintf($this->language->get('text_invoice_title'), $promotion_info['promotion_id']);
 			$data['logo'] = $this->config->get('config_name');
 
 			$data['company'] = !empty($seller_info['company']) ? $seller_info['company'] : (!empty($member_info['company']) ? $member_info['company'] : '');
@@ -138,7 +142,7 @@ class ControllerAccountPromotion extends Controller {
 
 			$this->response->setOutput($this->load->view('account/promotion_info', $data));
 		} else {
-			$this->document->setTitle('Promotion Not Found');
+			$this->document->setTitle($this->language->get('heading_not_found'));
 
 			$data['home'] = $this->url->link('common/home');
 			$data['continue'] = $this->url->link('account/promotion', 'member_token=' . $this->session->data['member_token'], true);

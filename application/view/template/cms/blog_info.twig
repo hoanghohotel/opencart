@@ -21,13 +21,13 @@
             <h2>{{ title }}</h2>
 
             <div class="pull-right socials">
-              <div class="btn-group btn-group-justified visible-xs-block"><a href="https://www.facebook.com/opencart/" id="share-facebook" class="btn btn-facebook"><i class="opencart-icon-social-facebook"></i> Facebook</a> <a href="https://twitter.com/opencart" id="share-twitter" class="btn btn-twitter"><i class="opencart-icon-social-twitter"></i> Twitter</a></div>
-              <div class="hidden-xs"><a href="https://www.facebook.com/opencart/" id="share-facebook" class="btn btn-facebook"><i class="opencart-icon-social-facebook"></i> Facebook</a> <a href="https://twitter.com/opencart" id="share-twitter" class="btn btn-twitter"><i class="opencart-icon-social-twitter"></i> Twitter</a></div>
+              <div class="btn-group btn-group-justified visible-xs-block"><a href="https://www.facebook.com/" id="share-facebook" class="btn btn-facebook"><i class="opencart-icon-social-facebook"></i> {{ text_facebook }}</a> <a href="https://twitter.com/" id="share-twitter" class="btn btn-twitter"><i class="opencart-icon-social-twitter"></i> {{ text_twitter }}</a></div>
+              <div class="hidden-xs"><a href="https://www.facebook.com/" id="share-facebook" class="btn btn-facebook"><i class="opencart-icon-social-facebook"></i> {{ text_facebook }}</a> <a href="https://twitter.com/" id="share-twitter" class="btn btn-twitter"><i class="opencart-icon-social-twitter"></i> {{ text_twitter }}</a></div>
             </div>
             <ul class="list-unstyled">
-              <li>By <a href="{{ filter_author }}">{{ author }}</a></li>
+              <li>{{ text_by }} <a href="{{ filter_author }}">{{ author }}</a></li>
               <li>{{ date_added }}</li>
-              <li><a onclick="document.getElementById('comment-box').scrollIntoView(true);" href="javascript:void(0);">{{ comment_total }} comments</a></li>
+              <li><a onclick="document.getElementById('comment-box').scrollIntoView(true);" href="javascript:void(0);">{{ comment_total }} {{ text_comments_lower }}</a></li>
             </ul>
 
             {% if image_status == 1 %}
@@ -35,19 +35,19 @@
             {% endif %}
 
             <div class="main">{{ description }}</div>
-            <div class="btn-group btn-group-justified visible-xs-block"><a href="https://www.facebook.com/opencart/" id="share-facebook" class="btn btn-facebook"><i class="opencart-icon-social-facebook"></i> Facebook</a> <a href="https://twitter.com/opencart" id="share-twitter" class="btn btn-twitter"><i class="opencart-icon-social-twitter"></i> Twitter</a> <a href="https://www.reddit.com/r/opencart/" id="share-reddit" class="btn btn-reddit"><i class="opencart-icon-social-reddit"></i> Reddit</a></div>
-            <div id="social-button" class="hidden-xs"><a href="https://www.facebook.com/opencart/" id="share-facebook" class="btn btn-facebook"><i class="opencart-icon-social-facebook"></i> Facebook</a> <a href="https://twitter.com/opencart" id="share-twitter" class="btn btn-twitter"><i class="opencart-icon-social-twitter"></i> Twitter</a> <a href="https://www.reddit.com/r/opencart/" id="share-reddit" class="btn btn-reddit"><i class="opencart-icon-social-reddit"></i> Reddit</a></div>
+            <div class="btn-group btn-group-justified visible-xs-block"><a href="https://www.facebook.com/" id="share-facebook" class="btn btn-facebook"><i class="opencart-icon-social-facebook"></i> {{ text_facebook }}</a> <a href="https://twitter.com/" id="share-twitter" class="btn btn-twitter"><i class="opencart-icon-social-twitter"></i> {{ text_twitter }}</a> <a href="https://www.reddit.com/" id="share-reddit" class="btn btn-reddit"><i class="opencart-icon-social-reddit"></i> {{ text_reddit }}</a></div>
+            <div id="social-button" class="hidden-xs"><a href="https://www.facebook.com/" id="share-facebook" class="btn btn-facebook"><i class="opencart-icon-social-facebook"></i> {{ text_facebook }}</a> <a href="https://twitter.com/" id="share-twitter" class="btn btn-twitter"><i class="opencart-icon-social-twitter"></i> {{ text_twitter }}</a> <a href="https://www.reddit.com/" id="share-reddit" class="btn btn-reddit"><i class="opencart-icon-social-reddit"></i> {{ text_reddit }}</a></div>
           </section>
           <section>
             <div id="blog-newsletter-bottom" class="newsletter">
-              <h4>OpenCart Newsletter</h4>
+              <h4>{{ text_newsletter_title }}</h4>
               <div class="text-center">
                 <p><img src="application/view/image/icon/newsletter-subscribe-icon.png" class="img-responsive"/></p>
-                <p>Subscribe to our newsletters and stay informed of new releases and other OpenCart events.</p>
+                <p>{{ text_newsletter_desc }}</p>
               </div>
               <div>
                 <div class="input-group newsletter">
-                  <input type="text" name="newsletter" value="" placeholder="Enter your email" class="form-control">
+                  <input type="text" name="newsletter" value="" placeholder="{{ entry_newsletter }}" class="form-control">
                   <div class="input-group-btn">
                     <button class="btn btn-primary" type="button"><i class="fa fa-angle-right"></i></button>
                   </div>
@@ -58,18 +58,18 @@
         </div>
         <div id="comment-input-box">{% if not logged %}
             <div class="login-layer">
-              <p>Login and write down your comment.</p>
-              <p><a href="{{ login }}" class="btn btn-primary">Login my OpenCart Account</a></p>
+              <p>{{ text_login_comment }}</p>
+              <p><a href="{{ login }}" class="btn btn-primary">{{ button_login_account }}</a></p>
             </div>
           {% endif %}
           <div class="media">
             <div class="media-left"><img src="{{ comment_image }}" alt="{{ comment_username }}" title="{{ comment_username }}" class="media-object"/></div>
             <div class="media-body">
               <div class="form-group">
-                <label for="input-comment">Leave your comment</label> <textarea name="comment" placeholder="Write your comment here..." id="input-comment" class="form-control"></textarea>
+                <label for="input-comment">{{ entry_comment }}</label> <textarea name="comment" placeholder="{{ entry_comment_placeholder }}" id="input-comment" class="form-control"></textarea>
               </div>
               <div class="text-right">
-                <button type="button" id="button-comment" class="btn btn-primary btn-sm">Comment</button>
+                <button type="button" id="button-comment" class="btn btn-primary btn-sm">{{ button_comment }}</button>
               </div>
             </div>
           </div>
@@ -80,7 +80,7 @@
       </div>
       <div class="col-md-3">
         <div id="blog-search">
-          <h4>Search articles</h4>
+          <h4>{{ text_search_articles }}</h4>
           <form id="form-search">
             <div class="input-group">
               <input type="text" name="filter_search" value="{{ filter_search }}" class="form-control"/>
@@ -91,14 +91,14 @@
           </form>
         </div>
         <div id="blog-newsletter">
-          <h4>OpenCart Newsletter</h4>
+          <h4>{{ text_newsletter_title }}</h4>
           <div class="text-center">
             <p><img src="application/view/image/icon/newsletter-subscribe-icon.png" class="img-responsive"/></p>
-            <p>Subscribe to our newsletters and stay informed of new releases and other OpenCart events.</p>
+            <p>{{ text_newsletter_desc }}</p>
           </div>
           <div>
             <div class="input-group newsletter">
-              <input type="text" name="newsletter" value="" placeholder="Enter your email" class="form-control"/>
+              <input type="text" name="newsletter" value="" placeholder="{{ entry_newsletter }}" class="form-control"/>
               <div class="input-group-btn">
                 <button type="button" class="btn btn-primary"><i class="fa fa-angle-right"></i></button>
               </div>
@@ -107,7 +107,7 @@
         </div>
         <div id="side-banner">{{ banner }}</div>
         <div id="blog-trending">
-          <h4>Trending</h4>
+          <h4>{{ text_trending }}</h4>
           <ul class="list-unstyled">
             {% for trending in trendings %}
               <li><a href="{{ trending.href }}">{{ trending.title }}</a></li>

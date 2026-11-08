@@ -11,7 +11,9 @@ class ControllerAccountForgotten extends Controller {
 			$this->response->redirect($this->url->link('account/account', 'member_token=' . $this->session->data['member_token'], true));
 		}
 
-		$this->document->setTitle('Forgot Your Password?');
+		$this->load->language('account/forgotten');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/member');
 
@@ -26,7 +28,7 @@ class ControllerAccountForgotten extends Controller {
 				$this->load->controller('mail/forgotten', $member_info);
 			}
 
-			$this->session->data['success'] = 'An email with a confirmation link has been sent to your email address.';
+			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
@@ -54,9 +56,9 @@ class ControllerAccountForgotten extends Controller {
 
 	protected function validate() {
 		if (!isset($this->request->post['email']) || empty($this->request->post['email'])) {
-			$this->error['email'] = 'Warning: The E-Mail Address was not found in our records, please try again!';
+			$this->error['email'] = $this->language->get('error_email');
 		} elseif (!$this->model_account_member->getTotalMembersByEmail($this->request->post['email'])) {
-			$this->error['email'] = 'Warning: The E-Mail Address was not found in our records, please try again!';
+			$this->error['email'] = $this->language->get('error_email');
 		}
 
 		return !$this->error;

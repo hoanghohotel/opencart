@@ -2,23 +2,23 @@
 <div id="account-account">
   <div class="page-header">
     <div class="container">
-      <h1>Cloud Invoice</h1>
-      <p>Check your invoice(s)</p>
+      <h1>{{ text_heading }}</h1>
+      <p>{{ text_subtitle }}</p>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-md-9">
         <fieldset>
-          <legend>Your Cloud Invoice(s)</legend>
+          <legend>{{ text_your_invoices }}</legend>
           <div class="table-responsive">
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <th class="text-left">Invoice No.</th>
-                  <th class="text-left">Amount</th>
-                  <th class="text-left">Add Date</th>
-                  <th class="text-right">Action</th>
+                  <th class="text-left">{{ column_invoice_no }}</th>
+                  <th class="text-left">{{ column_amount }}</th>
+                  <th class="text-left">{{ column_date_added }}</th>
+                  <th class="text-right">{{ column_action }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -27,7 +27,7 @@
                 <td class="text-left">US$350.00</td>
                 <td class="text-left">01 JAN, 2017</td>
                 <td class="text-right">
-                  <a href="" class="btn btn-primary"><i class="fa fa-eye fa-fw"></i> View details</a>
+                  <a href="" class="btn btn-primary"><i class="fa fa-eye fa-fw"></i> {{ button_view_details }}</a>
                 </td>
               </tr>
 
@@ -36,12 +36,12 @@
                 <td class="text-left">US$35.00</td>
                 <td class="text-left">11 FEB, 2017</td>
                 <td class="text-right">
-                  <a href="" class="btn btn-primary"><i class="fa fa-eye fa-fw"></i> View details</a>
+                  <a href="" class="btn btn-primary"><i class="fa fa-eye fa-fw"></i> {{ button_view_details }}</a>
                 </td>
               </tr>
 
               <tr class="hidden">
-                <td class="text-center" colspan="3">No record!</td>
+                <td class="text-center" colspan="3">{{ text_no_record }}</td>
               </tr>
 
               </tbody>

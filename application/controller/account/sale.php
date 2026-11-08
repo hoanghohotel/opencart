@@ -7,7 +7,9 @@ class ControllerAccountSale extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Your Sales');
+		$this->load->language('account/sale');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/order');
 
@@ -160,10 +162,19 @@ class ControllerAccountSale extends Controller {
 			'filter_date_end'        => isset($this->request->get['filter_date_end']) ? $this->request->get['filter_date_end'] : ''
 		);
 
+		$this->load->language('account/sale');
+
 		$results = $this->getFilteredSales($filter_data);
 
 		$output = fopen('php://temp', 'r+');
-		fputcsv($output, array('Order ID', 'Extension', 'Buyer', 'Order Status', 'Total', 'Date Added'));
+		fputcsv($output, array(
+			$this->language->get('column_order_id'),
+			$this->language->get('column_extension'),
+			$this->language->get('column_buyer'),
+			$this->language->get('column_order_status'),
+			$this->language->get('column_total'),
+			$this->language->get('column_date_added')
+		));
 
 		foreach ($results as $result) {
 			fputcsv($output, array(

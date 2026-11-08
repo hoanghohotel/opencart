@@ -1,7 +1,11 @@
 <?php
 class ControllerSupportPartner extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart - Partners');
+		$this->load->language('support/partner');
+
+		$store_name = $this->config->get('config_name') ?: 'Store';
+
+		$this->document->setTitle(str_replace('{store_name}', $store_name, $this->language->get('heading_title')));
 
 		$this->load->model('account/partner');
 		$this->load->model('tool/image');
@@ -62,7 +66,7 @@ class ControllerSupportPartner extends Controller {
 
 		$data['countries'][] = array(
 			'country_id' => 0,
-			'name'       => 'All',
+			'name'       => $this->language->get('text_all'),
 			'total'      => 0,
 			'href'       => $this->url->link('support/partner', $buildUrl(array('filter_country_id' => '')))
 		);
@@ -86,7 +90,7 @@ class ControllerSupportPartner extends Controller {
 
 		$data['partner_types'][] = array(
 			'member_partner_type_id' => '',
-			'name'                   => 'All',
+			'name'                   => $this->language->get('text_all'),
 			'href'                   => $this->url->link('support/partner', $buildUrl(array('filter_type_id' => '')))
 		);
 
@@ -104,7 +108,7 @@ class ControllerSupportPartner extends Controller {
 
 		$data['partner_statuses'][] = array(
 			'member_partner_status_id' => '',
-			'name'                     => 'All',
+			'name'                     => $this->language->get('text_all'),
 			'href'                     => $this->url->link('support/partner', $buildUrl(array('filter_status_id' => '')))
 		);
 
@@ -178,6 +182,8 @@ class ControllerSupportPartner extends Controller {
 	}
 
 	public function info() {
+		$this->load->language('support/partner');
+
 		$this->load->model('account/partner');
 		$this->load->model('cms/showcase');
 		$this->load->model('tool/image');
@@ -187,7 +193,9 @@ class ControllerSupportPartner extends Controller {
 		$partner_info = $this->model_account_partner->getPartner($partner_id);
 
 		if ($partner_info) {
-			$this->document->setTitle('OpenCart - Partner ' . $partner_info['company']);
+			$store_name = $this->config->get('config_name') ?: 'Store';
+
+			$this->document->setTitle(sprintf(str_replace('{store_name}', $store_name, $this->language->get('heading_title_info')), $partner_info['company']));
 
 			$data['partner_id'] = $partner_info['member_partner_id'];
 			$data['company'] = $partner_info['company'];
@@ -267,6 +275,8 @@ class ControllerSupportPartner extends Controller {
 	}
 
 	public function contact() {
+		$this->load->language('support/partner');
+
 		$this->load->model('account/partner');
 		$this->load->model('tool/image');
 
@@ -275,7 +285,7 @@ class ControllerSupportPartner extends Controller {
 		$partner_info = $this->model_account_partner->getPartner($partner_id);
 
 		if ($partner_info) {
-			$this->document->setTitle('Contact Partner - ' . $partner_info['company']);
+			$this->document->setTitle(sprintf($this->language->get('heading_title_contact'), $partner_info['company']));
 
 			if ($this->member->isLogged()) {
 				$data['name'] = trim($this->member->getFirstName() . ' ' . $this->member->getLastName());
@@ -326,28 +336,30 @@ class ControllerSupportPartner extends Controller {
 	}
 
 	public function send() {
+		$this->load->language('support/partner');
+
 		$json = array();
 
 		$this->load->model('support/enquiry');
 
 		if (!isset($this->request->post['name']) || (utf8_strlen(trim($this->request->post['name'])) < 3) || (utf8_strlen(trim($this->request->post['name'])) > 64)) {
-			$json['error']['name'] = 'Name must be between 3 and 64 characters!';
+			$json['error']['name'] = $this->language->get('error_name');
 		}
 
 		if (!isset($this->request->post['email']) || (utf8_strlen(trim($this->request->post['email'])) > 96) || !filter_var(trim($this->request->post['email']), FILTER_VALIDATE_EMAIL)) {
-			$json['error']['email'] = 'E-Mail Address does not appear to be valid!';
+			$json['error']['email'] = $this->language->get('error_email');
 		}
 
 		if (!isset($this->request->post['subject']) || (utf8_strlen(trim($this->request->post['subject'])) < 3) || (utf8_strlen(trim($this->request->post['subject'])) > 128)) {
-			$json['error']['subject'] = 'Subject must be between 3 and 128 characters!';
+			$json['error']['subject'] = $this->language->get('error_subject');
 		}
 
 		if (!isset($this->request->post['enquiry']) || (utf8_strlen(trim($this->request->post['enquiry'])) < 10) || (utf8_strlen(trim($this->request->post['enquiry'])) > 3000)) {
-			$json['error']['enquiry'] = 'Message must be between 10 and 3000 characters!';
+			$json['error']['enquiry'] = $this->language->get('error_enquiry');
 		}
 
 		if ($json && !isset($json['error']['warning'])) {
-			$json['error']['warning'] = 'Please check the form carefully for errors!';
+			$json['error']['warning'] = $this->language->get('error_warning');
 		}
 
 		if (!$json) {
@@ -362,17 +374,17 @@ class ControllerSupportPartner extends Controller {
 			$partner_email = ($partner_info && !empty($partner_info['email']) && filter_var($partner_info['email'], FILTER_VALIDATE_EMAIL)) ? $partner_info['email'] : $this->config->get('config_email');
 
 			if ($partner_email) {
-				$store_name = html_entity_decode($this->config->get('config_name') ?: 'OpenCart', ENT_QUOTES, 'UTF-8');
+				$store_name = html_entity_decode($this->config->get('config_name') ?: 'Store', ENT_QUOTES, 'UTF-8');
 				$sender_name = trim($this->request->post['name']);
 				$sender_email = trim($this->request->post['email']);
 				$subject_line = trim($this->request->post['subject']);
 				$message_body = trim($this->request->post['enquiry']);
 
-				$text  = "Hi " . ($partner_info ? $partner_info['company'] : 'Partner') . ",\n\n";
-				$text .= "You have received a new partner enquiry on " . $store_name . ".\n\n";
-				$text .= "From: " . $sender_name . " (" . $sender_email . ")\n";
-				$text .= "Subject: " . $subject_line . "\n\n";
-				$text .= "Message:\n----------------------------------------\n" . $message_body . "\n----------------------------------------\n";
+				$text  = sprintf($this->language->get('text_mail_greeting'), ($partner_info ? $partner_info['company'] : $this->language->get('text_partner_default'))) . "\n\n";
+				$text .= sprintf($this->language->get('text_mail_received'), $store_name) . "\n\n";
+				$text .= sprintf($this->language->get('text_mail_from'), $sender_name, $sender_email) . "\n";
+				$text .= sprintf($this->language->get('text_mail_subject_line'), $subject_line) . "\n\n";
+				$text .= $this->language->get('text_mail_message') . "\n----------------------------------------\n" . $message_body . "\n----------------------------------------\n";
 
 				try {
 					$mail = new Mail($this->config->get('config_mail_engine') ?: 'mail');
@@ -384,10 +396,10 @@ class ControllerSupportPartner extends Controller {
 					$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
 					$mail->setTo($partner_email);
-					$mail->setFrom($this->config->get('config_email') ?: 'noreply@opencart.com');
+					$mail->setFrom($this->config->get('config_email') ?: ('noreply@' . (parse_url($this->config->get('config_url'), PHP_URL_HOST) ?: 'localhost')));
 					$mail->setSender(html_entity_decode($store_name . ' (' . $sender_name . ')', ENT_QUOTES, 'UTF-8'));
 					$mail->setReplyTo($sender_email);
-					$mail->setSubject(html_entity_decode($store_name . ' - Partner Enquiry: ' . $subject_line, ENT_QUOTES, 'UTF-8'));
+					$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_mail_subject'), $store_name, $subject_line), ENT_QUOTES, 'UTF-8'));
 					$mail->setText($text);
 					$mail->send();
 				} catch (\Exception $e) {
@@ -405,7 +417,11 @@ class ControllerSupportPartner extends Controller {
 	}
 
 	public function success() {
-		$this->document->setTitle('OpenCart - Contact Partner');
+		$this->load->language('support/partner');
+
+		$store_name = $this->config->get('config_name') ?: 'Store';
+
+		$this->document->setTitle(str_replace('{store_name}', $store_name, $this->language->get('heading_title_success')));
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');

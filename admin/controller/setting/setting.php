@@ -74,6 +74,13 @@ class ControllerSettingSetting extends Controller {
 			'config_contact_support',
 			'config_contact_partner',
 			'config_contact_marketing',
+			'config_forum_url',
+			'config_docs_url',
+			'config_book_url',
+			'config_developer_url',
+			'config_dedicated_support_url',
+			'config_demo_store_url',
+			'config_demo_admin_url',
 			'config_country_id',
 			'config_zone_id',
 			'config_language',
@@ -255,8 +262,9 @@ class ControllerSettingSetting extends Controller {
 				$diag = $mail->testConnection();
 
 				if (!empty($test_email)) {
+					$default_host = parse_url(defined('HTTP_CATALOG') ? HTTP_CATALOG : HTTP_SERVER, PHP_URL_HOST) ?: 'localhost';
 					$mail->setTo($test_email);
-					$mail->setFrom($from_email ?: ($smtp_username ?: 'noreply@opencart.com'));
+					$mail->setFrom($from_email ?: ($smtp_username ?: ('noreply@' . $default_host)));
 					$mail->setSender(html_entity_decode($sender_name ?: 'OpenCart', ENT_QUOTES, 'UTF-8'));
 					$mail->setSubject(html_entity_decode(($sender_name ?: 'OpenCart') . ' - SMTP Configuration Test', ENT_QUOTES, 'UTF-8'));
 

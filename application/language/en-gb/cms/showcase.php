@@ -1,0 +1,31 @@
+<?php
+// Heading
+$_['heading_title']             = '{store_name} - Showcase';
+
+// Text
+$_['text_hero_title']           = '{store_name} Success Stories';
+$_['text_hero_subtitle']        = 'How one business experienced the dream of every entrepreneur - rapid growth.';
+$_['text_all_stores']           = 'All Stores';
+$_['text_view_project']         = 'View Project';
+
+$_['text_story_1_quote']        = 'I have been with {store_name} for over 3 years now, it\'s such an easy system to use and the staff find it easy to navigate around. As we are launching our brand to many countries, the APPS and integrations have been integral to our growth. Ultimately what I love about {store_name} is anything is possible. This fits with my glass is half full kind of attitude. I\'m looking forward to growing our business and working within the {store_name} platform.';
+$_['text_story_1_author']       = 'Bo Burns';
+$_['text_story_1_role']         = 'Founder of fundraisefactory.com';
+
+$_['text_story_2_quote']        = 'Eclipseorganics.com.au is a healthy snacks company located in Australia. The company sells Safe Health Food You Can Trust. “ We love the {store_name} open source platform as it has allowed out to grow our company online within years. We have thousands of products and the website loads within seconds. We are really happy with what we have achieved by moving into a different e-commerce platform”. {store_name} Rocks!';
+$_['text_story_2_author']       = 'Brett Monaghan';
+$_['text_story_2_role']         = 'Founder of Eclipseorganics.com.au';
+
+$_['text_story_3_quote']        = 'The UK\'s Leading Mitsubishi 4x4 parts company - new, used and reclaimed parts. Mitzybitz have been using {store_name} for over 5 years now, and continually invest into the development of the website. The base {store_name} offering is great, and with it being open source Mitzy have had many extra bespoke features coded up by dijitul, and added to the website. It is now very bespoke but still has the rock-solid foundation that is provided by {store_name}.';
+$_['text_story_4_quote']        = 'We chose to move to {store_name} from a popular website builder system. Every issue faced with the old website has been resolved and the whole website management is done in house now, by people that are not technically minded. The admin UI is intuitive enough for anyone to figure out. Great!';
+$_['text_story_5_quote']        = 'This website was Cheeky Smoke\'s first website - and they couldn\'t be happier. Their chosen payment gateway was already supported, shipping modules they needed were also available out the box. They are working with dijitul to now take theings to the next level and introduce a stock management system with barcode scanners, so the website will become the central hub for everything.';
+$_['text_story_6_quote']        = 'One of the countries leading vape companies, pioneering new brands and getting cost effective products to the masses. They had a slow, bogged down, broken WordPress eCommerce store and it was not suitable for their needs. We moved them to {store_name} and they have never looked back. All integrated with their accounts package, inventory management system and bespoke payment gateway - their website allows them to go from strength to strength without fear of things getting slow, and bogged down.';
+$_['text_story_7_quote']        = 'Aspire UK are one of the best known vape brands in the world - and our customer is one of the UK\'s leading distributers of their products. They wanted an Aspire site to be linked to their other websites so they had one easy to use admin interface. We did that, and they are now able to manage order more efficiently without logging in and out of a bunch of different admin interfaces.';
+$_['text_story_8_quote']        = 'A cool website for a cool brand - Wick Liquor moved from WooCommerce as they were having issues with attacks and hacks. We moved them to {store_name} and applied various security methods - they\'ve never been hacked since. We also created a bespoke payment gateway for them as their alternative provider was not properly supported.';
+$_['text_story_9_quote']        = 'The Euro Car Doctor. KMD lead the way in regards to modifying and tuning European cars. They are based in New Jersey, and are famous in their circles. Their website is a heavily modified version of {store_name} that duplicates the entire category functionality, meaning no compromises were made and the user could map products to categories exactly how they wanted to.';
+$_['text_story_10_quote']       = 'The number 1 choice for tractor parts in the UK - the design of this website does not sway too far from the default theme, but its packed with custom features, and awesome additions to make the user experience a great one! Its a industry favourite not only because of how well website operates - but the business itself is a true family business with amazing family values.';
+$_['text_story_11_quote']       = 'The best wasabi in the world - grown by experts in the UK. The Wasabi Company\'s products are in supermarkets but you can also buy them off their website. Its based on {store_name} and uses teh multi site feature to branch the trade hub off as a separate website. The website is not only an eComerce platform but is also a media hub, filled with recipes, news and Wasabi related goodies! {store_name} is the best, most flexible platform for the job.';
+$_['text_story_12_quote']       = 'Bio G Cosmetics is a Bulgarian brand behind which are the professional and creative efforts of qualified experts engaged in the development and production of natural cosmetic products for babies, children, and the whole family. Since 2011, we have been one of the few in the world that combine silver water with 100% natural plant oils and ingredients, the highest grade herbal extracts, and technologies over 200 years old that preserve the vitamins, antioxidants, and specific properties of each single sprig. We do not use any artificial:preservatives /including parabens/, colors, artificial foaming agents, synthetic emulsifiers and fragrances in the production of our products.';
+
+// Button
+$_['button_visit_website']      = 'Visit Website';

@@ -1,7 +1,11 @@
 <?php
 class ControllerSupportContact extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart - Contact Us');
+		$this->load->language('support/contact');
+
+		$store_name = $this->config->get('config_name') ?: 'Store';
+
+		$this->document->setTitle(str_replace('{store_name}', $store_name, $this->language->get('heading_title')));
 
 		if ($this->member->isLogged()) {
 			$data['name'] = trim($this->member->getFirstName() . ' ' . $this->member->getLastName());
@@ -14,10 +18,10 @@ class ControllerSupportContact extends Controller {
 			$data['email'] = '';
 		}
 
-		$data['contact_support'] = 'info@opencart.com';
-		$data['contact_telephone'] = '+852 2499 0996';
-		$data['contact_partner'] = 'partners@opencart.com';
-		$data['contact_marketing'] = 'media@opencart.com';
+		$data['contact_support'] = $this->config->get('config_contact_support') ?: $this->config->get('config_email');
+		$data['contact_telephone'] = $this->config->get('config_telephone');
+		$data['contact_partner'] = $this->config->get('config_contact_partner') ?: $this->config->get('config_email');
+		$data['contact_marketing'] = $this->config->get('config_contact_marketing') ?: $this->config->get('config_email');
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');
@@ -26,6 +30,8 @@ class ControllerSupportContact extends Controller {
 	}
 
 	public function reason() {
+		$this->load->language('support/contact');
+
 		$reason = isset($this->request->get['reason']) ? $this->request->get['reason'] : '';
 
 		$this->load->model('localisation/country');
@@ -45,6 +51,8 @@ class ControllerSupportContact extends Controller {
 	}
 
 	public function send() {
+		$this->load->language('support/contact');
+
 		$json = array();
 
 		$this->load->model('support/enquiry');
@@ -52,36 +60,36 @@ class ControllerSupportContact extends Controller {
 		$type = isset($this->request->post['reason']) ? $this->request->post['reason'] : (isset($this->request->post['type']) ? $this->request->post['type'] : '');
 
 		if (!$type) {
-			$json['error']['warning'] = 'Please select what you would like to contact us about!';
+			$json['error']['warning'] = $this->language->get('error_reason');
 		} else {
 			if (!isset($this->request->post['name']) || (utf8_strlen(trim($this->request->post['name'])) < 3) || (utf8_strlen(trim($this->request->post['name'])) > 64)) {
-				$json['error']['name'] = 'Name must be between 3 and 64 characters!';
+				$json['error']['name'] = $this->language->get('error_name');
 			}
 
 			if (!isset($this->request->post['email']) || (utf8_strlen(trim($this->request->post['email'])) > 96) || !filter_var(trim($this->request->post['email']), FILTER_VALIDATE_EMAIL)) {
-				$json['error']['email'] = 'E-Mail Address does not appear to be valid!';
+				$json['error']['email'] = $this->language->get('error_email');
 			}
 
 			if (!isset($this->request->post['enquiry']) || (utf8_strlen(trim($this->request->post['enquiry'])) < 10) || (utf8_strlen(trim($this->request->post['enquiry'])) > 3000)) {
-				$json['error']['enquiry'] = 'Message must be between 10 and 3000 characters!';
+				$json['error']['enquiry'] = $this->language->get('error_enquiry');
 			}
 
 			if ($type == 'partner') {
 				if (empty($this->request->post['company'])) {
-					$json['error']['company'] = 'Company Name required!';
+					$json['error']['company'] = $this->language->get('error_company');
 				}
 
 				if (empty($this->request->post['website'])) {
-					$json['error']['website'] = 'Company Website required!';
+					$json['error']['website'] = $this->language->get('error_website');
 				}
 
 				if (empty($this->request->post['country_id'])) {
-					$json['error']['country'] = 'Please select a country!';
+					$json['error']['country'] = $this->language->get('error_country');
 				}
 			}
 
 			if ($json && !isset($json['error']['warning'])) {
-				$json['error']['warning'] = 'Please check the form carefully for errors!';
+				$json['error']['warning'] = $this->language->get('error_warning');
 			}
 		}
 
@@ -93,23 +101,23 @@ class ControllerSupportContact extends Controller {
 
 			$admin_email = $this->config->get('config_email');
 			if ($admin_email && filter_var($admin_email, FILTER_VALIDATE_EMAIL)) {
-				$store_name = html_entity_decode($this->config->get('config_name') ?: 'OpenCart', ENT_QUOTES, 'UTF-8');
+				$store_name = html_entity_decode($this->config->get('config_name') ?: 'Store', ENT_QUOTES, 'UTF-8');
 				$sender_name = trim($this->request->post['name']);
 				$sender_email = trim($this->request->post['email']);
 				$message_body = trim($this->request->post['enquiry']);
 
-				$text  = "New Contact Us Enquiry (" . ucfirst($type) . ")\n\n";
-				$text .= "From: " . $sender_name . " (" . $sender_email . ")\n";
+				$text  = sprintf($this->language->get('text_mail_heading'), ucfirst($type)) . "\n\n";
+				$text .= sprintf($this->language->get('text_mail_from'), $sender_name, $sender_email) . "\n";
 				if (!empty($this->request->post['company'])) {
-					$text .= "Company: " . trim($this->request->post['company']) . "\n";
+					$text .= sprintf($this->language->get('text_mail_company'), trim($this->request->post['company'])) . "\n";
 				}
 				if (!empty($this->request->post['website'])) {
-					$text .= "Website: " . trim($this->request->post['website']) . "\n";
+					$text .= sprintf($this->language->get('text_mail_website'), trim($this->request->post['website'])) . "\n";
 				}
 				if (!empty($this->request->post['order_id'])) {
-					$text .= "Order ID: #" . trim($this->request->post['order_id']) . "\n";
+					$text .= sprintf($this->language->get('text_mail_order_id'), trim($this->request->post['order_id'])) . "\n";
 				}
-				$text .= "\nMessage:\n----------------------------------------\n" . $message_body . "\n----------------------------------------\n";
+				$text .= "\n" . $this->language->get('text_mail_message') . "\n----------------------------------------\n" . $message_body . "\n----------------------------------------\n";
 
 				try {
 					$mail = new Mail($this->config->get('config_mail_engine') ?: 'mail');
@@ -124,7 +132,7 @@ class ControllerSupportContact extends Controller {
 					$mail->setFrom($admin_email);
 					$mail->setSender(html_entity_decode($store_name . ' (' . $sender_name . ')', ENT_QUOTES, 'UTF-8'));
 					$mail->setReplyTo($sender_email);
-					$mail->setSubject(html_entity_decode($store_name . ' - Contact Enquiry [' . ucfirst($type) . '] from ' . $sender_name, ENT_QUOTES, 'UTF-8'));
+					$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_mail_subject'), $store_name, ucfirst($type), $sender_name), ENT_QUOTES, 'UTF-8'));
 					$mail->setText($text);
 					$mail->send();
 				} catch (\Exception $e) {
@@ -142,7 +150,11 @@ class ControllerSupportContact extends Controller {
 	}
 
 	public function success() {
-		$this->document->setTitle('OpenCart - Contact Us');
+		$this->load->language('support/contact');
+
+		$store_name = $this->config->get('config_name') ?: 'Store';
+
+		$this->document->setTitle(str_replace('{store_name}', $store_name, $this->language->get('heading_title')));
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');

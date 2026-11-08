@@ -1,13 +1,13 @@
 <fieldset id="payment-credit-card">
-	<legend>Please enter your card details below</legend>
+	<legend>{{ text_enter_card }}</legend>
 	<div class="form-group">
-		<label for="input-card-number">Credit Card Number</label>
+		<label for="input-card-number">{{ entry_card_number }}</label>
 		<div id="input-card-number" class="form-control"></div>
 	</div>
 	<div class="row">
 		<div class="col-xs-6">
 			<div class="form-group">
-				<label>Expire Date</label>
+				<label>{{ entry_expire_date }}</label>
 				<div id="input-card-expire" class="row">
 					<div class="col-xs-6">
 						<div id="input-card-expire-year" class="form-control"></div>
@@ -20,23 +20,23 @@
 		</div>
 		<div class="col-xs-6">
 			<div class="form-group">
-				<label for="input-card-cvv">CVV</label>
+				<label for="input-card-cvv">{{ entry_cvv }}</label>
 				<div id="input-card-cvv" class="form-control"></div>
 			</div>
 		</div>
 	</div>
 	<div class="form-group">
-		<label><input type="checkbox" name="vault" value="1" id="input-vault"/> Remember My Card</label>
+		<label><input type="checkbox" name="vault" value="1" id="input-vault"/> {{ text_remember_card }}</label>
 	</div>
 </fieldset>
 <input type="hidden" name="nonce" value="" id="input-nonce"/>
 <div class="text-right">
-	I agree with the <a href="{{ terms }}" target="_blank">terms &amp; conditions</a>&nbsp;&nbsp;<input type="checkbox" name="agree" value="1" id="agree"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<button type="button" id="button-continue" class="btn btn-primary btn-lg">Continue</button>
+	{{ text_agree_prefix }} <a href="{{ terms }}" target="_blank">{{ text_terms_conditions }}</a>&nbsp;&nbsp;<input type="checkbox" name="agree" value="1" id="agree"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<button type="button" id="button-continue" class="btn btn-primary btn-lg">{{ button_continue }}</button>
 </div>
 
 <div id="fadeLoader">
-	<div id="loader">Loading...</div>
+	<div id="loader">{{ text_loading }}</div>
 </div>
 
 <script type="text/javascript"><!--
@@ -64,7 +64,6 @@ braintree.client.create({
     authorization: '{{ client_token }}'
 }, function(clientErr, clientInstance) {
     if (clientErr) {
-        // Handle error in client creation
         console.log(clientErr);
 
         return;
@@ -96,12 +95,12 @@ braintree.client.create({
             },
             expirationMonth: {
                 container: '#input-card-expire-month',
-                placeholder: 'Month',
+                placeholder: '{{ text_month }}',
                 select: true
             },
             expirationYear: {
                 container: '#input-card-expire-year',
-                placeholder: 'Year',
+                placeholder: '{{ text_year }}',
                 select: true
             }
         }
@@ -130,7 +129,7 @@ braintree.client.create({
             hostedFieldsInstance.tokenize(function(tokenizeErr, payload) {
                 if (tokenizeErr) {
                     if (tokenizeErr.code == 'HOSTED_FIELDS_FIELDS_EMPTY') {
-                        $('#payment-credit-card').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> Credit Card Fields are missing!<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                        $('#payment-credit-card').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_fields_empty }}<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                     }
 
                     if (tokenizeErr.details) {
@@ -138,15 +137,15 @@ braintree.client.create({
                             key = tokenizeErr.details.invalidFieldKeys[i];
 
                             if (key == 'number') {
-                                $('#input-card-number').after('<div class="text-danger">Credit card number is required</div>');
+                                $('#input-card-number').after('<div class="text-danger">{{ error_card_number }}</div>');
                             }
 
                             if (key == 'cvv') {
-                                $('#input-card-cvv').after('<div class="text-danger">Security code required</div>');
+                                $('#input-card-cvv').after('<div class="text-danger">{{ error_cvv }}</div>');
                             }
 
                             if (key == 'expirationDate' || key == 'expirationMonth' || key == 'expirationDate') {
-                                $('#input-card-expire').after('<div class="text-danger">Expiration date required</div>');
+                                $('#input-card-expire').after('<div class="text-danger">{{ error_expiration_date }}</div>');
                             }
                         }
                     }

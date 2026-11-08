@@ -1,6 +1,9 @@
 <?php
 class ControllerMailOrder extends Controller {
 	public function index($args = array()) {
+		$this->load->language('mail/order');
+		$this->load->language('mail/seller');
+
 		if (is_numeric($args)) {
 			$order_id = (int)$args;
 			$is_new = true;
@@ -38,8 +41,8 @@ class ControllerMailOrder extends Controller {
 			return;
 		}
 
-		$store_name = html_entity_decode($this->config->get('config_name') ?: 'OpenCart', ENT_QUOTES, 'UTF-8');
-		$order_status_name = !empty($order_info['status']) ? $order_info['status'] : (!empty($order_info['order_status']) ? $order_info['order_status'] : 'Complete');
+		$store_name = html_entity_decode($this->config->get('config_name') ?: 'Store', ENT_QUOTES, 'UTF-8');
+		$order_status_name = !empty($order_info['status']) ? $order_info['status'] : (!empty($order_info['order_status']) ? $order_info['order_status'] : $this->language->get('text_status_complete'));
 
 		if (is_array($args) && isset($args['status']) && is_string($args['status'])) {
 			$status_code = strtolower(trim($args['status']));
@@ -60,6 +63,7 @@ class ControllerMailOrder extends Controller {
 		$data['date_added'] = date($this->language->get('date_format_short'), strtotime($order_info['date_added']));
 		$data['store'] = $store_name;
 		$data['store_url'] = $this->url->link('common/home', '', true);
+		$data['text_team_formatted'] = sprintf($this->language->get('text_team'), $store_name);
 
 		$data['extensions'] = array();
 
@@ -81,7 +85,7 @@ class ControllerMailOrder extends Controller {
 			'image'       => $image,
 			'name'        => $order_info['extension'],
 			'description' => $ext_info ? utf8_substr(trim(strip_tags(html_entity_decode($ext_info['description'], ENT_QUOTES, 'UTF-8'))), 0, 80) . '...' : '',
-			'license'     => !empty($order_info['license_period']) ? $order_info['license_period'] : '12 Months Support',
+			'license'     => !empty($order_info['license_period']) ? $order_info['license_period'] : $this->language->get('text_default_license'),
 			'price'       => $this->currency->format((float)$order_info['price'], $currency_code),
 			'quantity'    => isset($order_info['quantity']) ? (int)$order_info['quantity'] : 1,
 			'total'       => $this->currency->format((float)$order_info['total'], $currency_code)
@@ -111,23 +115,34 @@ class ControllerMailOrder extends Controller {
 			}
 		}
 
+		$from_email = $this->config->get('config_email') ?: ('noreply@' . (parse_url($this->config->get('config_url'), PHP_URL_HOST) ?: 'localhost'));
+
 		// Also notify the extension seller using mail/seller.twig
 		$seller_id = !empty($order_info['seller_id']) ? (int)$order_info['seller_id'] : (!empty($ext_info['member_id']) ? (int)$ext_info['member_id'] : 0);
 		if ($seller_id) {
 			$seller_info = $this->model_account_member->getMember($seller_id);
 			if ($seller_info && !empty($seller_info['email'])) {
-				$buyer_firstname = !empty($order_info['firstname']) ? $order_info['firstname'] : (!empty($buyer_info['firstname']) ? $buyer_info['firstname'] : (!empty($buyer_info['username']) ? $buyer_info['username'] : 'Customer'));
+				$buyer_firstname = !empty($order_info['firstname']) ? $order_info['firstname'] : (!empty($buyer_info['firstname']) ? $buyer_info['firstname'] : (!empty($buyer_info['username']) ? $buyer_info['username'] : $this->language->get('text_default_customer')));
+				$seller_username = !empty($seller_info['username']) ? $seller_info['username'] : $seller_info['firstname'];
+				$transaction_url = $this->url->link('account/transaction', '', true);
 
 				$seller_data = array(
-					'username'     => !empty($seller_info['username']) ? $seller_info['username'] : $seller_info['firstname'],
-					'extension'    => $order_info['extension'],
-					'extension_id' => $order_info['extension_id'],
-					'transaction'  => $this->url->link('account/transaction', '', true),
-					'order_id'     => $order_info['order_id'],
-					'firstname'    => $buyer_firstname,
-					'email'        => $buyer_email,
-					'order_status' => $data['order_status'],
-					'store'        => $store_name
+					'username'                  => $seller_username,
+					'extension'                 => $order_info['extension'],
+					'extension_id'              => $order_info['extension_id'],
+					'transaction'               => $transaction_url,
+					'order_id'                  => $order_info['order_id'],
+					'firstname'                 => $buyer_firstname,
+					'email'                     => $buyer_email,
+					'order_status'              => $data['order_status'],
+					'store'                     => $store_name,
+					'text_greeting_formatted'   => sprintf($this->language->get('text_greeting'), $seller_username),
+					'text_sale_intro_formatted' => sprintf($this->language->get('text_sale_intro'), $order_info['extension'], $order_info['extension_id']),
+					'text_sale_tx_formatted'    => sprintf($this->language->get('text_sale_transaction'), $transaction_url),
+					'text_sale_order_formatted' => sprintf($this->language->get('text_sale_order_id'), $order_info['order_id']),
+					'text_sale_fname_formatted' => sprintf($this->language->get('text_sale_firstname'), $buyer_firstname),
+					'text_sale_email_formatted' => sprintf($this->language->get('text_sale_email'), $buyer_email),
+					'text_sale_status_formatted'=> sprintf($this->language->get('text_sale_status'), $data['order_status'])
 				);
 
 				$seller_text = $this->load->view('mail/seller', $seller_data);
@@ -142,9 +157,9 @@ class ControllerMailOrder extends Controller {
 					$smail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
 					$smail->setTo($seller_info['email']);
-					$smail->setFrom($this->config->get('config_email') ?: 'noreply@opencart.com');
-					$smail->setSender(html_entity_decode($this->config->get('config_name') ?: 'OpenCart', ENT_QUOTES, 'UTF-8'));
-					$smail->setSubject(html_entity_decode(($this->config->get('config_name') ?: 'OpenCart') . ' - Extension Sale #' . $order_info['order_id'], ENT_QUOTES, 'UTF-8'));
+					$smail->setFrom($from_email);
+					$smail->setSender($store_name);
+					$smail->setSubject(html_entity_decode(sprintf($this->language->get('text_seller_subject'), $store_name, $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
 					$smail->setText($seller_text);
 					$smail->send();
 				} catch (\Exception $e) {
@@ -153,8 +168,11 @@ class ControllerMailOrder extends Controller {
 			}
 		}
 
+		// Reload mail/order language keys after mail/seller so mail/order keys take precedence
+		$this->load->language('mail/order');
+
 		$html = $this->load->view('mail/order', $data);
-		$text = "Thank you for your OpenCart order #" . $order_info['order_id'] . "!\nExtension: " . $order_info['extension'] . "\nOrder Status: " . $data['order_status'] . "\nDownloads: " . $data['download'];
+		$text = sprintf($this->language->get('text_plain_thank_you'), $store_name, $order_info['order_id']) . "\n" . sprintf($this->language->get('text_plain_extension'), $order_info['extension']) . "\n" . sprintf($this->language->get('text_plain_status'), $data['order_status']) . "\n" . sprintf($this->language->get('text_plain_downloads'), $data['download']);
 
 		try {
 			$mail = new Mail($this->config->get('config_mail_engine') ?: 'mail');
@@ -166,9 +184,9 @@ class ControllerMailOrder extends Controller {
 			$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
 			$mail->setTo($buyer_email);
-			$mail->setFrom($this->config->get('config_email') ?: 'noreply@opencart.com');
-			$mail->setSender(html_entity_decode($this->config->get('config_name') ?: 'OpenCart', ENT_QUOTES, 'UTF-8'));
-			$mail->setSubject(html_entity_decode(($this->config->get('config_name') ?: 'OpenCart') . ' - Order #' . $order_info['order_id'], ENT_QUOTES, 'UTF-8'));
+			$mail->setFrom($from_email);
+			$mail->setSender($store_name);
+			$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_subject'), $store_name, $order_info['order_id']), ENT_QUOTES, 'UTF-8'));
 			$mail->setHtml($html);
 			$mail->setText($text);
 			$mail->send();

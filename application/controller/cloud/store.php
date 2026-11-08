@@ -1,12 +1,16 @@
 <?php
 class ControllerCloudStore extends Controller {
 	public function index() {
+		$this->load->language('cloud/store');
+
 		if (!$this->member->isLogged() || !isset($this->session->data['member_token'])) {
 			$this->session->data['redirect'] = $this->url->link('cloud/store', '', true);
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('OpenCart Cloud - Cloud Stores');
+		$store_name = $this->config->get('config_name') ?: 'Store';
+
+		$this->document->setTitle(str_replace('{store_name}', $store_name, $this->language->get('heading_title')));
 
 		$this->load->model('account/subscription');
 

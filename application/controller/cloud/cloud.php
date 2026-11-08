@@ -1,7 +1,12 @@
 <?php
 class ControllerCloudCloud extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart Cloud - E-commerce Hosting Solution');
+		$this->load->language('cloud/cloud');
+		$this->load->language('cloud/landing');
+
+		$store_name = $this->config->get('config_name') ?: 'Store';
+
+		$this->document->setTitle(str_replace('{store_name}', $store_name, $this->language->get('heading_title')));
 
 		if ($this->member->isLogged() && isset($this->session->data['member_token'])) {
 			$data['create'] = $this->url->link('account/subscription', 'member_token=' . $this->session->data['member_token'], true);
@@ -18,7 +23,11 @@ class ControllerCloudCloud extends Controller {
 	}
 
 	public function terms() {
-		$this->document->setTitle('OpenCart Cloud - Terms and Conditions');
+		$this->load->language('cloud/terms');
+
+		$store_name = $this->config->get('config_name') ?: 'Store';
+
+		$this->document->setTitle(str_replace('{store_name}', $store_name, $this->language->get('heading_title')));
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');

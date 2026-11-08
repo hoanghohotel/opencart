@@ -1,0 +1,36 @@
+<?php
+// Text
+$_['text_subject']           = '%s - [%s] %s (Order #%s)';
+$_['text_heading']           = 'Contact Seller: %s';
+$_['text_default_seller']    = 'Seller';
+$_['text_default_customer']  = 'Customer';
+$_['text_na']                = 'N/A';
+$_['text_reason_question']   = 'I have a question';
+$_['text_reason_support']    = 'I want to get support';
+$_['text_reason_refund']     = 'I want to get a refund';
+$_['text_greeting']          = 'Hi %s,';
+$_['text_greeting_html']     = 'Hi <strong>%s</strong>,';
+$_['text_enquiry_intro']     = 'You have received a new support enquiry regarding your extension on %s Marketplace.';
+$_['text_enquiry_html']      = 'You have received a new message from a customer regarding your extension <a href="%s" style="color: #23A1D1; font-weight: bold;">%s</a> (ID: %d).';
+$_['text_label_extension']   = 'Extension:';
+$_['text_label_url']         = 'Extension URL:';
+$_['text_label_reason']      = 'Reason:';
+$_['text_label_customer']    = 'Customer Name:';
+$_['text_label_email']       = 'Customer E-Mail:';
+$_['text_label_website']     = 'Web Site:';
+$_['text_label_order_id']    = 'Order ID:';
+$_['text_label_version']     = '{store_name} Version:';
+$_['text_customer_details']  = 'Customer Details:';
+$_['text_label_name']        = 'Name:';
+$_['text_label_message']     = 'Message:';
+$_['text_reply_plain']       = 'You can reply directly to this email to respond to %s (%s).';
+$_['text_reply_html']        = 'You can reply directly to this email to contact <strong>%s</strong> (%s).';
+$_['text_regards']           = 'Best Regards,';
+$_['text_team']              = '{store_name} Team';
+$_['text_sale_intro']        = 'Someone has purchased your extension / theme %s (ID: %s).';
+$_['text_sale_transaction']  = 'You can view all of your transactions online on this page: %s.';
+$_['text_sale_order_id']     = 'Order ID: %s';
+$_['text_sale_buyer']        = 'Buyer Details:';
+$_['text_sale_firstname']    = 'First Name: %s';
+$_['text_sale_email']        = 'Email: %s';
+$_['text_sale_status']       = 'Order Status: %s';

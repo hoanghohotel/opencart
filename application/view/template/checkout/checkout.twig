@@ -2,9 +2,9 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th class="text-left">Extension Name</th>
-				<th class="text-right">Quantity</th>
-				<th class="text-right">Total</th>
+				<th class="text-left">{{ column_extension_name }}</th>
+				<th class="text-right">{{ column_quantity }}</th>
+				<th class="text-right">{{ column_total }}</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -21,11 +21,11 @@
 	</table>
 </fieldset>
 <fieldset>
-	<legend>Please choose a payment method below</legend>
+	<legend>{{ text_choose_payment }}</legend>
 	<div class="form-group">
 		<select name="payment_method" class="form-control">
 			{% if vaulted %}
-				<optgroup label="Stored Payment Methods">
+				<optgroup label="{{ text_stored_payment }}">
 					{% for vault in vaulted %}
 						<option value="{{ vault.value }}">{{ vault.text }}</option>
 					{% endfor %}
@@ -38,7 +38,7 @@
 	</div>
 </fieldset>
 <div class="text-right">
-	<button type="button" id="button-continue" class="btn btn-primary">Continue</button>
+	<button type="button" id="button-continue" class="btn btn-primary">{{ button_continue }}</button>
 </div>
 <script type="text/javascript">
 $('select[name=\'quantity\']').on('change', function(e) {
@@ -79,8 +79,6 @@ $('#button-continue').on('click', function(e) {
             }
         },
         success: function(html) {
-            //console.log(html);
-
             $('#modal-checkout .modal-body').html(html);
         },
         error: function(xhr, ajaxOptions, thrownError) {

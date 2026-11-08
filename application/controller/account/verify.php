@@ -1,7 +1,9 @@
 <?php
 class ControllerAccountVerify extends Controller {
 	public function index() {
-		$this->document->setTitle('Account Verification');
+		$this->load->language('account/verify');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/member');
 

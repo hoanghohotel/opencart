@@ -7,7 +7,7 @@
 					<div class="media-left"><a href="{{ filter_status }}"><img src="{{ status_image }}" alt="{{ status_name }}" title="{{ status_name }}" class="media-object img-circle"/></a></div>
 					<div class="media-body">
 						<h2 class="media-heading">{{ company }}</h2>
-						<h6>{{ country }} | OpenCart Partner since {{ date_added }} | <a href="{{ website }}" target="_blank">View Website</a></h6>
+						<h6>{{ country }} | {{ text_partner_since }} {{ date_added }} | <a href="{{ website }}" target="_blank">{{ text_view_website }}</a></h6>
 					</div>
 					{% if image %}
 						<div class="media-right"><a href="{{ website }}"><img src="{{ image }}" alt="{{ company }}" title="{{ company }}" class="media-object"/></a></div>
@@ -15,15 +15,15 @@
 				<div>{{ description }}</div>
 			</div>
 			<div class="col-sm-4">
-				<div class="well"><a href="{{ contact }}" class="btn btn-primary btn-lg btn-block">Contact Partner</a>
-					<h4>Phone</h4>
+				<div class="well"><a href="{{ contact }}" class="btn btn-primary btn-lg btn-block">{{ button_contact_partner }}</a>
+					<h4>{{ text_phone }}</h4>
 					<p><a href="tel:{{ telephone }}">{{ telephone }}</a></p>
-					<h4>Address</h4>
+					<h4>{{ text_address }}</h4>
 					<p>{{ address }}</p>
-					<h4>Partner Status</h4>
+					<h4>{{ text_partner_status }}</h4>
 					<p>{{ status_name }}</p>
 					{% if facebook or twitter or linkedin %}
-						<h4>Social Media</h4>
+						<h4>{{ text_social_media }}</h4>
 						<p>{% if facebook %}<a href="{{ facebook }}"><img src="application/view/image/icon/facebook.jpg" alt="Facebook" title="Facebook"/></a>{% endif %}
 							{% if twitter %}<a href="{{ twitter }}"><img src="application/view/image/icon/twitter.jpg" alt="Twitter" title="Twitter"/></a>{% endif %}
 							{% if linkedin %}<a href="{{ linkedin }}"><img src="application/view/image/icon/linkedin.jpg" alt="Linkedin" title="Linkedin"/></a>{% endif %}</p>
@@ -32,12 +32,12 @@
 		</div>
 		{% if showcases %}
 			<div id="projects">
-				<h2>Latest Projects</h2>
+				<h2>{{ text_latest_projects }}</h2>
 				{% for row in showcases|batch(3, '') %}
 					<div class="row"> {% for showcase in showcases %}
 							<div class="col-sm-4">
 								<div class="showcase-link">
-									<div><a href="{{ showcase.link }}" target="_blank">View Project</a></div>
+									<div><a href="{{ showcase.link }}" target="_blank">{{ text_view_project }}</a></div>
 									<a href="{{ showcase.link }}" target="_blank"><img src="{{ showcase.image }}" alt="{{ showcase.name }}" title="{{ showcase.name }}"/></a></div>
 								<h4>{{ showcase.name }}</h4>
 								<h6>{{ showcase.category }}</h6>

@@ -2,32 +2,32 @@
 <div id="account-account">
   <div class="page-header">
     <div class="container">
-      <h1>Cloud Payment Methods</h1>
-      <p>Modify your payment methods</p>
+      <h1>{{ text_heading }}</h1>
+      <p>{{ text_subtitle }}</p>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-md-9">
         <fieldset>
-          <legend>Payment Method(s)</legend>
+          <legend>{{ text_payment_methods }}</legend>
           <div class="table-responsive">
             <table class="table table-bordered table-hover">
               <thead>
                 <tr>
-                  <th class="text-left">Payment Gateway</th>
-                  <th class="text-left">Account</th>
-                  <th class="text-left">Status</th>
-                  <th class="text-right">Action</th>
+                  <th class="text-left">{{ column_gateway }}</th>
+                  <th class="text-left">{{ column_account }}</th>
+                  <th class="text-left">{{ column_status }}</th>
+                  <th class="text-right">{{ column_action }}</th>
                 </tr>
               </thead>
               <tbody>
               <tr>
                 <td class="text-left">Paypal</td>
                 <td class="text-left">example@gmail.com</td>
-                <td class="text-left"><span class="label label-success">Enabled</span></td>
+                <td class="text-left"><span class="label label-success">{{ text_enabled }}</span></td>
                 <td class="text-right">
-                <a href="#" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+                <a href="#" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i> {{ button_edit }}</a>
                 </td>
               </tr>
 
@@ -35,15 +35,15 @@
               <tr>
                 <td class="text-left">Braintree</td>
                 <td class="text-left">example2@gmail.com</td>
-                <td class="text-left"><span class="label label-danger">Disable</span></td>
+                <td class="text-left"><span class="label label-danger">{{ text_disabled }}</span></td>
                 <td class="text-right">
-                <a href="#" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+                <a href="#" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i> {{ button_edit }}</a>
                 </td>
               </tr>
 
 
               <tr class="hidden">
-                <td class="text-center" colspan="5">No results!</td>
+                <td class="text-center" colspan="5">{{ text_no_results }}</td>
               </tr>
 
               </tbody>
@@ -54,7 +54,7 @@
 
         <div class="buttons">
           <div class="text-right">
-            <a href="#" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i> Add payment method</a>
+            <a href="#" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i> {{ button_add_payment }}</a>
           </div>
         </div>
       </div>

@@ -1,7 +1,9 @@
 <?php
 class ControllerCmsBlog extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart - Blog');
+		$this->load->language('cms/blog');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('cms/blog');
 		$this->load->model('tool/image');
@@ -38,7 +40,7 @@ class ControllerCmsBlog extends Controller {
 
 		$data['blog_categories'][] = array(
 			'blog_category_id' => 0,
-			'name'             => 'All Articles',
+			'name'             => $this->language->get('text_all_articles'),
 			'href'             => $this->url->link('cms/blog')
 		);
 
@@ -139,6 +141,8 @@ class ControllerCmsBlog extends Controller {
 	}
 
 	public function info() {
+		$this->load->language('cms/blog');
+
 		$this->load->model('cms/blog');
 		$this->load->model('tool/image');
 
@@ -147,7 +151,7 @@ class ControllerCmsBlog extends Controller {
 		$blog_info = $this->model_cms_blog->getBlog($blog_id);
 
 		if ($blog_info) {
-			$this->document->setTitle('OpenCart - ' . $blog_info['title']);
+			$this->document->setTitle(sprintf($this->language->get('text_blog_title'), $blog_info['title']));
 
 			$this->model_cms_blog->updateViewed($blog_id);
 
@@ -187,7 +191,7 @@ class ControllerCmsBlog extends Controller {
 
 			$data['blog_categories'][] = array(
 				'blog_category_id' => 0,
-				'name'             => 'All Articles',
+				'name'             => $this->language->get('text_all_articles'),
 				'href'             => $this->url->link('cms/blog')
 			);
 
@@ -232,6 +236,8 @@ class ControllerCmsBlog extends Controller {
 	}
 
 	public function comment() {
+		$this->load->language('cms/blog');
+
 		$this->load->model('cms/blog');
 		$this->load->model('tool/image');
 
@@ -333,6 +339,8 @@ class ControllerCmsBlog extends Controller {
 	}
 
 	public function reply() {
+		$this->load->language('cms/blog');
+
 		$this->load->model('cms/blog');
 		$this->load->model('tool/image');
 
@@ -383,18 +391,20 @@ class ControllerCmsBlog extends Controller {
 	}
 
 	public function addcomment() {
+		$this->load->language('cms/blog');
+
 		$json = array();
 
 		$this->load->model('cms/blog');
 
 		if (!$this->member->isLogged()) {
-			$json['error'] = 'You must be logged in to post a comment!';
+			$json['error'] = $this->language->get('error_login_comment');
 		}
 
 		$comment = isset($this->request->post['comment']) ? trim($this->request->post['comment']) : '';
 
 		if (!$json && (utf8_strlen($comment) < 3 || utf8_strlen($comment) > 2000)) {
-			$json['error'] = 'Comment must be between 3 and 2000 characters!';
+			$json['error'] = $this->language->get('error_comment');
 		}
 
 		if (!$json) {
@@ -402,7 +412,7 @@ class ControllerCmsBlog extends Controller {
 
 			$this->model_cms_blog->addComment($blog_id, 0, $comment);
 
-			$json['success'] = 'Thank you for your comment!';
+			$json['success'] = $this->language->get('text_success_comment');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -410,18 +420,20 @@ class ControllerCmsBlog extends Controller {
 	}
 
 	public function addreply() {
+		$this->load->language('cms/blog');
+
 		$json = array();
 
 		$this->load->model('cms/blog');
 
 		if (!$this->member->isLogged()) {
-			$json['error'] = 'You must be logged in to reply!';
+			$json['error'] = $this->language->get('error_login_reply');
 		}
 
 		$comment = isset($this->request->post['comment']) ? trim($this->request->post['comment']) : '';
 
 		if (!$json && (utf8_strlen($comment) < 2 || utf8_strlen($comment) > 2000)) {
-			$json['error'] = 'Reply must be between 2 and 2000 characters!';
+			$json['error'] = $this->language->get('error_reply');
 		}
 
 		if (!$json) {
@@ -430,7 +442,7 @@ class ControllerCmsBlog extends Controller {
 
 			$this->model_cms_blog->addComment($blog_id, $parent_id, $comment);
 
-			$json['success'] = 'Your reply has been added!';
+			$json['success'] = $this->language->get('text_success_reply');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -438,6 +450,8 @@ class ControllerCmsBlog extends Controller {
 	}
 
 	public function removecomment() {
+		$this->load->language('cms/blog');
+
 		$json = array();
 
 		$this->load->model('cms/blog');
@@ -446,13 +460,13 @@ class ControllerCmsBlog extends Controller {
 		$comment_info = $this->model_cms_blog->getComment($blog_comment_id);
 
 		if (!$this->member->isLogged() || !$comment_info || (!$this->member->isModerator() && $this->member->getId() != $comment_info['member_id'])) {
-			$json['error'] = 'You do not have permission to remove this comment!';
+			$json['error'] = $this->language->get('error_permission_comment');
 		}
 
 		if (!$json) {
 			$this->model_cms_blog->deleteComment($blog_comment_id);
 
-			$json['success'] = 'Your comment has been removed!';
+			$json['success'] = $this->language->get('text_success_remove');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

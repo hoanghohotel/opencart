@@ -1,6 +1,8 @@
 <?php
 class ControllerMarketplaceBraintree extends Controller {
 	public function index() {
+		$this->load->language('marketplace/braintree');
+
 		$this->load->model('account/payment');
 
 		$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 0;
@@ -31,6 +33,8 @@ class ControllerMarketplaceBraintree extends Controller {
 	}
 
 	public function payment() {
+		$this->load->language('marketplace/braintree');
+
 		$this->load->model('marketplace/extension');
 		$this->load->model('account/order');
 
@@ -48,7 +52,7 @@ class ControllerMarketplaceBraintree extends Controller {
 				'quantity'        => $quantity,
 				'price'           => $extension_info['price'],
 				'total'           => (float)$extension_info['price'] * $quantity,
-				'payment_method'  => 'Credit Card (Braintree)',
+				'payment_method'  => $this->language->get('text_title'),
 				'transaction_id'  => 'BT-' . strtoupper(token(10)),
 				'order_status_id' => 5
 			));
@@ -72,8 +76,10 @@ class ControllerMarketplaceBraintree extends Controller {
 	}
 
 	public function remove() {
+		$this->load->language('marketplace/braintree');
+
 		$json = array(
-			'success'                 => 'Payment method removed!',
+			'success'                 => $this->language->get('text_remove'),
 			'vaulted_payment_methods' => false
 		);
 

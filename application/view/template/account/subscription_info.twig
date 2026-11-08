@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <h1 class="main-heading">Store Details</h1>
+                <h1 class="main-heading">{{ heading_details }}</h1>
                 {% if error_warning %}
                     <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
                 {% endif %}
@@ -12,7 +12,7 @@
                 {% endif %}
                 {% if countdown %}
                 <div id="countdown-alert">
-                    <div class="alert alert-info"><i class="fa fa-exclamation-circle"></i> Store is restarting now. It would be up and running in <strong class="countdown">{{ countdown }}</strong></div>
+                    <div class="alert alert-info"><i class="fa fa-exclamation-circle"></i> {{ text_restarting_countdown }} <strong class="countdown">{{ countdown }}</strong></div>
                 </div>
                 {% endif %}
                 <div id="status-alert"></div>
@@ -21,12 +21,12 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-4">
-                                <p class="form-title">Store Name</p>
-                                <p class="form-subtitle">The name used to identify your store</p>
+                                <p class="form-title">{{ entry_store_name }}</p>
+                                <p class="form-subtitle">{{ text_store_name_help }}</p>
                             </div>
                             <div class="col-sm-8">
                                 <input type="text" id="name" name="address_1" disabled="disabled"
-                               value="{{ subscription.subscription_store.name }}" placeholder="Store Name" class="form-control">
+                               value="{{ subscription.subscription_store.name }}" placeholder="{{ entry_store_name }}" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -34,12 +34,12 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-4">
-                                <p class="form-title">Store Email</p>
-                                <p class="form-subtitle">The store admin email address</p>
+                                <p class="form-title">{{ entry_store_email }}</p>
+                                <p class="form-subtitle">{{ text_store_email_help }}</p>
                             </div>
                             <div class="col-sm-8">
                                 <input type="text" id="admin_email" name="admin_email" disabled="disabled"
-                                value="{{ subscription.subscription_store.admin_email }}" placeholder="Address 1"
+                                value="{{ subscription.subscription_store.admin_email }}" placeholder="{{ entry_address_1 }}"
                                 class="form-control">
                             </div>
                         </div>
@@ -48,12 +48,12 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-4">
-                                <p class="form-title">Store Admin</p>
-                                <p class="form-subtitle">The store admin name</p>
+                                <p class="form-title">{{ entry_store_admin }}</p>
+                                <p class="form-subtitle">{{ text_store_admin_help }}</p>
                             </div>
                             <div class="col-sm-8">
                                 <input type="text" id="admin_username" name="admin_username" disabled="disabled"
-                                value="{{ subscription.subscription_store.admin_username }}" placeholder="Store Username"
+                                value="{{ subscription.subscription_store.admin_username }}" placeholder="{{ entry_store_username }}"
                                 class="form-control">
                             </div>
                         </div>
@@ -63,19 +63,19 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-sm-4">
-                                <p class="form-title">Store Status</p>
-                                <p class="form-subtitle">The status shows if store running now</p>
+                                <p class="form-title">{{ entry_store_status }}</p>
+                                <p class="form-subtitle">{{ text_store_status_help }}</p>
                             </div>
                             <div class="col-sm-8">
                             {% if store_info.status == 1 %}
-                                <span id="store-status-badge" class="label label-success">Active</span>
+                                <span id="store-status-badge" class="label label-success">{{ text_active }}</span>
                                 <div class="pull-right">
-                                    <input type="button" class="btn btn-lg btn-danger" value="Stop Store" id="stop-store"/>
+                                    <input type="button" class="btn btn-lg btn-danger" value="{{ button_stop_store }}" id="stop-store"/>
                                 </div>
                             {% else %}
-                                <span id="store-status-badge" class="label label-danger">Stopped</span>
+                                <span id="store-status-badge" class="label label-danger">{{ text_stopped }}</span>
                                 <div class="pull-right">
-                                    <input type="button" class="btn btn-lg btn-success" value="Activate Store" id="activate-store"/>
+                                    <input type="button" class="btn btn-lg btn-success" value="{{ button_activate_store }}" id="activate-store"/>
                                 </div>
                             {% endif %}
                             </div>
@@ -85,8 +85,8 @@
                 </fieldset>
 
                 <fieldset class="subscription-domains-block">
-                    <div class="domains-heading">Domain Details</div>
-                    <div class="domains-subheading">Your store can accessed via our system subdomain or via your custom domain. The store can be accessed only by multiple domains.</div>
+                    <div class="domains-heading">{{ text_domain_details }}</div>
+                    <div class="domains-subheading">{{ text_domain_details_sub }}</div>
                     {% if active_domains %}
                     <div class="form-group domain-block">
                         <div class="row">
@@ -94,7 +94,7 @@
                             <div class="col-sm-12">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <p class="form-title">Active Store Domains</p>
+                                        <p class="form-title">{{ text_active_domains }}</p>
                                     </div>
                                 </div>
                             </div>
@@ -103,7 +103,7 @@
                                     <div class="col-sm-12">
                                         {% for domain in active_domains %}
                                         <p>
-                                            <a href="{{ domain.url }}" target="_blank">{{ domain.url }}</a><a href="{{ domain.unpoint_href }}" data-toggle="tooltip" title="Disconnect custom domain" class="btn btn-link btn-md" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                            <a href="{{ domain.url }}" target="_blank">{{ domain.url }}</a><a href="{{ domain.unpoint_href }}" data-toggle="tooltip" title="{{ button_disconnect_domain }}" class="btn btn-link btn-md" onclick="return confirm('{{ text_confirm }}')"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </p>
                                         {% endfor %}
                                     </div>
@@ -117,10 +117,10 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                <th>Domain</th>
-                                <th>Status</th>
-                                <th>Connected To</th>
-                                <th class="text-right">Action</th>
+                                <th>{{ column_domain }}</th>
+                                <th>{{ column_status }}</th>
+                                <th>{{ column_connected_to }}</th>
+                                <th class="text-right">{{ column_action }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -140,47 +140,47 @@
                                         {% if domain.connected_to %}
                                         <span class="label label-primary">{{ domain.connected_to }}</span>
                                         {% else %}
-                                        <span class="label label-success">Not connected</span>
+                                        <span class="label label-success">{{ text_not_connected }}</span>
                                         {% endif %}
                                     </td>
                                     <td class="text-right">
-                                        <a href="{{ domain.point }}" data-toggle="tooltip" title="Connect custom domain" class="btn btn-primary"><i class="fa fa-link" aria-hidden="true"></i></a>
-                                        <a href="{{ domain.delete }}" data-toggle="tooltip" title="Remove custom domain" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        <a href="{{ domain.point }}" data-toggle="tooltip" title="{{ button_connect_domain }}" class="btn btn-primary"><i class="fa fa-link" aria-hidden="true"></i></a>
+                                        <a href="{{ domain.delete }}" data-toggle="tooltip" title="{{ button_remove_domain }}" class="btn btn-danger" onclick="return confirm('{{ text_confirm }}')"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                     </td>
                                     </tr>
                                 {% endfor %}
                                 {% else %}
                                 <tr>
-                                    <td class="text-center" colspan="3">No Domains Found! <a href="{{ add_domain }}">Want to add new one?</a></td>
+                                    <td class="text-center" colspan="3">{{ text_no_domains }} <a href="{{ add_domain }}">{{ text_want_add_domain }}</a></td>
                                 </tr>
                                 {% endif %}
                             </tbody>
                         </table>
                         {% if domains %}
-                        <a href="{{ add_domain }}" id="btn_add_new_domain" width="100%" class="btn btn-large btn-default">Add new Domain</a>
+                        <a href="{{ add_domain }}" id="btn_add_new_domain" width="100%" class="btn btn-large btn-default">{{ button_add_domain }}</a>
                         {% endif %}
                     </div>
                     {% endif %}
                 </fieldset>
                 {% if member_id != 78238 %}
                 <fieldset class="subscription-plan-block">
-                    <div class="subscription-plan-heading">Subscription Details</div>
-                    <div class="subscription-plan-subheading">Currently we offer one simple plan for all. In the future, we will add more plans</div>
+                    <div class="subscription-plan-heading">{{ text_subscription_details }}</div>
+                    <div class="subscription-plan-subheading">{{ text_subscription_details_sub }}</div>
                     <div class="form-group">
                         <div class="row">
                             <div id="plan_alert"></div>
                             <div class="col-sm-4">
-                                <p class="form-title">Your Subscription plan</p>
-                                <p class="form-subtitle">You will be charged on monthly bases</p>
+                                <p class="form-title">{{ text_your_plan }}</p>
+                                <p class="form-subtitle">{{ text_your_plan_sub }}</p>
                             </div>
                             <div class="col-sm-8">
                                 <div class="cloud-d-flex">
-                                    <span id="current_plan_name">{{ subscription.subscription_plan.name }} Plan</span><span id="current_plan_price">{{ subscription.subscription_plan.price }}</span>
+                                    <span id="current_plan_name">{{ subscription.subscription_plan.name }} {{ text_plan_suffix }}</span><span id="current_plan_price">{{ subscription.subscription_plan.price }}</span>
                                     <a data-toggle="collapse" 
                                             href="#planCollapse" 
                                             aria-expanded="false" 
                                             aria-controls="planCollapse" 
-                                            type="button" id="edit_plan_btn" class="btn btn-default">CHANGE
+                                            type="button" id="edit_plan_btn" class="btn btn-default">{{ button_change }}
                                     </a>
                                 </div>
                             </div>
@@ -203,7 +203,7 @@
                                             </div>
                                             {% endfor %}
                                             <div class="col-sm-12">
-                                                <a type="button" id="btn_plan_save" class="btn btn-primary pull-right">SAVE</a>
+                                                <a type="button" id="btn_plan_save" class="btn btn-primary pull-right">{{ button_save }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -213,13 +213,13 @@
                     </div>
                 </fieldset>
                 <fieldset class="subscription-payment-block">
-                    <div class="subscription-payment-heading">Payment Methods</div>
-                    <div class="subscription-payment-subheading">We accept credit and debit cards. You can change your payment method at any time.</div>
+                    <div class="subscription-payment-heading">{{ text_payment_methods }}</div>
+                    <div class="subscription-payment-subheading">{{ text_payment_methods_sub }}</div>
                     <div class="form-group">
                         <div class="row">
                             <div id="payment_alert"></div>
                             <div class="col-sm-4">
-                                <p class="form-title">Active Payment Method</p>
+                                <p class="form-title">{{ text_active_payment }}</p>
                             </div>
                             <div class="col-sm-8">
                                 <div class="payment-badge">
@@ -229,7 +229,7 @@
                                         href="#paymentCollapse" 
                                         aria-expanded="false" 
                                         aria-controls="paymentCollapse" 
-                                        type="button" id="edit_payment_btn" class="btn btn-default">CHANGE
+                                        type="button" id="edit_payment_btn" class="btn btn-default">{{ button_change }}
                                     </a>
                                 </div>
                             </div>
@@ -255,12 +255,12 @@
                                                 <a href="{{ add_payment }}">
                                                     <label class="cloud-d-flex new-payment">
                                                         <div><i class="fa fa-plus"></i></div>
-                                                        <div>Add new payment</div>
+                                                        <div>{{ text_add_new_payment }}</div>
                                                     </label>
                                                 </a>
                                             </div>
                                             <div class="col-sm-12">
-                                                    <a type="button" id="btn_payment_save" class="btn btn-primary pull-right">SAVE</a>
+                                                    <a type="button" id="btn_payment_save" class="btn btn-primary pull-right">{{ button_save }}</a>
                                             </div>
                                         </div>
                                     </div>
@@ -272,57 +272,57 @@
                 <fieldset class="subscription-actions-block">
                     {% if subscription.subscription_status_id == subscription_active_status %}
                     <div class="subscription-action-card">
-                        <div class="subscription-heading-title">Cancel Subscription</div>
+                        <div class="subscription-heading-title">{{ text_cancel_subscription }}</div>
                         <div class="subscription-info-window subscription-danger">
                             <div class="row">
                                 <div class="col-sm-10 col-xs-12">
                                     <span>
-                                        You can cancel your subscription at any time. When cancelling your subscription, the store will be turned off and deleted permanently. Please, be sure to backup any store valuable data, before canceling your subscription.
+                                        {{ text_cancel_info }}
                                     </span>
                                 </div>
                                 <div class="col-sm-2 col-xs-12">
                                     <input type="button"
                                         class="cancel-subscription btn btn-danger subscription-cancel button-click-load button-use-confirm pull-right"
-                                        data-toggle="tooltip" data-placement="top" title="Cancel cloud subscription"
-                                        data-original-title="Cancel cloud subscription" value="CANCEL"/>
+                                        data-toggle="tooltip" data-placement="top" title="{{ button_cancel_sub_title }}"
+                                        data-original-title="{{ button_cancel_sub_title }}" value="{{ button_cancel_upper }}"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {% elseif subscription.subscription_status_id == subscription_canceled_status %}
                     <div class="subscription-action-card">
-                        <div class="subscription-heading-title">Renew Subscription</div>
+                        <div class="subscription-heading-title">{{ text_renew_subscription }}</div>
                         <div class="subscription-info-window subscription-warning">
                             <div class="row">
                                 <div class="col-sm-10 col-xs-12">
                                     <span>
-                                        Renew your subscription to continue enjoying the benefits of OpenCart Cloud
+                                        {{ text_renew_info }}
                                     </span>
                                 </div>
                                 <div class="col-sm-2 col-xs-12">
                                     <input type="button"
                                         class="renew-subscription btn btn-warning subscription-cancel button-click-load button-use-confirm pull-right"
-                                        data-toggle="tooltip" data-placement="top" title="Renew cloud subscription"
-                                        data-original-title="Renew cloud subscription" value="RENEW"/>
+                                        data-toggle="tooltip" data-placement="top" title="{{ button_renew_sub_title }}"
+                                        data-original-title="{{ button_renew_sub_title }}" value="{{ button_renew_upper }}"/>
                                 </div>
                             </div>
                         </div>
                     </div>
                     {% else %}
                     <div class="subscription-action-card">
-                        <div class="subscription-heading-title">Restart Subscription</div>
+                        <div class="subscription-heading-title">{{ text_restart_subscription }}</div>
                         <div class="subscription-info-window subscription-warning">
                             <div class="row">
                                 <div class="col-sm-10 col-xs-12">
                                     <span>
-                                        Your store can still be restored. We will delete your store soon. By restoring your subscription, all store data is revived. You must have an active payment methods on record before restoring the subscription.
+                                        {{ text_restart_info }}
                                     </span>
                                 </div>
                                 <div class="col-sm-2 col-xs-12">
                                 <input type="button"
                                         class="restart-subscription btn btn-warning subscription-cancel button-click-load button-use-confirm pull-right"
-                                        data-toggle="tooltip" data-placement="top" title="Restart Cloud Store"
-                                        data-original-title="Restart Cloud Store" value="RESTART"/>
+                                        data-toggle="tooltip" data-placement="top" title="{{ button_restart_sub_title }}"
+                                        data-original-title="{{ button_restart_sub_title }}" value="{{ button_restart_upper }}"/>
                                 </div>
                             </div>
                         </div>
@@ -333,7 +333,7 @@
                 <div id="results"></div>
 
                 <div class="text-right">
-                    <a href="{{ cancel }}" class="btn btn-link">Cancel</a>
+                    <a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a>
                 </div>
             </div>
 
@@ -491,7 +491,7 @@
                     
                     var element_id = $('input[name="subscription_plan_id"]:checked').val();
                     
-                    $('#current_plan_name').text($('#plan_name_' + element_id).text() + ' Plan');
+                    $('#current_plan_name').text($('#plan_name_' + element_id).text() + ' {{ text_plan_suffix }}');
                     $('#current_plan_price').text($('#plan_price_' + element_id).text());
                     $('#planCollapse').collapse('toggle');
 

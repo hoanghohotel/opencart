@@ -1,7 +1,9 @@
 <?php
 class ControllerCmsDemo extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart - Demo');
+		$this->load->language('cms/demo');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['extension'] = $this->url->link('marketplace/extension');
 

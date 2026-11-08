@@ -2,24 +2,24 @@
 <div id="account-promotion">
   <div class="page-header">
     <div class="container">
-      <h1>Promote Your Extension</h1>
+      <h1>{{ heading_title }}</h1>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-md-9">
-        <h2>Your Promotions</h2>
+        <h2>{{ text_promotions }}</h2>
         <div class="table-responsive">
           <table class="table table-bordered">
             <thead>
               <tr>
-                <th class="text-right">ID</th>
-                <th>Extension</th>
-                <th>Date Start</th>
-                <th>Date End</th>
-                <th>Order Status</th>
-                <th>Date Added</th>
-                <th class="text-right">Action</th>
+                <th class="text-right">{{ column_promotion_id }}</th>
+                <th>{{ column_extension }}</th>
+                <th>{{ column_date_start }}</th>
+                <th>{{ column_date_end }}</th>
+                <th>{{ column_order_status }}</th>
+                <th>{{ column_date_added }}</th>
+                <th class="text-right">{{ column_action }}</th>
               </tr>
             </thead>
             <tbody>
@@ -37,17 +37,17 @@
                 {% endfor %}
               {% else %}
                 <tr>
-                  <td class="text-center" colspan="7">No results!</td>
+                  <td class="text-center" colspan="7">{{ text_no_results }}</td>
                 </tr>
               {% endif %}
             </tbody>
           </table>
         </div>
         <nav>{{ pagination }}</nav>
-        <div class="text-right"><a href="{{ add }}" class="btn btn-primary">New Promotion</a></div>
+        <div class="text-right"><a href="{{ add }}" class="btn btn-primary">{{ button_add }}</a></div>
       </div>
       <div class="col-md-3 hidden-xs">{{ menu }}</div>
     </div>
   </div>
 </div>
-{{ footer }} 
+{{ footer }}

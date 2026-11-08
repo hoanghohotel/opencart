@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ lang }}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,35 +45,35 @@
         <a href="{{ home }}" class="navbar-brand"><img src="application/view/image/icon/opencart-logo.png" title="{{ title }}" alt="{{ logo }}" /></a></div>
       <div class="collapse navbar-collapse" id="navbar-collapse-header">
         <ul class="nav navbar-nav">
-          <li><a href="{{ feature }}">Features</a></li>
-          <li><a href="{{ demo }}">Demo</a></li>
-          <li><a href="{{ marketplace }}">Marketplace</a></li>
-          <li><a href="{{ blog }}">Blog</a></li>
-          <li><a href="{{ download }}">Download</a></li>
-          <li class="dropdown"><a href="#" data-toggle="dropdown">Resources <span class="caret"></span></a>
+          <li><a href="{{ feature }}">{{ text_features }}</a></li>
+          <li><a href="{{ demo }}">{{ text_demo }}</a></li>
+          <li><a href="{{ marketplace }}">{{ text_marketplace }}</a></li>
+          <li><a href="{{ blog }}">{{ text_blog }}</a></li>
+          <li><a href="{{ download }}">{{ text_download }}</a></li>
+          <li class="dropdown"><a href="#" data-toggle="dropdown">{{ text_resources }} <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="{{ showcase }}">Showcase</a></li>
-              <li><a href="{{ contact }}">Contact Us</a></li>
-              {# <li><a href="{{ cloud }}">OpenCart Cloud</a></li> #}
-              <li><a href="{{ partner }}">OpenCart Partners</a></li>
-              <li><a href="https://forum.opencart.com">Community Forums</a></li>
-              <li><a href="https://www.facebook.com/groups/www.opencart" target="_blank">Facebook Community</a></li>
-              <li><a href="https://docs.opencart.com">OpenCart Documentation</a></li>
-              <li><a target="_blank" href="https://github.com/opencart/opencart">GitHub</a></li>
-              <li><a href="https://docs.opencart.com/#additional-reading">OpenCart Books</a></li>
-              <li><a href="https://github.com/opencart/opencart/issues">Github Bug Tracker</a></li>
-              <li><a href="https://docs.opencart.com/developer/module/">Developer</a></li>
+              <li><a href="{{ showcase }}">{{ text_showcase }}</a></li>
+              <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+              {# <li><a href="{{ cloud }}">{{ text_cloud }}</a></li> #}
+              <li><a href="{{ partner }}">{{ text_partners }}</a></li>
+              <li><a href="{{ forum }}">{{ text_forum }}</a></li>
+              <li><a href="{{ facebook_community }}" target="_blank">{{ text_facebook_community }}</a></li>
+              <li><a href="{{ documentation }}">{{ text_documentation }}</a></li>
+              <li><a target="_blank" href="{{ github }}">{{ text_github }}</a></li>
+              <li><a href="{{ book }}">{{ text_books }}</a></li>
+              <li><a href="{{ bug_tracker }}">{{ text_bug_tracker }}</a></li>
+              <li><a href="{{ developer }}">{{ text_developer }}</a></li>
             </ul>
           </li>
           {% if not logged %}
-          <li class="visible-xs"><a href="{{ login }}">Login</a></li>
-          <li class="visible-xs"><a href="{{ register }}">Register</a></li>
+          <li class="visible-xs"><a href="{{ login }}">{{ text_login }}</a></li>
+          <li class="visible-xs"><a href="{{ register }}">{{ text_register }}</a></li>
           {% else %}
-          <li class="visible-xs"><a href="{{ account }}">Account</a></li>
-          <li class="visible-xs"><a href="{{ logout }}">Logout</a></li>
+          <li class="visible-xs"><a href="{{ account }}">{{ text_account }}</a></li>
+          <li class="visible-xs"><a href="{{ logout }}">{{ text_logout }}</a></li>
           {% endif %}
         </ul>
-        <div class="navbar-right hidden-xs">{% if not logged %}<a href="{{ login }}" class="btn btn-link navbar-btn">Login</a> <a href="{{ register }}" class="btn btn-black navbar-btn">Register</a>{% else %}<a href="{{ account }}" class="btn btn-link navbar-btn">Account</a> <a href="{{ logout }}" class="btn btn-black navbar-btn">Logout</a>{% endif %}</div>
+        <div class="navbar-right hidden-xs">{% if not logged %}<a href="{{ login }}" class="btn btn-link navbar-btn">{{ text_login }}</a> <a href="{{ register }}" class="btn btn-black navbar-btn">{{ text_register }}</a>{% else %}<a href="{{ account }}" class="btn btn-link navbar-btn">{{ text_account }}</a> <a href="{{ logout }}" class="btn btn-black navbar-btn">{{ text_logout }}</a>{% endif %}</div>
       </div>
     </div>
   </nav>

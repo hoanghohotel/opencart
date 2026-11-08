@@ -1,7 +1,9 @@
 <?php
 class ControllerMarketplaceExtension extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart - Marketplace');
+		$this->load->language('marketplace/extension');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('marketplace/extension');
 		$this->load->model('cms/download');
@@ -109,7 +111,7 @@ class ControllerMarketplaceExtension extends Controller {
 
 		$data['categories'][] = array(
 			'extension_category_id' => '',
-			'name'                  => 'All',
+			'name'                  => $this->language->get('text_all'),
 			'href'                  => $this->url->link('marketplace/extension', $buildUrl(array('filter_category_id' => '')))
 		);
 
@@ -128,7 +130,7 @@ class ControllerMarketplaceExtension extends Controller {
 
 		$data['versions'][] = array(
 			'download_id' => '',
-			'name'        => 'All',
+			'name'        => $this->language->get('text_all'),
 			'href'        => $this->url->link('marketplace/extension', $buildUrl(array('filter_download_id' => '')))
 		);
 
@@ -146,17 +148,17 @@ class ControllerMarketplaceExtension extends Controller {
 		$data['partner_types'] = array(
 			array(
 				'value' => '',
-				'text'  => 'All',
+				'text'  => $this->language->get('text_all'),
 				'href'  => $this->url->link('marketplace/extension', $buildUrl(array('filter_partner' => '')))
 			),
 			array(
 				'value' => 'partner',
-				'text'  => 'OpenCart Partners',
+				'text'  => $this->language->get('text_partner_developer'),
 				'href'  => $this->url->link('marketplace/extension', $buildUrl(array('filter_partner' => 'partner')))
 			),
 			array(
 				'value' => 'developer',
-				'text'  => 'Developers',
+				'text'  => $this->language->get('text_developer'),
 				'href'  => $this->url->link('marketplace/extension', $buildUrl(array('filter_partner' => 'developer')))
 			)
 		);
@@ -174,37 +176,37 @@ class ControllerMarketplaceExtension extends Controller {
 		// Sorts
 		$data['sorts'] = array(
 			array(
-				'text'  => 'Recommended',
+				'text'  => $this->language->get('text_sort_recommended'),
 				'value' => 'recommended',
 				'href'  => $this->url->link('marketplace/extension', $buildUrl(array('sort' => '')))
 			),
 			array(
-				'text'  => 'Recently Updated',
+				'text'  => $this->language->get('text_sort_date_modified'),
 				'value' => 'date_modified',
 				'href'  => $this->url->link('marketplace/extension', $buildUrl(array('sort' => 'date_modified')))
 			),
 			array(
-				'text'  => 'Date Added',
+				'text'  => $this->language->get('text_sort_date_added'),
 				'value' => 'date_added',
 				'href'  => $this->url->link('marketplace/extension', $buildUrl(array('sort' => 'date_added')))
 			),
 			array(
-				'text'  => 'Rating',
+				'text'  => $this->language->get('text_sort_rating'),
 				'value' => 'rating',
 				'href'  => $this->url->link('marketplace/extension', $buildUrl(array('sort' => 'rating')))
 			),
 			array(
-				'text'  => 'Name',
+				'text'  => $this->language->get('text_sort_name'),
 				'value' => 'name',
 				'href'  => $this->url->link('marketplace/extension', $buildUrl(array('sort' => 'name')))
 			),
 			array(
-				'text'  => 'Price (Low > High)',
+				'text'  => $this->language->get('text_sort_price_asc'),
 				'value' => 'price',
 				'href'  => $this->url->link('marketplace/extension', $buildUrl(array('sort' => 'price')))
 			),
 			array(
-				'text'  => 'Price (High > Low)',
+				'text'  => $this->language->get('text_sort_price_desc'),
 				'value' => 'price_desc',
 				'href'  => $this->url->link('marketplace/extension', $buildUrl(array('sort' => 'price_desc')))
 			)
@@ -230,7 +232,7 @@ class ControllerMarketplaceExtension extends Controller {
 				'name'          => $result['name'],
 				'description'   => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, 100) . '..',
 				'image'         => $image,
-				'price'         => ($result['license'] && (float)$result['price'] > 0) ? $this->currency->format($result['price'], $this->config->get('config_currency')) : 'FREE',
+				'price'         => ($result['license'] && (float)$result['price'] > 0) ? $this->currency->format($result['price'], $this->config->get('config_currency')) : $this->language->get('text_free'),
 				'rating'        => (int)$result['rating'],
 				'rating_total'  => (int)$result['rating_total'],
 				'comment_total' => (int)$result['comment_total'],
@@ -271,7 +273,7 @@ class ControllerMarketplaceExtension extends Controller {
 				'name'          => $result['name'],
 				'description'   => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, 100) . '..',
 				'image'         => $image,
-				'price'         => ($result['license'] && (float)$result['price'] > 0) ? $this->currency->format($result['price'], $this->config->get('config_currency')) : 'FREE',
+				'price'         => ($result['license'] && (float)$result['price'] > 0) ? $this->currency->format($result['price'], $this->config->get('config_currency')) : $this->language->get('text_free'),
 				'rating'        => (int)$result['rating'],
 				'rating_total'  => (int)$result['rating_total'],
 				'comment_total' => (int)$result['comment_total'],
@@ -306,6 +308,8 @@ class ControllerMarketplaceExtension extends Controller {
 	}
 
 	public function info() {
+		$this->load->language('marketplace/extension');
+
 		$this->load->model('marketplace/extension');
 		$this->load->model('account/order');
 		$this->load->model('tool/image');
@@ -315,7 +319,7 @@ class ControllerMarketplaceExtension extends Controller {
 		$extension_info = $this->model_marketplace_extension->getExtension($extension_id);
 
 		if ($extension_info && ($extension_info['status'] || ($this->member->isLogged() && $this->member->getId() == $extension_info['member_id']))) {
-			$this->document->setTitle('OpenCart - ' . $extension_info['name']);
+			$this->document->setTitle(sprintf($this->language->get('text_extension_title'), $extension_info['name']));
 
 			$this->document->addStyle('application/view/javascript/lightbox/css/lightbox.css');
 			$this->document->addScript('application/view/javascript/lightbox/js/lightbox.js', 'footer');
@@ -323,12 +327,12 @@ class ControllerMarketplaceExtension extends Controller {
 			$data['breadcrumbs'] = array();
 
 			$data['breadcrumbs'][] = array(
-				'text' => 'Home',
+				'text' => $this->language->get('text_home'),
 				'href' => $this->url->link('common/home')
 			);
 
 			$data['breadcrumbs'][] = array(
-				'text' => 'Marketplace',
+				'text' => $this->language->get('text_marketplace'),
 				'href' => $this->url->link('marketplace/extension')
 			);
 
@@ -423,9 +427,9 @@ class ControllerMarketplaceExtension extends Controller {
 			}
 
 			$data['license'] = (int)$extension_info['license'];
-			$data['price'] = ($extension_info['license'] && (float)$extension_info['price'] > 0) ? $this->currency->format($extension_info['price'], $this->config->get('config_currency')) : 'FREE';
+			$data['price'] = ($extension_info['license'] && (float)$extension_info['price'] > 0) ? $this->currency->format($extension_info['price'], $this->config->get('config_currency')) : $this->language->get('text_free');
 			$data['partner_status'] = (int)$extension_info['partner_status'];
-			$data['license_period'] = $extension_info['license_period'] ? $extension_info['license_period'] : '12 Months';
+			$data['license_period'] = $extension_info['license_period'] ? $extension_info['license_period'] : $this->language->get('text_default_license_period');
 			$data['recommended'] = (int)$extension_info['recommended'];
 			$data['rating'] = (int)$extension_info['rating'];
 			$data['rating_total'] = (int)$extension_info['rating_total'];
@@ -476,6 +480,8 @@ class ControllerMarketplaceExtension extends Controller {
 	}
 
 	public function comment() {
+		$this->load->language('marketplace/extension');
+
 		$this->load->model('marketplace/extension');
 		$this->load->model('tool/image');
 
@@ -577,6 +583,8 @@ class ControllerMarketplaceExtension extends Controller {
 	}
 
 	public function reply() {
+		$this->load->language('marketplace/extension');
+
 		$this->load->model('marketplace/extension');
 		$this->load->model('tool/image');
 
@@ -627,18 +635,20 @@ class ControllerMarketplaceExtension extends Controller {
 	}
 
 	public function addcomment() {
+		$this->load->language('marketplace/extension');
+
 		$json = array();
 
 		$this->load->model('marketplace/extension');
 
 		if (!$this->member->isLogged()) {
-			$json['error'] = 'You must be logged in to post a comment!';
+			$json['error'] = $this->language->get('error_login_comment');
 		}
 
 		$comment = isset($this->request->post['comment']) ? trim($this->request->post['comment']) : '';
 
 		if (!$json && (utf8_strlen($comment) < 3 || utf8_strlen($comment) > 2000)) {
-			$json['error'] = 'Comment must be between 3 and 2000 characters!';
+			$json['error'] = $this->language->get('error_comment');
 		}
 
 		if (!$json) {
@@ -651,7 +661,7 @@ class ControllerMarketplaceExtension extends Controller {
 				'comment'      => $comment
 			));
 
-			$json['success'] = 'Thank you for your comment!';
+			$json['success'] = $this->language->get('text_success_comment');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -659,18 +669,20 @@ class ControllerMarketplaceExtension extends Controller {
 	}
 
 	public function addreply() {
+		$this->load->language('marketplace/extension');
+
 		$json = array();
 
 		$this->load->model('marketplace/extension');
 
 		if (!$this->member->isLogged()) {
-			$json['error'] = 'You must be logged in to reply!';
+			$json['error'] = $this->language->get('error_login_reply');
 		}
 
 		$comment = isset($this->request->post['comment']) ? trim($this->request->post['comment']) : '';
 
 		if (!$json && (utf8_strlen($comment) < 2 || utf8_strlen($comment) > 2000)) {
-			$json['error'] = 'Reply must be between 2 and 2000 characters!';
+			$json['error'] = $this->language->get('error_reply');
 		}
 
 		if (!$json) {
@@ -684,7 +696,7 @@ class ControllerMarketplaceExtension extends Controller {
 				'comment'      => $comment
 			));
 
-			$json['success'] = 'Your reply has been added!';
+			$json['success'] = $this->language->get('text_success_reply');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');
@@ -692,6 +704,8 @@ class ControllerMarketplaceExtension extends Controller {
 	}
 
 	public function removecomment() {
+		$this->load->language('marketplace/extension');
+
 		$json = array();
 
 		$this->load->model('marketplace/extension');
@@ -700,13 +714,13 @@ class ControllerMarketplaceExtension extends Controller {
 		$comment_info = $this->model_marketplace_extension->getComment($extension_comment_id);
 
 		if (!$this->member->isLogged() || !$comment_info || (!$this->member->isModerator() && $this->member->getId() != $comment_info['member_id'])) {
-			$json['error'] = 'You do not have permission to remove this comment!';
+			$json['error'] = $this->language->get('error_permission_comment');
 		}
 
 		if (!$json) {
 			$this->model_marketplace_extension->deleteComment($extension_comment_id);
 
-			$json['success'] = 'Your comment has been removed!';
+			$json['success'] = $this->language->get('text_success_remove');
 		}
 
 		$this->response->addHeader('Content-Type: application/json');

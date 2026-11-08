@@ -2,45 +2,45 @@
 <div id="support-seller">
 	<div class="page-header">
 		<div class="container">
-			<h1>Contact Seller</h1>
-			<p>Any usage problem on the extension?</p>
+			<h1>{{ text_heading }}</h1>
+			<p>{{ text_subtitle }}</p>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-8">
-				<div class="alert alert-info"><i class="fa fa-info-circle"></i> Please provide as much information <u>in the form below</u> for our agents to be able to assist you.
+				<div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_form_info }}
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
 				</div>
 				<form id="form-contact">
 					<div class="form-group required">
-						<label for="input-reason">How can we help you?</label> <select name="reason" id="input-reason" class="form-control">
-							<option value="question">I have a question</option>
-							<option value="support">I want to get support</option>
-							<option value="refund">I want to get a refund</option>
+						<label for="input-reason">{{ entry_reason }}</label> <select name="reason" id="input-reason" class="form-control">
+							<option value="question">{{ text_reason_question }}</option>
+							<option value="support">{{ text_reason_support }}</option>
+							<option value="refund">{{ text_reason_refund }}</option>
 						</select>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group required">
-								<label for="input-name">What is your name?</label> <input type="text" name="name" value="{{ name }}" placeholder="Name" id="input-name" class="form-control">
+								<label for="input-name">{{ entry_name }}</label> <input type="text" name="name" value="{{ name }}" placeholder="{{ placeholder_name }}" id="input-name" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group">
-								<label for="input-website">Web Site</label> <input type="text" name="website" value="" placeholder="Web Site" id="input-website" class="form-control"/>
+								<label for="input-website">{{ entry_website }}</label> <input type="text" name="website" value="" placeholder="{{ placeholder_website }}" id="input-website" class="form-control"/>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-6">
 							<div class="form-group required">
-								<label for="input-order-id">What is your order ID?</label> <input type="text" name="order_id" value="" placeholder="Order ID" id="input-order-id" class="form-control">
+								<label for="input-order-id">{{ entry_order_id }}</label> <input type="text" name="order_id" value="" placeholder="{{ placeholder_order_id }}" id="input-order-id" class="form-control">
 							</div>
 						</div>
 						<div class="col-md-6">
 							<div class="form-group required">
-								<label class="control-label" for="input-version">Which Opencart version are you using?</label> <select name="version_id" id="input-version" class="form-control">
+								<label class="control-label" for="input-version">{{ entry_version }}</label> <select name="version_id" id="input-version" class="form-control">
 									<option value=""></option>
 									{% for download in downloads %}
 										<option value="{{ download.download_id }}">{{ download.name }}</option>
@@ -52,7 +52,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group required">
-								<label for="input-enquiry">Message</label> <textarea name="enquiry" rows="7" id="input-enquiry" class="form-control">{{ enquiry }}</textarea>
+								<label for="input-enquiry">{{ entry_enquiry }}</label> <textarea name="enquiry" rows="7" id="input-enquiry" class="form-control">{{ enquiry }}</textarea>
 							</div>
 						</div>
 					</div>
@@ -63,7 +63,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<button type="button" id="button-contact" class="btn btn-primary btn-xl btn-block" disabled="disabled">Send Message</button>
+							<button type="button" id="button-contact" class="btn btn-primary btn-xl btn-block" disabled="disabled">{{ button_send }}</button>
 						</div>
 					</div>
 				</form>
@@ -74,11 +74,11 @@
 						<div class="media-left media-middle"><img src="{{ member_image }}" alt="{{ member_username }}" title="{{ member_username }}" class="media-object img-circle"/></div>
 						<div class="media-body"><span>{{ member_username }}</span>
 							<br/>
-							<small>Member since: {{ member_date_added }}</small>
+							<small>{{ text_member_since }} {{ member_date_added }}</small>
 						</div>
 					</div>
 					<br/>
-					<a href="{{ filter_member }}" class="btn btn-primary btn-lg btn-block">View all extensions</a></div>
+					<a href="{{ filter_member }}" class="btn btn-primary btn-lg btn-block">{{ button_view_extensions }}</a></div>
 				<div id="side-banner"> {{ banner }} </div>
 			</div>
 		</div>

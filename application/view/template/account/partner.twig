@@ -15,44 +15,44 @@
 
           <fieldset>
 
-            <legend>Register for a partner account</legend>
+            <legend>{{ text_register_partner }}</legend>
           {% if not partner_status %}
 
             {% if route == 'account/partner/add' %}
-            <h1>Partner Up</h1>
-            <p>Apply to become a partner</p>
+            <h1>{{ heading_add }}</h1>
+            <p>{{ text_subtitle_add }}</p>
           {% else %}
-            <h1>My Partner Info</h1>
-            <p>Edit partner information</p>
+            <h1>{{ heading_title }}</h1>
+            <p>{{ text_subtitle_edit }}</p>
           {% endif %}
 
-              <p>Please check before applying to become a partner if you qualify or not.</p>
-              <h4><strong>Attention</strong></h4>
+              <p>{{ text_qualify_desc }}</p>
+              <h4><strong>{{ text_attention }}</strong></h4>
               <div class="alert alert-info">
                 <ol>
-                  <li>Contribution in OpenCart Forum (3 post & 10 reply monthly).</li>
-                  <li>Submit at least one extension to OpenCart Marketplace.</li>
-                  <li>Write a blog article about OpenCart.</li>
-                  <li>Place an OpenCart logo on your website.</li>
-                  <li>Advertise in Opencart website.</li>
+                  <li>{{ text_requirement_1 }}</li>
+                  <li>{{ text_requirement_2 }}</li>
+                  <li>{{ text_requirement_3 }}</li>
+                  <li>{{ text_requirement_4 }}</li>
+                  <li>{{ text_requirement_5 }}</li>
                 </ol>
               </div>
             </fieldset>
           {% endif %}
 
           <fieldset>
-            <legend>Edit Your Partner Contact Details</legend>
+            <legend>{{ text_contact_details }}</legend>
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-firstname">First Name</label> <input type="text" name="firstname" value="{{ firstname }}" placeholder="First Name" id="input-firstname" class="form-control"/>
+                  <label class="control-label" for="input-firstname">{{ entry_firstname }}</label> <input type="text" name="firstname" value="{{ firstname }}" placeholder="{{ entry_firstname }}" id="input-firstname" class="form-control"/>
                   {% if error_firstname %}
                     <div class="text-danger">{{ error_firstname }}</div>
                   {% endif %}</div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-lastname">Last Name</label> <input type="text" name="lastname" value="{{ lastname }}" placeholder="Last Name" id="input-lastname" class="form-control"/>
+                  <label class="control-label" for="input-lastname">{{ entry_lastname }}</label> <input type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}" id="input-lastname" class="form-control"/>
                   {% if error_lastname %}
                     <div class="text-danger">{{ error_lastname }}</div>
                   {% endif %}</div>
@@ -61,7 +61,7 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-company">Company</label> <input type="text" name="company" value="{{ company }}" placeholder="Company" id="input-company" class="form-control"/>
+                  <label class="control-label" for="input-company">{{ entry_company }}</label> <input type="text" name="company" value="{{ company }}" placeholder="{{ entry_company }}" id="input-company" class="form-control"/>
                   {% if error_company %}
                     <div class="text-danger">{{ error_company }}</div>
                   {% endif %}
@@ -69,7 +69,7 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-website">Web Site</label> <input type="text" name="website" value="{{ website }}" placeholder="Web Site" id="input-website" class="form-control"/>
+                  <label class="control-label" for="input-website">{{ entry_website }}</label> <input type="text" name="website" value="{{ website }}" placeholder="{{ entry_website }}" id="input-website" class="form-control"/>
                   {% if error_website %}
                     <div class="text-danger">{{ error_website }}</div>
                   {% endif %}</div>
@@ -78,15 +78,15 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-email">E-Mail</label> <input type="text" name="email" value="{{ email }}" placeholder="E-Mail" id="input-email" class="form-control"/>
+                  <label class="control-label" for="input-email">{{ entry_email }}</label> <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control"/>
                   {% if error_email %}
                     <div class="text-danger">{{ error_email }}</div>
                   {% endif %}</div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-telephone">Telephone</label> <input type="text" name="telephone" value="{{ telephone }}" placeholder="Telephone" id="input-telephone" class="form-control"/>
-                  <div class="help-block">(Include the country code)</div>
+                  <label class="control-label" for="input-telephone">{{ entry_telephone }}</label> <input type="text" name="telephone" value="{{ telephone }}" placeholder="{{ entry_telephone }}" id="input-telephone" class="form-control"/>
+                  <div class="help-block">{{ help_telephone }}</div>
                   {% if error_telephone %}
                     <div class="text-danger">{{ error_telephone }}</div>
                   {% endif %}</div>
@@ -94,9 +94,9 @@
             </div>
           </fieldset>
           <fieldset>
-            <legend>About Your Company</legend>
+            <legend>{{ text_about_company }}</legend>
             <div class="form-group required">
-              <label class="control-label" for="input-partner-type">Partner Type</label> <select name="member_partner_type_id" id="input-partner-type" class="form-control">
+              <label class="control-label" for="input-partner-type">{{ entry_partner_type }}</label> <select name="member_partner_type_id" id="input-partner-type" class="form-control">
                 <option value=""></option>
                 {% for partner_type in partner_types %}
                   {% if partner_type.member_partner_type_id == member_partner_type_id %}
@@ -111,31 +111,31 @@
               {% endif %}
             </div>
             <div class="form-group required">
-              <label for="input-description-short">Short Description</label> <textarea name="description_short" placeholder="Short description about your company" rows="5" id="input-description-short" class="form-control">{{ description_short }}</textarea>
+              <label for="input-description-short">{{ entry_description_short }}</label> <textarea name="description_short" placeholder="{{ entry_description_short_holder }}" rows="5" id="input-description-short" class="form-control">{{ description_short }}</textarea>
               {% if error_description_short %}
                 <div class="text-danger">{{ error_description_short }}</div>
               {% endif %} </div>
             <div class="form-group required">
-              <label for="input-description-long">Long Description</label> <textarea name="description_long" placeholder="Long description about your company" rows="8" id="input-description-long" class="form-control">{{ description_long }}</textarea>
+              <label for="input-description-long">{{ entry_description_long }}</label> <textarea name="description_long" placeholder="{{ entry_description_long_holder }}" rows="8" id="input-description-long" class="form-control">{{ description_long }}</textarea>
               {% if error_description_long %}
                 <div class="text-danger">{{ error_description_long }}</div>
               {% endif %}
             </div>
           </fieldset>
           <fieldset>
-            <legend>Address</legend>
+            <legend>{{ text_address }}</legend>
             <div class="form-group required">
-              <label class="control-label" for="input-address-1">Address 1</label> <input type="text" name="address_1" value="{{ address_1 }}" placeholder="Address 1" id="input-address-1" class="form-control"/>
+              <label class="control-label" for="input-address-1">{{ entry_address_1 }}</label> <input type="text" name="address_1" value="{{ address_1 }}" placeholder="{{ entry_address_1 }}" id="input-address-1" class="form-control"/>
               {% if error_address_1 %}
                 <div class="text-danger">{{ error_address_1 }}</div>
               {% endif %}</div>
             <div class="form-group">
-              <label class="control-label" for="input-address-2">Address 2</label> <input type="text" name="address_2" value="{{ address_2 }}" placeholder="Address 2" id="input-address-2" class="form-control"/>
+              <label class="control-label" for="input-address-2">{{ entry_address_2 }}</label> <input type="text" name="address_2" value="{{ address_2 }}" placeholder="{{ entry_address_2 }}" id="input-address-2" class="form-control"/>
             </div>
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-city">City</label> <input type="text" name="city" value="{{ city }}" placeholder="City" id="input-city" class="form-control"/>
+                  <label class="control-label" for="input-city">{{ entry_city }}</label> <input type="text" name="city" value="{{ city }}" placeholder="{{ entry_city }}" id="input-city" class="form-control"/>
                   {% if error_city %}
                     <div class="text-danger">{{ error_city }}</div>
                   {% endif %}
@@ -143,7 +143,7 @@
               </div>
               <div class="col-sm-6">
                 <div class="form-group required">
-                  <label class="control-label" for="input-postcode">Postcode</label> <input type="text" name="postcode" value="{{ postcode }}" placeholder="Postcode" id="input-postcode" class="form-control"/>
+                  <label class="control-label" for="input-postcode">{{ entry_postcode }}</label> <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}" id="input-postcode" class="form-control"/>
                   {% if error_postcode %}
                     <div class="text-danger">{{ error_postcode }}</div>
                   {% endif %}
@@ -151,7 +151,7 @@
               </div>
             </div>
             <div class="form-group required">
-              <label class="control-label" for="input-country">Country</label> <select name="country_id" id="input-country" class="form-control">
+              <label class="control-label" for="input-country">{{ entry_country }}</label> <select name="country_id" id="input-country" class="form-control">
                 <option value=""></option>
                 {% for country in countries %}
                   {% if country.country_id == country_id %}
@@ -165,14 +165,14 @@
                 <div class="text-danger">{{ error_country }}</div>
               {% endif %}</div>
             <div class="form-group required">
-              <label class="control-label" for="input-zone">Region / State</label> <select name="zone_id" id="input-zone" class="form-control"></select>
+              <label class="control-label" for="input-zone">{{ entry_zone }}</label> <select name="zone_id" id="input-zone" class="form-control"></select>
               {% if error_zone %}
                 <div class="text-danger">{{ error_zone }}</div>
               {% endif %}
             </div>
           </fieldset>
           <fieldset>
-            <legend>Image</legend>
+            <legend>{{ text_image }}</legend>
             <div class="form-group">
               <div class="row">
                 <div class="col-sm-4">
@@ -181,70 +181,70 @@
               </div>
               <div class="row">
                 <div class="col-sm-2">
-                  <button type="button" data-toggle="image" data-target="#input-image" data-thumb="#thumb-image" class="btn btn-success btn-block">Browse</button>
+                  <button type="button" data-toggle="image" data-target="#input-image" data-thumb="#thumb-image" class="btn btn-success btn-block">{{ button_browse }}</button>
                 </div>
                 <div class="col-sm-2">
-                  <button type="button" data-toggle="clear" data-target="#input-image" data-thumb="#thumb-image" data-placeholder="{{ placeholder }}" class="btn btn-default btn-block">Clear</button>
+                  <button type="button" data-toggle="clear" data-target="#input-image" data-thumb="#thumb-image" data-placeholder="{{ placeholder }}" class="btn btn-default btn-block">{{ button_clear }}</button>
                 </div>
               </div>
-              <div class="help-block">Company image size should be 110 x 40px</div>
+              <div class="help-block">{{ help_image }}</div>
             </div>
           </fieldset>
           <fieldset>
-            <legend>Social Platform</legend>
+            <legend>{{ text_social_platform }}</legend>
             <div class="form-group">
-              <label for="input-facebook">Facebook</label>
+              <label for="input-facebook">{{ entry_facebook }}</label>
               <div class="input-group">
-                <input type="text" name="facebook" value="{{ facebook }}" placeholder="Facebook page link" id="input-facebook" class="form-control"/>
+                <input type="text" name="facebook" value="{{ facebook }}" placeholder="{{ entry_facebook_placeholder }}" id="input-facebook" class="form-control"/>
                 <div class="input-group-addon"><i class="fa fa-facebook"></i></div>
               </div>
             </div>
             <div class="form-group">
-              <label for="input-twitter">Twitter</label>
+              <label for="input-twitter">{{ entry_twitter }}</label>
               <div class="input-group">
-                <input type="text" name="twitter" value="{{ twitter }}" placeholder="Twitter link" id="input-twitter" class="form-control"/>
+                <input type="text" name="twitter" value="{{ twitter }}" placeholder="{{ entry_twitter_placeholder }}" id="input-twitter" class="form-control"/>
                 <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
               </div>
             </div>
             <div class="form-group">
-              <label for="input-linkedin">LinkedIn</label>
+              <label for="input-linkedin">{{ entry_linkedin }}</label>
               <div class="input-group">
-                <input type="text" name="linkedin" value="{{ linkedin }}" id="input-linkedin" class="form-control" placeholder="LinkedIn link"/>
+                <input type="text" name="linkedin" value="{{ linkedin }}" id="input-linkedin" class="form-control" placeholder="{{ entry_linkedin_placeholder }}"/>
                 <div class="input-group-addon"><i class="fa fa-linkedin"></i></div>
               </div>
             </div>
           </fieldset>
           {% if route == 'account/partner/add' %}
             <fieldset>
-              <legend>Terms &amp; Conditions</legend>
-              <textarea rows="8" class="form-control" readonly="readonly">Limitation of Liability
-  To the fullest extent permitted by law in each applicable jurisdiction, Opencart, its officers, directors, shareholders, employees, affiliates and/or agents shall not be liable to you for any direct, indirect, incidental, special, punitive, exemplary or consequential damages whatsoever, including any damages resulting from
+              <legend>{{ text_terms }}</legend>
+              <textarea rows="8" class="form-control" readonly="readonly">{{ text_terms_title }}
+  {{ text_terms_intro }}
 
-  (1) errors, mistakes, or inaccuracies of or in any content;
+  {{ text_terms_1 }}
 
-  (2) any personal injury or property damage related to your use of the Opencart Services;
+  {{ text_terms_2 }}
 
-  (3) any unauthorized access to or use of our servers and/or any personal information and/or other information stored therein;
+  {{ text_terms_3 }}
 
-  (4) any interruption or cessation of transmission to or from the OpenCart Services;
+  {{ text_terms_4 }}
 
-  (5) the use or display of any Content or User Content posted, emailed, transmitted, or otherwise made available via the Opencart Services;
+  {{ text_terms_5 }}
 
-  (6) events beyond the reasonable control of Opencart, including any internet failures, equipment failures, electrical power failures, strikes, labor disputes, riots, insurrections, civil disturbances, shortages of labor or materials, fires, floods, storms, earthquakes, explosions, acts of God, war, terrorism, intergalactic struggles, governmental actions, orders of courts, agencies or tribunals or non-performance of third parties; and/or
+  {{ text_terms_6 }}
 
-  (7) loss of use, data, profits, goodwill, or other intangible losses, resulting from the use or the inability to use any or all of Opencart Services.</textarea>
+  {{ text_terms_7 }}</textarea>
               <div class="checkbox">
                 <label>{% if agree %}
                     <input type="checkbox" name="agree" value="1" checked="checked"/>
                   {% else %}
                     <input type="checkbox" name="agree" value="1"/>
                   {% endif %}
-                  I agree with the above terms & conditions</label>
+                  {{ text_agree }}</label>
               </div>
             </fieldset>
           {% endif %}
-          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a>
-            <button type="submit" class="btn btn-primary">Submit</button>
+          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a>
+            <button type="submit" class="btn btn-primary">{{ button_submit }}</button>
           </div>
         </form>
       </div>
@@ -289,7 +289,7 @@ $('select[name=\'country_id\']').on('change', function() {
 					html += '>' + json['zone'][i]['name'] + '</option>';
 				}
 			} else {
-				html += '<option value="0" selected="selected"> --- None --- </option>';
+				html += '<option value="0" selected="selected">{{ text_none|e('js') }}</option>';
 			}
 
 			$('select[name=\'zone_id\']').html(html);

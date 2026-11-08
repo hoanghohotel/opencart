@@ -1,12 +1,14 @@
 <?php
 class ControllerErrorNotFound extends Controller {
 	public function index() {
-		$this->document->setTitle('The page you requested cannot be found!');
+		$this->load->language('error/not_found');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
-			'text' => 'Home',
+			'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home')
 		);
 
@@ -26,13 +28,14 @@ class ControllerErrorNotFound extends Controller {
 			}
 
 			$data['breadcrumbs'][] = array(
-				'text' => 'Page Not Found',
+				'text' => $this->language->get('text_breadcrumb'),
 				'href' => $this->url->link($route, $url, $this->request->server['HTTPS'])
 			);
 		}
 
 		$data['home'] = $this->url->link('common/home');
 		$data['continue'] = $this->url->link('common/home');
+		$data['text_navigation'] = sprintf($this->language->get('text_navigation'), $data['home']);
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');

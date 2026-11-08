@@ -1,0 +1,46 @@
+<?php
+// Text
+$_['text_site_name']            = '{store_name}';
+$_['text_features']             = 'Features';
+$_['text_demo']                 = 'Demo';
+$_['text_marketplace']          = 'Marketplace';
+$_['text_blog']                 = 'Blog';
+$_['text_download']             = 'Download';
+$_['text_resources']            = 'Resources';
+$_['text_showcase']             = 'Showcase';
+$_['text_contact']              = 'Contact Us';
+$_['text_cloud']                = '{store_name} Cloud';
+$_['text_partners']             = '{store_name} Partners';
+$_['text_forum']                = 'Community Forums';
+$_['text_facebook_community']   = 'Facebook Community';
+$_['text_documentation']        = '{store_name} Documentation';
+$_['text_github']               = 'GitHub';
+$_['text_books']                = '{store_name} Books';
+$_['text_bug_tracker']          = 'Github Bug Tracker';
+$_['text_developer']            = 'Developer';
+$_['text_login']                = 'Login';
+$_['text_register']             = 'Register';
+$_['text_account']              = 'Account';
+$_['text_logout']               = 'Logout';
+
+// Meta Descriptions & Keywords
+$_['meta_description_home']     = '{store_name} is an open source PHP-based online e-commerce solution. Everything you need to create, scale and run your online store.';
+$_['meta_description_feature']  = 'Explore {store_name} features: powerful store management, extensions, themes, payment gateways, shipping methods, and SEO-ready e-commerce tools.';
+$_['meta_description_demo']     = 'Try the official {store_name} live demo. Experience the storefront and administration panel before downloading or launching your store.';
+$_['meta_description_market']   = 'Browse over 13,000+ {store_name} extensions, modules, themes, payment gateways, shipping methods, and translations in the official {store_name} Marketplace.';
+$_['meta_description_ext_info'] = 'Download and install verified {store_name} extensions, themes, and modules from the official {store_name} Marketplace.';
+$_['meta_description_blog']     = 'Read the latest e-commerce news, tutorials, release notes, and merchant tips on the official {store_name} Blog.';
+$_['meta_description_blog_info']= 'Read detailed articles, e-commerce guides, and updates on the official {store_name} Blog.';
+$_['meta_description_download'] = 'Download the latest version of {store_name} free and open-source e-commerce platform, or launch your store instantly on {store_name} Cloud.';
+$_['meta_description_dl_start'] = 'Thank you for downloading {store_name}. Your download will begin shortly.';
+$_['meta_description_dl_hist']  = 'Browse and download previous {store_name} releases and historical versions.';
+$_['meta_description_showcase'] = 'Discover successful online stores and brands powered by {store_name} around the world.';
+$_['meta_description_partner']  = 'Find certified {store_name} partners, developers, and e-commerce agencies for custom development, design, and technical support.';
+$_['meta_description_support']  = 'Get professional {store_name} support, dedicated technical assistance, and community resources for your online store.';
+$_['meta_description_seller']   = 'Contact the extension developer or seller on {store_name} Marketplace for technical support, questions, or order assistance.';
+$_['meta_description_contact']  = 'Contact the {store_name} team for general inquiries, marketplace assistance, partnership opportunities, and technical support.';
+$_['meta_description_cloud']    = 'Launch a fully hosted {store_name} Cloud store in minutes with automated updates, cloud hosting, and pre-installed tools.';
+$_['meta_description_login']    = 'Log in to your {store_name} account to manage your marketplace extensions, downloads, subscriptions, and store services.';
+$_['meta_description_register'] = 'Create a free {store_name} account to download extensions, access community forums, and manage your e-commerce projects.';
+$_['meta_description_default']  = '{store_name} open-source e-commerce platform, marketplace extensions, cloud hosting, and developer resources.';
+$_['meta_keywords_default']     = 'ecommerce, open source, shopping cart, online store, marketplace, extensions, themes, php ecommerce';

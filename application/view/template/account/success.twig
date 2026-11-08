@@ -3,22 +3,22 @@
 	<div id="register" class="container">
 		<div class="row">
 			<div class="col-md-8">
-				<h3 style="margin-top: 0px;">Welcome to OpenCart, your account has been created</h3>
-				<p>The mail with verification link has been sent to your email address. Please, verify your account to use opencart.com</p>
+				<h3 style="margin-top: 0px;">{{ text_welcome }}</h3>
+				<p>{{ text_verify_email }}</p>
 				<div class="buttons text-right">
-					<a href="{{ continue }}" class="btn btn-primary pull-right">Continue</a>
+					<a href="{{ continue }}" class="btn btn-primary pull-right">{{ button_continue }}</a>
 				</div>
 			</div>
 			<div class="col-md-offset-1 col-md-3 hidden-xs">
 				<div id="register-newsletter">
-					<h4>OpenCart Newsletter</h4>
+					<h4>{{ text_newsletter_title }}</h4>
 					<div class="text-center">
 						<p><img src="application/view/image/icon/newsletter-subscribe-icon.png" class="img-responsive"/></p>
-						<p>Subscribe to our newsletters and stay informed of new releases and other OpenCart events.</p>
+						<p>{{ text_newsletter_desc }}</p>
 					</div>
 					<div>
 						<div class="input-group newsletter">
-							<input type="text" name="newsletter" value="" placeholder="Enter your email" class="form-control"/>
+							<input type="text" name="newsletter" value="" placeholder="{{ entry_newsletter }}" class="form-control"/>
 							<div class="input-group-btn">
 								<button type="button" class="btn btn-primary subscribe"><i class="fa fa-angle-right"></i></button>
 							</div>

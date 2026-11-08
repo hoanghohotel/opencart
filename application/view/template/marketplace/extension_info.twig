@@ -12,7 +12,7 @@
 				</div>
 				<div class="col-md-4">
 					<div id="extension-search" class="input-group">
-						<input type="text" name="filter_search" value="{{ filter_search }}" placeholder="Search for extensions and themes" class="form-control"> <input type="hidden" name="filter_category_id" value="{{ filter_category_id }}" class="form-control"/> <input type="hidden" name="filter_download_id" value="{{ filter_download_id }}" class="form-control"/> <input type="hidden" name="filter_rating" value="{{ filter_rating }}" class="form-control"/> <input type="hidden" name="filter_license" value="{{ filter_license }}" class="form-control"/> <input type="hidden" name="filter_partner" value="{{ filter_partner }}" class="form-control"/> <input type="hidden" name="sort" value="{{ sort }}" class="form-control"/>
+						<input type="text" name="filter_search" value="{{ filter_search }}" placeholder="{{ text_search_placeholder }}" class="form-control"> <input type="hidden" name="filter_category_id" value="{{ filter_category_id }}" class="form-control"/> <input type="hidden" name="filter_download_id" value="{{ filter_download_id }}" class="form-control"/> <input type="hidden" name="filter_rating" value="{{ filter_rating }}" class="form-control"/> <input type="hidden" name="filter_license" value="{{ filter_license }}" class="form-control"/> <input type="hidden" name="filter_partner" value="{{ filter_partner }}" class="form-control"/> <input type="hidden" name="sort" value="{{ sort }}" class="form-control"/>
 						<div class="input-group-btn">
 							<button type="button" id="button-search" class="btn btn-link"><i class="fa fa-search"></i></button>
 						</div>
@@ -38,7 +38,7 @@
 				<div>{{ description }}</div>
 				{% if reviews and reviews_enabled %}
 					<div class="extension-review">
-						<h3 class="text-center">What customers say about {{ name }}</h3>
+						<h3 class="text-center">{{ text_customer_reviews }} {{ name }}</h3>
 						{% for review in reviews %}
 							<div class="media">
 								<div class="media-left"><img src="{{ review.image }}" alt="{{ review.member }}" title="{{ review.member }}" class="media-object"/></div>
@@ -55,18 +55,18 @@
 				<div id="comment-input-box">
 					{% if not logged %}
 						<div class="login-layer">
-							<p>Login and write down your comment.</p>
-							<p><a href="{{ login }}" class="btn btn-primary">Login my OpenCart Account</a></p>
+							<p>{{ text_login_comment }}</p>
+							<p><a href="{{ login }}" class="btn btn-primary">{{ button_login_account }}</a></p>
 						</div>
 					{% endif %}
 					<div class="media">
 						<div class="media-left"><img src="{{ comment_image }}" alt="{{ comment_username }}" title="{{ comment_username }}" class="media-object"/></div>
 						<div class="media-body">
 							<div class="form-group">
-								<label for="input-comment">Leave your comment</label> <textarea name="comment" placeholder="Write your comment here..." id="input-comment" class="form-control"></textarea>
+								<label for="input-comment">{{ entry_comment }}</label> <textarea name="comment" placeholder="{{ entry_comment_placeholder }}" id="input-comment" class="form-control"></textarea>
 							</div>
 							<div class="text-right">
-								<button type="button" id="button-comment" class="btn btn-primary btn-sm">Comment</button>
+								<button type="button" id="button-comment" class="btn btn-primary btn-sm">{{ button_comment }}</button>
 							</div>
 						</div>
 					</div>
@@ -77,31 +77,31 @@
 				<br/>
 			</div>
 			<div class="col-md-4">
-				<div id="buy" class="well">{% if download %}<a href="{{ download }}" class="btn btn-success btn-lg btn-block">Download</a>{% else %}<button type="button" id="button-purchase" class="btn btn-success btn-lg btn-block">Buy</button>{% endif %}
+				<div id="buy" class="well">{% if download %}<a href="{{ download }}" class="btn btn-success btn-lg btn-block">{{ button_download }}</a>{% else %}<button type="button" id="button-purchase" class="btn btn-success btn-lg btn-block">{{ button_buy }}</button>{% endif %}
 					{% if license %}
 						<div id="price" class="row">
-							<div class="col-xs-5"><strong>Price</strong></div>
+							<div class="col-xs-5"><strong>{{ text_price }}</strong></div>
 							<div class="col-xs-7 text-right">{{ price }}</div>
 						</div>
 					{% endif %}
 					<hr/>
 					<ul class="list-check">
 						{% if partner_status %}
-							<li>Developed by OpenCart Partner</li>
+							<li>{{ text_developed_partner }}</li>
 						{% else %}
-							<li>Developed by OpenCart Community</li>
+							<li>{{ text_developed_community }}</li>
 						{% endif %}
 						{% if license_period %}
-							<li>{{ license_period }} Months Free Support</li>
+							<li>{{ license_period }} {{ text_free_support }}</li>
 						{% endif %}
-						<li>Documentation Included</li>
+						<li>{{ text_documentation_inc }}</li>
                         {% if recommended %}
 							<img class="recommended-label" src="/application/view/image/marketplace/recommended-label.svg"/>
 						{% endif %}
 					</ul>
 					<hr/>
 					<div class="row">
-						<div class="col-xs-5"><strong>Rating</strong></div>
+						<div class="col-xs-5"><strong>{{ text_rating }}</strong></div>
 						<div class="col-xs-7">
 							{% for i in 1..5 %}
 								{% if rating >= i %}<i class="opencart-icon-star-light"></i>{% else %}<i class="opencart-icon-star-light-o"></i>{% endif %}
@@ -110,40 +110,40 @@
 					</div>
 					<hr/>
 					<div class="row">
-						<div class="col-xs-5"><strong>Compatibility</strong></div>
+						<div class="col-xs-5"><strong>{{ text_compatibility }}</strong></div>
 						<div class="col-xs-7">{{ compatibility }}</div>
 					</div>
 					<hr/>
 					<div class="row">
-						<div class="col-xs-5"><strong>Last Update</strong></div>
+						<div class="col-xs-5"><strong>{{ text_last_update }}</strong></div>
 						<div class="col-xs-7">{{ date_modified }}</div>
 					</div>
 					<hr/>
 					<div class="row">
-						<div class="col-xs-5"><strong>Created</strong></div>
+						<div class="col-xs-5"><strong>{{ text_created }}</strong></div>
 						<div class="col-xs-7">{{ date_added }}</div>
 					</div>
 				</div>
 				<div id="sales" class="well">
 					{% if license %}
-						<i class="opencart-icon-cart-mini"></i> <strong>{{ sales }}</strong> Sales
+						<i class="opencart-icon-cart-mini"></i> <strong>{{ sales }}</strong> {{ text_sales }}
 					{% else %}
-						<i class="fa fa-cloud-download"></i> <strong>{{ downloaded }}</strong> Downloads
+						<i class="fa fa-cloud-download"></i> <strong>{{ downloaded }}</strong> {{ text_downloads }}
 					{% endif %}</div>
-				<div id="comment" class="well"><i class="opencart-icon-comment"></i> <strong>{{ comment_total }}</strong> Comments</div>
+				<div id="comment" class="well"><i class="opencart-icon-comment"></i> <strong>{{ comment_total }}</strong> {{ text_comments }}</div>
 				<div id="comment" class="well text-center">
-                    <div class="fb-share-button" data-href="{{ url }}" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                    <div class="fb-share-button" data-href="{{ url }}" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">{{ text_share }}</a></div>
                 </div>
 				<div class="well">
 					<div class="media">
 						<div class="media-left media-middle"><img src="{{ member_image }}" alt="{{ member_username }}" title="{{ member_username }}" class="media-object img-circle"/></div>
 						<div class="media-body"><span>{{ member_username }}</span>
 							<br/>
-							<small>Member since: {{ member_date_added }}</small>
+							<small>{{ text_member_since }} {{ member_date_added }}</small>
 						</div>
 					</div>
 					<br/>
-					<a href="{{ filter_member }}" class="btn btn-primary btn-lg btn-block">View all extensions</a> <a href="{{ support }}" class="btn btn-ghost-dark btn-lg btn-block">Get Support</a></div>
+					<a href="{{ filter_member }}" class="btn btn-primary btn-lg btn-block">{{ button_view_all_ext }}</a> <a href="{{ support }}" class="btn btn-ghost-dark btn-lg btn-block">{{ button_get_support }}</a></div>
 			</div>
 		</div>
 	</div>
@@ -194,7 +194,7 @@ $('#button-purchase').on('click', function() {
             string = '<div id="modal-checkout" class="modal">';
             string += '  <div class="modal-dialog">';
             string += '    <div class="modal-content">';
-            string += '      <div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h5 class="modal-title">Buy an extension license</h5></div>';
+            string += '      <div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h5 class="modal-title">{{ text_buy_license }}</h5></div>';
             string += '      <div class="modal-body">' + html + '</div>';
             string += '    </div>';
             string += '  </div>';

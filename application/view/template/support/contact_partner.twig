@@ -1,24 +1,24 @@
 <div class="row">
 	<div class="col-md-5">
 		<div class="form-group required">
-			<label for="input-company" class="control-label">Company Name</label> <input type="text" name="company" value="" placeholder="Company Name" id="input-company" class="form-control">
+			<label for="input-company" class="control-label">{{ entry_company }}</label> <input type="text" name="company" value="" placeholder="{{ placeholder_company }}" id="input-company" class="form-control">
 		</div>
 	</div>
 	<div class="col-md-7">
 		<div class="form-group required">
-			<label for="input-website" class="control-label">Web Site</label> <input type="text" name="website" value="" placeholder="Web Site" id="input-website" class="form-control"/>
+			<label for="input-website" class="control-label">{{ entry_website }}</label> <input type="text" name="website" value="" placeholder="{{ placeholder_website }}" id="input-website" class="form-control"/>
 		</div>
 	</div>
 </div>
 <div class="row">
 	<div class="col-md-5">
 		<div class="form-group">
-			<label for="input-telephone" class="control-label">Phone</label> <input type="text" name="telephone" value="" placeholder="Phone" id="input-telephone" class="form-control"/>
+			<label for="input-telephone" class="control-label">{{ entry_telephone }}</label> <input type="text" name="telephone" value="" placeholder="{{ placeholder_telephone }}" id="input-telephone" class="form-control"/>
 		</div>
 	</div>
 	<div class="col-md-7">
 		<div class="form-group required">
-			<label for="input-country" class="control-label">Country</label> <select name="country_id" id="input-country" class="form-control">
+			<label for="input-country" class="control-label">{{ entry_country }}</label> <select name="country_id" id="input-country" class="form-control">
 				<option value=""></option>
 				{% for country in countries %}
 					{% if country.country_id == country_id %}

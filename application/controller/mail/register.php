@@ -1,6 +1,8 @@
 <?php
 class ControllerMailRegister extends Controller {
 	public function index($member_info = array()) {
+		$this->load->language('mail/register');
+
 		if (is_numeric($member_info)) {
 			$this->load->model('account/member');
 			$member_info = $this->model_account_member->getMember((int)$member_info);
@@ -11,13 +13,14 @@ class ControllerMailRegister extends Controller {
 		}
 
 		$code = !empty($member_info['code']) ? $member_info['code'] : token(40);
-		$store_name = html_entity_decode($this->config->get('config_name') ?: 'OpenCart', ENT_QUOTES, 'UTF-8');
+		$store_name = html_entity_decode($this->config->get('config_name') ?: 'Store', ENT_QUOTES, 'UTF-8');
 
 		$data['header'] = $this->load->controller('mail/header');
 		$data['footer'] = $this->load->controller('mail/footer');
 		$data['verification_link'] = $this->url->link('account/verify', 'code=' . urlencode($code), true);
 		$data['store'] = $store_name;
 		$data['store_url'] = $this->url->link('common/home', '', true);
+		$data['text_team_formatted'] = sprintf($this->language->get('text_team'), $store_name);
 		$data['extension'] = array(
 			'link' => $this->url->link('marketplace/extension', '', true),
 			'href' => $this->url->link('marketplace/extension', '', true)
@@ -45,7 +48,7 @@ class ControllerMailRegister extends Controller {
 				'image'       => $image,
 				'name'        => $result['name'],
 				'description' => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, 80) . '...',
-				'price'       => ($result['price'] > 0) ? $this->currency->format($result['price'], $this->config->get('config_currency')) : 'FREE',
+				'price'       => ($result['price'] > 0) ? $this->currency->format($result['price'], $this->config->get('config_currency')) : $this->language->get('text_free'),
 				'link'        => $ext_link,
 				'href'        => $ext_link
 			);
@@ -59,7 +62,7 @@ class ControllerMailRegister extends Controller {
 		}
 
 		$html = $this->load->view('mail/register', $data);
-		$text = "Welcome to OpenCart!\n\nPlease verify your email address by clicking the link below:\n" . $data['verification_link'];
+		$text = sprintf($this->language->get('text_plain_welcome'), $store_name, $data['verification_link']);
 
 		try {
 			$mail = new Mail($this->config->get('config_mail_engine') ?: 'mail');
@@ -71,9 +74,9 @@ class ControllerMailRegister extends Controller {
 			$mail->smtp_timeout = $this->config->get('config_mail_smtp_timeout');
 
 			$mail->setTo($member_info['email']);
-			$mail->setFrom($this->config->get('config_email') ?: 'noreply@opencart.com');
-			$mail->setSender(html_entity_decode($this->config->get('config_name') ?: 'OpenCart', ENT_QUOTES, 'UTF-8'));
-			$mail->setSubject(html_entity_decode(($this->config->get('config_name') ?: 'OpenCart') . ' - Account Verification', ENT_QUOTES, 'UTF-8'));
+			$mail->setFrom($this->config->get('config_email') ?: ('noreply@' . (parse_url($this->config->get('config_url'), PHP_URL_HOST) ?: 'localhost')));
+			$mail->setSender($store_name);
+			$mail->setSubject(html_entity_decode(sprintf($this->language->get('text_subject'), $store_name), ENT_QUOTES, 'UTF-8'));
 			$mail->setHtml($html);
 			$mail->setText($text);
 			$mail->send();

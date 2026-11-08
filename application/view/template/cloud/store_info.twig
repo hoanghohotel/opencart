@@ -9,22 +9,12 @@
         {% if success %}
           <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}</div>
         {% endif %}
-        <!--
-        {% if "now"|date('Y-m-d') < store.date_trial_expire|date('Y-m-d') %}
-            <div class="alert alert-info">Your Cloud Store is free on the trial plan until {{ store.date_trial_expire|date('Y-m-d') }}</div>
-        {% else %}
-          {% if store.plan_id == 1 %}
-            <div class="alert alert-warning">Your Cloud Store trial has now expired. Please <a href="{{ link_change_plan }}" title="Choose a new plan for your Cloud Store">choose a new plan</a></div>
-          {% endif %}
-        {% endif %}
-        -->
         {% if store is not empty %}
           {% if store.status_code == "ACTIVE" %}
             <ul class="nav nav-tabs">
-              <li class="active"><a data-toggle="tab" href="#info-tab">Store info</a></li>
-              <li><a data-toggle="tab" href="#domain-tab">Domains</a></li>
-              <li><a data-toggle="tab" href="#backup-tab">Backups</a></li>
-              <!--<li><a data-toggle="tab" href="#plan-tab">Plan</a></li>-->
+              <li class="active"><a data-toggle="tab" href="#info-tab">{{ tab_info }}</a></li>
+              <li><a data-toggle="tab" href="#domain-tab">{{ tab_domain }}</a></li>
+              <li><a data-toggle="tab" href="#backup-tab">{{ tab_backup }}</a></li>
             </ul>
 
             <!-- Tab-pane content -->
@@ -33,56 +23,56 @@
                 <br />
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4>Store Information</h4>
+                    <h4>{{ text_store_information }}</h4>
                   </div>
                   <div class="panel-body">
                     <div class="row">
-                      <div class="col-sm-3"><strong>Cloud Store ID #</strong></div>
+                      <div class="col-sm-3"><strong>{{ text_cloud_store_id }}</strong></div>
                       <div class="col-sm-9">
                         <p class="form-static">{{ store.store_id }}</p>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-3"><strong>Store Created</strong></div>
+                      <div class="col-sm-3"><strong>{{ text_store_created }}</strong></div>
                       <div class="col-sm-9">
                         <p class="form-static">{{ store.date_added|date("d/m/Y") }}</p>
                       </div>
                     </div>
                     {% if "now"|date('Y-m-d') < store.date_trial_expire|date('Y-m-d') %}
                       <div class="row">
-                        <div class="col-sm-3"><strong>Trial Expires</strong></div>
+                        <div class="col-sm-3"><strong>{{ text_trial_expires }}</strong></div>
                         <div class="col-sm-9">
                           <p class="form-static">{{ store.date_trial_expire|date("d/m/Y") }}</p>
                         </div>
                       </div>
                     {% endif %}
                     <div class="row">
-                      <div class="col-sm-3"><strong>Store Name</strong></div>
+                      <div class="col-sm-3"><strong>{{ text_store_name_label }}</strong></div>
                       <div class="col-sm-9">
                         <p class="form-static">{{ store.store_name }}</p>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-3"><strong>Store URL</strong></div>
+                      <div class="col-sm-3"><strong>{{ text_store_url }}</strong></div>
                       <div class="col-sm-9">
                         <p class="form-static"><a href="http://{{ store.url_temp }}" target="_blank">{{ store.url_temp }} <i class="fa fa-external-link"></i></a></p>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-3"><strong>Store Admin URL</strong></div>
+                      <div class="col-sm-3"><strong>{{ text_store_admin_url }}</strong></div>
                       <div class="col-sm-9">
                         <p class="form-static"><a href="http://{{ store.url_temp }}/admin" target="_blank">{{ store.url_temp }}/admin <i class="fa fa-external-link"></i></a></a></p>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="col-sm-3"><strong>Admin user</strong></div>
+                      <div class="col-sm-3"><strong>{{ text_admin_user }}</strong></div>
                       <div class="col-sm-3"><p class="form-static">{{ store.config.store_user }}</p></div>
-                      <div class="col-sm-3"><strong>Admin password</strong> <a style="margin-left:15px; vertical-align:middle;" class="label label-info" id="password-view">View</a></div>
+                      <div class="col-sm-3"><strong>{{ text_admin_password }}</strong> <a style="margin-left:15px; vertical-align:middle;" class="label label-info" id="password-view">{{ text_view }}</a></div>
                       <div class="col-sm-3"><p class="form-static"><span id="store-admin-password">**********</span></p></div>
                     </div>
                     <div class="row">
                       <div class="col-sm-12">
-                        <p class="form-static">* You may have changed your username and/or password in the store admin area, they will not update here</p>
+                        <p class="form-static">{{ text_password_notice }}</p>
                       </div>
                     </div>
                   </div>
@@ -92,9 +82,9 @@
                 <br />
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4>Domains / URLs
+                    <h4>{{ text_domains_urls }}
                       <span class="btn-group pull-right">
-                        <a class="btn btn-primary" href="{{ link_add_url }}"><i class="fa fa-plus fa-fw"></i> Add URL</a>
+                        <a class="btn btn-primary" href="{{ link_add_url }}"><i class="fa fa-plus fa-fw"></i> {{ button_add_url }}</a>
                       </span>
                     </h4>
                   </div>
@@ -102,22 +92,22 @@
                     <div class="row">
                       <div class="col-sm-12">
                         {% if store.urls is empty %}
-                          <p class="form-static">You don't have any urls setup yet</p>
+                          <p class="form-static">{{ text_no_urls }}</p>
                         {% else %}
-                          <div class="table-responsive margin-top">
+                           <div class="table-responsive margin-top">
                             <table class="table table-bordered">
                               <thead>
                               <tr>
-                                <th class="col-sm-7">URL</th>
-                                <th class="text-center col-sm-1">SSL</th>
-                                <th class="text-center col-sm-1">Verified</th>
-                                <th class="text-center col-sm-1">Default</th>
-                                <th class="text-right col-sm-2">Actions</th>
+                                <th class="col-sm-7">{{ column_url }}</th>
+                                <th class="text-center col-sm-1">{{ column_ssl }}</th>
+                                <th class="text-center col-sm-1">{{ column_verified }}</th>
+                                <th class="text-center col-sm-1">{{ column_default }}</th>
+                                <th class="text-right col-sm-2">{{ column_actions }}</th>
                               </tr>
                               </thead>
                               <tbody>
                               <tr>
-                                <td><a href="{% if store.url_temp_ssl == 1 %}https://{% else %}http://{% endif %}{{ store.url_temp }}" target="_blank" title="Click to view store">{{ store.url_temp }}</a></td>
+                                <td><a href="{% if store.url_temp_ssl == 1 %}https://{% else %}http://{% endif %}{{ store.url_temp }}" target="_blank" title="{{ text_click_view_store }}">{{ store.url_temp }}</a></td>
                                 <td class="text-center">{% if store.url_temp_ssl == 1 %} <i class="fa fa-check fa-fw"></i> {% else %} <i class="fa fa-times fa-fw"></i> {% endif %}</td>
                                 <td class="text-center"><i class="fa fa-check fa-fw"></i></td>
                                 <td class="text-center"></td>
@@ -125,13 +115,13 @@
                               </tr>
                               {% for url in store.urls %}
                                 <tr>
-                                  <td><a href="{% if url.ssl_enabled == 1 %}https://{% else %}http://{% endif %}{{ url.url }}" target="_blank" data-toggle="tooltip" data-placement="top" title="Click to view store">{{ url.url }}</a></td>
-                                  <td class="text-center">{% if url.ssl_pending == 1 %}<h6><span class="label label-warning">Updating</span></h6>{% else %}{% if url.ssl_enabled == 1 %} <i class="fa fa-check fa-fw"></i> {% else %} <i class="fa fa-times fa-fw"></i>{% endif %}{% endif %}</td>
+                                  <td><a href="{% if url.ssl_enabled == 1 %}https://{% else %}http://{% endif %}{{ url.url }}" target="_blank" data-toggle="tooltip" data-placement="top" title="{{ text_click_view_store }}">{{ url.url }}</a></td>
+                                  <td class="text-center">{% if url.ssl_pending == 1 %}<h6><span class="label label-warning">{{ text_updating }}</span></h6>{% else %}{% if url.ssl_enabled == 1 %} <i class="fa fa-check fa-fw"></i> {% else %} <i class="fa fa-times fa-fw"></i>{% endif %}{% endif %}</td>
                                   <td class="text-center">{% if url.dns_check == 1 %} <i class="fa fa-check fa-fw"></i> {% else %} <i class="fa fa-times fa-fw"></i> {% endif %}</td>
                                   <td class="text-center">{% if url.default == 1 %} <i class="fa fa-check fa-fw"></i> {% else %} <i class="fa fa-times fa-fw"></i> {% endif %}</td>
                                   <td class="text-right">
-                                    <button class="btn btn-sm btn-info" title="Edit URL" data-toggle="modal" data-target="#url-modal-{{ url.store_url_id }}"><i class="fa fa-pencil fa-fw"></i></button>
-                                    <a class="btn btn-sm btn-danger button-click-load button-use-confirm" href="{{ link_delete_url }}{{ url.store_url_id }}" data-toggle="tooltip" data-placement="top" title="Delete URL"><i class="fa fa-trash-o fa-fw"></i></a>
+                                    <button class="btn btn-sm btn-info" title="{{ button_edit_url }}" data-toggle="modal" data-target="#url-modal-{{ url.store_url_id }}"><i class="fa fa-pencil fa-fw"></i></button>
+                                    <a class="btn btn-sm btn-danger button-click-load button-use-confirm" href="{{ link_delete_url }}{{ url.store_url_id }}" data-toggle="tooltip" data-placement="top" title="{{ button_delete_url }}"><i class="fa fa-trash-o fa-fw"></i></a>
                                   </td>
                                 </tr>
                               {% endfor %}
@@ -149,27 +139,27 @@
                 <br />
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4>Manual Backups
+                    <h4>{{ text_manual_backups }}
                       <span class="btn-group pull-right">
-                        <a href="{{ link_request_backup }}" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i> New backup</a>
+                        <a href="{{ link_request_backup }}" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i> {{ button_new_backup }}</a>
                       </span>
                     </h4>
                   </div>
                   <div class="panel-body">
-                    <p>Before making changes to your store you should take a manual backup.</p>
+                    <p>{{ text_manual_backup_desc }}</p>
                     <div class="row">
                       <div class="col-sm-12">
                         {% if store.manual_backups is empty %}
-                          <p class="form-static">You don't have any manual backups</p>
+                          <p class="form-static">{{ text_no_manual_backups }}</p>
                         {% else %}
                           <div class="table-responsive margin-top">
                             <table class="table table-bordered table-condensed">
                               <thead>
                               <tr>
-                                <th class="text-center col-sm-2">Started</th>
-                                <th class="text-center col-sm-2">Completed</th>
-                                <th class="text-left col-sm-6">Comment</th>
-                                <th class="text-right col-sm-2">Actions</th>
+                                <th class="text-center col-sm-2">{{ column_started }}</th>
+                                <th class="text-center col-sm-2">{{ column_completed }}</th>
+                                <th class="text-left col-sm-6">{{ column_comment }}</th>
+                                <th class="text-right col-sm-2">{{ column_actions }}</th>
                               </tr>
                               </thead>
                               <tbody>
@@ -178,7 +168,7 @@
                                   <td class="text-center small">{{ backup.date_started|date("d/m/Y H:i") }}</td>
                                   <td class="text-center small">
                                     {% if backup.date_completed == '0000-00-00 00:00:00' %}
-                                      <label class="label label-success">Running</label>
+                                      <label class="label label-success">{{ text_running }}</label>
                                     {% else %}
                                       {{ backup.date_completed|date("d/m/Y H:i") }}
                                     {% endif %}
@@ -186,9 +176,9 @@
                                   <td class="text-left small">{{ backup.comment }}</td>
                                   <td class="text-right">
                                     {% if backup.delete_requested == 1 %}
-                                      <label class="label label-danger">Deleting</label>
+                                      <label class="label label-danger">{{ text_deleting }}</label>
                                     {% else %}
-                                      <a class="btn btn-sm btn-danger button-click-load button-use-confirm" href="{{ link_delete_backup }}{{ backup.store_backup_id }}" data-toggle="tooltip" data-placement="top" title="Delete Backup"><i class="fa fa-trash-o fa-fw"></i></a>
+                                      <a class="btn btn-sm btn-danger button-click-load button-use-confirm" href="{{ link_delete_backup }}{{ backup.store_backup_id }}" data-toggle="tooltip" data-placement="top" title="{{ button_delete_backup }}"><i class="fa fa-trash-o fa-fw"></i></a>
                                     {% endif %}
                                   </td>
                                 </tr>
@@ -204,15 +194,15 @@
                 <br />
                 <div class="panel panel-default">
                   <div class="panel-heading">
-                    <h4>Automated Backups</h4>
+                    <h4>{{ text_automated_backups }}</h4>
                   </div>
                   <div class="panel-body">
-                    <p>If you have not taken a manual backup yet, but you can use an automated one instead.</p>
+                    <p>{{ text_automated_backup_desc }}</p>
                     <form action="{{ backup_restore_action }}" method="post" enctype="multipart/form-data" id="restore-backup-form">
                       <div class="row">
                         <div class="col-sm-5">
                           <select id="input-restore-backup" class="form-control col-sm-4">
-                            <option value="" selected disabled>View backups</option>
+                            <option value="" selected disabled>{{ text_view_backups }}</option>
                             {% for backup in store.automatic_backups %}
                               {% if backup.date_completed != '0000-00-00 00:00:00' %}
                                 <option value="{{ backup.store_backup_id }}">{{ backup.date_completed|date("d/m/Y H:i") }}</option>
@@ -220,70 +210,15 @@
                             {% endfor %}
                           </select>
                         </div>
-                        <!--<div class="col-sm-2"><button type="submit" class="btn btn-primary" id="backup-submit-button">Restore</button></div>-->
                       </div>
                     </form>
                   </div>
                 </div>
               </div>
-            <!--
-              <div id="plan-tab" class="tab-pane fade">
-                <br />
-                <div class="panel panel-default">
-                  <div class="panel-heading">
-                    <h4>Plan information
-                      <span class="btn-group pull-right">
-                        <a href="{{ link_change_plan }}" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i> Change plan</a>
-                      </span>
-                    </h4>
-                  </div>
-                  <div class="panel-body">
-                    <div class="row">
-                      <div class="col-sm-12">
-                        <div class="table-responsive margin-top">
-                          <table class="table table-striped">
-                            <tbody>
-                            <tr>
-                              <td><strong>Name</strong></td>
-                              <td>{{ store.plan.name }}</td>
-                            </tr>
-                            {% if store.plan.plan_id == 1 %}
-                              <tr>
-                                <td><strong>Cost</strong></td>
-                                <td>FREE</td>
-                              </tr>
-                            {% else %}
-                              {% if store.plan.billing_option %}
-                                <tr>
-                                  <td><strong>Price</strong></td>
-                                  <td>&pound;{{ store.plan.billing_option.cost|number_format(2, '.') }}</td>
-                                </tr>
-                                <tr>
-                                  <td><strong>Period</strong></td>
-                                  <td>{{ store.plan.billing_option.period_months }}</td>
-                                </tr>
-                              {% endif %}
-                            {% endif %}
-
-                            {% for plan_attribute in store.plan.attributes %}
-                                <tr>
-                                  <td><strong>{{ plan_attribute.name }}</strong></td>
-                                  <td>{{ plan_attribute.value_display }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            -->
             </div>
             <div class="buttons">
               <div class="text-left">
-                <a href="{{ link_store_list }}" class="btn btn-default"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Cloud Stores</a>
+                <a href="{{ link_store_list }}" class="btn btn-default"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;{{ button_cloud_stores }}</a>
               </div>
             </div>
 
@@ -293,33 +228,33 @@
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                      <h4 class="modal-title" id="url-modal-{{ url.store_url_id }}-label">Edit store URL</h4>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="{{ button_close }}"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="url-modal-{{ url.store_url_id }}-label">{{ text_edit_store_url }}</h4>
                     </div>
                     <div class="modal-body">
                       <div class="row">
                         <div class="col-sm-12">
                             {% if url.dns_check == 0 %}
-                            <div id="dns-status-alert-{{ url.store_url_id }}"><div class="alert alert-danger"><i class="fa fa-times fa-fw"></i> This URL is not pointing at your Cloud Store yet</div></div>
-                              <p class="dns-status-{{ url.store_url_id }}">Add this CNAME to your domains DNS, it can take a few hours to work</p>
+                            <div id="dns-status-alert-{{ url.store_url_id }}"><div class="alert alert-danger"><i class="fa fa-times fa-fw"></i> {{ text_url_not_pointing }}</div></div>
+                              <p class="dns-status-{{ url.store_url_id }}">{{ text_add_cname }}</p>
                               <div class="form-horizontal dns-status-{{ url.store_url_id }}">
                                 <div class="form-group">
-                                  <label class="col-sm-2">CNAME</label>
+                                  <label class="col-sm-2">{{ text_cname }}</label>
                                   <div class="col-sm-7">
-                                      <input type="text" class="form-control text-center" value="mystore.stores-1.opencartcloud.com" />
+                                      <input type="text" class="form-control text-center" value="mystore.stores-1.{{ store_domain }}" />
                                   </div>
-                                  <label class="col-sm-3"><button class="btn btn-info test-dns" value="{{ url.store_url_id }}">Test DNS</button></label>
+                                  <label class="col-sm-3"><button class="btn btn-info test-dns" value="{{ url.store_url_id }}">{{ button_test_dns }}</button></label>
                                 </div>
                               </div>
                             {% else %}
-                              <div class="alert alert-success"><i class="fa fa-check"></i> Your url is setup correctly</div>
+                              <div class="alert alert-success"><i class="fa fa-check"></i> {{ text_url_setup_ok }}</div>
                             {% endif %}
                         </div>
                       </div>
 
                       <div id="dns-verified-{{ url.store_url_id }}" {% if url.dns_check == 0 %}style="display:none;"{% endif %}>
                         <div class="row">
-                          <div class="col-sm-7"><label class="control-label form-control-static">Set this domain as the main URL?</label></div>
+                          <div class="col-sm-7"><label class="control-label form-control-static">{{ text_set_main_url }}</label></div>
                           <div class="col-sm-5" id="default-url-update-{{ url.store_url_id }}">
                             {% if url.default == 1 %}
                               <h6><span class="label label-success"><i class="fa fa-check fa-fw"></i></span></h6>
@@ -331,10 +266,10 @@
                           </div>
                         </div>
                         <div class="row">
-                          <div class="col-sm-7"><label class="control-label form-control-static">Enable SSL on the domain?</label></div>
+                          <div class="col-sm-7"><label class="control-label form-control-static">{{ text_enable_ssl }}</label></div>
                           <div class="col-sm-5" id="ssl-update-{{ url.store_url_id }}">
                             {% if url.ssl_pending == 1 %}
-                              <h6><span class="label label-warning">Updating</span></h6>
+                              <h6><span class="label label-warning">{{ text_updating }}</span></h6>
                             {% else %}
                               <div class="radio">
                                 {% if url.ssl_enabled == 1 %}
@@ -348,25 +283,25 @@
                         </div>
                         <div class="row">
                           <div class="col-sm-12">
-                            <div class="help-block">SSL certificates are <u>FREE</u> and provided by <a href="https://letsencrypt.org/" rel="nofollow" target="_blank">LetsEncrypt.org</a></div>
+                            <div class="help-block">{{ text_ssl_free_notice }}</div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">{{ button_close }}</button>
                     </div>
                   </div>
                 </div>
               </div>
             {% endfor %}
           {% elseif store.status_code == "SETUP_REQUESTED" or store.status_code == "SETUP_QUEUED" or store.status_code == "SETUP_STARTED" %}
-            <div class="alert alert-info">Store setup is still in process. <a href="{{ link_creating_url }}">Click here</a> to view the progress.</div>
+            <div class="alert alert-info">{{ text_setup_in_process }} <a href="{{ link_creating_url }}">{{ text_click_here }}</a> {{ text_to_view_progress }}</div>
           {% else %}
-            <div class="alert alert-warning">Unable to load store information</div>
+            <div class="alert alert-warning">{{ text_unable_load_store }}</div>
           {% endif %}
         {% else %}
-          <div class="alert alert-warning">Unable to load account information</div>
+          <div class="alert alert-warning">{{ text_unable_load_account }}</div>
         {% endif %}
       </div>
       <div class="col-md-3 hidden-xs">{{ menu }}</div>
@@ -378,13 +313,13 @@
   $('body').on('click', '.default-url', function (event) {
     var store_url_id = $(this).val();
 
-    if (confirm("Are you sure?")) {
+    if (confirm("{{ text_confirm }}")) {
       $.ajax({
           url: 'index.php?route=cloud/store/defaulturl&store_id={{ store.store_id }}&store_url_id=' + store_url_id + '&member_token={{ member_token }}',
           type: 'get',
           dataType: 'json',
           beforeSend: function() {
-            $('#default-url-update-' + store_url_id).html('<h6><span class="label label-info"><i class="fa fa-refresh fa-spin fa-fw"></i> Updating</span></h6>');
+            $('#default-url-update-' + store_url_id).html('<h6><span class="label label-info"><i class="fa fa-refresh fa-spin fa-fw"></i> {{ text_updating }}</span></h6>');
           },
           success: function(json) {
               if (json.success) {
@@ -410,19 +345,19 @@
       type: 'get',
       dataType: 'json',
       beforeSend: function() {
-        $('#dns-status-alert-' + store_url_id).html('<div class="alert alert-info" id="testing-dns-' + store_url_id + '"><i class="fa fa-refresh fa-spin fa-fw"></i> Checking domain status</div>');
+        $('#dns-status-alert-' + store_url_id).html('<div class="alert alert-info" id="testing-dns-' + store_url_id + '"><i class="fa fa-refresh fa-spin fa-fw"></i> {{ text_checking_domain }}</div>');
       },
       success: function(json) {
           if (json.header_code == 200) {
-            $('#dns-status-alert-' + store_url_id).html('<div class="alert alert-success"><i class="fa fa-check fa-fw"></i> The URL is now working perfectly!</div>');
+            $('#dns-status-alert-' + store_url_id).html('<div class="alert alert-success"><i class="fa fa-check fa-fw"></i> {{ text_url_working }}</div>');
             $('.dns-status-' + store_url_id).hide();
             $('#dns-verified-' + store_url_id).show();
           } else if (json.header_code == 404) {
-            $('#dns-status-alert-' + store_url_id).html('<div class="alert alert-warning"><i class="fa fa-times fa-fw"></i> The URL is not pointing at your Cloud Store yet</div>');
+            $('#dns-status-alert-' + store_url_id).html('<div class="alert alert-warning"><i class="fa fa-times fa-fw"></i> {{ text_url_not_pointing }}</div>');
           } else if (json.header_code > 0) {
-            $('#dns-status-alert-' + store_url_id).html('<div class="alert alert-warning"><i class="fa fa-question fa-fw"></i> Unable to check the status, response header code was "'+json.header_code+'"</div>');
+            $('#dns-status-alert-' + store_url_id).html('<div class="alert alert-warning"><i class="fa fa-question fa-fw"></i> {{ text_unable_check_code }} "'+json.header_code+'"</div>');
           } else {
-            $('#dns-status-alert-' + store_url_id).html('<div class="alert alert-warning"><i class="fa fa-question fa-fw"></i> Unable to check the status, please try later</div>');
+            $('#dns-status-alert-' + store_url_id).html('<div class="alert alert-warning"><i class="fa fa-question fa-fw"></i> {{ text_unable_check_later }}</div>');
           }
 
           $('#testing-dns-' + store_url_id).remove();
@@ -436,15 +371,14 @@
   $('body').on('change', '.enable-ssl', function (event) {
     var store_url_id = $(this).val();
 
-    if (confirm("Are you sure?")) {
+    if (confirm("{{ text_confirm }}")) {
         if ($(this).is(":checked")) {
             $.ajax({
                 url: 'index.php?route=cloud/store/addssl&store_id={{ store.store_id }}&store_url_id=' + store_url_id + '&member_token={{ member_token }}',
                 type: 'get',
                 dataType: 'json',
                 beforeSend: function () {
-                    $('#ssl-update-' + store_url_id).html('<h6><span class="label label-info"><i class="fa fa-refresh fa-spin fa-fw"></i> Requesting SSL</span></h6>');
-                    //$('#ssl-update-' + store_url_id).html('<div class="alert alert-info"><i class="fa fa-refresh fa-spin fa-fw"></i> Requesting SSL</div>');
+                    $('#ssl-update-' + store_url_id).html('<h6><span class="label label-info"><i class="fa fa-refresh fa-spin fa-fw"></i> {{ text_requesting_ssl }}</span></h6>');
                 },
                 success: function (json) {
                     if (json.success) {
@@ -463,7 +397,7 @@
                 type: 'get',
                 dataType: 'json',
                 beforeSend: function () {
-                    $('#ssl-update-' + store_url_id).html('<h6><span class="label label-info"><i class="fa fa-refresh fa-spin fa-fw"></i> Removing SSL</span></h6>');
+                    $('#ssl-update-' + store_url_id).html('<h6><span class="label label-info"><i class="fa fa-refresh fa-spin fa-fw"></i> {{ text_removing_ssl }}</span></h6>');
                 },
                 success: function (json) {
                     if (json.success) {
@@ -478,7 +412,6 @@
             });
         }
     } else {
-        // some backwards logic here
         if ($(this).is(":checked")) {
             $(this).prop("checked", false);
         } else {
@@ -496,14 +429,14 @@
 
     if ($('#store-admin-password').text() == '**********') {
         $('#store-admin-password').text('{{ store.config.store_password }}');
-        $('#password-view').text('Hide');
+        $('#password-view').text('{{ text_hide }}');
     } else {
         $('#store-admin-password').text('**********');
-        $('#password-view').text('View');
+        $('#password-view').text('{{ text_view }}');
     }
   });
 
   $('.button-use-confirm').on('click', function () {
-    return confirm('Are you sure?');
+    return confirm('{{ text_confirm }}');
   });
 //--></script>

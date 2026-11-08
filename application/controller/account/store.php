@@ -13,7 +13,9 @@ class ControllerAccountStore extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('Your Stores');
+		$this->load->language('account/store');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/store');
 
@@ -92,7 +94,9 @@ class ControllerAccountStore extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('Add Store');
+		$this->load->language('account/store');
+
+		$this->document->setTitle($this->language->get('heading_add'));
 
 		$this->load->model('account/store');
 
@@ -109,7 +113,7 @@ class ControllerAccountStore extends Controller {
 				$this->model_account_store->addStore($post_data);
 			}
 
-			$this->session->data['success'] = 'Success: Your store has been registered!';
+			$this->session->data['success'] = $this->language->get('text_success_add');
 
 			$this->response->redirect($this->url->link('account/store', 'member_token=' . $this->session->data['member_token'], true));
 		}
@@ -167,7 +171,9 @@ class ControllerAccountStore extends Controller {
 			return;
 		}
 
-		$this->document->setTitle('Your Store API Information');
+		$this->load->language('account/store');
+
+		$this->document->setTitle($this->language->get('heading_info'));
 
 		$data['error_warning'] = '';
 		$data['member_token'] = $this->session->data['member_token'];
@@ -186,10 +192,12 @@ class ControllerAccountStore extends Controller {
 	}
 
 	public function secret() {
+		$this->load->language('account/store');
+
 		$json = array();
 
 		if (!$this->member->isLogged()) {
-			$json['error'] = 'Warning: You must be logged in!';
+			$json['error'] = $this->language->get('error_login');
 		} else {
 			$store_id = isset($this->request->get['store_id']) ? (int)$this->request->get['store_id'] : 0;
 
@@ -198,7 +206,7 @@ class ControllerAccountStore extends Controller {
 			$store_info = $this->getStoreInfo($store_id);
 
 			if (!$store_info) {
-				$json['error'] = 'Warning: Store could not be found!';
+				$json['error'] = $this->language->get('error_not_found');
 			} else {
 				if (isset($this->model_account_store->generateSecret)) {
 					$secret = $this->model_account_store->generateSecret($this->member->getId(), $store_id);
@@ -212,7 +220,7 @@ class ControllerAccountStore extends Controller {
 				}
 
 				$json['secret'] = $secret;
-				$json['success'] = 'Success: You have generated a new API secret!';
+				$json['success'] = $this->language->get('text_success_secret');
 			}
 		}
 
@@ -231,6 +239,8 @@ class ControllerAccountStore extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
+		$this->load->language('account/store');
+
 		if (isset($this->request->get['store_id'])) {
 			$this->load->model('account/store');
 
@@ -243,7 +253,7 @@ class ControllerAccountStore extends Controller {
 				$this->model_account_store->deleteStore($store_id);
 			}
 
-			$this->session->data['success'] = 'Success: Your store has been deleted!';
+			$this->session->data['success'] = $this->language->get('text_success_delete');
 		}
 
 		$this->response->redirect($this->url->link('account/store', 'member_token=' . $this->session->data['member_token'], true));
@@ -260,7 +270,7 @@ class ControllerAccountStore extends Controller {
 
 	protected function validateForm() {
 		if (!isset($this->request->post['domain']) || (utf8_strlen(trim($this->request->post['domain'])) < 3) || (utf8_strlen(trim($this->request->post['domain'])) > 255)) {
-			$this->error['domain'] = 'Domain must be between 3 and 255 characters!';
+			$this->error['domain'] = $this->language->get('error_domain');
 		}
 
 		return !$this->error;

@@ -2,15 +2,15 @@
 <div id="account-account">
   <div class="page-header">
     <div class="container">
-      <h1>Cloud Stores</h1>
-      <p>View all of your OpenCart Cloud Stores</p>
+      <h1>{{ text_list_heading }}</h1>
+      <p>{{ text_list_subtitle }}</p>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-md-9">
         <fieldset>
-          <legend>Cloud Stores</legend>
+          <legend>{{ text_list_heading }}</legend>
           {% if error_warning %}
             <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
           {% endif %}
@@ -22,11 +22,11 @@
               {% if stores %}
                 <thead>
                   <tr>
-                    <th class="text-left">Store Name</th>
-                    <th class="text-left">Plan</th>
-                    <th class="text-left col-sm-2">Created</th>
-                    <th class="text-center col-sm-2">Status</th>
-                    <th class="text-right col-sm-2">Action</th>
+                    <th class="text-left">{{ column_store_name }}</th>
+                    <th class="text-left">{{ column_plan }}</th>
+                    <th class="text-left col-sm-2">{{ column_created }}</th>
+                    <th class="text-center col-sm-2">{{ column_status }}</th>
+                    <th class="text-right col-sm-2">{{ column_action }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -44,8 +44,8 @@
                       </td>
                       <td class="text-right">
                         {% if store.status_id == 5 %}
-                          <a href="{{ store.view }}" class="btn btn-info button-click-load" data-toggle="tooltip" data-placement="top" title="View Cloud Store"><i class="fa fa-eye"></i></a>
-                          <a href="{{ store.delete }}" class="btn btn-danger button-click-load button-use-confirm" data-toggle="tooltip" data-placement="top" title="Delete Cloud Store"><i class="fa fa-trash-o fa-fw"></i></a>
+                          <a href="{{ store.view }}" class="btn btn-info button-click-load" data-toggle="tooltip" data-placement="top" title="{{ button_view_store }}"><i class="fa fa-eye"></i></a>
+                          <a href="{{ store.delete }}" class="btn btn-danger button-click-load button-use-confirm" data-toggle="tooltip" data-placement="top" title="{{ button_delete_store }}"><i class="fa fa-trash-o fa-fw"></i></a>
                         {% endif %}
                       </td>
                     </tr>
@@ -54,7 +54,7 @@
               {% else %}
                 <tbody>
                   <tr>
-                    <td class="text-center">No Cloud Stores Found!</td>
+                    <td class="text-center">{{ text_no_results }}</td>
                   </tr>
                 </tbody>
               {% endif %}
@@ -63,8 +63,8 @@
         </fieldset>
         <div class="buttons">
           <div class="text-left">
-            <a href="{{ cancel }}" class="btn btn-default"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Account area</a>
-            <a href="{{ add }}" class="btn btn-primary pull-right" id="btn-new-store"><i class="fa fa-plus fa-fw"></i> New store</a>
+            <a href="{{ cancel }}" class="btn btn-default"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;{{ button_account_area }}</a>
+            <a href="{{ add }}" class="btn btn-primary pull-right" id="btn-new-store"><i class="fa fa-plus fa-fw"></i> {{ button_new_store }}</a>
           </div>
         </div>
       </div>
@@ -75,7 +75,7 @@
 {{ footer }}
 <script type="text/javascript"><!--
   $('body').on('click', '.button-use-confirm', function (event) {
-    return confirm('Are you sure?');
+    return confirm('{{ text_confirm }}');
   });
   $('body').on('click', '.button-click-load', function (event) {
     $(this).html('<i class="fa fa-refresh fa-spin fa-fw"></i>').prop("disabled", "disabled");

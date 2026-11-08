@@ -2,20 +2,20 @@
 <div id="marketplace-contact">
 	<div class="page-header">
 		<div class="container">
-			<h1>Extension Purchase Success</h1>
-			<p>Your order is successfully completed!</p>
+			<h1>{{ text_heading }}</h1>
+			<p>{{ text_subtitle }}</p>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-10 col-sm-offset-2">
-				<h2>Your order has been successfully processed!</h2>
-				<p>You can view your order history by going to the <a href="{{ account }}">account</a> page and by clicking on <a href="{{ history }}">order history</a>.</p>
-				<p>Please direct any questions you have to <a href="{{ contact }}">OpenCart support</a>.</p>
-				<p>Thanks for shopping with us online!</p>
-				<p>Best Regards,
+				<h2>{{ text_processed }}</h2>
+				<p>{{ text_history_prefix }} <a href="{{ account }}">{{ text_account_link }}</a> {{ text_history_mid }} <a href="{{ history }}">{{ text_history_link }}</a>.</p>
+				<p>{{ text_questions_prefix }} <a href="{{ contact }}">{{ text_support_link }}</a>.</p>
+				<p>{{ text_thanks }}</p>
+				<p>{{ text_regards }}
 					<br/>
-					<strong>OpenCart Team<strong></p>
+					<strong>{{ text_team }}</strong></p>
 			</div>
 		</div>
 	</div>

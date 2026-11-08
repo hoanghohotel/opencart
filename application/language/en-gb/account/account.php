@@ -1,0 +1,50 @@
+<?php
+// Heading
+$_['heading_title']                  = 'Account';
+
+// Text
+$_['text_welcome']                   = 'Welcome to {store_name}!';
+$_['text_account_section']           = 'Account';
+$_['text_account_details']           = 'Account Details';
+$_['text_account_details_desc']      = 'Edit your account details';
+$_['text_change_password']           = 'Change Password';
+$_['text_change_password_desc']      = 'Reset your password';
+$_['text_payment_methods']           = 'Payment Methods';
+$_['text_payment_methods_desc']      = 'Modify your payment methods';
+$_['text_showcase']                  = 'Showcase';
+$_['text_showcase_desc']             = 'Submit your store to {store_name}\'s showcase';
+$_['text_partner_up']                = 'Partner Up';
+$_['text_partner_up_desc']           = 'Apply to become a partner';
+$_['text_partner_edit']              = 'Edit Partner Information';
+$_['text_partner_edit_desc']         = 'Change your address, logo';
+$_['text_cloud_stores_section']      = 'Cloud Stores';
+$_['text_cloud_stores']              = 'Cloud Stores';
+$_['text_cloud_subscriptions_desc']  = 'View all of your {store_name} subscriptions';
+$_['text_cloud_stores_desc']         = 'View all of your {store_name} Cloud Stores';
+$_['text_cloud_domains']             = 'Cloud Domains';
+$_['text_cloud_domains_desc']        = 'View all of your {store_name} Cloud Domains';
+$_['text_invoices']                  = 'Invoices';
+$_['text_invoices_desc']             = 'Check your subscription invoice(s)';
+$_['text_purchases_section']         = 'Purchases';
+$_['text_your_orders']               = 'Your Orders';
+$_['text_your_orders_desc']          = 'View the extensions you have previously purchased';
+$_['text_your_downloads']            = 'Your Downloads';
+$_['text_your_downloads_desc']       = 'Your Purchased extensions';
+$_['text_your_stores']               = 'Your Stores';
+$_['text_your_stores_desc']          = 'Register your store to access the marketplace API';
+$_['text_rate_downloads']            = 'Rate your Downloads';
+$_['text_rate_downloads_desc']       = 'Rate your previously downloaded extensions';
+$_['text_extensions_section']        = 'Extensions';
+$_['text_manage_extensions']         = 'Manage your Extensions';
+$_['text_manage_extensions_desc']    = 'Manage the extensions you have uploaded';
+$_['text_apply_seller']              = 'Apply to become a seller';
+$_['text_apply_seller_desc']         = 'Get paid by selling your work!';
+$_['text_edit_seller']               = 'Edit Seller Information';
+$_['text_edit_seller_desc']          = 'Modify your current seller details';
+$_['text_sales']                     = 'Sales';
+$_['text_sales_desc']                = 'View your Sales';
+$_['text_transactions']              = 'Transactions';
+$_['text_transactions_desc']         = 'View your commission rate for sales';
+$_['text_promote_extensions']        = 'Promote Extensions';
+$_['text_manage_comments']           = 'Manage your Extensions Comments';
+$_['text_manage_comments_desc']      = 'Manage the comments member left under your extensions';

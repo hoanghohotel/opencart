@@ -7,23 +7,23 @@
           <div class="media-left"><img src="{{ image }}" alt="{{ name }}" title="{{ name }}" class="media-object" /></div>
           <div class="media-body">{% if license %}
             <div class="pull-right">
-              <div class="well well-sm text-center"><small class="text-uppercase">Support valid until</small><br />
+              <div class="well well-sm text-center"><small class="text-uppercase">{{ text_support_valid }}</small><br />
                 <strong>{{ date_added }}</strong></div>
             </div>
             {% endif %}
             <h4 class="media-heading">{{ name }}</h4>
             {% if license %}
-            <p>Purchased on <strong>{{ date_added }}</strong></p>
+            <p>{{ text_purchased_on }} <strong>{{ date_added }}</strong></p>
             {% else %}
-            <p>Extension added on <strong>{{ date_added }}</strong></p>
+            <p>{{ text_added_on }} <strong>{{ date_added }}</strong></p>
             {% endif %}
-            <p><a href="{{ extension }}">[Go to extension page]</a></p>
+            <p><a href="{{ extension }}">{{ text_go_extension }}</a></p>
           </div>
         </div>
         <br />
         <ul class="nav nav-tabs">
-          <li class="active"><a href="#tab-download" data-toggle="tab">Downloads</a></li>
-          <li><a href="#tab-documentation" data-toggle="tab">Documentation</a></li>
+          <li class="active"><a href="#tab-download" data-toggle="tab">{{ tab_downloads }}</a></li>
+          <li><a href="#tab-documentation" data-toggle="tab">{{ tab_documentation }}</a></li>
         </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="tab-download">
@@ -31,10 +31,10 @@
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th class="text-left">Download Name</th>
-                    <th class="text-left">Compatibility</th>
-                    <th class="text-left">Date</th>
-                    <th class="text-left">Action</th>
+                    <th class="text-left">{{ column_name }}</th>
+                    <th class="text-left">{{ column_compatibility }}</th>
+                    <th class="text-left">{{ column_date_added }}</th>
+                    <th class="text-left">{{ column_action }}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -47,19 +47,19 @@
 							<td class="text-left">{{ download.date_added }}</td>
 							<td class="text-left"> 
 							{% if download.upgrade %}
-								<a href="{{ download.upgrade }}" class="btn btn-primary">Upgrade</a>
+								<a href="{{ download.upgrade }}" class="btn btn-primary">{{ button_upgrade }}</a>
 							{% endif %}
 							{% if download.href %}
-								<a href="{{ download.href }}" class="btn btn-primary">Download</a>							
+								<a href="{{ download.href }}" class="btn btn-primary">{{ button_download }}</a>							
 							{% endif %}
 							{% if not download.href %}
-								<button type="button" disabled="disabled" class="btn btn-primary">Download</button>
+								<button type="button" disabled="disabled" class="btn btn-primary">{{ button_download }}</button>
 							{% endif %}</td>
 						</tr>
 					{% endfor %}
                 {% else %}
 					<tr>
-						<td class="text-center" colspan="4">No results!</td>
+						<td class="text-center" colspan="4">{{ text_no_results }}</td>
 					</tr>
                 {% endif %}
                 </tbody>                

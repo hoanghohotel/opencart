@@ -5,6 +5,8 @@ class ControllerAccountMenu extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
+		$this->load->language('account/menu');
+
 		$token = 'member_token=' . $this->session->data['member_token'];
 
 		$data['account'] = $this->url->link('account/account', $token, true);
@@ -37,42 +39,42 @@ class ControllerAccountMenu extends Controller {
 			array(
 				'value'   => 'account/edit',
 				'icon'    => 'user',
-				'text'    => 'Account Details',
-				'tooltip' => 'Edit your account details',
+				'text'    => $this->language->get('text_menu_edit'),
+				'tooltip' => $this->language->get('text_menu_edit_tip'),
 				'href'    => $this->url->link('account/edit', $token, true)
 			),
 			array(
 				'value'   => 'account/password',
 				'icon'    => 'key',
-				'text'    => 'Change Password',
-				'tooltip' => 'Reset your password',
+				'text'    => $this->language->get('text_menu_password'),
+				'tooltip' => $this->language->get('text_menu_password_tip'),
 				'href'    => $this->url->link('account/password', $token, true)
 			),
 			array(
 				'value'   => 'account/payment',
 				'icon'    => 'credit-card',
-				'text'    => 'Payment Methods',
-				'tooltip' => 'Modify your payment methods',
+				'text'    => $this->language->get('text_menu_payment'),
+				'tooltip' => $this->language->get('text_menu_payment_tip'),
 				'href'    => $this->url->link('account/payment', $token, true)
 			),
 			array(
 				'value'   => 'account/showcase',
 				'icon'    => 'laptop',
-				'text'    => 'Showcase',
-				'tooltip' => 'Submit your store to OpenCart\'s showcase',
+				'text'    => $this->language->get('text_menu_showcase'),
+				'tooltip' => $this->language->get('text_menu_showcase_tip'),
 				'href'    => $this->url->link('account/showcase', $token, true)
 			),
 			array(
 				'value'   => 'account/partner',
 				'icon'    => 'users',
-				'text'    => $this->member->isPartner() ? 'Edit Partner Information' : 'Partner Up',
-				'tooltip' => $this->member->isPartner() ? 'Change your address, logo' : 'Apply to become a partner',
+				'text'    => $this->member->isPartner() ? $this->language->get('text_menu_partner_edit') : $this->language->get('text_menu_partner_up'),
+				'tooltip' => $this->member->isPartner() ? $this->language->get('text_menu_partner_edit_tip') : $this->language->get('text_menu_partner_up_tip'),
 				'href'    => $this->url->link('account/partner', $token, true)
 			)
 		);
 
 		$data['menus'][] = array(
-			'text'     => ' Account',
+			'text'     => $this->language->get('text_menu_account'),
 			'children' => $account_children
 		);
 
@@ -81,35 +83,35 @@ class ControllerAccountMenu extends Controller {
 			array(
 				'value'   => 'account/order',
 				'icon'    => 'shopping-cart',
-				'text'    => 'Your Orders',
-				'tooltip' => 'View the extensions you have previously purchased',
+				'text'    => $this->language->get('text_menu_order'),
+				'tooltip' => $this->language->get('text_menu_order_tip'),
 				'href'    => $this->url->link('account/order', $token, true)
 			),
 			array(
 				'value'   => 'account/download',
 				'icon'    => 'cloud-download',
-				'text'    => 'Your Downloads',
-				'tooltip' => 'Your Purchased extensions',
+				'text'    => $this->language->get('text_menu_download'),
+				'tooltip' => $this->language->get('text_menu_download_tip'),
 				'href'    => $this->url->link('account/download', $token, true)
 			),
 			array(
 				'value'   => 'account/store',
 				'icon'    => 'globe',
-				'text'    => 'Your Stores',
-				'tooltip' => 'Register your store to access the marketplace API',
+				'text'    => $this->language->get('text_menu_store'),
+				'tooltip' => $this->language->get('text_menu_store_tip'),
 				'href'    => $this->url->link('account/store', $token, true)
 			),
 			array(
 				'value'   => 'account/rating',
 				'icon'    => 'star',
-				'text'    => 'Rate your Downloads',
-				'tooltip' => 'Rate your previously downloaded extensions',
+				'text'    => $this->language->get('text_menu_rating'),
+				'tooltip' => $this->language->get('text_menu_rating_tip'),
 				'href'    => $this->url->link('account/rating', $token, true)
 			)
 		);
 
 		$data['menus'][] = array(
-			'text'     => ' Purchases',
+			'text'     => $this->language->get('text_menu_purchases'),
 			'children' => $purchase_children
 		);
 
@@ -118,15 +120,15 @@ class ControllerAccountMenu extends Controller {
 			array(
 				'value'   => 'account/extension',
 				'icon'    => 'puzzle-piece',
-				'text'    => 'Manage your Extensions',
-				'tooltip' => 'Manage the extensions you have uploaded',
+				'text'    => $this->language->get('text_menu_extension'),
+				'tooltip' => $this->language->get('text_menu_extension_tip'),
 				'href'    => $this->url->link('account/extension', $token, true)
 			),
 			array(
 				'value'   => 'account/seller',
 				'icon'    => 'briefcase',
-				'text'    => $this->member->isSeller() ? 'Edit Seller Information' : 'Apply to become a seller',
-				'tooltip' => $this->member->isSeller() ? 'Modify your current seller details' : 'Get paid by selling your work!',
+				'text'    => $this->member->isSeller() ? $this->language->get('text_menu_seller_edit') : $this->language->get('text_menu_seller_apply'),
+				'tooltip' => $this->member->isSeller() ? $this->language->get('text_menu_seller_edit_tip') : $this->language->get('text_menu_seller_apply_tip'),
 				'href'    => $this->url->link('account/seller', $token, true)
 			)
 		);
@@ -135,16 +137,16 @@ class ControllerAccountMenu extends Controller {
 			$extension_children[] = array(
 				'value'   => 'account/sale',
 				'icon'    => 'line-chart',
-				'text'    => 'Sales',
-				'tooltip' => 'View your Sales',
+				'text'    => $this->language->get('text_menu_sale'),
+				'tooltip' => $this->language->get('text_menu_sale_tip'),
 				'href'    => $this->url->link('account/sale', $token, true)
 			);
 
 			$extension_children[] = array(
 				'value'   => 'account/transaction',
 				'icon'    => 'dollar',
-				'text'    => 'Transactions',
-				'tooltip' => 'View your commission rate for sales',
+				'text'    => $this->language->get('text_menu_transaction'),
+				'tooltip' => $this->language->get('text_menu_transaction_tip'),
 				'href'    => $this->url->link('account/transaction', $token, true)
 			);
 		}
@@ -152,13 +154,13 @@ class ControllerAccountMenu extends Controller {
 		$extension_children[] = array(
 			'value'   => 'account/extension/comment',
 			'icon'    => 'comments',
-			'text'    => 'Extensions Comments',
-			'tooltip' => 'Manage the comments member left under your extensions',
+			'text'    => $this->language->get('text_menu_comment'),
+			'tooltip' => $this->language->get('text_menu_comment_tip'),
 			'href'    => $this->url->link('account/extension/comment', $token, true)
 		);
 
 		$data['menus'][] = array(
-			'text'     => ' Extensions',
+			'text'     => $this->language->get('text_menu_extensions'),
 			'children' => $extension_children
 		);
 
@@ -168,28 +170,28 @@ class ControllerAccountMenu extends Controller {
 				array(
 					'value'   => 'account/subscription',
 					'icon'    => 'cloud',
-					'text'    => 'Cloud Stores',
-					'tooltip' => 'View all of your OpenCart Cloud Stores',
+					'text'    => $this->language->get('text_menu_cloud_stores'),
+					'tooltip' => $this->language->get('text_menu_cloud_stores_tip'),
 					'href'    => $this->url->link('account/subscription', $token, true)
 				),
 				array(
 					'value'   => 'account/subscription/domain',
 					'icon'    => 'globe',
-					'text'    => 'Cloud Domains',
-					'tooltip' => 'View all of your OpenCart Cloud Domains',
+					'text'    => $this->language->get('text_menu_cloud_domains'),
+					'tooltip' => $this->language->get('text_menu_cloud_domains_tip'),
 					'href'    => $this->url->link('account/subscription/domain', $token, true)
 				),
 				array(
 					'value'   => 'account/subscription/invoice',
 					'icon'    => 'file-text-o',
-					'text'    => 'Invoices',
-					'tooltip' => 'Check your subscription invoice(s)',
+					'text'    => $this->language->get('text_menu_invoices'),
+					'tooltip' => $this->language->get('text_menu_invoices_tip'),
 					'href'    => $this->url->link('account/subscription/invoice', $token, true)
 				)
 			);
 
 			$data['menus'][] = array(
-				'text'     => ' Cloud Stores',
+				'text'     => $this->language->get('text_menu_cloud_section'),
 				'children' => $cloud_children
 			);
 		}

@@ -1,7 +1,9 @@
 <?php
 class ControllerCmsFeature extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart - Features');
+		$this->load->language('cms/feature');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['download'] = $this->url->link('cms/download');
 		$data['demo'] = $this->url->link('cms/demo');

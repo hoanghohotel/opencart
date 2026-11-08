@@ -1,6 +1,8 @@
 <?php
 class ControllerMarketplacePaypal extends Controller {
 	public function index() {
+		$this->load->language('marketplace/paypal');
+
 		$this->load->model('marketplace/extension');
 
 		$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 0;
@@ -12,7 +14,7 @@ class ControllerMarketplacePaypal extends Controller {
 		$data['quantity'] = $quantity;
 		$data['action'] = $this->url->link('marketplace/purchase/success', '', true);
 		$data['business'] = $this->config->get('config_email');
-		$data['item_name'] = $extension_info ? $extension_info['name'] : 'OpenCart Extension';
+		$data['item_name'] = $extension_info ? $extension_info['name'] : $this->language->get('text_default_item');
 		$data['item_number'] = $extension_id;
 		$data['currency_code'] = $this->config->get('config_currency') ? $this->config->get('config_currency') : 'USD';
 		$data['amount'] = $extension_info ? number_format((float)$extension_info['price'], 2, '.', '') : '0.00';
@@ -28,12 +30,14 @@ class ControllerMarketplacePaypal extends Controller {
 	}
 
 	public function send() {
+		$this->load->language('marketplace/paypal');
+
 		$json = array();
 
 		if (!$this->member->isLogged()) {
-			$json['error'] = 'You must be logged in to purchase an extension!';
+			$json['error'] = $this->language->get('error_login');
 		} elseif (empty($this->request->post['agree'])) {
-			$json['error'] = 'You must agree to the Terms & Conditions!';
+			$json['error'] = $this->language->get('error_agree');
 		}
 
 		if (!$json) {
@@ -62,7 +66,7 @@ class ControllerMarketplacePaypal extends Controller {
 				$json['invoice'] = $order_id;
 				$json['custom'] = $order_id;
 			} else {
-				$json['error'] = 'Extension not found!';
+				$json['error'] = $this->language->get('error_extension');
 			}
 		}
 

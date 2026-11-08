@@ -1,7 +1,9 @@
 <?php
 class ControllerCmsDownload extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart - Downloads');
+		$this->load->language('cms/download');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('cms/download');
 		$this->load->model('marketplace/extension');
@@ -49,7 +51,9 @@ class ControllerCmsDownload extends Controller {
 	}
 
 	public function history() {
-		$this->document->setTitle('OpenCart - Previous Releases & Release Notes');
+		$this->load->language('cms/download');
+
+		$this->document->setTitle($this->language->get('heading_title_history'));
 
 		$this->load->model('cms/download');
 
@@ -91,6 +95,8 @@ class ControllerCmsDownload extends Controller {
 	}
 
 	public function download() {
+		$this->load->language('cms/download');
+
 		$this->load->model('cms/download');
 		$this->load->model('marketplace/extension');
 		$this->load->model('tool/image');
@@ -113,7 +119,7 @@ class ControllerCmsDownload extends Controller {
 			return;
 		}
 
-		$this->document->setTitle('OpenCart - Downloads');
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['download_id'] = (int)$download_info['download_id'];
 		$data['name'] = $download_info['name'];
@@ -139,6 +145,8 @@ class ControllerCmsDownload extends Controller {
 	}
 
 	public function file() {
+		$this->load->language('cms/download');
+
 		$this->load->model('cms/download');
 
 		$download_id = 0;
@@ -184,7 +192,10 @@ class ControllerCmsDownload extends Controller {
 			} elseif (!empty($download_info['href'])) {
 				$this->response->redirect($download_info['href']);
 			} else {
-				$filename = $mask ? $mask : 'opencart-' . $download_info['name'] . '.zip';
+				$token_map = Language::getTokenMap($this->config);
+				$store_name = $token_map['{store_name}'];
+				$slug = strtolower(preg_replace('/[^a-zA-Z0-9]+/', '-', $store_name));
+				$filename = $mask ? $mask : $slug . '-' . $download_info['name'] . '.zip';
 				$fallback_file = DIR_DOWNLOAD . basename($filename);
 
 				if (!is_file($fallback_file)) {
@@ -194,7 +205,7 @@ class ControllerCmsDownload extends Controller {
 					if (class_exists('ZipArchive')) {
 						$zip = new ZipArchive();
 						if ($zip->open($fallback_file, ZipArchive::CREATE | ZipArchive::OVERWRITE) === true) {
-							$zip->addFromString('README.md', "# OpenCart v" . $download_info['name'] . "\r\n\r\nRelease Date: " . $download_info['date_added'] . "\r\n\r\n" . strip_tags(html_entity_decode($download_info['description'], ENT_QUOTES, 'UTF-8')) . "\r\n");
+							$zip->addFromString('README.md', "# " . $store_name . " v" . $download_info['name'] . "\r\n\r\nRelease Date: " . $download_info['date_added'] . "\r\n\r\n" . strip_tags(html_entity_decode($download_info['description'], ENT_QUOTES, 'UTF-8')) . "\r\n");
 							$zip->close();
 						}
 					}
@@ -217,7 +228,7 @@ class ControllerCmsDownload extends Controller {
 					exit();
 				}
 
-				$content = "OpenCart Release Package v" . $download_info['name'] . "\r\n";
+				$content = $store_name . " Release Package v" . $download_info['name'] . "\r\n";
 				if (!headers_sent()) {
 					header('Content-Type: application/octet-stream');
 					header('Content-Disposition: attachment; filename="' . $filename . '"');
@@ -292,7 +303,7 @@ class ControllerCmsDownload extends Controller {
 				'name'         => $result['name'],
 				'description'  => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, 100) . '..',
 				'image'        => $image,
-				'price'        => ($result['license'] && (float)$result['price'] > 0) ? $this->currency->format($result['price'], $this->config->get('config_currency')) : 'FREE',
+				'price'        => ($result['license'] && (float)$result['price'] > 0) ? $this->currency->format($result['price'], $this->config->get('config_currency')) : $this->language->get('text_free'),
 				'rating'       => (int)$result['rating'],
 				'rating_total' => (int)$result['rating_total'],
 				'href'         => $this->url->link('marketplace/extension/info', 'extension_id=' . $result['extension_id'])
@@ -350,7 +361,7 @@ class ControllerCmsDownload extends Controller {
 				'name'         => $result['name'],
 				'description'  => utf8_substr(trim(strip_tags(html_entity_decode($result['description'], ENT_QUOTES, 'UTF-8'))), 0, 100) . '..',
 				'image'        => $image,
-				'price'        => ($result['license'] && (float)$result['price'] > 0) ? $this->currency->format($result['price'], $this->config->get('config_currency')) : 'FREE',
+				'price'        => ($result['license'] && (float)$result['price'] > 0) ? $this->currency->format($result['price'], $this->config->get('config_currency')) : $this->language->get('text_free'),
 				'rating'       => (int)$result['rating'],
 				'rating_total' => (int)$result['rating_total'],
 				'href'         => $this->url->link('marketplace/extension/info', 'extension_id=' . $result['extension_id'])

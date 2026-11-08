@@ -4,32 +4,32 @@
     <div class="row">
       <div class="col-sm-2">
         <section>
-          <h5>OpenCart</h5>
+          <h5>{{ text_store_heading }}</h5>
           <ul class="list-unstyled">
-            <li><a href="{{ feature }}">Features</a></li>
+            <li><a href="{{ feature }}">{{ text_features }}</a></li>
             {% if cloud %}
-            <li><a href="{{ cloud }}">OpenCart Cloud</a></li>
+            <li><a href="{{ cloud }}">{{ text_cloud }}</a></li>
             {% endif %}
-            <li><a href="{{ showcase }}">Showcase</a></li>
-            <li><a href="{{ demo }}">Demo</a></li>
-            <li><a href="{{ download }}">Download</a></li>
-            <li><a href="{{ marketplace }}">Marketplace</a></li>
-            <li><a href="{{ login }}">Login</a></li>
+            <li><a href="{{ showcase }}">{{ text_showcase }}</a></li>
+            <li><a href="{{ demo }}">{{ text_demo }}</a></li>
+            <li><a href="{{ download }}">{{ text_download }}</a></li>
+            <li><a href="{{ marketplace }}">{{ text_marketplace }}</a></li>
+            <li><a href="{{ login }}">{{ text_login }}</a></li>
           </ul>
         </section>
       </div>
       <div class="col-sm-2">
         <section>
-          <h5>Company</h5>
+          <h5>{{ text_company }}</h5>
           <ul class="list-unstyled">
-            <li><a href="{{ contact }}">Contact Us</a></li>
-            <li><a href="{{ advertise }}">Extension Advertising</a></li>
-            <li><a href="{{ advertise }}">Marketplace Advertising</a></li>
-            <li><a href="{{ company }}">About Us</a></li>
-            <li><a href="{{ terms }}">Terms & Conditions</a></li>
-            <li><a href="{{ privacy }}">Privacy Policy</a></li>
-            <li><a href="{{ refund }}">Refund Policy</a></li>
-            <li><a href="{{ gdpr }}">GDPR</a></li>
+            <li><a href="{{ contact }}">{{ text_contact }}</a></li>
+            <li><a href="{{ advertise }}">{{ text_extension_advertising }}</a></li>
+            <li><a href="{{ advertise }}">{{ text_marketplace_advertising }}</a></li>
+            <li><a href="{{ company }}">{{ text_about }}</a></li>
+            <li><a href="{{ terms }}">{{ text_terms }}</a></li>
+            <li><a href="{{ privacy }}">{{ text_privacy }}</a></li>
+            <li><a href="{{ refund }}">{{ text_refund }}</a></li>
+            <li><a href="{{ gdpr }}">{{ text_gdpr }}</a></li>
             {% for information in informations %}
             <li><a href="{{ information.href }}">{{ information.title }}</a></li>
             {% endfor %}
@@ -38,35 +38,35 @@
       </div>
       <div class="col-sm-2">
         <section>
-          <h5>Support</h5>
+          <h5>{{ text_support }}</h5>
           <ul class="list-unstyled">
-            <li><a href="https://forum.opencart.com">Community Forum</a></li>
-            <li><a href="https://dedicated.opencart.com">Dedicated Support</a></li>
-            <li><a href="{{ partner }}">OpenCart Partners</a></li>
-            <li><a href="{{ support }}">Marketplace Support</a></li>
-            <li><a href="{{ cart2cart }}">Migrate to OpenCart</a></li>
+            <li><a href="{{ forum }}">{{ text_forum }}</a></li>
+            <li><a href="{{ dedicated_support }}">{{ text_dedicated_support }}</a></li>
+            <li><a href="{{ partner }}">{{ text_partners }}</a></li>
+            <li><a href="{{ support }}">{{ text_marketplace_support }}</a></li>
+            <li><a href="{{ cart2cart }}">{{ text_migrate }}</a></li>
           </ul>
         </section>
       </div>
       <div class="col-sm-2">
         <section>
-          <h5>Resources</h5>
+          <h5>{{ text_resources }}</h5>
           <ul class="list-unstyled">
-            <li><a href="{{ blog }}">OpenCart Blog</a></li>
-            <li><a href="https://docs.opencart.com">OpenCart Documentation</a></li>
-            <li><a target="_blank" href="https://github.com/opencart/opencart">GitHub</a></li>
-            <li><a href="https://docs.opencart.com/#additional-reading">OpenCart Books</a></li>
-            <li><a href="https://github.com/opencart/opencart/issues">Github Bug Tracker</a></li>
-            <li><a href="https://docs.opencart.com/developer/module/">Developer</a></li>
+            <li><a href="{{ blog }}">{{ text_blog }}</a></li>
+            <li><a href="{{ documentation }}">{{ text_documentation }}</a></li>
+            <li><a target="_blank" href="{{ github }}">{{ text_github }}</a></li>
+            <li><a href="{{ book }}">{{ text_books }}</a></li>
+            <li><a href="{{ bug_tracker }}">{{ text_bug_tracker }}</a></li>
+            <li><a href="{{ developer }}">{{ text_developer }}</a></li>
           </ul>
         </section>
       </div>
       <div class="col-sm-2 col-md-4">
         <section id="newsletter">
-          <h5>Newsletter</h5>
-          <p>Subscribe to our newsletters and stay informed of new releases and other OpenCart events.</p>
+          <h5>{{ text_newsletter }}</h5>
+          <p>{{ text_newsletter_description }}</p>
             <div class="input-group newsletter">
-              <input type="text" name="newsletter" value="" placeholder="Enter your email address" class="form-control">
+              <input type="text" name="newsletter" value="" placeholder="{{ entry_newsletter }}" class="form-control">
               <div class="input-group-btn">
                 <button type="button" class="btn btn-primary subscribe"><i class="fa fa-angle-right"></i></button>
               </div>
@@ -78,18 +78,18 @@
       <div class="col-sm-6 col-md-6">
         <div id="copyright">
           <ul class="list-unstyled">
-            <li class="company-logo"><img src="application/view/image/icon/opencart-logo-white.png" alt="OpenCart" title="OpenCart" /></li>
-            <li class="copyright-text">&copy; Copyright {{ 'now'|date('Y') }} OpenCart</li>
+            <li class="company-logo"><img src="application/view/image/icon/opencart-logo-white.png" alt="{{ store_name }}" title="{{ store_name }}" /></li>
+            <li class="copyright-text">&copy; {{ text_copyright }} {{ 'now'|date('Y') }} {{ store_name }}</li>
           </ul>
         </div>
       </div>
       <div class="col-sm-6 col-md-6">
         <div id="social">
           <ul class="list-unstyled">
-            <li class="facebook-marketing-partner-logo"><a href="https://www.facebook.com/fmp/commerce/partner-badge" target="_blank"><img src="application/view/image/icon/facebook_marketing_partner.png" alt="Facebook Marketing Partner" title="Facebook Marketing Partner" /></a></li>
-            <li><a href="https://www.linkedin.com/company/5224021/" target="_blank">Linkedin</a></li>
-            <li><a href="https://www.facebook.com/opencart/?ref=aymt_homepage_panel" target="_blank">Facebook</a></li>
-            <li><a href="https://twitter.com/opencart" target="_blank">Twitter</a></li>
+            <li class="facebook-marketing-partner-logo"><a href="https://www.facebook.com/fmp/commerce/partner-badge" target="_blank"><img src="application/view/image/icon/facebook_marketing_partner.png" alt="{{ text_facebook_partner }}" title="{{ text_facebook_partner }}" /></a></li>
+            <li><a href="{{ linkedin_url }}" target="_blank">{{ text_linkedin }}</a></li>
+            <li><a href="{{ facebook_url }}" target="_blank">{{ text_facebook }}</a></li>
+            <li><a href="{{ twitter_url }}" target="_blank">{{ text_twitter }}</a></li>
           </ul>
         </div>
       </div>

@@ -9,7 +9,7 @@ $_['datetime_format']       = 'd/m/Y H:i:s';
 $_['decimal_point']         = '.';
 $_['thousand_point']        = ',';
 
-// Text
+// Common Text
 $_['text_home']             = 'Home';
 $_['text_yes']              = 'Yes';
 $_['text_no']               = 'No';
@@ -20,12 +20,55 @@ $_['text_pagination']       = 'Showing %d to %d of %d (%d Pages)';
 $_['text_loading']          = 'Loading...';
 $_['text_no_results']       = 'No results!';
 $_['text_free']             = 'FREE';
+$_['text_all']              = 'All';
+$_['text_commercial']       = 'Commercial';
+$_['text_search']           = 'Search';
+$_['text_learn_more']       = 'Learn More';
+$_['text_view_more']        = 'View More';
+$_['text_read_more']        = 'Read More';
+$_['text_close']            = 'Close';
+$_['text_save']             = 'Save';
+$_['text_cancel']           = 'Cancel';
+$_['text_status']           = 'Status';
+$_['text_date_added']       = 'Date Added';
+$_['text_date_modified']    = 'Date Modified';
+$_['text_action']           = 'Action';
+$_['text_details']          = 'Details';
+$_['text_description']      = 'Description';
+$_['text_documentation']    = 'Documentation';
+$_['text_comments']         = 'Comments';
+$_['text_reviews']          = 'Reviews';
+$_['text_rating']           = 'Rating';
+$_['text_price']            = 'Price';
+$_['text_total']            = 'Total';
+$_['text_subtotal']         = 'Sub-Total';
+$_['text_quantity']         = 'Quantity';
+$_['text_email']            = 'Email';
+$_['text_telephone']        = 'Telephone';
+$_['text_address']          = 'Address';
+$_['text_country']          = 'Country';
+$_['text_zone']             = 'Region / State';
+$_['text_account']          = 'Account';
+$_['text_login']            = 'Login';
+$_['text_register']         = 'Register';
+$_['text_logout']           = 'Logout';
+$_['text_marketplace']      = 'Marketplace';
+$_['text_features']         = 'Features';
+$_['text_demo']             = 'Demo';
+$_['text_resources']        = 'Resources';
+$_['text_blog']             = 'Blog';
+$_['text_download']         = 'Download';
+$_['text_support']          = 'Support';
+$_['text_partner']          = 'Partners';
+$_['text_company']          = 'Company';
+$_['text_contact']          = 'Contact Us';
 
 // Buttons
 $_['button_address_add']    = 'Add Address';
 $_['button_back']           = 'Back';
 $_['button_continue']       = 'Continue';
 $_['button_cart']           = 'Add to Cart';
+$_['button_buy']            = 'Buy';
 $_['button_cancel']         = 'Cancel';
 $_['button_compare']        = 'Compare this Product';
 $_['button_wishlist']       = 'Add to Wish List';
@@ -49,6 +92,8 @@ $_['button_shopping']       = 'Continue Shopping';
 $_['button_search']         = 'Search';
 $_['button_shipping']       = 'Apply Shipping';
 $_['button_submit']         = 'Submit';
+$_['button_send']           = 'Send';
+$_['button_save']           = 'Save';
 $_['button_guest']          = 'Guest Checkout';
 $_['button_view']           = 'View';
 $_['button_voucher']        = 'Apply Gift Certificate';
@@ -58,6 +103,9 @@ $_['button_quote']          = 'Get Quotes';
 $_['button_list']           = 'List';
 $_['button_grid']           = 'Grid';
 $_['button_map']            = 'View Google Map';
+$_['button_close']          = 'Close';
+$_['button_reply']          = 'Reply';
+$_['button_comment']        = 'Comment';
 
 // Error
 $_['error_exception']       = 'Error Code(%s): %s in %s on line %s';
@@ -70,6 +118,8 @@ $_['error_upload_7']        = 'Warning: Failed to write file to disk!';
 $_['error_upload_8']        = 'Warning: File upload stopped by extension!';
 $_['error_upload_999']      = 'Warning: No error code available!';
 $_['error_curl']            = 'CURL: Error Code(%s): %s';
+$_['error_warning']         = 'Warning: Please check the form carefully for errors!';
+$_['error_permission']      = 'Warning: You do not have permission to perform this action!';
 
 // Datepicker
 $_['datepicker']            = 'en-gb';

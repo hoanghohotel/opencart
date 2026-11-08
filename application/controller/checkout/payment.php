@@ -5,6 +5,8 @@ class ControllerCheckoutPayment extends Controller {
 	}
 
 	public function card() {
+		$this->load->language('checkout/card');
+
 		$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 0;
 		$quantity = isset($this->request->get['quantity']) && (int)$this->request->get['quantity'] > 0 ? (int)$this->request->get['quantity'] : 1;
 		$order_id = isset($this->request->get['order_id']) ? (int)$this->request->get['order_id'] : 0;
@@ -34,6 +36,8 @@ class ControllerCheckoutPayment extends Controller {
 	}
 
 	public function paypal() {
+		$this->load->language('checkout/paypal');
+
 		$this->load->model('marketplace/extension');
 
 		require_once(DIR_SYSTEM . 'library/payment_gateway.php');
@@ -87,6 +91,8 @@ class ControllerCheckoutPayment extends Controller {
 	}
 
 	public function prepare() {
+		$this->load->language('checkout/confirm');
+
 		$this->load->model('marketplace/extension');
 		$this->load->model('account/payment');
 
@@ -215,6 +221,8 @@ class ControllerCheckoutPayment extends Controller {
 	}
 
 	public function confirm() {
+		$this->load->language('checkout/payment');
+
 		$json = array();
 
 		$this->load->model('marketplace/extension');
@@ -227,7 +235,7 @@ class ControllerCheckoutPayment extends Controller {
 		$quantity = isset($this->request->get['quantity']) && (int)$this->request->get['quantity'] > 0 ? (int)$this->request->get['quantity'] : 1;
 
 		if (!$this->member->isLogged()) {
-			$json['error'] = 'You must be logged in to complete your order!';
+			$json['error'] = $this->language->get('error_login');
 		}
 
 		if (!$json) {
@@ -239,11 +247,14 @@ class ControllerCheckoutPayment extends Controller {
 				$gateway_used = !empty($order_data['payment_gateway']) ? $order_data['payment_gateway'] : '';
 
 				if ($gateway_used === 'stripe' || strpos($payment_token, 'stripe') === 0) {
+					$store_name = $this->config->get('config_name') ?: 'Store';
+					$stripe_desc = sprintf(str_replace('{store_name}', $store_name, $this->language->get('text_stripe_description')), $order_data['extension']);
+
 					$charge = $payment_gateway->chargeStripe(
 						$payment_token,
 						$order_data['total'],
 						$this->config->get('config_currency'),
-						'OpenCart Extension: ' . $order_data['extension'],
+						$stripe_desc,
 						$this->member->getEmail(),
 						trim($this->member->getFirstName() . ' ' . $this->member->getLastName()),
 						$this->member->getId()
@@ -266,7 +277,7 @@ class ControllerCheckoutPayment extends Controller {
 					unset($this->session->data['pending_extension_order']);
 					$order_id = $this->model_account_order->addOrder($order_data);
 					$json['order_id'] = $order_id;
-					$json['success'] = 'Your order has been completed!';
+					$json['success'] = $this->language->get('text_success');
 				}
 			} else {
 				$extension_info = $this->model_marketplace_extension->getExtension($extension_id);
@@ -284,9 +295,9 @@ class ControllerCheckoutPayment extends Controller {
 						'order_status_id' => 5
 					));
 					$json['order_id'] = $order_id;
-					$json['success'] = 'Your order has been completed!';
+					$json['success'] = $this->language->get('text_success');
 				} else {
-					$json['error'] = 'Extension not found!';
+					$json['error'] = $this->language->get('error_extension');
 				}
 			}
 		}

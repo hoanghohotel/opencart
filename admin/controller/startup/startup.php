@@ -12,6 +12,8 @@ class ControllerStartupStartup extends Controller {
 			}
 		}
 
+		$GLOBALS['__oc_site_config'] = $this->config;
+
 		// Set time zone
 		if ($this->config->get('config_timezone')) {
 			date_default_timezone_set($this->config->get('config_timezone'));

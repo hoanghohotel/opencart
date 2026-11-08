@@ -11,7 +11,9 @@ class ControllerAccountAccount extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('Account');
+		$this->load->language('account/account');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (isset($this->session->data['success'])) {
 			$data['success'] = $this->session->data['success'];

@@ -1,6 +1,8 @@
 <?php
 class ControllerCheckoutCheckout extends Controller {
 	public function index() {
+		$this->load->language('checkout/checkout');
+
 		$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 0;
 		$quantity = isset($this->request->get['quantity']) && (int)$this->request->get['quantity'] > 0 ? (int)$this->request->get['quantity'] : 1;
 
@@ -44,35 +46,35 @@ class ControllerCheckoutCheckout extends Controller {
 
 			if ($payment_gateway->isStripeEnabled()) {
 				$stripe_cfg = $payment_gateway->getStripeConfig();
-				$mode_label = $stripe_cfg['environment'] === 'live' ? 'Live' : 'Test Mode';
+				$mode_label = $stripe_cfg['environment'] === 'live' ? $this->language->get('text_live') : $this->language->get('text_test_mode');
 				$data['payment_methods'][] = array(
 					'value' => $this->url->link('checkout/payment/card', 'member_token=' . $member_token . '&extension_id=' . $extension_id . '&quantity=' . $quantity . '&gateway=stripe', true),
-					'text'  => 'Stripe - Credit / Debit Card (' . $mode_label . ')'
+					'text'  => sprintf($this->language->get('text_stripe_card'), $mode_label)
 				);
 			}
 
 			if ($payment_gateway->isBraintreeEnabled()) {
 				$bt_cfg = $payment_gateway->getBraintreeConfig();
-				$mode_label = $bt_cfg['environment'] === 'production' ? 'Live' : 'Sandbox';
+				$mode_label = $bt_cfg['environment'] === 'production' ? $this->language->get('text_live') : $this->language->get('text_sandbox');
 				$data['payment_methods'][] = array(
 					'value' => $this->url->link('checkout/payment/card', 'member_token=' . $member_token . '&extension_id=' . $extension_id . '&quantity=' . $quantity . '&gateway=braintree', true),
-					'text'  => 'Credit / Debit Card - Braintree (' . $mode_label . ')'
+					'text'  => sprintf($this->language->get('text_braintree_card'), $mode_label)
 				);
 			}
 
 			if ($payment_gateway->isPayPalEnabled()) {
 				$pp_cfg = $payment_gateway->getPayPalConfig();
-				$mode_label = $pp_cfg['environment'] === 'live' ? 'Live' : 'Sandbox';
+				$mode_label = $pp_cfg['environment'] === 'live' ? $this->language->get('text_live') : $this->language->get('text_sandbox');
 				$data['payment_methods'][] = array(
 					'value' => $this->url->link('checkout/payment/paypal', 'member_token=' . $member_token . '&extension_id=' . $extension_id . '&quantity=' . $quantity, true),
-					'text'  => 'PayPal (' . $mode_label . ')'
+					'text'  => sprintf($this->language->get('text_paypal_method'), $mode_label)
 				);
 			}
 
 			if (empty($data['payment_methods'])) {
 				$data['payment_methods'][] = array(
 					'value' => $this->url->link('checkout/payment/card', 'member_token=' . $member_token . '&extension_id=' . $extension_id . '&quantity=' . $quantity, true),
-					'text'  => 'Credit / Debit Card'
+					'text'  => $this->language->get('text_credit_debit_card')
 				);
 			}
 
@@ -81,7 +83,9 @@ class ControllerCheckoutCheckout extends Controller {
 	}
 
 	public function success() {
-		$this->document->setTitle('Extension Purchase Success');
+		$this->load->language('checkout/success');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if ($this->member->isLogged() && !empty($this->session->data['pending_extension_order'])) {
 			$this->load->model('account/order');
@@ -103,7 +107,9 @@ class ControllerCheckoutCheckout extends Controller {
 	}
 
 	public function failure() {
-		$this->document->setTitle('Extension Purchase Failure');
+		$this->load->language('checkout/failure');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['contact'] = $this->url->link('support/contact');
 
@@ -114,7 +120,9 @@ class ControllerCheckoutCheckout extends Controller {
 	}
 
 	public function terms() {
-		$this->document->setTitle('Extension Purchase Terms');
+		$this->load->language('checkout/terms');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');

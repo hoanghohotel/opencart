@@ -25,7 +25,9 @@ class ControllerAccountPin extends Controller {
 			}
 		}
 
-		$this->document->setTitle('Setup PIN for your account');
+		$this->load->language('account/pin');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$pin = trim($this->request->post['pin']);
@@ -96,7 +98,7 @@ class ControllerAccountPin extends Controller {
 		$pin = isset($this->request->post['pin']) ? trim($this->request->post['pin']) : '';
 
 		if (!preg_match('/^\d{4}$/', $pin)) {
-			$this->error['pin'] = 'PIN must be exactly 4 digits (0-9)!';
+			$this->error['pin'] = $this->language->get('error_pin');
 		}
 
 		return !$this->error;

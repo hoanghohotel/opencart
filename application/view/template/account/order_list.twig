@@ -2,8 +2,8 @@
 <div id="account-order">
   <div class="page-header">
     <div class="container">
-      <h1>Order History</h1>
-      <p>View the extensions you have previously purchased</p>
+      <h1>{{ heading_title }}</h1>
+      <p>{{ text_subtitle }}</p>
     </div>
   </div>
   <div class="container">
@@ -14,17 +14,17 @@
           </div>
         {% endif %}
         <fieldset>
-          <legend>Your Orders</legend>
+          <legend>{{ text_orders }}</legend>
           <div class="table-responsive">
             <table class="table table-bordered">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>Extension Name</th>
-                  <th>Amount</th>
-                  <th class="text-center">Status</th>
-                  <th>Add Date</th>
-                  <th class="text-right">Action</th>
+                  <th>{{ column_order_id }}</th>
+                  <th>{{ column_extension }}</th>
+                  <th>{{ column_amount }}</th>
+                  <th class="text-center">{{ column_status }}</th>
+                  <th>{{ column_date_added }}</th>
+                  <th class="text-right">{{ column_action }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -42,12 +42,12 @@
                           <span class="label label-danger">{{ order.status }}</span>
                         {% endif %}</td>
                       <td>{{ order.date_added }}</td>
-                      <td class="text-right"><a href="{{ order.href }}" data-toggle="tooltip" title="view" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+                      <td class="text-right"><a href="{{ order.href }}" data-toggle="tooltip" title="{{ button_view }}" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
                     </tr>
                   {% endfor %}
                 {% else %}
                   <tr>
-                    <td class="text-center" colspan="6">No results!</td>
+                    <td class="text-center" colspan="6">{{ text_no_results }}</td>
                   </tr>
                 {% endif %}
               </tbody>

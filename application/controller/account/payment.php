@@ -13,7 +13,9 @@ class ControllerAccountPayment extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('Registered Payment Methods');
+		$this->load->language('account/payment');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/payment');
 
@@ -125,6 +127,8 @@ class ControllerAccountPayment extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
+		$this->load->language('account/payment');
+
 		require_once(DIR_SYSTEM . 'library/payment_gateway.php');
 		$payment_gateway = new PaymentGateway($this->registry);
 
@@ -133,9 +137,9 @@ class ControllerAccountPayment extends Controller {
 		$this->session->data['active_card_gateway'] = $active_gateway;
 
 		if ($active_gateway === 'stripe') {
-			$this->document->setTitle('Register New Credit Card (Stripe)');
+			$this->document->setTitle($this->language->get('heading_card_stripe'));
 		} else {
-			$this->document->setTitle('Register New Credit Card');
+			$this->document->setTitle($this->language->get('heading_card'));
 		}
 
 		if (isset($this->session->data['success'])) {
@@ -174,11 +178,13 @@ class ControllerAccountPayment extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
+		$this->load->language('account/payment');
+
 		require_once(DIR_SYSTEM . 'library/payment_gateway.php');
 		$payment_gateway = new PaymentGateway($this->registry);
 		$pp_cfg = $payment_gateway->getPayPalConfig();
 
-		$this->document->setTitle('Register PayPal Account');
+		$this->document->setTitle($this->language->get('heading_paypal'));
 
 		if (isset($this->session->data['success'])) {
 			$data['success'] = $this->session->data['success'];
@@ -206,6 +212,8 @@ class ControllerAccountPayment extends Controller {
 	}
 
 	public function add() {
+		$this->load->language('account/payment');
+
 		$json = array();
 
 		if (!$this->member->isLogged()) {
@@ -219,7 +227,7 @@ class ControllerAccountPayment extends Controller {
 			$nonce = isset($this->request->post['nonce']) ? trim($this->request->post['nonce']) : '';
 
 			if (!$nonce && empty($this->request->post['name'])) {
-				$json['error']['warning'] = 'Payment token is missing!';
+				$json['error']['warning'] = $this->language->get('error_token_missing');
 				$json['error']['merchant_errors'] = array();
 			} else {
 				require_once(DIR_SYSTEM . 'library/payment_gateway.php');
@@ -233,7 +241,7 @@ class ControllerAccountPayment extends Controller {
 						'name'        => isset($this->request->post['name']) ? $this->request->post['name'] : $this->member->getEmail(),
 						'token'       => $nonce ? $nonce : 'bt_tok_' . token(12),
 						'image'       => 'application/view/image/account/paypal-logo.png',
-						'date_expire' => 'Unlimited',
+						'date_expire' => $this->language->get('text_unlimited'),
 						'default'     => 0
 					);
 				} else {
@@ -283,11 +291,11 @@ class ControllerAccountPayment extends Controller {
 
 				$this->load->controller('mail/payment', array(
 					'email'     => $this->member->getEmail(),
-					'text'      => 'A new payment method (' . $payment_data['name'] . ') has been added to your OpenCart account.',
+					'text'      => sprintf($this->language->get('text_mail_added'), $payment_data['name']),
 					'mail_link' => $this->url->link('account/payment', 'member_token=' . $this->session->data['member_token'], true)
 				));
 
-				$this->session->data['success'] = 'Success: You have added a new payment method!';
+				$this->session->data['success'] = $this->language->get('text_success_add');
 
 				$json['redirect'] = str_replace('&amp;', '&', $this->url->link('account/payment', 'member_token=' . $this->session->data['member_token'], true));
 			}
@@ -298,6 +306,8 @@ class ControllerAccountPayment extends Controller {
 	}
 
 	public function makedefault() {
+		$this->load->language('account/payment');
+
 		$json = array();
 
 		if (!$this->member->isLogged()) {
@@ -314,7 +324,7 @@ class ControllerAccountPayment extends Controller {
 			$payment_info = $this->model_account_payment->getPayment($member_payment_id);
 
 			if (!$payment_info || (isset($payment_info['member_id']) && (int)$payment_info['member_id'] !== (int)$this->member->getId())) {
-				$json['error'] = 'Warning: Payment method could not be found!';
+				$json['error'] = $this->language->get('error_not_found');
 			} else {
 				$ref = new ReflectionMethod('ModelAccountPayment', 'setDefaultPayment');
 				if ($ref->getNumberOfParameters() >= 2) {
@@ -323,7 +333,7 @@ class ControllerAccountPayment extends Controller {
 					$this->model_account_payment->setDefaultPayment($member_payment_id);
 				}
 
-				$this->session->data['success'] = 'Success: Default payment method has been updated!';
+				$this->session->data['success'] = $this->language->get('text_success_default');
 
 				$json['redirect'] = str_replace('&amp;', '&', $this->url->link('account/payment', 'member_token=' . $this->session->data['member_token'], true));
 			}
@@ -334,6 +344,8 @@ class ControllerAccountPayment extends Controller {
 	}
 
 	public function delete() {
+		$this->load->language('account/payment');
+
 		$json = array();
 
 		if (!$this->member->isLogged()) {
@@ -350,7 +362,7 @@ class ControllerAccountPayment extends Controller {
 			$payment_info = $this->model_account_payment->getPayment($member_payment_id);
 
 			if (!$payment_info || (isset($payment_info['member_id']) && (int)$payment_info['member_id'] !== (int)$this->member->getId())) {
-				$json['error'] = 'Warning: Payment method could not be found!';
+				$json['error'] = $this->language->get('error_not_found');
 			} else {
 				$ref = new ReflectionMethod('ModelAccountPayment', 'deletePayment');
 				if ($ref->getNumberOfParameters() >= 2) {
@@ -359,7 +371,7 @@ class ControllerAccountPayment extends Controller {
 					$this->model_account_payment->deletePayment($member_payment_id);
 				}
 
-				$this->session->data['success'] = 'Success: Payment method has been deleted!';
+				$this->session->data['success'] = $this->language->get('text_success_delete');
 
 				$json['redirect'] = str_replace('&amp;', '&', $this->url->link('account/payment', 'member_token=' . $this->session->data['member_token'], true));
 			}

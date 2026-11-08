@@ -13,14 +13,16 @@ class ControllerAccountPassword extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('Change My Password');
+		$this->load->language('account/password');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->load->model('account/member');
 
 			$this->model_account_member->editPassword($this->member->getEmail(), $this->request->post['password']);
 
-			$this->session->data['success'] = 'Success: Your password has been successfully updated.';
+			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->response->redirect($this->url->link('account/account', 'member_token=' . $this->session->data['member_token'], true));
 		}
@@ -74,15 +76,15 @@ class ControllerAccountPassword extends Controller {
 
 	protected function validate() {
 		if (!isset($this->request->post['current']) || !$this->member->login($this->member->getEmail(), html_entity_decode($this->request->post['current'], ENT_QUOTES, 'UTF-8'))) {
-			$this->error['current'] = 'Your old password is incorrect!';
+			$this->error['current'] = $this->language->get('error_current');
 		}
 
 		if (!isset($this->request->post['password']) || (utf8_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) < 4) || (utf8_strlen(html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8')) > 40)) {
-			$this->error['password'] = 'Password must be between 4 and 40 characters!';
+			$this->error['password'] = $this->language->get('error_password');
 		}
 
 		if (!isset($this->request->post['confirm']) || ($this->request->post['confirm'] != $this->request->post['password'])) {
-			$this->error['confirm'] = 'Password confirmation does not match password!';
+			$this->error['confirm'] = $this->language->get('error_confirm');
 		}
 
 		return !$this->error;

@@ -1,7 +1,9 @@
 <?php
 class ControllerAccountSuccess extends Controller {
 	public function index() {
-		$this->document->setTitle('Your Account Has Been Created!');
+		$this->load->language('account/success');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if ($this->member->isLogged()) {
 			if (empty($this->session->data['member_token'])) {

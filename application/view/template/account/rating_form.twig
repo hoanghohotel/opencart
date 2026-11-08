@@ -2,8 +2,8 @@
 <div id="account-review">
   <div class="page-header">
     <div class="container">
-      <h1>Rate your downloads</h1>
-      <p>Review your downloads based on Functionality, Appearance, User friendly, Support and Documentation</p>
+      <h1>{{ heading_title }}</h1>
+      <p>{{ text_lead_review }}</p>
     </div>
   </div>
   <div class="container">
@@ -12,177 +12,177 @@
         <form action="{{ action }}" method="post" enctype="multipart/form-data">
           <div class="section-xs">
             <fieldset>
-              <legend>Please rate {{ extension }}</legend>
+              <legend>{{ text_please_rate }} {{ extension }}</legend>
               <div class="form-group">
-                <label for="input-functionality">How is the Functionality of this extension?</label> <select name="functionality" id="input-functionality" class="form-control">
+                <label for="input-functionality">{{ entry_functionality }}</label> <select name="functionality" id="input-functionality" class="form-control">
                   <option value=""></option>
                   {% if functionality == 5 %}
-                    <option value="5" selected="selected">Excellent</option>
+                    <option value="5" selected="selected">{{ text_excellent }}</option>
                   {% else %}
-                    <option value="5">Excellent</option>
+                    <option value="5">{{ text_excellent }}</option>
                   {% endif %}
                   {% if functionality == 4 %}
-                    <option value="4" selected="selected">Very Good</option>
+                    <option value="4" selected="selected">{{ text_very_good }}</option>
                   {% else %}
-                    <option value="4">Very Good</option>
+                    <option value="4">{{ text_very_good }}</option>
                   {% endif %}
                   {% if functionality == 3 %}
-                    <option value="3" selected="selected">Good</option>
+                    <option value="3" selected="selected">{{ text_good }}</option>
                   {% else %}
-                    <option value="3">Good</option>
+                    <option value="3">{{ text_good }}</option>
                   {% endif %}
                   {% if functionality == 2 %}
-                    <option value="2" selected="selected">Acceptable</option>
+                    <option value="2" selected="selected">{{ text_acceptable }}</option>
                   {% else %}
-                    <option value="2">Acceptable</option>
+                    <option value="2">{{ text_acceptable }}</option>
                   {% endif %}
                   {% if functionality == 1 %}
-                    <option value="1" selected="selected">Poor</option>
+                    <option value="1" selected="selected">{{ text_poor }}</option>
                   {% else %}
-                    <option value="1">Poor</option>
+                    <option value="1">{{ text_poor }}</option>
                   {% endif %}
                 </select>
                 {% if error_functionality %}
                   <div class="text-danger">{{ error_functionality }}</div>
                 {% endif %} </div>
               <div class="form-group">
-                <label for="input-appearance">Are you satisfied with the Appearance?</label> <select name="appearance" id="input-appearance" class="form-control">
+                <label for="input-appearance">{{ entry_appearance }}</label> <select name="appearance" id="input-appearance" class="form-control">
                   <option value=""></option>
                   {% if appearance == 5 %}
-                    <option value="5" selected="selected">Very satisfied</option>
+                    <option value="5" selected="selected">{{ text_very_satisfied }}</option>
                   {% else %}
-                    <option value="5">Very satisfied</option>
+                    <option value="5">{{ text_very_satisfied }}</option>
                   {% endif %}
                   {% if appearance == 4 %}
-                    <option value="4" selected="selected">Somewhat satisfied</option>
+                    <option value="4" selected="selected">{{ text_somewhat_satisfied }}</option>
                   {% else %}
-                    <option value="4">Somewhat satisfied</option>
+                    <option value="4">{{ text_somewhat_satisfied }}</option>
                   {% endif %}
                   {% if appearance == 3 %}
-                    <option value="3" selected="selected">No opinion</option>
+                    <option value="3" selected="selected">{{ text_no_opinion }}</option>
                   {% else %}
-                    <option value="3">No opinion</option>
+                    <option value="3">{{ text_no_opinion }}</option>
                   {% endif %}
                   {% if appearance == 2 %}
-                    <option value="2" selected="selected">Somewhat dissatisfied</option>
+                    <option value="2" selected="selected">{{ text_somewhat_dissatisfied }}</option>
                   {% else %}
-                    <option value="2">Somewhat dissatisfied</option>
+                    <option value="2">{{ text_somewhat_dissatisfied }}</option>
                   {% endif %}
                   {% if appearance == 1 %}
-                    <option value="1" selected="selected">Very dissatisfied</option>
+                    <option value="1" selected="selected">{{ text_very_dissatisfied }}</option>
                   {% else %}
-                    <option value="1">Very dissatisfied</option>
+                    <option value="1">{{ text_very_dissatisfied }}</option>
                   {% endif %}
                 </select>
                 {% if error_appearance %}
                   <div class="text-danger">{{ error_appearance }}</div>
                 {% endif %} </div>
               <div class="form-group">
-                <label for="input-user-friendly">Is this extension User friendly?</label> <select name="user_friendly" id="input-user-friendly" class="form-control">
+                <label for="input-user-friendly">{{ entry_user_friendly }}</label> <select name="user_friendly" id="input-user-friendly" class="form-control">
                   <option value=""></option>
                   {% if user_friendly == 5 %}
-                    <option value="5" selected="selected">Extremely</option>
+                    <option value="5" selected="selected">{{ text_extremely }}</option>
                   {% else %}
-                    <option value="5">Extremely</option>
+                    <option value="5">{{ text_extremely }}</option>
                   {% endif %}
                   {% if user_friendly == 4 %}
-                    <option value="4" selected="selected">Very</option>
+                    <option value="4" selected="selected">{{ text_very }}</option>
                   {% else %}
-                    <option value="4">Very</option>
+                    <option value="4">{{ text_very }}</option>
                   {% endif %}
                   {% if user_friendly == 3 %}
-                    <option value="3" selected="selected">Moderately</option>
+                    <option value="3" selected="selected">{{ text_moderately }}</option>
                   {% else %}
-                    <option value="3">Moderately</option>
+                    <option value="3">{{ text_moderately }}</option>
                   {% endif %}
                   {% if user_friendly == 2 %}
-                    <option value="2" selected="selected">Slightly</option>
+                    <option value="2" selected="selected">{{ text_slightly }}</option>
                   {% else %}
-                    <option value="2">Slightly</option>
+                    <option value="2">{{ text_slightly }}</option>
                   {% endif %}
                   {% if user_friendly == 1 %}
-                    <option value="1" selected="selected">Not at all</option>
+                    <option value="1" selected="selected">{{ text_not_at_all }}</option>
                   {% else %}
-                    <option value="1">Not at all</option>
+                    <option value="1">{{ text_not_at_all }}</option>
                   {% endif %}
                 </select>
                 {% if error_user_friendly %}
                   <div class="text-danger">{{ error_user_friendly }}</div>
                 {% endif %} </div>
               <div class="form-group">
-                <label for="input-support">Are you satisfied with your Support?</label> <select name="support" id="input-rating-q3" class="form-control">
+                <label for="input-support">{{ entry_support }}</label> <select name="support" id="input-rating-q3" class="form-control">
                   <option value=""></option>
                   {% if support == 5 %}
-                    <option value="5" selected="selected">Very satisfied</option>
+                    <option value="5" selected="selected">{{ text_very_satisfied }}</option>
                   {% else %}
-                    <option value="5">Very satisfied</option>
+                    <option value="5">{{ text_very_satisfied }}</option>
                   {% endif %}
                   {% if support == 4 %}
-                    <option value="4" selected="selected">Somewhat satisfied</option>
+                    <option value="4" selected="selected">{{ text_somewhat_satisfied }}</option>
                   {% else %}
-                    <option value="4">Somewhat satisfied</option>
+                    <option value="4">{{ text_somewhat_satisfied }}</option>
                   {% endif %}
                   {% if support == 3 %}
-                    <option value="3" selected="selected">No opinion</option>
+                    <option value="3" selected="selected">{{ text_no_opinion }}</option>
                   {% else %}
-                    <option value="3">No opinion</option>
+                    <option value="3">{{ text_no_opinion }}</option>
                   {% endif %}
                   {% if support == 2 %}
-                    <option value="2" selected="selected">Somewhat dissatisfied</option>
+                    <option value="2" selected="selected">{{ text_somewhat_dissatisfied }}</option>
                   {% else %}
-                    <option value="2">Somewhat dissatisfied</option>
+                    <option value="2">{{ text_somewhat_dissatisfied }}</option>
                   {% endif %}
                   {% if support == 1 %}
-                    <option value="1" selected="selected">Very dissatisfied</option>
+                    <option value="1" selected="selected">{{ text_very_dissatisfied }}</option>
                   {% else %}
-                    <option value="1">Very dissatisfied</option>
+                    <option value="1">{{ text_very_dissatisfied }}</option>
                   {% endif %}
                 </select>
                 {% if error_support %}
                   <div class="text-danger">{{ error_support }}</div>
                 {% endif %} </div>
               <div class="form-group">
-                <label for="input-documentation">Do you found the Documentation useful?</label> <select name="documentation" id="input-documentation" class="form-control">
+                <label for="input-documentation">{{ entry_documentation }}</label> <select name="documentation" id="input-documentation" class="form-control">
                   <option value=""></option>
                   {% if documentation == 5 %}
-                    <option value="5" selected="selected">Very useful</option>
+                    <option value="5" selected="selected">{{ text_very_useful }}</option>
                   {% else %}
-                    <option value="5">Very useful</option>
+                    <option value="5">{{ text_very_useful }}</option>
                   {% endif %}
                   {% if documentation == 4 %}
-                    <option value="4" selected="selected">Somewhat useful</option>
+                    <option value="4" selected="selected">{{ text_somewhat_useful }}</option>
                   {% else %}
-                    <option value="4">Somewhat useful</option>
+                    <option value="4">{{ text_somewhat_useful }}</option>
                   {% endif %}
                   {% if documentation == 3 %}
-                    <option value="3" selected="selected">No opinion</option>
+                    <option value="3" selected="selected">{{ text_no_opinion }}</option>
                   {% else %}
-                    <option value="3">No opinion</option>
+                    <option value="3">{{ text_no_opinion }}</option>
                   {% endif %}
                   {% if documentation == 2 %}
-                    <option value="2" selected="selected">Not very useful</option>
+                    <option value="2" selected="selected">{{ text_not_very_useful }}</option>
                   {% else %}
-                    <option value="2">Not very useful</option>
+                    <option value="2">{{ text_not_very_useful }}</option>
                   {% endif %}
                   {% if documentation == 1 %}
-                    <option value="1" selected="selected">Not at all useful</option>
+                    <option value="1" selected="selected">{{ text_not_at_all_useful }}</option>
                   {% else %}
-                    <option value="1">Not at all useful</option>
+                    <option value="1">{{ text_not_at_all_useful }}</option>
                   {% endif %}
                 </select>
                 {% if error_documentation %}
                   <div class="text-danger">{{ error_documentation }}</div>
                 {% endif %}</div>
               <div class="form-group">
-                <label for="input-comment">Other Feedback?</label> <textarea name="comment" placeholder="Write down your feedback here" id="input-comment" class="form-control">{{ comment }}</textarea>
+                <label for="input-comment">{{ entry_comment }}</label> <textarea name="comment" placeholder="{{ entry_comment_placeholder }}" id="input-comment" class="form-control">{{ comment }}</textarea>
                 {% if error_comment %}
                   <div class="text-danger">{{ error_comment }}</div>
                 {% endif %}</div>
             </fieldset>
           </div>
           <div class="section-xs button clearfix">
-            <div class="pull-right"><a href="{{ cancel }}" class="btn btn-default text-uppercase">Cancel</a>
-              <button type="submit" class="btn btn-primary text-uppercase">Submit</button>
+            <div class="pull-right"><a href="{{ cancel }}" class="btn btn-default text-uppercase">{{ button_cancel }}</a>
+              <button type="submit" class="btn btn-primary text-uppercase">{{ button_submit }}</button>
             </div>
           </div>
         </form>
@@ -191,4 +191,4 @@
     </div>
   </div>
 </div>
-{{ footer }} 
+{{ footer }}

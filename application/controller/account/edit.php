@@ -13,14 +13,16 @@ class ControllerAccountEdit extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('Edit My Information');
+		$this->load->language('account/edit');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/member');
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_account_member->editMember($this->member->getId(), $this->request->post);
 
-			$this->session->data['success'] = 'Success: Your account has been successfully updated.';
+			$this->session->data['success'] = $this->language->get('text_success');
 
 			$this->response->redirect($this->url->link('account/account', 'member_token=' . $this->session->data['member_token'], true));
 		}
@@ -164,27 +166,27 @@ class ControllerAccountEdit extends Controller {
 
 	protected function validate() {
 		if (!isset($this->request->post['username']) || (utf8_strlen(trim($this->request->post['username'])) < 3) || (utf8_strlen(trim($this->request->post['username'])) > 64)) {
-			$this->error['username'] = 'Username must be between 3 and 64 characters!';
+			$this->error['username'] = $this->language->get('error_username');
 		} elseif ((utf8_strtolower($this->member->getUsername()) != utf8_strtolower(trim($this->request->post['username']))) && $this->model_account_member->getTotalMembersByUsername($this->request->post['username'])) {
-			$this->error['username'] = 'Warning: Username is already registered!';
+			$this->error['username'] = $this->language->get('error_username_exists');
 		}
 
 		if (!isset($this->request->post['firstname']) || (utf8_strlen(trim($this->request->post['firstname'])) < 1) || (utf8_strlen(trim($this->request->post['firstname'])) > 32)) {
-			$this->error['firstname'] = 'First Name must be between 1 and 32 characters!';
+			$this->error['firstname'] = $this->language->get('error_firstname');
 		}
 
 		if (!isset($this->request->post['lastname']) || (utf8_strlen(trim($this->request->post['lastname'])) < 1) || (utf8_strlen(trim($this->request->post['lastname'])) > 32)) {
-			$this->error['lastname'] = 'Last Name must be between 1 and 32 characters!';
+			$this->error['lastname'] = $this->language->get('error_lastname');
 		}
 
 		if (!isset($this->request->post['email']) || (utf8_strlen($this->request->post['email']) > 96) || !filter_var($this->request->post['email'], FILTER_VALIDATE_EMAIL)) {
-			$this->error['email'] = 'E-Mail Address does not appear to be valid!';
+			$this->error['email'] = $this->language->get('error_email');
 		} elseif ((utf8_strtolower($this->member->getEmail()) != utf8_strtolower(trim($this->request->post['email']))) && $this->model_account_member->getTotalMembersByEmail($this->request->post['email'])) {
-			$this->error['email'] = 'Warning: E-Mail address is already registered!';
+			$this->error['email'] = $this->language->get('error_email_exists');
 		}
 
 		if (empty($this->request->post['country_id'])) {
-			$this->error['country'] = 'Please select a country!';
+			$this->error['country'] = $this->language->get('error_country');
 		}
 
 		return !$this->error;

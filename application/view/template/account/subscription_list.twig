@@ -2,15 +2,15 @@
 <div id="account-subscription">
     <div class="page-header">
         <div class="container">
-            <h1>Cloud Stores</h1>
-            <p>View all of your OpenCart Cloud Stores</p>
+            <h1>{{ heading_title }}</h1>
+            <p>{{ text_lead }}</p>
         </div>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-md-9">
-                <h2>Cloud Stores</h2>
-                <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> Cloud service is currently unavailable for new stores!</div>
+                <h2>{{ heading_title }}</h2>
+                <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ text_cloud_unavailable }}</div>
                 {% if error_warning %}
                     <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
                 {% endif %}
@@ -22,11 +22,11 @@
                         {% if subscriptions %}
                             <thead>
                             <tr>
-                                <th class="text-left">Store Name</th>
-                                <th class="text-left">Plan</th>
-                                <th class="text-center">Status</th>
-                                <th class="text-left">Created</th>
-                                <th class="text-right">Action</th>
+                                <th class="text-left">{{ column_store_name }}</th>
+                                <th class="text-left">{{ column_plan }}</th>
+                                <th class="text-center">{{ column_status }}</th>
+                                <th class="text-left">{{ column_created }}</th>
+                                <th class="text-right">{{ column_action }}</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -43,16 +43,16 @@
                                             <button class="btn btn-default"
                                                 type="button"
                                                 data-toggle="dropdown">
-                                                <span>Actions <span class="caret"></span></span>
+                                                <span>{{ button_actions }} <span class="caret"></span></span>
                                             </button>
                                             <ul class="dropdown-menu">
-                                                <li><a href="{{ subscription.backup }}"><i class="fa fa-file" aria-hidden="true"></i> Filebase Backup</a></li>
-                                                <li><a href="{{ subscription.database_backup }}"><i class="fa fa-database" aria-hidden="true"></i> Database Backup</a></li>
-                                                <li><a href="{{ subscription.history_url }}"><i class="fa fa-list" aria-hidden="true"></i> View Log</a></li>
+                                                <li><a href="{{ subscription.backup }}"><i class="fa fa-file" aria-hidden="true"></i> {{ button_filebase_backup }}</a></li>
+                                                <li><a href="{{ subscription.database_backup }}"><i class="fa fa-database" aria-hidden="true"></i> {{ button_database_backup }}</a></li>
+                                                <li><a href="{{ subscription.history_url }}"><i class="fa fa-list" aria-hidden="true"></i> {{ button_view_log }}</a></li>
                                             </ul>
                                         </div>
                                         <a href="{{ subscription.view }}" class="btn btn-info button-click-load"
-                                           data-toggle="tooltip" data-placement="top" title="Edit Cloud Store">EDIT</a>
+                                           data-toggle="tooltip" data-placement="top" title="{{ button_edit_store }}">{{ button_edit }}</a>
                                     </td>
                                 </tr>
                             {% endfor %}
@@ -60,15 +60,14 @@
                         {% else %}
                             <tbody>
                             <tr>
-                                <td class="text-center">No Cloud Stores Found!</td>
+                                <td class="text-center">{{ text_no_stores }}</td>
                             </tr>
                             </tbody>
                         {% endif %}
                     </table>
                 </div>
                 <nav>{{ pagination }}</nav>
-                <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a>
-                {# <a href="{{ add }}" class="btn btn-primary"><i class="fa fa-plus"></i> New store</a> #}
+                <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a>
                 </div>
             </div>
             <div class="col-md-3 hidden-xs">{{ menu }}</div>

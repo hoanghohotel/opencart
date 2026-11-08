@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"/>
-<title>OpenCart</title>
+<title>{{ store_name }}</title>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
 <style type="text/css">
 html {
@@ -163,7 +163,7 @@ img[class="divider"] {
                     <tr>
                       <td width="600"><table align="left" width="600" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
                           <tr>
-                            <td align="center" valign="middle" style="padding: 0px; font-size:12px ; font-style:italic; color:#ffffff; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 22px; font-style: italic;"><span> <a href="https://www.opencart.com/" style="color:#23A1D1;"> <img src="https://s3-us-west-2.amazonaws.com/opencart-email-asset/logo.png" alt="logo" border="0" style="display: inline-block;"/> </a> </span></td>
+                            <td align="center" valign="middle" style="padding: 0px; font-size:12px ; font-style:italic; color:#ffffff; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 22px; font-style: italic;"><span> <a href="{{ store_url }}" style="color:#23A1D1;"> <img src="{{ store_logo_url }}" alt="{{ store_name }}" border="0" style="display: inline-block;"/> </a> </span></td>
                           </tr>
                         </table></td>
                     </tr>
@@ -208,4 +208,4 @@ img[class="divider"] {
               </tr>
             </table>
             
-            <!-- END OF SPACER BLOCK--> 
+            <!-- END OF SPACER BLOCK-->

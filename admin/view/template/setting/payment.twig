@@ -33,64 +33,64 @@
       <div class="panel-body">
         <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-payment" class="form-horizontal">
           <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab-stripe" data-toggle="tab"><i class="fa fa-cc-stripe"></i> Stripe (Test &amp; Live API)</a></li>
-            <li><a href="#tab-braintree" data-toggle="tab"><i class="fa fa-credit-card-alt"></i> Braintree (Sandbox &amp; Production API)</a></li>
-            <li><a href="#tab-paypal" data-toggle="tab"><i class="fa fa-paypal"></i> PayPal REST API (Sandbox &amp; Live)</a></li>
-            <li><a href="#tab-general" data-toggle="tab"><i class="fa fa-cog"></i> General Routing</a></li>
+            <li class="active"><a href="#tab-stripe" data-toggle="tab"><i class="fa fa-cc-stripe"></i> {{ tab_stripe }}</a></li>
+            <li><a href="#tab-braintree" data-toggle="tab"><i class="fa fa-credit-card-alt"></i> {{ tab_braintree }}</a></li>
+            <li><a href="#tab-paypal" data-toggle="tab"><i class="fa fa-paypal"></i> {{ tab_paypal }}</a></li>
+            <li><a href="#tab-general" data-toggle="tab"><i class="fa fa-cog"></i> {{ tab_general }}</a></li>
           </ul>
           <div class="tab-content">
             <!-- STRIPE TAB -->
             <div class="tab-pane active" id="tab-stripe">
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-stripe-status">Stripe Status</label>
+                <label class="col-sm-2 control-label" for="input-stripe-status">{{ entry_stripe_status }}</label>
                 <div class="col-sm-10">
                   <select name="payment_stripe_status" id="input-stripe-status" class="form-control">
                     {% if payment_stripe_status %}
-                    <option value="1" selected="selected">Enabled</option>
-                    <option value="0">Disabled</option>
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
                     {% else %}
-                    <option value="1">Enabled</option>
-                    <option value="0" selected="selected">Disabled</option>
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
                     {% endif %}
                   </select>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-stripe-environment"><span data-toggle="tooltip" title="Select Test Mode (pk_test_ / sk_test_) or Live Mode (pk_live_ / sk_live_)">API Mode</span></label>
+                <label class="col-sm-2 control-label" for="input-stripe-environment"><span data-toggle="tooltip" title="{{ help_api_mode }}">{{ entry_api_mode }}</span></label>
                 <div class="col-sm-10">
                   <select name="payment_stripe_environment" id="input-stripe-environment" class="form-control">
                     {% if payment_stripe_environment == 'live' %}
-                    <option value="test">Test Mode (Sandbox)</option>
-                    <option value="live" selected="selected">Live Mode (Production)</option>
+                    <option value="test">{{ text_mode_test }}</option>
+                    <option value="live" selected="selected">{{ text_mode_live }}</option>
                     {% else %}
-                    <option value="test" selected="selected">Test Mode (Sandbox)</option>
-                    <option value="live">Live Mode (Production)</option>
+                    <option value="test" selected="selected">{{ text_mode_test }}</option>
+                    <option value="live">{{ text_mode_live }}</option>
                     {% endif %}
                   </select>
                 </div>
               </div>
 
               <fieldset>
-                <legend><span class="label label-warning">TEST MODE</span> Stripe Test API Keys (<code>https://api.stripe.com/v1</code>)</legend>
+                <legend><span class="label label-warning">{{ text_badge_test }}</span> {{ text_stripe_test_legend }} (<code>https://api.stripe.com/v1</code>)</legend>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-stripe-test-pk">Test Publishable Key</label>
+                  <label class="col-sm-2 control-label" for="input-stripe-test-pk">{{ entry_stripe_test_pk }}</label>
                   <div class="col-sm-10">
                     <input type="text" name="payment_stripe_test_publishable_key" value="{{ payment_stripe_test_publishable_key }}" placeholder="pk_test_..." id="input-stripe-test-pk" class="form-control" />
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-stripe-test-sk">Test Secret Key</label>
+                  <label class="col-sm-2 control-label" for="input-stripe-test-sk">{{ entry_stripe_test_sk }}</label>
                   <div class="col-sm-10">
                     <div class="input-group">
                       <input type="password" name="payment_stripe_test_secret_key" value="{{ payment_stripe_test_secret_key }}" placeholder="sk_test_..." id="input-stripe-test-sk" class="form-control" />
                       <span class="input-group-btn">
-                        <button type="button" class="btn btn-warning btn-test-stripe" data-env="test" data-target="#input-stripe-test-sk"><i class="fa fa-plug"></i> Test Stripe (Test Mode)</button>
+                        <button type="button" class="btn btn-warning btn-test-stripe" data-env="test" data-target="#input-stripe-test-sk"><i class="fa fa-plug"></i> {{ button_test_stripe_test }}</button>
                       </span>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-stripe-test-wh">Test Webhook Secret</label>
+                  <label class="col-sm-2 control-label" for="input-stripe-test-wh">{{ entry_stripe_test_wh }}</label>
                   <div class="col-sm-10">
                     <input type="password" name="payment_stripe_test_webhook_secret" value="{{ payment_stripe_test_webhook_secret }}" placeholder="whsec_..." id="input-stripe-test-wh" class="form-control" />
                   </div>
@@ -98,26 +98,26 @@
               </fieldset>
 
               <fieldset>
-                <legend><span class="label label-success">LIVE MODE</span> Stripe Live API Keys (<code>https://api.stripe.com/v1</code>)</legend>
+                <legend><span class="label label-success">{{ text_badge_live }}</span> {{ text_stripe_live_legend }} (<code>https://api.stripe.com/v1</code>)</legend>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-stripe-live-pk">Live Publishable Key</label>
+                  <label class="col-sm-2 control-label" for="input-stripe-live-pk">{{ entry_stripe_live_pk }}</label>
                   <div class="col-sm-10">
                     <input type="text" name="payment_stripe_live_publishable_key" value="{{ payment_stripe_live_publishable_key }}" placeholder="pk_live_..." id="input-stripe-live-pk" class="form-control" />
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-stripe-live-sk">Live Secret Key</label>
+                  <label class="col-sm-2 control-label" for="input-stripe-live-sk">{{ entry_stripe_live_sk }}</label>
                   <div class="col-sm-10">
                     <div class="input-group">
                       <input type="password" name="payment_stripe_live_secret_key" value="{{ payment_stripe_live_secret_key }}" placeholder="sk_live_..." id="input-stripe-live-sk" class="form-control" />
                       <span class="input-group-btn">
-                        <button type="button" class="btn btn-success btn-test-stripe" data-env="live" data-target="#input-stripe-live-sk"><i class="fa fa-plug"></i> Test Stripe (Live Mode)</button>
+                        <button type="button" class="btn btn-success btn-test-stripe" data-env="live" data-target="#input-stripe-live-sk"><i class="fa fa-plug"></i> {{ button_test_stripe_live }}</button>
                       </span>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-stripe-live-wh">Live Webhook Secret</label>
+                  <label class="col-sm-2 control-label" for="input-stripe-live-wh">{{ entry_stripe_live_wh }}</label>
                   <div class="col-sm-10">
                     <input type="password" name="payment_stripe_live_webhook_secret" value="{{ payment_stripe_live_webhook_secret }}" placeholder="whsec_..." id="input-stripe-live-wh" class="form-control" />
                   </div>
@@ -125,9 +125,9 @@
               </fieldset>
 
               <fieldset>
-                <legend>Stripe Payment Options</legend>
+                <legend>{{ text_stripe_options }}</legend>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-stripe-currency">Currency</label>
+                  <label class="col-sm-2 control-label" for="input-stripe-currency">{{ entry_currency }}</label>
                   <div class="col-sm-10">
                     <select name="payment_stripe_currency" id="input-stripe-currency" class="form-control">
                       {% for currency in currencies %}
@@ -137,29 +137,29 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-stripe-capture">Capture Method</label>
+                  <label class="col-sm-2 control-label" for="input-stripe-capture">{{ entry_capture_method }}</label>
                   <div class="col-sm-10">
                     <select name="payment_stripe_capture_method" id="input-stripe-capture" class="form-control">
                       {% if payment_stripe_capture_method == 'manual' %}
-                      <option value="automatic">Automatic (Immediate Charge)</option>
-                      <option value="manual" selected="selected">Manual (Authorize Only)</option>
+                      <option value="automatic">{{ text_capture_auto }}</option>
+                      <option value="manual" selected="selected">{{ text_capture_manual }}</option>
                       {% else %}
-                      <option value="automatic" selected="selected">Automatic (Immediate Charge)</option>
-                      <option value="manual">Manual (Authorize Only)</option>
+                      <option value="automatic" selected="selected">{{ text_capture_auto }}</option>
+                      <option value="manual">{{ text_capture_manual }}</option>
                       {% endif %}
                     </select>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-stripe-3ds">3D Secure (SCA)</label>
+                  <label class="col-sm-2 control-label" for="input-stripe-3ds">{{ entry_three_d_secure }}</label>
                   <div class="col-sm-10">
                     <select name="payment_stripe_three_d_secure" id="input-stripe-3ds" class="form-control">
                       {% if payment_stripe_three_d_secure %}
-                      <option value="1" selected="selected">Enabled</option>
-                      <option value="0">Disabled</option>
+                      <option value="1" selected="selected">{{ text_enabled }}</option>
+                      <option value="0">{{ text_disabled }}</option>
                       {% else %}
-                      <option value="1">Enabled</option>
-                      <option value="0" selected="selected">Disabled</option>
+                      <option value="1">{{ text_enabled }}</option>
+                      <option value="0" selected="selected">{{ text_disabled }}</option>
                       {% endif %}
                     </select>
                   </div>
@@ -170,112 +170,112 @@
             <!-- BRAINTREE TAB -->
             <div class="tab-pane" id="tab-braintree">
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-bt-status">Braintree Status</label>
+                <label class="col-sm-2 control-label" for="input-bt-status">{{ entry_braintree_status }}</label>
                 <div class="col-sm-10">
                   <select name="payment_braintree_status" id="input-bt-status" class="form-control">
                     {% if payment_braintree_status %}
-                    <option value="1" selected="selected">Enabled</option>
-                    <option value="0">Disabled</option>
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
                     {% else %}
-                    <option value="1">Enabled</option>
-                    <option value="0" selected="selected">Disabled</option>
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
                     {% endif %}
                   </select>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-bt-environment">Environment (Mode)</label>
+                <label class="col-sm-2 control-label" for="input-bt-environment">{{ entry_environment }}</label>
                 <div class="col-sm-10">
                   <select name="payment_braintree_environment" id="input-bt-environment" class="form-control">
                     {% if payment_braintree_environment == 'production' %}
-                    <option value="sandbox">Test Mode (Sandbox)</option>
-                    <option value="production" selected="selected">Live Mode (Production)</option>
+                    <option value="sandbox">{{ text_mode_test }}</option>
+                    <option value="production" selected="selected">{{ text_mode_live }}</option>
                     {% else %}
-                    <option value="sandbox" selected="selected">Test Mode (Sandbox)</option>
-                    <option value="production">Live Mode (Production)</option>
+                    <option value="sandbox" selected="selected">{{ text_mode_test }}</option>
+                    <option value="production">{{ text_mode_live }}</option>
                     {% endif %}
                   </select>
                 </div>
               </div>
 
               <fieldset>
-                <legend><span class="label label-warning">TEST MODE (SANDBOX)</span> Braintree Sandbox API Keys (<code>https://payments.sandbox.braintree-api.com/graphql</code>)</legend>
+                <legend><span class="label label-warning">{{ text_badge_sandbox }}</span> {{ text_braintree_sb_legend }} (<code>https://payments.sandbox.braintree-api.com/graphql</code>)</legend>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-bt-sb-mid">Sandbox Merchant ID</label>
+                  <label class="col-sm-2 control-label" for="input-bt-sb-mid">{{ entry_bt_sb_mid }}</label>
                   <div class="col-sm-10">
-                    <input type="text" name="payment_braintree_sandbox_merchant_id" value="{{ payment_braintree_sandbox_merchant_id }}" placeholder="Sandbox Merchant ID" id="input-bt-sb-mid" class="form-control" />
+                    <input type="text" name="payment_braintree_sandbox_merchant_id" value="{{ payment_braintree_sandbox_merchant_id }}" placeholder="{{ entry_bt_sb_mid }}" id="input-bt-sb-mid" class="form-control" />
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-bt-sb-pub">Sandbox Public Key</label>
+                  <label class="col-sm-2 control-label" for="input-bt-sb-pub">{{ entry_bt_sb_pub }}</label>
                   <div class="col-sm-10">
-                    <input type="text" name="payment_braintree_sandbox_public_key" value="{{ payment_braintree_sandbox_public_key }}" placeholder="Sandbox Public Key" id="input-bt-sb-pub" class="form-control" />
+                    <input type="text" name="payment_braintree_sandbox_public_key" value="{{ payment_braintree_sandbox_public_key }}" placeholder="{{ entry_bt_sb_pub }}" id="input-bt-sb-pub" class="form-control" />
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-bt-sb-priv">Sandbox Private Key</label>
+                  <label class="col-sm-2 control-label" for="input-bt-sb-priv">{{ entry_bt_sb_priv }}</label>
                   <div class="col-sm-10">
                     <div class="input-group">
-                      <input type="password" name="payment_braintree_sandbox_private_key" value="{{ payment_braintree_sandbox_private_key }}" placeholder="Sandbox Private Key" id="input-bt-sb-priv" class="form-control" />
+                      <input type="password" name="payment_braintree_sandbox_private_key" value="{{ payment_braintree_sandbox_private_key }}" placeholder="{{ entry_bt_sb_priv }}" id="input-bt-sb-priv" class="form-control" />
                       <span class="input-group-btn">
-                        <button type="button" class="btn btn-warning btn-test-braintree" data-env="sandbox" data-mid="#input-bt-sb-mid" data-pub="#input-bt-sb-pub" data-priv="#input-bt-sb-priv"><i class="fa fa-plug"></i> Test Braintree (Sandbox)</button>
+                        <button type="button" class="btn btn-warning btn-test-braintree" data-env="sandbox" data-mid="#input-bt-sb-mid" data-pub="#input-bt-sb-pub" data-priv="#input-bt-sb-priv"><i class="fa fa-plug"></i> {{ button_test_bt_sandbox }}</button>
                       </span>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-bt-sb-maid">Sandbox Merchant Account ID</label>
+                  <label class="col-sm-2 control-label" for="input-bt-sb-maid">{{ entry_bt_sb_maid }}</label>
                   <div class="col-sm-10">
-                    <input type="text" name="payment_braintree_sandbox_merchant_account_id" value="{{ payment_braintree_sandbox_merchant_account_id }}" placeholder="Optional default Merchant Account ID" id="input-bt-sb-maid" class="form-control" />
+                    <input type="text" name="payment_braintree_sandbox_merchant_account_id" value="{{ payment_braintree_sandbox_merchant_account_id }}" placeholder="{{ entry_bt_sb_maid }}" id="input-bt-sb-maid" class="form-control" />
                   </div>
                 </div>
               </fieldset>
 
               <fieldset>
-                <legend><span class="label label-success">LIVE MODE (PRODUCTION)</span> Braintree Production API Keys (<code>https://payments.braintree-api.com/graphql</code>)</legend>
+                <legend><span class="label label-success">{{ text_badge_production }}</span> {{ text_braintree_prod_legend }} (<code>https://payments.braintree-api.com/graphql</code>)</legend>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-bt-prod-mid">Production Merchant ID</label>
+                  <label class="col-sm-2 control-label" for="input-bt-prod-mid">{{ entry_bt_prod_mid }}</label>
                   <div class="col-sm-10">
-                    <input type="text" name="payment_braintree_production_merchant_id" value="{{ payment_braintree_production_merchant_id }}" placeholder="Production Merchant ID" id="input-bt-prod-mid" class="form-control" />
+                    <input type="text" name="payment_braintree_production_merchant_id" value="{{ payment_braintree_production_merchant_id }}" placeholder="{{ entry_bt_prod_mid }}" id="input-bt-prod-mid" class="form-control" />
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-bt-prod-pub">Production Public Key</label>
+                  <label class="col-sm-2 control-label" for="input-bt-prod-pub">{{ entry_bt_prod_pub }}</label>
                   <div class="col-sm-10">
-                    <input type="text" name="payment_braintree_production_public_key" value="{{ payment_braintree_production_public_key }}" placeholder="Production Public Key" id="input-bt-prod-pub" class="form-control" />
+                    <input type="text" name="payment_braintree_production_public_key" value="{{ payment_braintree_production_public_key }}" placeholder="{{ entry_bt_prod_pub }}" id="input-bt-prod-pub" class="form-control" />
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-bt-prod-priv">Production Private Key</label>
+                  <label class="col-sm-2 control-label" for="input-bt-prod-priv">{{ entry_bt_prod_priv }}</label>
                   <div class="col-sm-10">
                     <div class="input-group">
-                      <input type="password" name="payment_braintree_production_private_key" value="{{ payment_braintree_production_private_key }}" placeholder="Production Private Key" id="input-bt-prod-priv" class="form-control" />
+                      <input type="password" name="payment_braintree_production_private_key" value="{{ payment_braintree_production_private_key }}" placeholder="{{ entry_bt_prod_priv }}" id="input-bt-prod-priv" class="form-control" />
                       <span class="input-group-btn">
-                        <button type="button" class="btn btn-success btn-test-braintree" data-env="production" data-mid="#input-bt-prod-mid" data-pub="#input-bt-prod-pub" data-priv="#input-bt-prod-priv"><i class="fa fa-plug"></i> Test Braintree (Live)</button>
+                        <button type="button" class="btn btn-success btn-test-braintree" data-env="production" data-mid="#input-bt-prod-mid" data-pub="#input-bt-prod-pub" data-priv="#input-bt-prod-priv"><i class="fa fa-plug"></i> {{ button_test_bt_live }}</button>
                       </span>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-bt-prod-maid">Production Merchant Account ID</label>
+                  <label class="col-sm-2 control-label" for="input-bt-prod-maid">{{ entry_bt_prod_maid }}</label>
                   <div class="col-sm-10">
-                    <input type="text" name="payment_braintree_production_merchant_account_id" value="{{ payment_braintree_production_merchant_account_id }}" placeholder="Optional default Merchant Account ID" id="input-bt-prod-maid" class="form-control" />
+                    <input type="text" name="payment_braintree_production_merchant_account_id" value="{{ payment_braintree_production_merchant_account_id }}" placeholder="{{ entry_bt_prod_maid }}" id="input-bt-prod-maid" class="form-control" />
                   </div>
                 </div>
               </fieldset>
 
               <fieldset>
-                <legend>Braintree Options</legend>
+                <legend>{{ text_braintree_options }}</legend>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-bt-3ds">3D Secure 2.0</label>
+                  <label class="col-sm-2 control-label" for="input-bt-3ds">{{ entry_three_d_secure_2 }}</label>
                   <div class="col-sm-10">
                     <select name="payment_braintree_three_d_secure" id="input-bt-3ds" class="form-control">
                       {% if payment_braintree_three_d_secure %}
-                      <option value="1" selected="selected">Enabled</option>
-                      <option value="0">Disabled</option>
+                      <option value="1" selected="selected">{{ text_enabled }}</option>
+                      <option value="0">{{ text_disabled }}</option>
                       {% else %}
-                      <option value="1">Enabled</option>
-                      <option value="0" selected="selected">Disabled</option>
+                      <option value="1">{{ text_enabled }}</option>
+                      <option value="0" selected="selected">{{ text_disabled }}</option>
                       {% endif %}
                     </select>
                   </div>
@@ -286,49 +286,49 @@
             <!-- PAYPAL TAB -->
             <div class="tab-pane" id="tab-paypal">
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-pp-status">PayPal Status</label>
+                <label class="col-sm-2 control-label" for="input-pp-status">{{ entry_paypal_status }}</label>
                 <div class="col-sm-10">
                   <select name="payment_paypal_status" id="input-pp-status" class="form-control">
                     {% if payment_paypal_status %}
-                    <option value="1" selected="selected">Enabled</option>
-                    <option value="0">Disabled</option>
+                    <option value="1" selected="selected">{{ text_enabled }}</option>
+                    <option value="0">{{ text_disabled }}</option>
                     {% else %}
-                    <option value="1">Enabled</option>
-                    <option value="0" selected="selected">Disabled</option>
+                    <option value="1">{{ text_enabled }}</option>
+                    <option value="0" selected="selected">{{ text_disabled }}</option>
                     {% endif %}
                   </select>
                 </div>
               </div>
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-pp-environment">Environment (Mode)</label>
+                <label class="col-sm-2 control-label" for="input-pp-environment">{{ entry_environment }}</label>
                 <div class="col-sm-10">
                   <select name="payment_paypal_environment" id="input-pp-environment" class="form-control">
                     {% if payment_paypal_environment == 'live' %}
-                    <option value="sandbox">Test Mode (Sandbox)</option>
-                    <option value="live" selected="selected">Live Mode (Production)</option>
+                    <option value="sandbox">{{ text_mode_test }}</option>
+                    <option value="live" selected="selected">{{ text_mode_live }}</option>
                     {% else %}
-                    <option value="sandbox" selected="selected">Test Mode (Sandbox)</option>
-                    <option value="live">Live Mode (Production)</option>
+                    <option value="sandbox" selected="selected">{{ text_mode_test }}</option>
+                    <option value="live">{{ text_mode_live }}</option>
                     {% endif %}
                   </select>
                 </div>
               </div>
 
               <fieldset>
-                <legend><span class="label label-warning">TEST MODE (SANDBOX)</span> PayPal Sandbox REST API Credentials (<code>https://api-m.sandbox.paypal.com</code>)</legend>
+                <legend><span class="label label-warning">{{ text_badge_sandbox }}</span> {{ text_paypal_sb_legend }} (<code>https://api-m.sandbox.paypal.com</code>)</legend>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-pp-sb-cid">Sandbox Client ID</label>
+                  <label class="col-sm-2 control-label" for="input-pp-sb-cid">{{ entry_pp_sb_cid }}</label>
                   <div class="col-sm-10">
-                    <input type="text" name="payment_paypal_sandbox_client_id" value="{{ payment_paypal_sandbox_client_id }}" placeholder="PayPal Sandbox Client ID" id="input-pp-sb-cid" class="form-control" />
+                    <input type="text" name="payment_paypal_sandbox_client_id" value="{{ payment_paypal_sandbox_client_id }}" placeholder="{{ entry_pp_sb_cid }}" id="input-pp-sb-cid" class="form-control" />
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-pp-sb-sec">Sandbox Secret</label>
+                  <label class="col-sm-2 control-label" for="input-pp-sb-sec">{{ entry_pp_sb_sec }}</label>
                   <div class="col-sm-10">
                     <div class="input-group">
-                      <input type="password" name="payment_paypal_sandbox_secret" value="{{ payment_paypal_sandbox_secret }}" placeholder="PayPal Sandbox Secret" id="input-pp-sb-sec" class="form-control" />
+                      <input type="password" name="payment_paypal_sandbox_secret" value="{{ payment_paypal_sandbox_secret }}" placeholder="{{ entry_pp_sb_sec }}" id="input-pp-sb-sec" class="form-control" />
                       <span class="input-group-btn">
-                        <button type="button" class="btn btn-warning btn-test-paypal" data-env="sandbox" data-cid="#input-pp-sb-cid" data-sec="#input-pp-sb-sec"><i class="fa fa-plug"></i> Test PayPal (Sandbox)</button>
+                        <button type="button" class="btn btn-warning btn-test-paypal" data-env="sandbox" data-cid="#input-pp-sb-cid" data-sec="#input-pp-sb-sec"><i class="fa fa-plug"></i> {{ button_test_pp_sandbox }}</button>
                       </span>
                     </div>
                   </div>
@@ -336,20 +336,20 @@
               </fieldset>
 
               <fieldset>
-                <legend><span class="label label-success">LIVE MODE (PRODUCTION)</span> PayPal Live REST API Credentials (<code>https://api-m.paypal.com</code>)</legend>
+                <legend><span class="label label-success">{{ text_badge_production }}</span> {{ text_paypal_live_legend }} (<code>https://api-m.paypal.com</code>)</legend>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-pp-live-cid">Live Client ID</label>
+                  <label class="col-sm-2 control-label" for="input-pp-live-cid">{{ entry_pp_live_cid }}</label>
                   <div class="col-sm-10">
-                    <input type="text" name="payment_paypal_live_client_id" value="{{ payment_paypal_live_client_id }}" placeholder="PayPal Live Client ID" id="input-pp-live-cid" class="form-control" />
+                    <input type="text" name="payment_paypal_live_client_id" value="{{ payment_paypal_live_client_id }}" placeholder="{{ entry_pp_live_cid }}" id="input-pp-live-cid" class="form-control" />
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-pp-live-sec">Live Secret</label>
+                  <label class="col-sm-2 control-label" for="input-pp-live-sec">{{ entry_pp_live_sec }}</label>
                   <div class="col-sm-10">
                     <div class="input-group">
-                      <input type="password" name="payment_paypal_live_secret" value="{{ payment_paypal_live_secret }}" placeholder="PayPal Live Secret" id="input-pp-live-sec" class="form-control" />
+                      <input type="password" name="payment_paypal_live_secret" value="{{ payment_paypal_live_secret }}" placeholder="{{ entry_pp_live_sec }}" id="input-pp-live-sec" class="form-control" />
                       <span class="input-group-btn">
-                        <button type="button" class="btn btn-success btn-test-paypal" data-env="live" data-cid="#input-pp-live-cid" data-sec="#input-pp-live-sec"><i class="fa fa-plug"></i> Test PayPal (Live)</button>
+                        <button type="button" class="btn btn-success btn-test-paypal" data-env="live" data-cid="#input-pp-live-cid" data-sec="#input-pp-live-sec"><i class="fa fa-plug"></i> {{ button_test_pp_live }}</button>
                       </span>
                     </div>
                   </div>
@@ -357,9 +357,9 @@
               </fieldset>
 
               <fieldset>
-                <legend>PayPal Options</legend>
+                <legend>{{ text_paypal_options }}</legend>
                 <div class="form-group">
-                  <label class="col-sm-2 control-label" for="input-pp-currency">Currency</label>
+                  <label class="col-sm-2 control-label" for="input-pp-currency">{{ entry_currency }}</label>
                   <div class="col-sm-10">
                     <select name="payment_paypal_currency" id="input-pp-currency" class="form-control">
                       {% for currency in currencies %}
@@ -374,18 +374,18 @@
             <!-- GENERAL ROUTING TAB -->
             <div class="tab-pane" id="tab-general">
               <div class="form-group">
-                <label class="col-sm-2 control-label" for="input-card-gateway">Default Credit Card Gateway</label>
+                <label class="col-sm-2 control-label" for="input-card-gateway">{{ entry_card_gateway }}</label>
                 <div class="col-sm-10">
                   <select name="payment_card_gateway" id="input-card-gateway" class="form-control">
                     {% if payment_card_gateway == 'braintree' %}
-                    <option value="stripe">Stripe (Elements &amp; PaymentIntents API)</option>
-                    <option value="braintree" selected="selected">Braintree (Hosted Fields &amp; GraphQL API)</option>
+                    <option value="stripe">{{ text_gateway_stripe }}</option>
+                    <option value="braintree" selected="selected">{{ text_gateway_braintree }}</option>
                     {% else %}
-                    <option value="stripe" selected="selected">Stripe (Elements &amp; PaymentIntents API)</option>
-                    <option value="braintree">Braintree (Hosted Fields &amp; GraphQL API)</option>
+                    <option value="stripe" selected="selected">{{ text_gateway_stripe }}</option>
+                    <option value="braintree">{{ text_gateway_braintree }}</option>
                     {% endif %}
                   </select>
-                  <span class="help-block">Determines the default gateway used on <code>index.php?route=account/payment/card</code>. Note: Users can also select Stripe, Braintree, or PayPal directly on the Payment Methods and Checkout screens.</span>
+                  <span class="help-block">{{ help_card_gateway }}</span>
                 </div>
               </div>
             </div>

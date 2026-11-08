@@ -2,15 +2,15 @@
 <div id="marketplace-extension">
   <div class="page-header">
     <div class="container">
-      <h1>Welcome to OpenCart Extension Store</h1>
-      <p>With a huge range of features included out-of-the-box and over 13 000+ additional extensions available to download</p>
+      <h1>{{ text_welcome }}</h1>
+      <p>{{ text_subtitle }}</p>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-sm-4 col-md-3">
         <section id="extension-search">
-          <h4>Search extensions and themes</h4>
+          <h4>{{ text_search_extensions }}</h4>
           <div class="input-group">
             <input type="text" name="filter_search" value="{{ filter_search }}" class="form-control"/> <input type="hidden" name="filter_category_id" value="{{ filter_category_id }}" class="form-control"/> <input type="hidden" name="filter_download_id" value="{{ filter_download_id }}" class="form-control"/> <input type="hidden" name="filter_rating" value="{{ filter_rating }}" class="form-control"/> <input type="hidden" name="filter_license" value="{{ filter_license }}" class="form-control"/> <input type="hidden" name="filter_partner" value="{{ filter_partner }}" class="form-control"/> <input type="hidden" name="sort" value="{{ sort }}" class="form-control"/>
             <div class="input-group-btn">
@@ -19,11 +19,11 @@
           </div>
         </section>
         <div class="visible-xs">
-          <button id="mobile-switch" data-target="#collapse-filter" data-toggle="collapse" type="button" class="btn btn-primary btn-block btn-lg">Advanced Search</button>
+          <button id="mobile-switch" data-target="#collapse-filter" data-toggle="collapse" type="button" class="btn btn-primary btn-block btn-lg">{{ text_advanced_search }}</button>
         </div>
         <div id="collapse-filter" class="collapse">
           <section id="extension-category">
-            <h4>Category</h4>
+            <h4>{{ text_category }}</h4>
             <ul class="list-unstyled">
               {% for category in categories %}
                 {% if category.extension_category_id == filter_category_id %}
@@ -35,7 +35,7 @@
             </ul>
           </section>
           <section id="extension-opencart-version">
-            <h4>OpenCart version</h4>
+            <h4>{{ text_version }}</h4>
             <div class="form-group">
               <div class="input-group">
                 <select onchange="location = this.value" class="form-control">
@@ -51,7 +51,7 @@
             </div>
           </section>
           <section id="extension-developed">
-            <h4>Developed by</h4>
+            <h4>{{ text_developed_by }}</h4>
             {% for partner_type in partner_types %}
               {% if partner_type.value == filter_partner %}
                 <div class="radio">
@@ -66,13 +66,13 @@
               {% endif %}
             {% endfor %}</section>
           <section id="extension-rating">
-            <h4>Rating</h4>
+            <h4>{{ text_rating }}</h4>
             <ul class="list-unstyled">
               {% for rating in ratings %}
                 {% if rating.value == filter_rating %}
-                  <li class="active"><a href="{{ rating.href }}">{% for i in 1..5 %}{% if rating.value >= i %}<i class="opencart-icon-star-light"></i>{% else %}<i class="opencart-icon-star-light-o"></i>{% endif %}{% endfor %} and up</a></li>
+                  <li class="active"><a href="{{ rating.href }}">{% for i in 1..5 %}{% if rating.value >= i %}<i class="opencart-icon-star-light"></i>{% else %}<i class="opencart-icon-star-light-o"></i>{% endif %}{% endfor %} {{ text_and_up }}</a></li>
                 {% else %}
-                  <li><a href="{{ rating.href }}">{% for i in 1..5 %}{% if rating.value >= i %}<i class="opencart-icon-star-light"></i>{% else %}<i class="opencart-icon-star-light-o"></i>{% endif %}{% endfor %} and up</a></li>
+                  <li><a href="{{ rating.href }}">{% for i in 1..5 %}{% if rating.value >= i %}<i class="opencart-icon-star-light"></i>{% else %}<i class="opencart-icon-star-light-o"></i>{% endif %}{% endfor %} {{ text_and_up }}</a></li>
                 {% endif %}
               {% endfor %}
             </ul>
@@ -82,17 +82,17 @@
       <div class="col-sm-8 col-md-9">
         <div class="row">
           <div class="col-md-6">
-            <div class="btn-group hidden-xs hidden-sm"> {% if filter_license is empty %}<a href="{{ license_all }}" class="btn btn-default btn-lg active">All</a>{% else %}<a href="{{ license_all }}" class="btn btn-default btn-lg">All</a>{% endif %}
-              {% if filter_license == '1' %}<a href="{{ license_paid }}" class="btn btn-default btn-lg active">Commercial</a>{% else %}<a href="{{ license_paid }}" class="btn btn-default btn-lg">Commercial</a>{% endif %}
-              {% if filter_license == '0' %}<a href="{{ license_free }}" class="btn btn-default btn-lg active">Free</a>{% else %}<a href="{{ license_free }}" class="btn btn-default btn-lg">Free</a>{% endif %}</div>
-            <div class="btn-group btn-group-justified visible-xs-block visible-sm-block"> {% if filter_license is empty %}<a href="{{ license_all }}" class="btn btn-default btn-lg active">All</a>{% else %}<a href="{{ license_all }}" class="btn btn-default btn-lg">All</a>{% endif %}
-              {% if filter_license == '1' %}<a href="{{ license_paid }}" class="btn btn-default btn-lg active">Commercial</a>{% else %}<a href="{{ license_paid }}" class="btn btn-default btn-lg">Commercial</a>{% endif %}
-              {% if filter_license == '0' %}<a href="{{ license_free }}" class="btn btn-default btn-lg active">Free</a>{% else %}<a href="{{ license_free }}" class="btn btn-default btn-lg">Free</a>{% endif %}</div>
+            <div class="btn-group hidden-xs hidden-sm"> {% if filter_license is empty %}<a href="{{ license_all }}" class="btn btn-default btn-lg active">{{ text_all }}</a>{% else %}<a href="{{ license_all }}" class="btn btn-default btn-lg">{{ text_all }}</a>{% endif %}
+              {% if filter_license == '1' %}<a href="{{ license_paid }}" class="btn btn-default btn-lg active">{{ text_commercial }}</a>{% else %}<a href="{{ license_paid }}" class="btn btn-default btn-lg">{{ text_commercial }}</a>{% endif %}
+              {% if filter_license == '0' %}<a href="{{ license_free }}" class="btn btn-default btn-lg active">{{ text_free_filter }}</a>{% else %}<a href="{{ license_free }}" class="btn btn-default btn-lg">{{ text_free_filter }}</a>{% endif %}</div>
+            <div class="btn-group btn-group-justified visible-xs-block visible-sm-block"> {% if filter_license is empty %}<a href="{{ license_all }}" class="btn btn-default btn-lg active">{{ text_all }}</a>{% else %}<a href="{{ license_all }}" class="btn btn-default btn-lg">{{ text_all }}</a>{% endif %}
+              {% if filter_license == '1' %}<a href="{{ license_paid }}" class="btn btn-default btn-lg active">{{ text_commercial }}</a>{% else %}<a href="{{ license_paid }}" class="btn btn-default btn-lg">{{ text_commercial }}</a>{% endif %}
+              {% if filter_license == '0' %}<a href="{{ license_free }}" class="btn btn-default btn-lg active">{{ text_free_filter }}</a>{% else %}<a href="{{ license_free }}" class="btn btn-default btn-lg">{{ text_free_filter }}</a>{% endif %}</div>
           </div>
           <div id="extension-sorting" class="col-md-6">
             <form class="form-horizontal">
               <div class="form-group">
-                <label for="input-sort" class="col-xs-4">Sort by</label>
+                <label for="input-sort" class="col-xs-4">{{ text_sort_by }}</label>
                 <div class="col-xs-8">
                   <select onchange="location = this.value" id="input-sort" class="form-control">
                     {% for sorts in sorts %}
@@ -116,7 +116,7 @@
               </div>
             {% endif %}
             {% if promotions %}
-              <h3>Featured</h3>
+              <h3>{{ text_featured }}</h3>
               {% for row in promotions|batch(3, '') %}
                 <div class="row">
                   {% for promotion in row %}
@@ -144,7 +144,7 @@
                                 </div>
                               </div>
                               <div class="col-xs-6">
-                                <div class="text-right"><span>{{ promotion.rating_total }} reviews</span></div>
+                                <div class="text-right"><span>{{ promotion.rating_total }} {{ text_reviews }}</span></div>
                               </div>
                             </div>
                           </div>
@@ -185,7 +185,7 @@
                             </div>
                           </div>
                           <div class="col-xs-6">
-                            <div class="text-right"><span>{{ extension.rating_total }} reviews</span></div>
+                            <div class="text-right"><span>{{ extension.rating_total }} {{ text_reviews }}</span></div>
                           </div>
                         </div>
                       </div>

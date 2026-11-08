@@ -1,6 +1,8 @@
 <?php
 class ControllerCmsInformation extends Controller {
 	public function index() {
+		$this->load->language('cms/information');
+
 		$this->load->model('cms/information');
 
 		if (isset($this->request->get['information_id'])) {

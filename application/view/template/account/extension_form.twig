@@ -2,14 +2,14 @@
 <div id="account-extension">
 	<div class="page-header">
 		<div class="container">
-			<h1>New Extension</h1>
-			<p>Submit your extension</p>
+			<h1>{{ heading_new }}</h1>
+			<p>{{ text_lead_submit }}</p>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
-				<h1>Add Extension</h1>
+				<h1>{{ heading_add }}</h1>
 				{% if error_warning %}
 					<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
 						<button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -17,27 +17,27 @@
 				{% endif %}
 				<div class="alert alert-info">
 					<ol>
-						<li>All uploaded files must be in zip or rar format and less than <strong>50MB</strong>.</li>
-						<li>Please remember to include <strong>install instructions</strong> with each extension uploaded.</li>
+						<li>{{ text_upload_rule_1 }}</li>
+						<li>{{ text_upload_rule_2 }}</li>
 					</ol>
 				</div>
 				<form action="{{ action }}" method="post" enctype="multipart/form-data">
 					<fieldset>
-						<legend>General Information</legend>
+						<legend>{{ text_general }}</legend>
 						<div class="form-group required">
-							<label for="input-name">Extension Name</label> <input type="text" name="name" value="{{ name }}" id="input-name" class="form-control" placeholder="Extension Name"/>
+							<label for="input-name">{{ entry_name }}</label> <input type="text" name="name" value="{{ name }}" id="input-name" class="form-control" placeholder="{{ entry_name }}"/>
 							{% if error_name %}
 								<div class="text-danger">{{ error_name }}</div>
 							{% endif %}
 						</div>
 						<div class="form-group required">
-							<label for="input-description">Description</label> <textarea type="text" name="description" rows="8" id="input-description" placeholder="Extension Description" class="form-control">{{ description }}</textarea>
+							<label for="input-description">{{ entry_description }}</label> <textarea type="text" name="description" rows="8" id="input-description" placeholder="{{ entry_description_placeholder }}" class="form-control">{{ description }}</textarea>
 							{% if error_description %}
 								<div class="text-danger">{{ error_description }}</div>
 							{% endif %}
 						</div>
 						<div class="form-group required">
-							<label for="input-category">Category</label> <select name="extension_category_id" id="input-category" class="form-control">
+							<label for="input-category">{{ entry_category }}</label> <select name="extension_category_id" id="input-category" class="form-control">
 								<option value=""></option>
 								{% for category in categories %}
 									{% if category.extension_category_id == extension_category_id %}
@@ -52,29 +52,29 @@
 							{% endif %}
 						</div>
 						<div class="form-group">
-							<label for="input-license">License</label> <select name="license" id="input-license" class="form-control">
+							<label for="input-license">{{ entry_license }}</label> <select name="license" id="input-license" class="form-control">
 								{% if license == 0 %}
-									<option value="0" selected="selected">Free</option>
+									<option value="0" selected="selected">{{ text_free }}</option>
 								{% else %}
-									<option value="0">Free</option>
+									<option value="0">{{ text_free }}</option>
 								{% endif %}
 								{% if license == 1 %}
-									<option value="1" selected="selected">Paid</option>
+									<option value="1" selected="selected">{{ text_paid }}</option>
 								{% else %}
-									<option value="1">Paid</option>
+									<option value="1">{{ text_paid }}</option>
 								{% endif %}
 							</select>
 						</div>
 						<div class="row">
 							<div class="col-sm-8">
 								<div class="form-group">
-									<label for="input-license-period">License Period</label> <select name="license_period" id="input-license-period" class="form-control">
+									<label for="input-license-period">{{ entry_license_period }}</label> <select name="license_period" id="input-license-period" class="form-control">
 										<option value=""></option>
 										{% for i in 1..12 %}
 											{% if license_period == i %}
-												<option value="{{ i }}" selected="selected">{{ i }} months</option>
+												<option value="{{ i }}" selected="selected">{{ i }} {{ text_months }}</option>
 											{% else %}
-												<option value="{{ i }}">{{ i }} months</option>
+												<option value="{{ i }}">{{ i }} {{ text_months }}</option>
 											{% endif %}
 										{% endfor %}
 									</select>
@@ -84,55 +84,55 @@
 								</div>
 							</div>
 							<div class="col-sm-4">
-								<label for="input-price">Price</label> <input type="text" name="price" value="{{ price }}" placeholder="Price" id="input-price" class="form-control"/>
+								<label for="input-price">{{ entry_price }}</label> <input type="text" name="price" value="{{ price }}" placeholder="{{ entry_price }}" id="input-price" class="form-control"/>
 								{% if error_price %}
 									<div class="text-danger">{{ error_price }}</div>
 								{% endif %}
 							</div>
 						</div>
 						<div class="form-group required">
-							<label for="input-cloud">Cloud Price / Per month</label> <input type="text" name="cloud" value="{{ cloud }}" placeholder="Cloud Price" id="input-cloud" class="form-control"/>
+							<label for="input-cloud">{{ entry_cloud }}</label> <input type="text" name="cloud" value="{{ cloud }}" placeholder="{{ entry_cloud_placeholder }}" id="input-cloud" class="form-control"/>
 							{% if error_cloud %}
 								<div class="text-danger">{{ error_cloud }}</div>
 							{% endif %}
 						</div>
 						<div class="form-group required">
-							<label for="input-tag">Tags</label> <textarea name="tag" placeholder="Tags" rows="10" id="input-tag" class="form-control">{{ tag }}</textarea>
-							<div class="help-block">Your extension can be visible to others you must type in some keywords that members might type in when searching for your extensions. Tags must be split using commas. e.g. widget, widget, etc</div>
+							<label for="input-tag">{{ entry_tag }}</label> <textarea name="tag" placeholder="{{ entry_tag }}" rows="10" id="input-tag" class="form-control">{{ tag }}</textarea>
+							<div class="help-block">{{ help_tag }}</div>
 							{% if error_tag %}
 								<div class="text-danger">{{ error_tag }}</div>
 							{% endif %}
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend>Images</legend>
+						<legend>{{ text_images }}</legend>
 						<div class="form-group required text-center">
-							<label for="input-banner">Image</label>
+							<label for="input-banner">{{ entry_image }}</label>
 							<br/>
 							<img src="{{ image_thumb }}" alt="" title="" id="image-thumb" class="img-thumbnail"/>
 							<br/>
 							<input type="hidden" name="image" value="{{ image }}" id="input-image"/>
-							<button type="button" data-toggle="image" data-target="#input-image" data-thumb="#image-thumb" class="btn btn-success">Browse</button>
-							<button type="button" data-toggle="clear" data-target="#input-image" data-thumb="#image-thumb" data-placeholder="{{ placeholder }}" class="btn btn-danger">Clear</button>
-							<div class="help-block">This will be used on the marketplace page thumbnail. Size Should be 260 x 152</div>
+							<button type="button" data-toggle="image" data-target="#input-image" data-thumb="#image-thumb" class="btn btn-success">{{ button_browse }}</button>
+							<button type="button" data-toggle="clear" data-target="#input-image" data-thumb="#image-thumb" data-placeholder="{{ placeholder }}" class="btn btn-danger">{{ button_clear }}</button>
+							<div class="help-block">{{ help_image }}</div>
 						</div>
 						<div class="form-group required text-center">
-							<label for="input-banner">Banner</label>
+							<label for="input-banner">{{ entry_banner }}</label>
 							<br/>
 							<img src="{{ banner_thumb }}" alt="" title="" id="banner-thumb" class="img-thumbnail"/>
 							<br/>
 							<input type="hidden" name="banner" value="{{ banner }}" id="input-banner"/>
-							<button type="button" data-toggle="image" data-target="#input-banner" data-thumb="#banner-thumb" class="btn btn-success">Browse</button>
-							<button type="button" data-toggle="clear" data-target="#input-banner" data-thumb="#banner-thumb" data-placeholder="{{ placeholder }}" class="btn btn-danger">Clear</button>
-							<div class="help-block">This will be used on the extension info page as well as a banner if your extension gets added to the feature list. Size Should be 710 x 380</div>
+							<button type="button" data-toggle="image" data-target="#input-banner" data-thumb="#banner-thumb" class="btn btn-success">{{ button_browse }}</button>
+							<button type="button" data-toggle="clear" data-target="#input-banner" data-thumb="#banner-thumb" data-placeholder="{{ placeholder }}" class="btn btn-danger">{{ button_clear }}</button>
+							<div class="help-block">{{ help_banner }}</div>
 						</div>
 						<div class="table-responsive">
 							<table id="image" class="table table-bordered">
 								<thead>
 									<tr>
-										<th>Additional Image</th>
-										<th>Filename</th>
-										<th class="text-right">Action</th>
+										<th>{{ column_additional_image }}</th>
+										<th>{{ column_filename }}</th>
+										<th class="text-right">{{ column_action }}</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -140,46 +140,46 @@
 									{% for extension_image in extension_images %}
 										<tr id="image-row{{ image_row }}">
 											<td><img src="{{ extension_image.thumb }}" alt="" title="" id="thumb-image{{ image_row }}" class="img-thumbnail"/> <input type="hidden" name="extension_image[{{ image_row }}][image]" value="{{ extension_image.image }}" id="input-image{{ image_row }}"/></td>
-											<td><button type="button" data-toggle="image" data-target="#input-image{{ image_row }}" data-thumb="#thumb-image{{ image_row }}" class="btn btn-success">Browse</button></td>
-											<td class="text-right"><button type="button" onclick="$('#image-row{{ image_row }}').remove();" class="btn btn-danger">Remove</button></td>
+											<td><button type="button" data-toggle="image" data-target="#input-image{{ image_row }}" data-thumb="#thumb-image{{ image_row }}" class="btn btn-success">{{ button_browse }}</button></td>
+											<td class="text-right"><button type="button" onclick="$('#image-row{{ image_row }}').remove();" class="btn btn-danger">{{ button_remove }}</button></td>
 										</tr>
 										{% set image_row = image_row + 1 %}
 									{% endfor %}
 								</tbody>
 								<tfoot>
 									<tr>
-										<td colspan="3" class="text-right"><button type="button" id="button-image" class="btn btn-success">Add Image</button></td>
+										<td colspan="3" class="text-right"><button type="button" id="button-image" class="btn btn-success">{{ button_image_add }}</button></td>
 									</tr>
 								</tfoot>
 							</table>
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend>Documentation</legend>
+						<legend>{{ text_documentation }}</legend>
 						<div class="form-group required">
-							<label for="input-documentation">Documentation</label> <textarea name="documentation" id="input-documentation" placeholder="Extension Documentation" rows="10" class="form-control">{{ documentation }}</textarea>
+							<label for="input-documentation">{{ entry_documentation }}</label> <textarea name="documentation" id="input-documentation" placeholder="{{ entry_documentation_placeholder }}" rows="10" class="form-control">{{ documentation }}</textarea>
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend>Extension Downloads</legend>
-						<div class="alert alert-info"><i class="fa fa-info-circle"></i> If you activate the cloud button your extension will be added to a queue waiting for approval before it will appear in the cloud marketplace. Any file changes will need to be reapproved.
+						<legend>{{ text_downloads }}</legend>
+						<div class="alert alert-info"><i class="fa fa-info-circle"></i> {{ text_cloud_info }}
 							<br/>
-							<strong>Requirement for the Cloud Marketplace:</strong>
+							<strong>{{ text_cloud_req_title }}</strong>
 							<br/>
 							<ol>
-								<li>Only support OpenCart version 3.0 or above.</li>
-								<li>The folder name must be named "upload" / The file name must be "install.xml"</li>
-								<li>The compression should be in Zip format.</li>
-								<li>You are able to check Cloud Approval Status in your extension downloads list.</li>
+								<li>{{ text_cloud_req_1 }}</li>
+								<li>{{ text_cloud_req_2 }}</li>
+								<li>{{ text_cloud_req_3 }}</li>
+								<li>{{ text_cloud_req_4 }}</li>
 							</ol>
 						</div>
 						<div class="table-response">
 							<table class="table table-bordered" id="download">
 								<thead>
 									<tr>
-										<th>Download Name</th>
-										<th>Compatibility</th>
-										<th class="text-right">Action</th>
+										<th>{{ column_download_name }}</th>
+										<th>{{ column_compatibility }}</th>
+										<th class="text-right">{{ column_action }}</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -193,17 +193,17 @@
 											<td class="text-left">
 												{% if extension_download.approved != '' %}
 													<div class="well well-sm text-center" style="max-height: 150px; overflow-y: scroll;">
-														{% if extension_download.approved == '1' %}<span class="label label-success">Approved for Cloud</span>{% elseif extension_download.approved == '0' %}<span class="label label-warning">Waiting for Cloud</span>{% elseif extension_download.approved == '-1' %}<span class="label label-danger">Denied for Cloud</span>{% endif %}
+														{% if extension_download.approved == '1' %}<span class="label label-success">{{ text_cloud_approved }}</span>{% elseif extension_download.approved == '0' %}<span class="label label-warning">{{ text_cloud_waiting }}</span>{% elseif extension_download.approved == '-1' %}<span class="label label-danger">{{ text_cloud_denied }}</span>{% endif %}
 													</div>
 												{% endif %}
 												<div class="well well-sm" style="max-height: 150px; overflow-y: scroll;">
 													{% if extension_download.cloud %}
 														<div class="checkbox">
-															<label> <input type="checkbox" name="extension_download[{{ download_row }}][cloud]" value="1" checked="checked"/> Cloud</label>
+															<label> <input type="checkbox" name="extension_download[{{ download_row }}][cloud]" value="1" checked="checked"/> {{ text_cloud }}</label>
 														</div>
 													{% else %}
 														<div class="checkbox">
-															<label> <input type="checkbox" name="extension_download[{{ download_row }}][cloud]" value="1"/> Cloud</label>
+															<label> <input type="checkbox" name="extension_download[{{ download_row }}][cloud]" value="1"/> {{ text_cloud }}</label>
 														</div>
 													{% endif %}
 													{% for download in downloads %}
@@ -221,52 +221,51 @@
 													{% endfor %}</div>
 											</td>
 											<td class="text-right">
-												<a href="{{ extension_download.href }}" class="btn btn-info">Download</a>
-												{# <button type="button" class="btn btn-info" value="{{ extension_download.extension_download_id }}">Download</button> #}
-												<button type="button" data-target="#input-filename{{ download_row }}" data-mask="#input-mask{{ download_row }}" class="btn btn-success">Browse</button>
-												<button type="button" onclick="$('#download-row{{ download_row }}').remove();" class="btn btn-danger">Remove</button></td>
+												<a href="{{ extension_download.href }}" class="btn btn-info">{{ button_download }}</a>
+												<button type="button" data-target="#input-filename{{ download_row }}" data-mask="#input-mask{{ download_row }}" class="btn btn-success">{{ button_browse }}</button>
+												<button type="button" onclick="$('#download-row{{ download_row }}').remove();" class="btn btn-danger">{{ button_remove }}</button></td>
 										</tr>
 										{% set download_row = download_row + 1 %}
 									{% endfor %}
 								</tbody>
 								<tfoot>
 									<tr>
-										<td colspan="4" class="text-right"><button type="button" id="button-download" class="btn btn-success">Add Download</button></td>
+										<td colspan="4" class="text-right"><button type="button" id="button-download" class="btn btn-success">{{ button_download_add }}</button></td>
 									</tr>
 								</tfoot>
 							</table>
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend>Extension History</legend>
+						<legend>{{ text_history }}</legend>
 						{% if error_history %}
 							<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_history }}
 								<button type="button" class="close" data-dismiss="alert">&times;</button>
 							</div>
 						{% endif %}
 						<div class="form-group required">
-							<label for="input-history">Reason for changes</label> <textarea name="history" id="input-history" placeholder="Reason for changes" rows="5" class="form-control">{{ history }}</textarea>
+							<label for="input-history">{{ entry_history }}</label> <textarea name="history" id="input-history" placeholder="{{ entry_history }}" rows="5" class="form-control">{{ history }}</textarea>
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend>Extension Options</legend>
+						<legend>{{ text_options }}</legend>
 						<div class="form-group">
 							<div class="row">
 								<div class="col-sm-6">
 									<p class="form-control-static">
-										<label class="control-label">Publish</label>
+										<label class="control-label">{{ entry_publish }}</label>
 									</p>
 								</div>
 								<div class="col-sm-6 text-right">
 									<div class="radio">{% if publish == '1' %}
-											<label class="radio-inline"> <input type="radio" name="publish" value="1" checked="checked"/> Yes</label>
+											<label class="radio-inline"> <input type="radio" name="publish" value="1" checked="checked"/> {{ text_yes }}</label>
 										{% else %}
-											<label class="radio-inline"> <input type="radio" name="publish" value="1"/> Yes</label>
+											<label class="radio-inline"> <input type="radio" name="publish" value="1"/> {{ text_yes }}</label>
 										{% endif %}
 										{% if publish == '0' %}
-											<label class="radio-inline"> <input type="radio" name="publish" value="0" checked="checked"/> No</label>
+											<label class="radio-inline"> <input type="radio" name="publish" value="0" checked="checked"/> {{ text_no }}</label>
 										{% else %}
-											<label class="radio-inline"> <input type="radio" name="publish" value="0"/> No</label>
+											<label class="radio-inline"> <input type="radio" name="publish" value="0"/> {{ text_no }}</label>
 										{% endif %}</div>
 								</div>
 							</div>
@@ -274,19 +273,19 @@
 								<div class="row">
 									<div class="col-sm-6">
 										<p class="form-control-static">
-											<label class="control-label">Notify when new comments are made</label>
+											<label class="control-label">{{ entry_notify }}</label>
 										</p>
 									</div>
 									<div class="col-sm-6 text-right">
 										<div class="radio"> {% if notify == '1' %}
-												<label class="radio-inline"><input type="radio" name="notify" value="1" checked="checked"/> Yes</label>
+												<label class="radio-inline"><input type="radio" name="notify" value="1" checked="checked"/> {{ text_yes }}</label>
 											{% else %}
-												<label class="radio-inline"><input type="radio" name="notify" value="1"/> Yes</label>
+												<label class="radio-inline"><input type="radio" name="notify" value="1"/> {{ text_yes }}</label>
 											{% endif %}
 											{% if notify == '0' %}
-												<label class="radio-inline"><input type="radio" name="notify" value="0" checked="checked"/> No</label>
+												<label class="radio-inline"><input type="radio" name="notify" value="0" checked="checked"/> {{ text_no }}</label>
 											{% else %}
-												<label class="radio-inline"><input type="radio" name="notify" value="0"/> No</label>
+												<label class="radio-inline"><input type="radio" name="notify" value="0"/> {{ text_no }}</label>
 											{% endif %}</div>
 									</div>
 								</div>
@@ -296,19 +295,19 @@
 							<div class="row">
 								<div class="col-sm-6">
 									<p class="form-control-static">
-										<label class="control-label">Send update email to purchasers</label>
+										<label class="control-label">{{ entry_alert }}</label>
 									</p>
 								</div>
 								<div class="col-sm-6 text-right">
 									<div class="radio">{% if alert == '1' %}
-											<label class="radio-inline"><input type="radio" name="alert" value="1" checked="checked"/> Yes</label>
+											<label class="radio-inline"><input type="radio" name="alert" value="1" checked="checked"/> {{ text_yes }}</label>
 										{% else %}
-											<label class="radio-inline"><input type="radio" name="alert" value="1"/> Yes</label>
+											<label class="radio-inline"><input type="radio" name="alert" value="1"/> {{ text_yes }}</label>
 										{% endif %}
 										{% if alert == '0' %}
-											<label class="radio-inline"><input type="radio" name="alert" value="0" checked="checked"/> No</label>
+											<label class="radio-inline"><input type="radio" name="alert" value="0" checked="checked"/> {{ text_no }}</label>
 										{% else %}
-											<label class="radio-inline"><input type="radio" name="alert" value="0"/> No</label>
+											<label class="radio-inline"><input type="radio" name="alert" value="0"/> {{ text_no }}</label>
 										{% endif %}
 									</div>
 								</div>
@@ -316,8 +315,8 @@
 						</div>
 					</fieldset>
 					<div class="text-right">
-						<a href="{{ cancel }}" class="btn btn-link">Cancel</a>
-						<button type="submit" class="btn btn-primary">Submit</button>
+						<a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a>
+						<button type="submit" class="btn btn-primary">{{ button_submit }}</button>
 					</div>
 				</form>
 			</div>
@@ -339,12 +338,12 @@ $('#button-download').on('click', function() {
     html = '<tr id="download-row' + download_row + '">';
     html += '  <td class="text-left"><input type="text" name="extension_download[' + download_row + '][name]" value="" class="form-control" /><input type="hidden" name="extension_download[' + download_row + '][extension_download_id]" value="" /><input type="hidden" name="extension_download[' + download_row + '][filename]" value="" id="input-filename' + download_row + '" /><input type="hidden" name="extension_download[' + download_row + '][mask]" value="" id="input-mask' + download_row + '" /></td>';
     html += '  <td class="text-left"><div class="well well-sm" style="max-height: 150px; overflow-y: scroll;">';
-    html += '    <div class="checkbox"><label>Cloud <input type="checkbox" name="extension_download[{{ download_row }}][cloud]" value="1" /></label></div>';
+    html += '    <div class="checkbox"><label>{{ text_cloud }} <input type="checkbox" name="extension_download[{{ download_row }}][cloud]" value="1" /></label></div>';
 	{% for download in downloads %}
     html += '<div class="checkbox"><label><input type="checkbox" name="extension_download[' + download_row + '][download][]" value="{{ download.download_id }}" /> {{ download.name }}</label></div>';
 	{% endfor %}
     html += '  </div></td>';
-    html += '  <td class="text-right"><button type="button" data-target="#input-filename' + download_row + '" data-mask="#input-mask' + download_row + '" class="btn btn-success">Browse</button> <button type="button" onclick="$(\'#download-row' + download_row + '\').remove();" class="btn btn-danger">Remove</button></td>';
+    html += '  <td class="text-right"><button type="button" data-target="#input-filename' + download_row + '" data-mask="#input-mask' + download_row + '" class="btn btn-success">{{ button_browse }}</button> <button type="button" onclick="$(\'#download-row' + download_row + '\').remove();" class="btn btn-danger">{{ button_remove }}</button></td>';
     html += '</tr>';
 
     $('#download tbody').append(html);
@@ -412,8 +411,8 @@ var image_row = {{ image_row }};
 $('#button-image').on('click', function() {
     html = '<tr id="image-row' + image_row + '">';
     html += '  <td><img src="{{ placeholder }}" alt="" title="" id="thumb-image' + image_row + '" class="img-thumbnail" /><input type="hidden" name="extension_image[' + image_row + '][image]" value="" id="input-image' + image_row + '"/></td>';
-    html += '  <td><button type="button" data-toggle="image" data-target="#input-image' + image_row + '" data-thumb="#thumb-image' + image_row + '" class="btn btn-success">Browse</button></td>';
-    html += '  <td class="text-right"><button type="button" onclick="$(\'#image-row' + image_row + '\').remove();" class="btn btn-danger">Remove</button></td>';
+    html += '  <td><button type="button" data-toggle="image" data-target="#input-image' + image_row + '" data-thumb="#thumb-image' + image_row + '" class="btn btn-success">{{ button_browse }}</button></td>';
+    html += '  <td class="text-right"><button type="button" onclick="$(\'#image-row' + image_row + '\').remove();" class="btn btn-danger">{{ button_remove }}</button></td>';
     html += '</tr>';
 
     $('#image tbody').append(html);

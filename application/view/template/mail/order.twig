@@ -13,7 +13,7 @@
                           <!-- START OF HEADING-->
                           <tr>
                             <td class="center" align="center" style="padding: 0px; font-weight: bold; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#6dc6dd; font-size:22px; line-height:32px; mso-line-height-rule: exactly;">
-                              <span> <a class="heading-link" href="#" style="color:#6dc6dd; text-decoration: none; font-style: normal; font-weight: bold;"> Your order status has been updated</a></span>
+                              <span> <a class="heading-link" href="#" style="color:#6dc6dd; text-decoration: none; font-style: normal; font-weight: bold;"> {{ text_heading }}</a></span>
                             </td>
                           </tr>
                           <!-- END OF HEADING-->
@@ -29,25 +29,25 @@
                               <table style="width:100%; border:0; font-size:16px; line-height:28px;" cellspacing="0" cellpadding="0">
                                 <tr>
                                   <td style="height:50px;">
-                                    <span style="display:none"> Status</span>
+                                    <span style="display:none"> {{ text_status }}</span>
                                     {% if status == 'complete' %}
                                     <table style="width:100%; border:0; font-size:24px; line-height:28px;" cellspacing="0" cellpadding="0">
                                       <tr>
-                                        <td width="33%" align="right"><img src="https://image.opencart.com/original/591985cbf36e6.jpg" alt="" title="" /></td>
+                                        <td width="33%" align="right"><img src="{{ store_url }}application/view/image/cms/591985cbf36e6.jpg" alt="" title="" /></td>
                                         <td width="67%" style="font-size:; color:#00af29; text-transform:uppercase; font-weight:bold; padding-left:20px;">{{ order_status }}</td>
                                       </tr>
                                     </table>
                                     {% elseif status == 'pending' %}
                                     <table style="width:100%; border:0; font-size:24px; line-height:28px;" cellspacing="0" cellpadding="0">
                                       <tr>
-                                        <td width="33%" align="right"><img src="https://image.opencart.com/original/591985e43dbc0.jpg" alt="" title="" /></td>
+                                        <td width="33%" align="right"><img src="{{ store_url }}application/view/image/cms/591985e43dbc0.jpg" alt="" title="" /></td>
                                         <td width="67%" style="font-size:; color:#efa500; text-transform:uppercase; font-weight:bold; padding-left:20px;">{{ order_status }}</td>
                                       </tr>
                                     </table>
                                     {% else %}
                                     <table style="width:100%; border:0; font-size:24px; line-height:28px;" cellspacing="0" cellpadding="0">
                                       <tr>
-                                        <td width="33%" align="right"><img src="https://image.opencart.com/original/591985f732af2.jpg" alt="" title="" /></td>
+                                        <td width="33%" align="right"><img src="{{ store_url }}application/view/image/cms/591985f732af2.jpg" alt="" title="" /></td>
                                         <td width="67%" style="font-size:; color:#ad0000; text-transform:uppercase; font-weight:bold; padding-left:20px;">{{ order_status }}</td>
                                       </tr>
                                     </table>
@@ -62,7 +62,7 @@
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td><a href="{{ download }}" style="background-color:#23a1d1; display:block; padding-top:12px; padding-bottom:12px; color:#ffffff; text-align:center; border-radius:4px; text-decoration:none; font-family:'Open Sans',Helvetica,Arial,sans-serif;" target="_blank">DOWNLOAD EXTENSION</a></td>
+                                  <td><a href="{{ download }}" style="background-color:#23a1d1; display:block; padding-top:12px; padding-bottom:12px; color:#ffffff; text-align:center; border-radius:4px; text-decoration:none; font-family:'Open Sans',Helvetica,Arial,sans-serif;" target="_blank">{{ button_download }}</a></td>
                                 </tr>
                                 {% endif %}
                               </table>
@@ -75,11 +75,11 @@
                                   </td>
                                 </tr>
                                 <tr>
-                                  <td width="50" style="height:50px;">Order ID</td>
+                                  <td width="50" style="height:50px;">{{ text_order_id }}</td>
                                   <td width="50" align="right" style="text-align:right; font-weight:bold; color:#333333;">#{{ order_id }}</td>
                                 </tr>
                                 <tr>
-                                  <td style="height:50px;">Date Added</td>
+                                  <td style="height:50px;">{{ text_date_added }}</td>
                                   <td align="right" style="text-align:right; font-weight:bold; color:#333333;">{{ date_added }}</td>
                                 </tr>
                               </table>
@@ -97,8 +97,8 @@
                             <td class="center" align="right" style="margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;mso-line-height-rule: exactly;">
                               <p style="text-align:right;">
                                 <br />
-                                Many thanks,<br />
-                                The {{ store }} team</p>
+                                {{ text_thanks }}<br />
+                                {{ text_team_formatted }}</p>
                               </td>
                           </tr>
                           <!-- END OF TEXT-->
@@ -170,7 +170,7 @@
                       <td width="540"><table class="full" align="left" width="540" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
                           <!-- START OF HEADING-->
                           <tr>
-                            <td class="center" align="left" style="padding: 0px; font-weight: bold; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#23A1D1; font-size:22px; line-height:32px; mso-line-height-rule: exactly;"><span><a class="heading-link" href="#" style="color:#23A1D1; text-decoration: none; font-style: normal; font-weight: bold;">Featured Extensions</a></span></td>
+                            <td class="center" align="left" style="padding: 0px; font-weight: bold; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#23A1D1; font-size:22px; line-height:32px; mso-line-height-rule: exactly;"><span><a class="heading-link" href="#" style="color:#23A1D1; text-decoration: none; font-style: normal; font-weight: bold;">{{ text_featured_extensions }}</a></span></td>
                           </tr>
                           <!-- END OF HEADING-->
                         </table></td>
@@ -246,7 +246,7 @@
                           <tr>
                             <td align="left" valign="top" style="padding-top: 17px;"><table border="0" align="left" cellpadding="0" cellspacing="0" style="border-radius: 2px; margin: 0;">
                                 <tr>
-                                  <td align="center" valign="middle" bgcolor="#23A1D1" style="border-radius: 2px; padding: 6px 15px; font-weight: bold;  font-size: 13px; line-height: 18px; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#ffffff; margin: 0 !important; "><a href="{{ extension.href }}" style="border: none; font-weight: bold; font-style: normal; color:#ffffff; text-decoration: none;">Read more</a></td>
+                                  <td align="center" valign="middle" bgcolor="#23A1D1" style="border-radius: 2px; padding: 6px 15px; font-weight: bold;  font-size: 13px; line-height: 18px; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#ffffff; margin: 0 !important; "><a href="{{ extension.href }}" style="border: none; font-weight: bold; font-style: normal; color:#ffffff; text-decoration: none;">{{ button_read_more }}</a></td>
                                 </tr>
                               </table></td>
                           </tr>

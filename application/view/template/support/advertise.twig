@@ -2,62 +2,62 @@
 <div id="support-contact">
 	<div class="page-header">
 		<div class="container">
-			<h1>Contact Us</h1>
-			<p>Stay connected with us</p>
+			<h1>{{ text_heading }}</h1>
+			<p>{{ text_subtitle }}</p>
 		</div>
 	</div>
 	<div class="container">
 		<div class="row">
 			<div id="support-contact" class="col-md-8">
 				<div class="form-group required">
-					<label for="input-reason">Please, choose type of advertising</label> <select name="type" id="input-reason" class="form-control">
-						<option value="extension" selected>Extension Advertising</option>
-						<option value="marketplace">Marketplace Advertising</option>
+					<label for="input-reason">{{ entry_reason }}</label> <select name="type" id="input-reason" class="form-control">
+						<option value="extension" selected>{{ text_extension_ad }}</option>
+						<option value="marketplace">{{ text_marketplace_ad }}</option>
 					</select>
 				</div>
 				<div class="row">
 					<div class="col-md-5">
 						<div class="form-group required">
-							<label for="input-name" class="control-label">What is your name?</label> <input type="text" name="name" value="{{ name }}" placeholder="Name" id="input-name" class="form-control">
+							<label for="input-name" class="control-label">{{ entry_name }}</label> <input type="text" name="name" value="{{ name }}" placeholder="{{ placeholder_name }}" id="input-name" class="form-control">
 						</div>
 					</div>
 					<div class="col-md-7">
 						<div class="form-group required">
-							<label for="input-email" class="control-label">E-Mail</label> <input type="text" name="email" value="{{ email }}" placeholder="Email" id="input-email" class="form-control"/>
+							<label for="input-email" class="control-label">{{ entry_email }}</label> <input type="text" name="email" value="{{ email }}" placeholder="{{ placeholder_email }}" id="input-email" class="form-control"/>
 						</div>
 					</div>
 				</div>
 				<div id="contact"></div>
 				<div class="form-group required">
-					<label for="input-enquiry" class="control-label">Message</label> <textarea name="enquiry" rows="7" id="input-enquiry" class="form-control"></textarea>
+					<label for="input-enquiry" class="control-label">{{ entry_enquiry }}</label> <textarea name="enquiry" rows="7" id="input-enquiry" class="form-control"></textarea>
 				</div>
 				<div class="row">
 					<div class="col-md-5">
 						<div data-captcha="#button-send"></div>
 					</div>
 					<div class="col-md-7">
-						<button type="button" id="button-send" class="btn btn-primary btn-xl btn-block" disabled="disabled">Send Message</button>
+						<button type="button" id="button-send" class="btn btn-primary btn-xl btn-block" disabled="disabled">{{ button_send }}</button>
 					</div>
 				</div>
 			</div>
 			<div class="col-md-4">
 				<div class="well">
-					<h4>General Information</h4>
+					<h4>{{ text_general_info }}</h4>
 					<hr>
 					<p><a href="mailto:{{ contact_support }}">{{ contact_support }}</a></p>
-					<h4>Support</h4>
-					<p><a href="mailto:opencart@zendesk.com">opencart@zendesk.com</a>
+					<h4>{{ text_support }}</h4>
+					<p><a href="mailto:{{ contact_support }}">{{ contact_support }}</a>
 						<br/>
-						Available every day from 09:30 to 18:30 (HK Time).
+						{{ text_support_hours }}
 						<br/>
-						Provide your feedback regarding <a href="https://support.opencart.com/anonymous_requests/new" target="_blank">support</a> or an <a href="https://support.opencart.com/anonymous_requests/new" target="_blank">extension</a> .
+						{{ text_feedback_prefix }} <a href="{{ dedicated_support }}" target="_blank">{{ text_feedback_support }}</a> {{ text_feedback_or }} <a href="{{ dedicated_support }}" target="_blank">{{ text_feedback_extension }}</a> .
 						<br/>
 					</p>
-					<h4>Partnerships</h4>
+					<h4>{{ text_partnerships }}</h4>
 					<p><a href="tel:{{ contact_telephone }}">{{ contact_telephone }}</a>
 						<br/>
 						<a href="mailto:{{ contact_partner }}">{{ contact_partner }}</a></p>
-					<h4>Press And Media</h4>
+					<h4>{{ text_press_media }}</h4>
 					<p><a href="tel:{{ contact_telephone }}">{{ contact_telephone }}</a>
 						<br/>
 						<a href="mailto:{{ contact_marketing }}">{{ contact_marketing }}</a></p>
@@ -65,37 +65,21 @@
 			</div>
 		</div>
 		<div id="address">
-			<h2>Our Office</h2>
+			<h2>{{ text_our_office }}</h2>
 			<div class="row">
 				<div class="col-md-12">
 					<div id="map-hk" class="map"></div>
 					<div class="office">
 						<div class="row">
 							<div class="col-sm-6">
-								<h4>Address</h4>
-								<p>OpenCart Limited,
-									<br/>
-									Workshop 22, 7 Floor,
-									<br/>
-									99Commons,
-									<br/>
-									99 Pui To Road,
-									<br/>
-									Tuen Mun,
-									<br/>
-									Hong Kong
-								</p>
+								<h4>{{ text_address }}</h4>
+								<p><strong>{{ store_owner }}</strong><br />{{ store_address }}</p>
 							</div>
 							<div class="col-sm-6">
-								<h4>Office Hours</h4>
-								<p>Monday to Friday, 09:30 - 18:30
-									<br/>
-									Lunch Time: 13:00 - 14:00
-									<br/>
-									Closed on general holidays
-								</p>
-								<h4>Telephone</h4>
-								<p>+852 2499 0996</p>
+								<h4>{{ text_office_hours }}</h4>
+								<p>{{ text_office_hours_detail }}</p>
+								<h4>{{ text_telephone }}</h4>
+								<p>{{ contact_telephone }}</p>
 							</div>
 						</div>
 					</div>
@@ -105,11 +89,8 @@
 	</div>
 	<div class="container-fluid">
 		<div class="container">
-			<p>Looking for dedicated technical support for your OpenCart Project?
-				<br/>
-				View our new Dedicated Support.
-			</p>
-			<p><a href="https://dedicated.opencart.com/" target="_blank" class="btn btn-primary btn-lg">Learn More</a></p>
+			<p>{{ text_dedicated_cta }}</p>
+			<p><a href="{{ dedicated_support }}" target="_blank" class="btn btn-primary btn-lg">{{ button_learn_more }}</a></p>
 		</div>
 	</div>
 	<script type="text/javascript"><!--

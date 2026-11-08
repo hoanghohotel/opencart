@@ -1,16 +1,18 @@
 <?php
 class ControllerCommonMaintenance extends Controller {
 	public function index() {
-		$this->document->setTitle('Maintenance');
+		$this->load->language('common/maintenance');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$data['breadcrumbs'] = array();
 
 		$data['breadcrumbs'][] = array(
-			'text' => 'Maintenance',
+			'text' => $this->language->get('text_maintenance'),
 			'href' => $this->url->link('common/maintenance')
 		);
 
-		$data['message'] = '<h1 style="text-align:center;">We are currently performing some scheduled maintenance. <br/>We will be back as soon as possible. Please check back soon.</h1>';
+		$data['message'] = $this->language->get('text_message');
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['footer'] = $this->load->controller('common/footer');

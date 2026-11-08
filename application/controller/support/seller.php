@@ -1,6 +1,8 @@
 <?php
 class ControllerSupportSeller extends Controller {
 	public function index() {
+		$this->load->language('support/seller');
+
 		$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 0;
 
 		if (!$this->member->isLogged()) {
@@ -28,7 +30,9 @@ class ControllerSupportSeller extends Controller {
 		$extension_info = $this->model_marketplace_extension->getExtension($extension_id);
 
 		if ($extension_info) {
-			$this->document->setTitle('OpenCart - Contact Seller');
+			$store_name = $this->config->get('config_name') ?: 'Store';
+
+			$this->document->setTitle(str_replace('{store_name}', $store_name, $this->language->get('heading_title')));
 
 			$data['extension_id'] = (int)$extension_info['extension_id'];
 			$data['member_token'] = $this->session->data['member_token'];
@@ -60,6 +64,8 @@ class ControllerSupportSeller extends Controller {
 	}
 
 	public function send() {
+		$this->load->language('support/seller');
+
 		$json = array();
 
 		$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 0;
@@ -76,35 +82,37 @@ class ControllerSupportSeller extends Controller {
 			$extension_info = $this->model_marketplace_extension->getExtension($extension_id);
 
 			if (!$extension_info) {
-				$json['error']['warning'] = 'Extension could not be found!';
+				$json['error']['warning'] = $this->language->get('error_extension');
 			}
 		}
 
 		if (!$json) {
+			$store_name = $this->config->get('config_name') ?: 'Store';
+
 			$reason = isset($this->request->post['reason']) ? trim($this->request->post['reason']) : '';
 
 			if (!in_array($reason, array('question', 'support', 'refund'))) {
-				$json['error']['reason'] = 'Please select how we can help you!';
+				$json['error']['reason'] = $this->language->get('error_reason');
 			}
 
 			if (!isset($this->request->post['name']) || (utf8_strlen(trim($this->request->post['name'])) < 3) || (utf8_strlen(trim($this->request->post['name'])) > 64)) {
-				$json['error']['name'] = 'Name must be between 3 and 64 characters!';
+				$json['error']['name'] = $this->language->get('error_name');
 			}
 
 			if (!isset($this->request->post['order_id']) || trim($this->request->post['order_id']) === '') {
-				$json['error']['order_id'] = 'Order ID required!';
+				$json['error']['order_id'] = $this->language->get('error_order_id');
 			}
 
 			if (empty($this->request->post['version_id'])) {
-				$json['error']['version'] = 'Please select which OpenCart version you are using!';
+				$json['error']['version'] = str_replace('{store_name}', $store_name, $this->language->get('error_version'));
 			}
 
 			if (!isset($this->request->post['enquiry']) || (utf8_strlen(trim($this->request->post['enquiry'])) < 10) || (utf8_strlen(trim($this->request->post['enquiry'])) > 3000)) {
-				$json['error']['enquiry'] = 'Message must be between 10 and 3000 characters!';
+				$json['error']['enquiry'] = $this->language->get('error_enquiry');
 			}
 
 			if ($json && !isset($json['error']['warning'])) {
-				$json['error']['warning'] = 'Please check the form carefully for errors!';
+				$json['error']['warning'] = $this->language->get('error_warning');
 			}
 		}
 
@@ -125,7 +133,7 @@ class ControllerSupportSeller extends Controller {
 				'version_id'    => (int)$this->request->post['version_id'],
 				'extension_url' => str_replace('&amp;', '&', $this->url->link('marketplace/extension/info', 'extension_id=' . $extension_id, true)),
 				'original_url'  => '',
-				'subject'       => 'Contact Seller [' . ucfirst($this->request->post['reason']) . ']: ' . $extension_info['name'] . ' (ID: ' . $extension_id . ')',
+				'subject'       => sprintf($this->language->get('text_enquiry_subject'), ucfirst($this->request->post['reason']), $extension_info['name'], $extension_id),
 				'enquiry'       => trim($this->request->post['enquiry'])
 			);
 
@@ -153,11 +161,15 @@ class ControllerSupportSeller extends Controller {
 	}
 
 	public function success() {
+		$this->load->language('support/seller');
+
 		if (!$this->member->isLogged()) {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('OpenCart - Contact Seller');
+		$store_name = $this->config->get('config_name') ?: 'Store';
+
+		$this->document->setTitle(str_replace('{store_name}', $store_name, $this->language->get('heading_title')));
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');

@@ -32,7 +32,9 @@ class ControllerAccountLogin extends Controller {
 			$this->response->redirect($this->url->link('account/account', 'member_token=' . $this->session->data['member_token'], true));
 		}
 
-		$this->document->setTitle('Log in to your OpenCart account');
+		$this->load->language('account/login');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			if (empty($this->session->data['member_token'])) {
@@ -125,14 +127,14 @@ class ControllerAccountLogin extends Controller {
 		$password = isset($this->request->post['password']) ? html_entity_decode($this->request->post['password'], ENT_QUOTES, 'UTF-8') : '';
 
 		if (!$email || !$password) {
-			$this->error['warning'] = 'Warning: No match for E-Mail Address and/or Password.';
+			$this->error['warning'] = $this->language->get('error_login');
 		}
 
 		if (!$this->error) {
 			$member_info = $this->model_account_member->getMemberByLogin($email);
 
 			if ($member_info && !$member_info['status']) {
-				$this->error['warning'] = 'Warning: Your account has been disabled. Please contact support.';
+				$this->error['warning'] = $this->language->get('error_disabled');
 			} elseif ($member_info && !$member_info['verified']) {
 				if (empty($member_info['code'])) {
 					$code = token(40);
@@ -142,10 +144,10 @@ class ControllerAccountLogin extends Controller {
 
 				$this->load->controller('mail/register', $member_info);
 
-				$this->error['warning'] = 'Warning: Your account must be verified before you can log in. We have sent a verification link to your email address (' . $member_info['email'] . ').';
+				$this->error['warning'] = sprintf($this->language->get('error_unverified'), $member_info['email']);
 			} elseif (!$this->member->login($email, $password)) {
 				$this->model_account_member->addLoginAttempt($email);
-				$this->error['warning'] = 'Warning: No match for E-Mail Address and/or Password.';
+				$this->error['warning'] = $this->language->get('error_login');
 			} else {
 				$this->model_account_member->deleteLoginAttempts($email);
 			}

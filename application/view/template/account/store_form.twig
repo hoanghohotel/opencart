@@ -2,8 +2,8 @@
 <div id="account-edit">
   <div class="page-header">
     <div class="container">
-      <h1>Your Stores</h1>
-      <p>Register your store to get access to the marketplace API</p>
+      <h1>{{ heading_title }}</h1>
+      <p>{{ text_subtitle }}</p>
     </div>
   </div>
   <div class="container">
@@ -16,15 +16,15 @@
         {% endif %}
         <form action="{{ action }}" method="post" enctype="multipart/form-data">
           <fieldset>
-            <legend>Add your store information</legend>
+            <legend>{{ text_add_store_info }}</legend>
             <div class="form-group">
-              <label for="input-domain">Domain Name e.g. (www.hostname.com)</label><input type="text" name="domain" value="{{ domain }}" placeholder="Domain" id="input-domain" class="form-control"/>
+              <label for="input-domain">{{ entry_domain_example }}</label><input type="text" name="domain" value="{{ domain }}" placeholder="{{ entry_domain_placeholder }}" id="input-domain" class="form-control"/>
               {% if error_domain %}
                 <div class="text-danger">{{ error_domain }}</div>
               {% endif %}</div>
           </fieldset>
-          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a>
-            <button type="submit" class="btn btn-primary">Submit</button>
+          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a>
+            <button type="submit" class="btn btn-primary">{{ button_submit }}</button>
           </div>
         </form>
       </div>
@@ -32,4 +32,4 @@
     </div>
   </div>
 </div>
-{{ footer }} 
+{{ footer }}

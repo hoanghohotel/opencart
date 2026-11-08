@@ -7,8 +7,8 @@
                 <div class="wrapper-subscription-create-form">
                     <div class="banner-block">
                         <img src="application/view/image/cloud/subscription_create.png"/>
-                        <h2>Create Your Store</h2>
-                        <span>Please select a store name, subscription plan and payment method</span>
+                        <h2>{{ heading_create_store }}</h2>
+                        <span>{{ text_create_lead }}</span>
                     </div>
                     {% if error_warning %}
                     <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
@@ -18,16 +18,16 @@
                     {% endif %}
                     <form id="subscription-add" method="post" action="">
                     <div class="store-name-block">
-                        <div class="store-title"><span>Store Name</span></div>
+                        <div class="store-title"><span>{{ entry_store_name }}</span></div>
                         <div class="input-group" id="input_name">
-                            <input type="text" name="name" value="{{ name }}" placeholder="Would be used as your default domain (can be removed later)" class="form-control"/>
-                            <span class="input-group-addon" id="basic-addon2">.opencart.shop</span>
+                            <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_store_name_placeholder }}" class="form-control"/>
+                            <span class="input-group-addon" id="basic-addon2">{{ text_cloud_subdomain }}</span>
                         </div>
-                        <div class="store-help"><span>Do not use prohibited characters in the store name */_'</span></div>
+                        <div class="store-help"><span>{{ help_store_name_chars }}</span></div>
                     </div>
                     {% if member_id != 78238 %}
                     <div class="plan-block">
-                        <div class="plan-selection-title text-center">Subscription Plan</div>
+                        <div class="plan-selection-title text-center">{{ entry_subscription_plan }}</div>
                         <div class="row badges-block">
                             {% for subscription_plan in subscription_plans %}
                             <div class="col-sm-4 cloud-centered-block">
@@ -50,7 +50,7 @@
                                 {% endif %}
                                     <div>
                                         {% if subscription_plan.label_active == 1 %}
-                                        <div class="plan-recommended">recommended</div>
+                                        <div class="plan-recommended">{{ text_recommended }}</div>
                                         {% endif %}
                                         <div class="plan-name text-center">{{ subscription_plan.name }}</div>
                                         <div class="badge-divider"></div>
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div class="payment-block">
-                        <div class="payment-selection-title text-center">Payment Method</div>
+                        <div class="payment-selection-title text-center">{{ entry_payment_method }}</div>
                         <div class="row badges-block">
                         {% for payment_method in payment_methods %}
                             <div class="col-sm-4">
@@ -85,48 +85,31 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <a title="{{ subscription_payment_create_info }}" href="{{ subscription_payment_create_url }}" class="btn btn-default btn-lg add-payment-button">Add new Payment Method</a>
+                                <a title="{{ subscription_payment_create_info }}" href="{{ subscription_payment_create_url }}" class="btn btn-default btn-lg add-payment-button">{{ text_add_payment_method }}</a>
                             </div>
                         </div>
                     </div>
                     {% endif %}
-                    {# <div class="server-block">
-                        <div class="server-selection-title text-center">Select Server Region</div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="server-map-container">
-                                    <img class="server-marker europe" src="application/view/image/cloud/server-marker-active.svg" />
-                                    <img src="application/view/image/cloud/server-map.svg"/>
-                                </div>
-                            </div>
-                            <div class="col-sm-12">
-                                <div class="server-info">
-                                    <img src="application/view/image/cloud/server-marker-active.svg"/>
-                                    <span>Europe</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div> #}
                     <div class="admin-info-block">
                         <div class="row">
                             <div class="col-sm-6">
-                                <label for="input-name" class="control-label admin-info-label">Store Admin Email</label>
-                                <input type="text" name="admin_email" value="{{ admin_email }}" placeholder="This is just to help you find your store in your account area" id="input_admin_email" class="form-control"/>
+                                <label for="input-name" class="control-label admin-info-label">{{ entry_admin_email }}</label>
+                                <input type="text" name="admin_email" value="{{ admin_email }}" placeholder="{{ entry_admin_help_placeholder }}" id="input_admin_email" class="form-control"/>
                             </div>
                             <div class="col-sm-6">
-                            <label for="input-name" class="control-label admin-info-label">Store Admin Username</label>
-                                <input type="text" name="admin_username" value="{{ admin_username }}" placeholder="This is just to help you find your store in your account area" id="input_admin_username" class="form-control"/>
+                            <label for="input-name" class="control-label admin-info-label">{{ entry_admin_username }}</label>
+                                <input type="text" name="admin_username" value="{{ admin_username }}" placeholder="{{ entry_admin_help_placeholder }}" id="input_admin_username" class="form-control"/>
                             </div>
                             <div class="col-sm-12">
                                 <div class="form-check form-check-inline agree-block">
                                     <input type="hidden" name="agree" value="-1" />
                                     <input class="form-check-input" name="agree" type="checkbox" value="1">
-                                    <label class="form-check-label" id="input_agree" for="agree">I agree with <a href="{{ subscription_terms }}">Terms and Conditions</a></label>
+                                    <label class="form-check-label" id="input_agree" for="agree">{{ text_agree }} <a href="{{ subscription_terms }}">{{ text_terms }}</a></label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                        <button type="button" id="button-store" class="btn btn-primary pull-right create-store-button">CREATE STORE</button>
+                        <button type="button" id="button-store" class="btn btn-primary pull-right create-store-button">{{ button_create_store }}</button>
                     </form>
                     <div class="modal" id="loaderStoreModal" tabindex="-1" role="dialog" aria-hidden="true">
                         <div class="modal-dialog" role="document">
@@ -142,10 +125,10 @@
                                         {% endif %}
                                     </div>
                                     <p>
-                                        <strong>Hold on! We are setting up your new store in the clouds!</strong>
+                                        <strong>{{ text_setting_up_cloud }}</strong>
                                     </p>
-                                    <div class="loader">Loading...</div>
-                                    <p id="modalStatusText">Getting to start...</p>
+                                    <div class="loader">{{ text_loading }}</div>
+                                    <p id="modalStatusText">{{ text_getting_started }}</p>
                                 </div>
                             </div>
                         </div>

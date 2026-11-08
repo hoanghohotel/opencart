@@ -7,7 +7,9 @@ class ControllerAccountTransaction extends Controller {
 			$this->response->redirect($this->url->link('account/login', '', true));
 		}
 
-		$this->document->setTitle('Your Transactions');
+		$this->load->language('account/transaction');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('account/transaction');
 		$this->load->model('account/seller');
@@ -23,7 +25,7 @@ class ControllerAccountTransaction extends Controller {
 		if ($seller_info && !empty($seller_info['seller_group'])) {
 			$data['seller_group'] = $seller_info['seller_group'];
 		} else {
-			$data['seller_group'] = 'Default';
+			$data['seller_group'] = $this->language->get('text_default_group');
 		}
 
 		$data['balance'] = $this->currency->format($this->model_account_transaction->getTransactionTotal($this->member->getId()), $this->config->get('config_currency'));

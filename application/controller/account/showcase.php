@@ -13,7 +13,9 @@ class ControllerAccountShowcase extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('Showcase');
+		$this->load->language('account/showcase');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('cms/showcase');
 
@@ -31,7 +33,9 @@ class ControllerAccountShowcase extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
-		$this->document->setTitle('Showcase Info');
+		$this->load->language('account/showcase');
+
+		$this->document->setTitle($this->language->get('heading_form'));
 
 		$this->load->model('cms/showcase');
 
@@ -44,7 +48,7 @@ class ControllerAccountShowcase extends Controller {
 				$this->model_cms_showcase->addShowcase($this->request->post);
 			}
 
-			$this->session->data['success'] = 'Success: You have submitted your project to the showcase!';
+			$this->session->data['success'] = $this->language->get('text_success_add');
 
 			$this->response->redirect($this->url->link('account/showcase', 'member_token=' . $this->session->data['member_token'], true));
 		}
@@ -63,6 +67,8 @@ class ControllerAccountShowcase extends Controller {
 			$this->session->data['member_token'] = token(32);
 		}
 
+		$this->load->language('account/showcase');
+
 		$this->load->model('cms/showcase');
 
 		if (isset($this->request->get['showcase_id'])) {
@@ -76,7 +82,7 @@ class ControllerAccountShowcase extends Controller {
 				$this->model_cms_showcase->deleteShowcase($showcase_id);
 			}
 
-			$this->session->data['success'] = 'Success: Your showcase project has been deleted!';
+			$this->session->data['success'] = $this->language->get('text_success_delete');
 		}
 
 		$this->response->redirect($this->url->link('account/showcase', 'member_token=' . $this->session->data['member_token'], true));
@@ -230,19 +236,19 @@ class ControllerAccountShowcase extends Controller {
 
 	protected function validateForm() {
 		if (!isset($this->request->post['name']) || (utf8_strlen(trim($this->request->post['name'])) < 3) || (utf8_strlen(trim($this->request->post['name'])) > 128)) {
-			$this->error['name'] = 'Project Name must be between 3 and 128 characters!';
+			$this->error['name'] = $this->language->get('error_name');
 		}
 
 		if (empty($this->request->post['showcase_category_id'])) {
-			$this->error['category'] = 'Please select a showcase category!';
+			$this->error['category'] = $this->language->get('error_category');
 		}
 
 		if (empty($this->request->post['date_launch'])) {
-			$this->error['date_launch'] = 'Launch Date is required!';
+			$this->error['date_launch'] = $this->language->get('error_date_launch');
 		}
 
 		if (empty($this->request->post['link']) || (utf8_strlen(trim($this->request->post['link'])) < 5)) {
-			$this->error['link'] = 'Website URL is required!';
+			$this->error['link'] = $this->language->get('error_link');
 		}
 
 		return !$this->error;

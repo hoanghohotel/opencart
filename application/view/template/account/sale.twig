@@ -2,17 +2,17 @@
 <div id="account-sale">
   <div class="page-header">
     <div class="container">
-      <h1>Your Transactions</h1>
-      <p>View your commission rate for sales</p>
+      <h1>{{ text_page_heading }}</h1>
+      <p>{{ text_subtitle }}</p>
     </div>
   </div>
   <div class="container">
     <div class="row">
       <div class="col-md-9">
-        <h2>Sales Reports</h2>
+        <h2>{{ text_sales_reports }}</h2>
         <div class="row">
           <div class="col-md-offset-2 col-md-8">
-            <button type="button" data-toggle="collapse" data-target="#collapse-sale" class="btn btn-default btn-lg btn-block"><i class="fa fa-filter"></i> Filter</button>
+            <button type="button" data-toggle="collapse" data-target="#collapse-sale" class="btn btn-default btn-lg btn-block"><i class="fa fa-filter"></i> {{ button_filter }}</button>
           </div>
         </div>
         <br/>
@@ -21,18 +21,18 @@
             <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label class="control-label" for="input-order-id">Order ID</label> <input type="text" name="filter_order_id" value="{{ filter_order_id }}" placeholder="Order ID" id="input-order-id" class="form-control"/>
+                  <label class="control-label" for="input-order-id">{{ entry_order_id }}</label> <input type="text" name="filter_order_id" value="{{ filter_order_id }}" placeholder="{{ entry_order_id }}" id="input-order-id" class="form-control"/>
                 </div>
                 <div class="form-group">
-                  <label class="control-label" for="input-extension">Extension</label> <input type="text" name="filter_extension" value="{{ filter_extension }}" placeholder="Extension" id="input-extension" class="form-control"/>
+                  <label class="control-label" for="input-extension">{{ entry_extension }}</label> <input type="text" name="filter_extension" value="{{ filter_extension }}" placeholder="{{ entry_extension }}" id="input-extension" class="form-control"/>
                 </div>
                 <div class="form-group">
-                  <label class="control-label" for="input-member">Member</label> <input type="text" name="filter_member" value="{{ filter_member }}" placeholder="Member" id="input-member" class="form-control"/>
+                  <label class="control-label" for="input-member">{{ entry_member }}</label> <input type="text" name="filter_member" value="{{ filter_member }}" placeholder="{{ entry_member }}" id="input-member" class="form-control"/>
                 </div>
               </div>
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label class="control-label" for="input-order-status">Order Status</label> <select name="filter_order_status_id" id="input-order-status" class="form-control">
+                  <label class="control-label" for="input-order-status">{{ entry_order_status }}</label> <select name="filter_order_status_id" id="input-order-status" class="form-control">
                     <option value=""></option>
                     {% for order_status in order_statuses %}
                       {% if order_status.order_status_id == filter_order_status_id %}
@@ -44,18 +44,18 @@
                   </select>
                 </div>
                 <div class="form-group">
-                  <label class="control-label" for="input-date-start">Date Start</label>
+                  <label class="control-label" for="input-date-start">{{ entry_date_start }}</label>
                   <div class="input-group date">
-                    <input type="text" name="filter_date_start" value="{{ filter_date_start }}" placeholder="Date Start" data-date-format="YYYY-MM-DD" id="input-date-start" class="form-control"/>
+                    <input type="text" name="filter_date_start" value="{{ filter_date_start }}" placeholder="{{ entry_date_start }}" data-date-format="YYYY-MM-DD" id="input-date-start" class="form-control"/>
                     <div class="input-group-btn">
                       <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                     </div>
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label" for="input-date-end">Date End</label>
+                  <label class="control-label" for="input-date-end">{{ entry_date_end }}</label>
                   <div class="input-group date">
-                    <input type="text" name="filter_date_end" value="{{ filter_date_end }}" placeholder="Date End" data-date-format="YYYY-MM-DD" id="input-date-end" class="form-control"/>
+                    <input type="text" name="filter_date_end" value="{{ filter_date_end }}" placeholder="{{ entry_date_end }}" data-date-format="YYYY-MM-DD" id="input-date-end" class="form-control"/>
                     <div class="input-group-btn">
                       <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
                     </div>
@@ -65,8 +65,8 @@
             </div>
             <div class="row">
               <div class="col-sm-12 text-right">
-                <button type="button" id="button-export" class="btn btn-default"><i class="fa fa-search"></i> Export</button>
-                <button type="button" id="button-filter" class="btn btn-default"><i class="fa fa-search"></i> Filter</button>
+                <button type="button" id="button-export" class="btn btn-default"><i class="fa fa-search"></i> {{ button_export }}</button>
+                <button type="button" id="button-filter" class="btn btn-default"><i class="fa fa-search"></i> {{ button_filter }}</button>
               </div>
             </div>
           </div>
@@ -75,12 +75,12 @@
           <table class="table table-bordered table-hover">
             <thead>
               <tr>
-                <th class="text-right">Order ID</th>
-                <th class="text-left">Extension</th>
-                <th class="text-left">Buyer</th>
-                <th class="text-right">Order Status</th>
-                <th class="text-right">Total</th>
-                <th class="text-left">Date Added</th>
+                <th class="text-right">{{ column_order_id }}</th>
+                <th class="text-left">{{ column_extension }}</th>
+                <th class="text-left">{{ column_buyer }}</th>
+                <th class="text-right">{{ column_order_status }}</th>
+                <th class="text-right">{{ column_total }}</th>
+                <th class="text-left">{{ column_date_added }}</th>
               </tr>
             </thead>
             <tbody>
@@ -97,7 +97,7 @@
                 {% endfor %}
               {% else %}
                 <tr>
-                  <td class="text-center" colspan="6">No results!</td>
+                  <td class="text-center" colspan="6">{{ text_no_results }}</td>
                 </tr>
               {% endif %}
             </tbody>
@@ -211,4 +211,4 @@ $('.date').datetimepicker({
 	pickTime: false
 });
 //--></script>
-{{ footer }} 
+{{ footer }}

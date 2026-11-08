@@ -1,7 +1,9 @@
 <?php
 class ControllerCmsShowcase extends Controller {
 	public function index() {
-		$this->document->setTitle('OpenCart - Showcase');
+		$this->load->language('cms/showcase');
+
+		$this->document->setTitle($this->language->get('heading_title'));
 
 		$this->load->model('cms/showcase');
 		$this->load->model('tool/image');
@@ -24,7 +26,7 @@ class ControllerCmsShowcase extends Controller {
 
 		$data['showcase_categories'][] = array(
 			'showcase_category_id' => 0,
-			'name'                 => 'All Stores',
+			'name'                 => $this->language->get('text_all_stores'),
 			'href'                 => $this->url->link('cms/showcase')
 		);
 

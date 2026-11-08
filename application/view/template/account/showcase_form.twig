@@ -3,22 +3,22 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-9">
-				<h1>Showcase Info</h1>
+				<h1>{{ heading_form }}</h1>
 				<form action="{{ action }}" method="post" enctype="multipart/form-data">
 					<fieldset>
-						<legend>Showcase Details</legend>
+						<legend>{{ text_showcase_details }}</legend>
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group required">
-									<label for="input-name">Showcase Name</label> <input type="text" name="name" value="{{ name }}" placeholder="Project Name" id="input-name" class="form-control"/>
+									<label for="input-name">{{ entry_name }}</label> <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name_placeholder }}" id="input-name" class="form-control"/>
 									{% if error_name %}
 										<div class="text-danger">{{ error_name }}</div>
 									{% endif %}</div>
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group required">
-									<label for="input-category">Showcase Type</label> <select name="showcase_category_id" id="input-category" class="form-control">
-										<option value=""> --- Please Select ---</option>
+									<label for="input-category">{{ entry_category }}</label> <select name="showcase_category_id" id="input-category" class="form-control">
+										<option value="">{{ text_select }}</option>
 										{% for category in categories %}
 											<option value="{{ category.showcase_category_id }}">{{ category.name }}</option>
 										{% endfor %}
@@ -31,9 +31,9 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group required">
-									<label for="input-date-launch">Launch Date</label>
+									<label for="input-date-launch">{{ entry_date_launch }}</label>
 									<div class="input-group date">
-										<input type="text" name="date_launch" value="{{ date_launch }}" data-date-format="YYYY-MM-DD" placeholder="Launch Date" id="input-date-launch" class="form-control"/>
+										<input type="text" name="date_launch" value="{{ date_launch }}" data-date-format="YYYY-MM-DD" placeholder="{{ entry_date_launch }}" id="input-date-launch" class="form-control"/>
 										<div class="input-group-btn">
 											<button type="button" class="btn btn-default btn-group"><i class="fa fa-calendar"></i></button>
 										</div>
@@ -44,7 +44,7 @@
 							</div>
 							<div class="col-sm-6">
 								<div class="form-group required">
-									<label for="input-link">Web Site</label> <input type="text" name="link" value="{{ link }}" placeholder="Project Web Site" id="input-link" class="form-control"/>
+									<label for="input-link">{{ entry_link }}</label> <input type="text" name="link" value="{{ link }}" placeholder="{{ entry_link_placeholder }}" id="input-link" class="form-control"/>
 									{% if error_link %}
 										<div class="text-danger">{{ error_link }}</div>
 									{% endif %} </div>
@@ -52,7 +52,7 @@
 						</div>
 					</fieldset>
 					<fieldset>
-						<legend>Screenshot</legend>
+						<legend>{{ text_screenshot }}</legend>
 						<div class="form-group">
 							<div class="row">
 								<div class="col-sm-4">
@@ -61,16 +61,16 @@
 							</div>
 							<div class="row">
 								<div class="col-sm-2">
-									<button type="button" data-toggle="image" data-target="#input-image" data-thumb="#thumb-image" class="btn btn-success btn-block">Browse</button>
+									<button type="button" data-toggle="image" data-target="#input-image" data-thumb="#thumb-image" class="btn btn-success btn-block">{{ button_browse }}</button>
 								</div>
 								<div class="col-sm-2">
-									<button type="button" data-toggle="clear" data-target="#input-image" data-thumb="#thumb-image" data-placeholder="{{ placeholder }}" class="btn btn-default btn-block">Clear</button>
+									<button type="button" data-toggle="clear" data-target="#input-image" data-thumb="#thumb-image" data-placeholder="{{ placeholder }}" class="btn btn-default btn-block">{{ button_clear }}</button>
 								</div>
 							</div>
 						</div>
 					</fieldset>
-					<div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a>
-						<button type="submit" class="btn btn-primary">Submit</button>
+					<div class="text-right"><a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a>
+						<button type="submit" class="btn btn-primary">{{ button_submit }}</button>
 					</div>
 				</form>
 			</div>
@@ -83,4 +83,4 @@ $('.date').datetimepicker({
     pickTime: false
 });
 //--></script>
-{{ footer }} 
+{{ footer }}
