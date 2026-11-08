@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1032" viewBox="0 0 1440 1032">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1440" height="1032" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">Admin cập nhật “sản phẩm” = extension</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Không có catalog/product controller. Request không hợp lệ quay về form hoặc permission/login action.</text>
+<text x="50" y="1003" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">06-sequence-diagrams · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="50" y="145" width="225" height="85" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="64" y="167" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Admin browser</text>
+<rect x="315" y="145" width="225" height="85" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="329" y="167" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Pre-actions</text>
+<text x="329" y="218" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/config/admin.php:1</text>
+<rect x="580" y="145" width="225" height="85" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="594" y="167" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">MarketplaceExtension</text>
+<text x="594" y="205" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/marketplace/ext</text>
+<text x="594" y="218" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">ension.php:1</text>
+<rect x="845" y="145" width="225" height="85" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="859" y="167" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">ModelMarketplaceExtension</text>
+<text x="859" y="205" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/model/marketplace/extensio</text>
+<text x="859" y="218" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">n.php:1</text>
+<rect x="1110" y="145" width="225" height="85" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="1124" y="167" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">DB</text>
+<text x="1124" y="218" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:1</text>
+<polyline points="162.5,230 162.0,950" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<polyline points="427.5,230 427.0,950" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<polyline points="692.5,230 692.0,950" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<polyline points="957.5,230 957.0,950" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<polyline points="1222.5,230 1222.0,950" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<polyline points="162.0,286.0 427.0,286.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="174.0" y="278.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#334155">1. POST marketplace/extension/edit + user_token</text>
+<polyline points="427.0,376.0 692.0,376.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="439.0" y="368.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#334155">2. login + access gate → edit()</text>
+<polyline points="692.0,466.0 767,466 767,496 692.0,496.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="704.0" y="473.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#334155">3. load language/model → validateForm() [modify]</text>
+<polyline points="692.0,556.0 957.0,556.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="704.0" y="548.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#334155">4. editExtension(extension_id,post)</text>
+<polyline points="957.0,646.0 1222.0,646.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="969.0" y="638.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#334155">5. UPDATE extension; DELETE/INSERT extension_image</text>
+<polyline points="957.0,736.0 1222.0,736.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="969.0" y="728.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#334155">6. SELECT old downloads; DELETE paths/downloads; INSERT new rows</text>
+<polyline points="692.0,826.0 162.0,826.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="174.0" y="818.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#334155">7. session success → redirect list</text>
+</svg>

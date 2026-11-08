@@ -1,0 +1,11 @@
+{
+  "commit": "7fcbe3b27bb7ac04e10895f9d5a64fa964659fbe",
+  "source_files_hash_checked": 3590,
+  "source_unchanged": true,
+  "schema_tables": 59,
+  "foreign_keys": 0,
+  "findings": 27,
+  "evidence_locations_checked": 67,
+  "method": "offline source/DDL analysis; no HTTP, DB writes, migrations, exploitation, benchmarks or advisory queries",
+  "runtime_tests_this_audit": "not run"
+}

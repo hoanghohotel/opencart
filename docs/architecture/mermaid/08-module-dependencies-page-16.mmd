@@ -1,0 +1,14 @@
+---
+title: admin/sale · phụ thuộc 1
+---
+flowchart TB
+    n1["sale/order.php<br/>index() · L10"]
+    n2["model/sale/order<br/>đã có file"]
+    n3["oc_member, oc_order, oc_order_status"]
+    n4["sale/order.php<br/>getList() · L310"]
+    n5["model/localisation/order_status<br/>đã có file"]
+    n6["oc_order_status"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6

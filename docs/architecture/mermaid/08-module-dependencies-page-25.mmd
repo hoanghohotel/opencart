@@ -1,0 +1,38 @@
+---
+title: application/account · phụ thuộc 2
+---
+flowchart TB
+    n1["account/extension.php<br/>index() · L14"]
+    n2["model/marketplace/extension<br/>đã có file"]
+    n3["oc_download, oc_extension, oc_extension_category,<br/>oc_extension_comment, oc_extension_download,<br/>oc_extension_download_path, oc_extension_image,<br/>oc_extension_promotion, oc_extension_rating,<br/>oc_member, oc_member_seller"]
+    n4["account/extension.php<br/>getForm() · L319"]
+    n5["model/tool/image<br/>đã có file"]
+    n6["Không có SQL literal được trích xuất"]
+    n7["account/extension.php<br/>getForm() · L384"]
+    n8["model/cms/download<br/>đã có file"]
+    n9["oc_download"]
+    n10["account/forgotten.php<br/>index() · L16"]
+    n11["model/account/member<br/>đã có file"]
+    n12["oc_member, oc_member_ip, oc_member_login,<br/>oc_newsletter"]
+    n13["account/login.php<br/>index() · L6"]
+    n14["model/account/member<br/>đã có file"]
+    n15["oc_member, oc_member_ip, oc_member_login,<br/>oc_newsletter"]
+    n16["account/order.php<br/>index() · L37"]
+    n17["model/account/order<br/>đã có file"]
+    n18["oc_country, oc_extension, oc_member,<br/>oc_member_seller, oc_member_transaction,<br/>oc_order, oc_order_status"]
+    n19["account/order.php<br/>index() · L38"]
+    n20["model/localisation/order_status<br/>đã có file"]
+    n21["oc_order_status"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n7 --> n8
+    n8 -.-> n9
+    n10 --> n11
+    n11 -.-> n12
+    n13 --> n14
+    n14 -.-> n15
+    n16 --> n17
+    n17 -.-> n18
+    n19 --> n20
+    n20 -.-> n21

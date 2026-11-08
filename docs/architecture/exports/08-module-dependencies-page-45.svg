@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1113" viewBox="0 0 1440 1113">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1440" height="1113" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">Phụ thuộc dùng chung và hook</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Các cơ chế/nhánh độc lập; không có thứ tự gọi giữa các khối. Luồng cụ thể xem sequence và dẫn chiếu source.</text>
+<text x="50" y="1084" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">08-module-dependencies · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="60" y="150" width="1180" height="108" rx="10" fill="#dff3ff" stroke="#94a3b8"/>
+<text x="74" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">checkout/payment + checkout/checkout → PaymentGateway</text>
+<text x="74" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Settings quyết định gateway; HTTP Stripe/Braintree, PayPal frontend SDK</text>
+<text x="74" y="246" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/checkout/payment.php:217</text>
+<rect x="60" y="305" width="1180" height="108" rx="10" fill="#dff3ff" stroke="#94a3b8"/>
+<text x="74" y="327" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">account/extension::upload + marketplace/download::download → CloudStorage</text>
+<text x="74" y="347" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">File local hoặc object storage theo settings</text>
+<text x="74" y="401" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/marketplace/download.php:81</text>
+<rect x="60" y="460" width="1180" height="108" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="74" y="482" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ModelAccountOrder::addOrder → Loader::controller(mail/order) → Mail</text>
+<text x="74" y="502" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Model cũng có thể gọi controller; không phải phân lớp một chiều tuyệt đối</text>
+<text x="74" y="556" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/account/order.php:3</text>
+<rect x="60" y="615" width="1180" height="108" rx="10" fill="#e5edff" stroke="#94a3b8"/>
+<text x="74" y="637" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Loader::model → Proxy::__call → callback → Model + Event before/after</text>
+<text x="74" y="657" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Registry cung cấp DB, Cache, Session, Config cho cả Controller và Model</text>
+<text x="74" y="711" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/engine/proxy.php:33</text>
+<rect x="60" y="770" width="1180" height="108" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="792" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">startup/event → model setting/event → oc_event → Event::register</text>
+<text x="74" y="812" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Seed không có INSERT event: chưa có bằng chứng hook DB nào được bật mặc định</text>
+<text x="74" y="866" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:1</text>
+<rect x="60" y="925" width="1180" height="108" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="947" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">modification() → DIR_MODIFICATION override; bundled packages → vendor/autoload.php</text>
+<text x="74" y="967" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Marketplace extension là hàng hóa số, không đồng nghĩa plugin đã cài vào runtime</text>
+<text x="74" y="1021" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">system/startup.php:49</text>
+</svg>

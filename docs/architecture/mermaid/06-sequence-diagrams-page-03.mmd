@@ -1,0 +1,6 @@
+---
+title: Yêu cầu thêm giỏ hàng · không có triển khai
+---
+flowchart TB
+    n1["Không tìm thấy checkout/cart controller, Cart\Cart library hay oc_cart trong schema<br/>Không có bằng chứng để vẽ sequence add-to-cart"]
+    n2["Hành vi có thật: extension_info.twig Buy → AJAX checkout/checkout<br/>Truyền extension_id và quantity trực tiếp, không lưu basket"]

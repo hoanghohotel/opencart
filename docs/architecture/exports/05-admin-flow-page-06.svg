@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="990" viewBox="0 0 1450 990">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1450" height="990" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">Admin · danh mục controller 4</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Danh sách từ mã nguồn; có file không đồng nghĩa đã được kích hoạt hoặc route an toàn để gọi</text>
+<text x="50" y="961" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">05-admin-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="60" y="150" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="74" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">mail/transaction.php</text>
+<text x="74" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerMailTransaction</text>
+<text x="74" y="212" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index</text>
+<text x="74" y="298" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/mail/transaction.php:1</text>
+<rect x="520" y="150" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="534" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">marketplace/category.php</text>
+<text x="534" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerMarketplaceCategory</text>
+<text x="534" y="212" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, add, edit, delete, getList, getForm,</text>
+<text x="534" y="232" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">validateForm, validateDelete</text>
+<text x="534" y="298" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/marketplace/category.php:1</text>
+<rect x="980" y="150" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="994" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">marketplace/comment.php</text>
+<text x="994" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerMarketplaceComment</text>
+<text x="994" y="212" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, edit, approve, delete, getList, getForm,</text>
+<text x="994" y="232" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">validateForm, validateDelete</text>
+<text x="994" y="298" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/marketplace/comment.php:1</text>
+<rect x="60" y="350" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="74" y="372" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">marketplace/extension.php</text>
+<text x="74" y="392" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerMarketplaceExtension</text>
+<text x="74" y="412" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, add, edit, delete, getFilterUrl, getList,</text>
+<text x="74" y="432" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">getForm, validateForm, validateDelete</text>
+<text x="74" y="498" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/marketplace/extension.php:1</text>
+<rect x="520" y="350" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="534" y="372" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">marketplace/promotion.php</text>
+<text x="534" y="392" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerMarketplacePromotion</text>
+<text x="534" y="412" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, add, edit, delete, getList, getForm,</text>
+<text x="534" y="432" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">validateForm, validateDelete</text>
+<text x="534" y="498" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/marketplace/promotion.php:1</text>
+<rect x="980" y="350" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="994" y="372" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">member/member.php</text>
+<text x="994" y="392" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerMemberMember</text>
+<text x="994" y="412" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, add, edit, delete, getList, getForm,</text>
+<text x="994" y="432" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">validateForm, validateDelete</text>
+<text x="994" y="498" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/member/member.php:1</text>
+<rect x="60" y="550" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="74" y="572" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">member/partner.php</text>
+<text x="74" y="592" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerMemberPartner</text>
+<text x="74" y="612" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, add, edit, delete, getList, getForm,</text>
+<text x="74" y="632" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">validateForm, validateDelete</text>
+<text x="74" y="698" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/member/partner.php:1</text>
+<rect x="520" y="550" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="534" y="572" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">member/seller.php</text>
+<text x="534" y="592" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerMemberSeller</text>
+<text x="534" y="612" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, add, edit, delete, getList, getForm,</text>
+<text x="534" y="632" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">validateForm, validateDelete</text>
+<text x="534" y="698" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/member/seller.php:1</text>
+<rect x="980" y="550" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="994" y="572" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">sale/order.php</text>
+<text x="994" y="592" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerSaleOrder</text>
+<text x="994" y="612" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, add, edit, delete, getList, info, getForm,</text>
+<text x="994" y="632" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">validateForm, validateDelete, getStatusClass</text>
+<text x="994" y="698" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/sale/order.php:1</text>
+<rect x="60" y="750" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="74" y="772" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">setting/payment.php</text>
+<text x="74" y="792" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerSettingPayment</text>
+<text x="74" y="812" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, testStripe, testBraintree, testPaypal,</text>
+<text x="74" y="832" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">validate</text>
+<text x="74" y="898" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/setting/payment.php:1</text>
+<rect x="520" y="750" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="534" y="772" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">setting/setting.php</text>
+<text x="534" y="792" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerSettingSetting</text>
+<text x="534" y="812" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, validate, testSmtp, testStorage</text>
+<text x="534" y="898" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/setting/setting.php:1</text>
+<rect x="980" y="750" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="994" y="772" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">setting/store.php</text>
+<text x="994" y="792" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerSettingStore</text>
+<text x="994" y="812" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, add, edit, delete, getList, getForm,</text>
+<text x="994" y="832" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">validateForm, validateDelete</text>
+<text x="994" y="898" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/setting/store.php:1</text>
+</svg>

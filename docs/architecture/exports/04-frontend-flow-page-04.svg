@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="958" viewBox="0 0 1440 958">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1440" height="958" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">Nhánh legacy và các module khác</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Các cơ chế/nhánh độc lập; không có thứ tự gọi giữa các khối. Luồng cụ thể xem sequence và dẫn chiếu source.</text>
+<text x="50" y="929" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">04-frontend-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="60" y="150" width="1180" height="108" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">marketplace/purchase::index() → purchase.twig</text>
+<text x="74" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">marketplace/braintree::payment() → addOrder trực tiếp</text>
+<text x="74" y="246" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/marketplace/braintree.php:33</text>
+<rect x="60" y="305" width="1180" height="108" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="327" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">marketplace/paypal::send() → addOrder; callback() chỉ redirect success</text>
+<text x="74" y="347" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Không gộp các nhánh này với charge server trong checkout/payment</text>
+<text x="74" y="401" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/marketplace/paypal.php:30</text>
+<rect x="60" y="460" width="1180" height="108" rx="10" fill="#dcf4ec" stroke="#94a3b8"/>
+<text x="74" y="482" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">CMS: blog, download, information, showcase, sitemap</text>
+<text x="74" y="502" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Support: enquiry/contact, partner, guide và các trang thông tin</text>
+<text x="74" y="556" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/cms/blog.php:3</text>
+<rect x="60" y="615" width="1180" height="108" rx="10" fill="#dcf4ec" stroke="#94a3b8"/>
+<text x="74" y="637" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Seller: account/extension CRUD + upload → CloudStorage</text>
+<text x="74" y="657" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Buyer download: marketplace/download → kiểm tra quyền mua → outputFile()</text>
+<text x="74" y="711" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/marketplace/download.php:81</text>
+<rect x="60" y="770" width="1180" height="108" rx="10" fill="#fff7d6" stroke="#94a3b8"/>
+<text x="74" y="792" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Cloud: account/subscription → account/subscription model → SQL, history, transaction</text>
+<text x="74" y="812" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">cloud/store hiển thị subscription; provision hạ tầng chưa xác minh</text>
+<text x="74" y="866" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/account/subscription.php:27</text>
+</svg>

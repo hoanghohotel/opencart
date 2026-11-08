@@ -1,0 +1,39 @@
+---
+title: admin/setting · phụ thuộc 1
+---
+flowchart TB
+    n1["setting/payment.php<br/>index() · L10"]
+    n2["model/setting/setting<br/>đã có file"]
+    n3["oc_setting"]
+    n4["setting/payment.php<br/>index() · L97"]
+    n5["model/localisation/currency<br/>đã có file"]
+    n6["oc_currency"]
+    n7["setting/setting.php<br/>index() · L10"]
+    n8["model/setting/setting<br/>đã có file"]
+    n9["oc_setting"]
+    n10["setting/setting.php<br/>index() · L134"]
+    n11["model/localisation/country<br/>đã có file"]
+    n12["oc_country"]
+    n13["setting/setting.php<br/>index() · L137"]
+    n14["model/localisation/language<br/>đã có file"]
+    n15["oc_banner_image, oc_download_description,<br/>oc_extension_category_description,<br/>oc_information_description, oc_language,<br/>oc_order_status, oc_seo_url, oc_setting"]
+    n16["setting/setting.php<br/>index() · L140"]
+    n17["model/localisation/currency<br/>đã có file"]
+    n18["oc_currency"]
+    n19["setting/setting.php<br/>index() · L143"]
+    n20["model/localisation/order_status<br/>đã có file"]
+    n21["oc_order_status"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6
+    n7 --> n8
+    n8 -.-> n9
+    n10 --> n11
+    n11 -.-> n12
+    n13 --> n14
+    n14 -.-> n15
+    n16 --> n17
+    n17 -.-> n18
+    n19 --> n20
+    n20 -.-> n21

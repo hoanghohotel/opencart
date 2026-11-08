@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="390" viewBox="0 0 1440 390">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1440" height="390" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">Admin · danh mục controller 6</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Danh sách từ mã nguồn; có file không đồng nghĩa đã được kích hoạt hoặc route an toàn để gọi</text>
+<text x="50" y="361" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">05-admin-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="60" y="150" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="74" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">user/user.php</text>
+<text x="74" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerUserUser</text>
+<text x="74" y="212" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, add, edit, delete, getList, getForm,</text>
+<text x="74" y="232" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">validateForm, validateDelete</text>
+<text x="74" y="298" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/user/user.php:1</text>
+<rect x="520" y="150" width="420" height="160" rx="10" fill="#f1e5fc" stroke="#94a3b8"/>
+<text x="534" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">user/user_permission.php</text>
+<text x="534" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">ControllerUserUserPermission</text>
+<text x="534" y="212" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index, add, edit, delete, getList, getForm,</text>
+<text x="534" y="232" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">validateForm, validateDelete</text>
+<text x="534" y="298" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">admin/controller/user/user_permission.php:1</text>
+</svg>

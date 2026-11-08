@@ -1,0 +1,12 @@
+---
+title: system · kernel và thư viện
+---
+flowchart TB
+    n1["engine/<br/>Action, Controller, Event, Loader, Model, Proxy, Registry, Router"]
+    n2["config/<br/>default.php, application.php, admin.php, install.php"]
+    n3["library/<br/>DB, Cache, Session, Template, Language, Request, Response, Url"]
+    n4["library/cart/<br/>Member, User, Currency; không có class Cart giỏ hàng"]
+    n5["helper/<br/>general.php, utf8.php, bbcode.php"]
+    n6["library/<br/>PaymentGateway, CloudStorage, Mail"]
+    n7["storage/<br/>cache, logs, download, upload, session, modification, vendor"]
+    n8["vendor/<br/>Twig, Braintree, Cardinity, Divido, SCSSPHP, WeChat<br/>+ phụ thuộc bắc cầu theo composer.lock"]

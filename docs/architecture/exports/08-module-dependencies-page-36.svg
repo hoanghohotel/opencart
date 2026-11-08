@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="360" viewBox="0 0 1440 360">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1440" height="360" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">application/event · phụ thuộc 1</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Mỗi hàng là load-&gt;model literal có thật. Truy cập bảng là tham chiếu SQL tĩnh ở cấp file model, không phải mọi method đều query mọi bảng.</text>
+<text x="50" y="331" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">08-module-dependencies · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="50" y="145" width="380" height="100" rx="10" fill="#dcf4ec" stroke="#94a3b8"/>
+<text x="64" y="167" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">event/translation.php</text>
+<text x="64" y="187" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index() · L4</text>
+<text x="64" y="233" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/event/translation.php:4</text>
+<rect x="500" y="145" width="360" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="514" y="167" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">model/design/translation</text>
+<text x="514" y="187" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">đã có file</text>
+<text x="514" y="233" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/design/translation.php:1</text>
+<rect x="950" y="145" width="440" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="964" y="167" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_translation</text>
+<polyline points="430,195.0 500,195.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="434.2" y="187.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">load-&gt;model</text>
+<polyline points="860,195.0 950,195.0" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="871.4" y="187.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">SQL cấp file</text>
+</svg>

@@ -1,0 +1,9 @@
+---
+title: admin/startup · phụ thuộc 1
+---
+flowchart TB
+    n1["startup/event.php<br/>index() · L5"]
+    n2["model/setting/event<br/>đã có file"]
+    n3["oc_event, oc_extension, oc_setting"]
+    n1 --> n2
+    n2 -.-> n3

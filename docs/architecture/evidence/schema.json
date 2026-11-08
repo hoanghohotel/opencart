@@ -1,0 +1,2821 @@
+[
+  {
+    "name": "oc_api",
+    "line": 13,
+    "columns": [
+      {
+        "name": "api_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "username",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "key",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      },
+      {
+        "name": "date_modified",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "api_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_api_ip",
+    "line": 28,
+    "columns": [
+      {
+        "name": "api_ip_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "api_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "ip",
+        "definition": "varchar(40) NOT NULL"
+      }
+    ],
+    "pk": [
+      "api_ip_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_api_session",
+    "line": 40,
+    "columns": [
+      {
+        "name": "api_session_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "api_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "session_id",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "ip",
+        "definition": "varchar(40) NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      },
+      {
+        "name": "date_modified",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "api_session_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_banner",
+    "line": 55,
+    "columns": [
+      {
+        "name": "banner_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL"
+      }
+    ],
+    "pk": [
+      "banner_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_banner_image",
+    "line": 70,
+    "columns": [
+      {
+        "name": "banner_image_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "banner_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "language_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "title",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "link",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "image",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "sort_order",
+        "definition": "int NOT NULL DEFAULT '0'"
+      }
+    ],
+    "pk": [
+      "banner_image_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_blog",
+    "line": 89,
+    "columns": [
+      {
+        "name": "blog_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "blog_category_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "title",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "description",
+        "definition": "mediumtext NOT NULL"
+      },
+      {
+        "name": "author",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "image",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "image_status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "trending",
+        "definition": "tinyint(1) NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "viewed",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      },
+      {
+        "name": "date_modified",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "blog_id"
+    ],
+    "indexes": [
+      {
+        "name": "blog_category_id",
+        "unique": false,
+        "columns": [
+          "blog_category_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=311 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_blog_category",
+    "line": 131,
+    "columns": [
+      {
+        "name": "blog_category_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "sort_order",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      }
+    ],
+    "pk": [
+      "blog_category_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_blog_comment",
+    "line": 151,
+    "columns": [
+      {
+        "name": "blog_comment_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "blog_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "parent_id",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "comment",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "blog_comment_id"
+    ],
+    "indexes": [
+      {
+        "name": "blog_id",
+        "unique": false,
+        "columns": [
+          "blog_id"
+        ]
+      },
+      {
+        "name": "parent_id",
+        "unique": false,
+        "columns": [
+          "parent_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_country",
+    "line": 173,
+    "columns": [
+      {
+        "name": "country_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "iso_code_2",
+        "definition": "varchar(2) NOT NULL"
+      },
+      {
+        "name": "iso_code_3",
+        "definition": "varchar(3) NOT NULL"
+      },
+      {
+        "name": "address_format",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "postcode_required",
+        "definition": "tinyint(1) NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      }
+    ],
+    "pk": [
+      "country_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=258 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_currency",
+    "line": 446,
+    "columns": [
+      {
+        "name": "currency_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "title",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "code",
+        "definition": "varchar(3) NOT NULL"
+      },
+      {
+        "name": "symbol_left",
+        "definition": "varchar(12) NOT NULL"
+      },
+      {
+        "name": "symbol_right",
+        "definition": "varchar(12) NOT NULL"
+      },
+      {
+        "name": "decimal_place",
+        "definition": "char(1) NOT NULL"
+      },
+      {
+        "name": "value",
+        "definition": "double(15,8) NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL"
+      },
+      {
+        "name": "date_modified",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "currency_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_download",
+    "line": 469,
+    "columns": [
+      {
+        "name": "download_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "description",
+        "definition": "mediumtext NOT NULL"
+      },
+      {
+        "name": "filename",
+        "definition": "varchar(160) NOT NULL"
+      },
+      {
+        "name": "mask",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "href",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "download_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=83 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_event",
+    "line": 563,
+    "columns": [
+      {
+        "name": "event_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "code",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "trigger",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "action",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL"
+      },
+      {
+        "name": "sort_order",
+        "definition": "int NOT NULL"
+      }
+    ],
+    "pk": [
+      "event_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_extension",
+    "line": 578,
+    "columns": [
+      {
+        "name": "extension_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "extension_category_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "description",
+        "definition": "mediumtext NOT NULL"
+      },
+      {
+        "name": "documentation",
+        "definition": "mediumtext NOT NULL"
+      },
+      {
+        "name": "history",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "license",
+        "definition": "tinyint(1) NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "license_period",
+        "definition": "int NOT NULL DEFAULT '12'"
+      },
+      {
+        "name": "price",
+        "definition": "decimal(15,4) NOT NULL DEFAULT '0.0000'"
+      },
+      {
+        "name": "image",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "banner",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "tag",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "cloud",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "recommended",
+        "definition": "tinyint(1) NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "featured",
+        "definition": "tinyint(1) NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "publish",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "notify",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "alert",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "sales",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "downloaded",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "rating",
+        "definition": "int NOT NULL DEFAULT '5'"
+      },
+      {
+        "name": "rating_total",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "reviews_enabled",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "comments_enabled",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      },
+      {
+        "name": "date_modified",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "extension_id"
+    ],
+    "indexes": [
+      {
+        "name": "extension_category_id",
+        "unique": false,
+        "columns": [
+          "extension_category_id"
+        ]
+      },
+      {
+        "name": "member_id",
+        "unique": false,
+        "columns": [
+          "member_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=49867 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_extension_category",
+    "line": 655,
+    "columns": [
+      {
+        "name": "extension_category_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "sort_order",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      }
+    ],
+    "pk": [
+      "extension_category_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_extension_comment",
+    "line": 684,
+    "columns": [
+      {
+        "name": "extension_comment_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "extension_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "parent_id",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "comment",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "extension_comment_id"
+    ],
+    "indexes": [
+      {
+        "name": "extension_id",
+        "unique": false,
+        "columns": [
+          "extension_id"
+        ]
+      },
+      {
+        "name": "parent_id",
+        "unique": false,
+        "columns": [
+          "parent_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_extension_download",
+    "line": 708,
+    "columns": [
+      {
+        "name": "extension_download_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "extension_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "filename",
+        "definition": "varchar(160) NOT NULL"
+      },
+      {
+        "name": "mask",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "cloud",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "approved",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "downloaded",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "extension_download_id"
+    ],
+    "indexes": [
+      {
+        "name": "extension_id",
+        "unique": false,
+        "columns": [
+          "extension_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_extension_download_path",
+    "line": 765,
+    "columns": [
+      {
+        "name": "extension_download_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "download_id",
+        "definition": "int NOT NULL"
+      }
+    ],
+    "pk": [
+      "extension_download_id",
+      "download_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_extension_image",
+    "line": 1250,
+    "columns": [
+      {
+        "name": "extension_image_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "extension_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "image",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "sort_order",
+        "definition": "int NOT NULL DEFAULT '0'"
+      }
+    ],
+    "pk": [
+      "extension_image_id"
+    ],
+    "indexes": [
+      {
+        "name": "extension_id",
+        "unique": false,
+        "columns": [
+          "extension_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_extension_promotion",
+    "line": 1302,
+    "columns": [
+      {
+        "name": "promotion_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "extension_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "days",
+        "definition": "int NOT NULL DEFAULT '30'"
+      },
+      {
+        "name": "total",
+        "definition": "decimal(15,4) NOT NULL DEFAULT '0.0000'"
+      },
+      {
+        "name": "payment_method",
+        "definition": "varchar(64) NOT NULL DEFAULT 'PayPal'"
+      },
+      {
+        "name": "transaction_id",
+        "definition": "varchar(128) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "order_status_id",
+        "definition": "int NOT NULL DEFAULT '5'"
+      },
+      {
+        "name": "date_start",
+        "definition": "date NOT NULL"
+      },
+      {
+        "name": "date_end",
+        "definition": "date NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "promotion_id"
+    ],
+    "indexes": [
+      {
+        "name": "extension_id",
+        "unique": false,
+        "columns": [
+          "extension_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_extension_rating",
+    "line": 1329,
+    "columns": [
+      {
+        "name": "extension_rating_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "extension_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "order_id",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "functionality",
+        "definition": "int NOT NULL DEFAULT '5'"
+      },
+      {
+        "name": "appearance",
+        "definition": "int NOT NULL DEFAULT '5'"
+      },
+      {
+        "name": "user_friendly",
+        "definition": "int NOT NULL DEFAULT '5'"
+      },
+      {
+        "name": "support",
+        "definition": "int NOT NULL DEFAULT '5'"
+      },
+      {
+        "name": "documentation",
+        "definition": "int NOT NULL DEFAULT '5'"
+      },
+      {
+        "name": "rating",
+        "definition": "int NOT NULL DEFAULT '5'"
+      },
+      {
+        "name": "comment",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "extension_rating_id"
+    ],
+    "indexes": [
+      {
+        "name": "extension_id",
+        "unique": false,
+        "columns": [
+          "extension_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_information",
+    "line": 1357,
+    "columns": [
+      {
+        "name": "information_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "bottom",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "sort_order",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      }
+    ],
+    "pk": [
+      "information_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_information_description",
+    "line": 1374,
+    "columns": [
+      {
+        "name": "information_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "language_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "title",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "description",
+        "definition": "mediumtext NOT NULL"
+      },
+      {
+        "name": "meta_title",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "meta_description",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "meta_keyword",
+        "definition": "varchar(255) NOT NULL"
+      }
+    ],
+    "pk": [
+      "information_id",
+      "language_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_information_to_store",
+    "line": 1394,
+    "columns": [
+      {
+        "name": "information_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "store_id",
+        "definition": "int NOT NULL"
+      }
+    ],
+    "pk": [
+      "information_id",
+      "store_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_language",
+    "line": 1409,
+    "columns": [
+      {
+        "name": "language_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "code",
+        "definition": "varchar(5) NOT NULL"
+      },
+      {
+        "name": "locale",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "image",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "directory",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "sort_order",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL"
+      }
+    ],
+    "pk": [
+      "language_id"
+    ],
+    "indexes": [
+      {
+        "name": "name",
+        "unique": false,
+        "columns": [
+          "name"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_mail_log",
+    "line": 1430,
+    "columns": [
+      {
+        "name": "mail_log_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "recipient",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "sender",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "subject",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "engine",
+        "definition": "varchar(32) NOT NULL DEFAULT 'mail'"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "error",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "body",
+        "definition": "mediumtext NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "mail_log_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_member",
+    "line": 1448,
+    "columns": [
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "username",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "firstname",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "lastname",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "company",
+        "definition": "varchar(128) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "tax_id",
+        "definition": "varchar(64) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "email",
+        "definition": "varchar(96) NOT NULL"
+      },
+      {
+        "name": "telephone",
+        "definition": "varchar(32) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "image",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "country_id",
+        "definition": "int NOT NULL DEFAULT '222'"
+      },
+      {
+        "name": "password",
+        "definition": "varchar(40) NOT NULL"
+      },
+      {
+        "name": "salt",
+        "definition": "varchar(9) NOT NULL"
+      },
+      {
+        "name": "code",
+        "definition": "varchar(40) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "pin",
+        "definition": "varchar(10) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "pin_attempts",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "notify",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "verified",
+        "definition": "tinyint(1) NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "seller_status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "partner_status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "moderator",
+        "definition": "tinyint(1) NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "cloud",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "ip",
+        "definition": "varchar(40) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      },
+      {
+        "name": "date_modified",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "member_id"
+    ],
+    "indexes": [
+      {
+        "name": "email",
+        "unique": false,
+        "columns": [
+          "email"
+        ]
+      },
+      {
+        "name": "username",
+        "unique": false,
+        "columns": [
+          "username"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_member_ip",
+    "line": 1491,
+    "columns": [
+      {
+        "name": "member_ip_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "ip",
+        "definition": "varchar(40) NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "member_ip_id"
+    ],
+    "indexes": [
+      {
+        "name": "member_id",
+        "unique": false,
+        "columns": [
+          "member_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_member_login",
+    "line": 1510,
+    "columns": [
+      {
+        "name": "member_login_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "email",
+        "definition": "varchar(96) NOT NULL"
+      },
+      {
+        "name": "ip",
+        "definition": "varchar(40) NOT NULL"
+      },
+      {
+        "name": "total",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      },
+      {
+        "name": "date_modified",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "member_login_id"
+    ],
+    "indexes": [
+      {
+        "name": "email",
+        "unique": false,
+        "columns": [
+          "email"
+        ]
+      },
+      {
+        "name": "ip",
+        "unique": false,
+        "columns": [
+          "ip"
+        ]
+      }
+    ],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_member_partner",
+    "line": 1527,
+    "columns": [
+      {
+        "name": "member_partner_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "member_partner_type_id",
+        "definition": "int NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "member_partner_status_id",
+        "definition": "int NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "firstname",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "lastname",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "company",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "website",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "email",
+        "definition": "varchar(96) NOT NULL"
+      },
+      {
+        "name": "telephone",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "description_short",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "description_long",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "address_1",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "address_2",
+        "definition": "varchar(128) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "city",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "postcode",
+        "definition": "varchar(16) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "country_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "zone_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "image",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "facebook",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "twitter",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "linkedin",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      },
+      {
+        "name": "date_modified",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "member_partner_id"
+    ],
+    "indexes": [
+      {
+        "name": "member_id",
+        "unique": false,
+        "columns": [
+          "member_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_member_partner_status",
+    "line": 1572,
+    "columns": [
+      {
+        "name": "member_partner_status_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "image",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "sort_order",
+        "definition": "int NOT NULL DEFAULT '0'"
+      }
+    ],
+    "pk": [
+      "member_partner_status_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_member_partner_type",
+    "line": 1590,
+    "columns": [
+      {
+        "name": "member_partner_type_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "sort_order",
+        "definition": "int NOT NULL DEFAULT '0'"
+      }
+    ],
+    "pk": [
+      "member_partner_type_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_member_payment",
+    "line": 1607,
+    "columns": [
+      {
+        "name": "member_payment_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "type",
+        "definition": "varchar(32) NOT NULL DEFAULT 'card'"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "token",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "image",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "date_expire",
+        "definition": "varchar(32) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "default",
+        "definition": "tinyint(1) NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "member_payment_id"
+    ],
+    "indexes": [
+      {
+        "name": "member_id",
+        "unique": false,
+        "columns": [
+          "member_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_member_seller",
+    "line": 1626,
+    "columns": [
+      {
+        "name": "member_seller_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "firstname",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "lastname",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "email",
+        "definition": "varchar(96) NOT NULL"
+      },
+      {
+        "name": "support_email",
+        "definition": "varchar(96) NOT NULL"
+      },
+      {
+        "name": "telephone",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "website",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "payment_method",
+        "definition": "varchar(32) NOT NULL DEFAULT 'paypal'"
+      },
+      {
+        "name": "payoneer_token",
+        "definition": "varchar(128) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "payment_email",
+        "definition": "varchar(96) NOT NULL"
+      },
+      {
+        "name": "company",
+        "definition": "varchar(128) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "address_1",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "address_2",
+        "definition": "varchar(128) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "city",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "postcode",
+        "definition": "varchar(16) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "country_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "zone_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "notify",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "api_status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "api_url",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "commission",
+        "definition": "int NOT NULL DEFAULT '20'"
+      },
+      {
+        "name": "seller_group",
+        "definition": "varchar(64) NOT NULL DEFAULT 'Standard Seller (80%)'"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      },
+      {
+        "name": "date_modified",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "member_seller_id"
+    ],
+    "indexes": [
+      {
+        "name": "member_id",
+        "unique": false,
+        "columns": [
+          "member_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_member_store",
+    "line": 1667,
+    "columns": [
+      {
+        "name": "member_store_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "domain",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "username",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "secret",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      },
+      {
+        "name": "date_modified",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "member_store_id"
+    ],
+    "indexes": [
+      {
+        "name": "member_id",
+        "unique": false,
+        "columns": [
+          "member_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_member_transaction",
+    "line": 1687,
+    "columns": [
+      {
+        "name": "member_transaction_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "order_id",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "description",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "amount",
+        "definition": "decimal(15,4) NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "member_transaction_id"
+    ],
+    "indexes": [
+      {
+        "name": "member_id",
+        "unique": false,
+        "columns": [
+          "member_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_modification",
+    "line": 1707,
+    "columns": [
+      {
+        "name": "modification_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "extension_install_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "code",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "author",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "version",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "link",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "xml",
+        "definition": "mediumtext NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "modification_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_newsletter",
+    "line": 1726,
+    "columns": [
+      {
+        "name": "newsletter_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "email",
+        "definition": "varchar(96) NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "newsletter_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_order",
+    "line": 1738,
+    "columns": [
+      {
+        "name": "order_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "seller_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "extension_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "extension",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "quantity",
+        "definition": "int NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "price",
+        "definition": "decimal(15,4) NOT NULL DEFAULT '0.0000'"
+      },
+      {
+        "name": "total",
+        "definition": "decimal(15,4) NOT NULL DEFAULT '0.0000'"
+      },
+      {
+        "name": "payment_method",
+        "definition": "varchar(64) NOT NULL DEFAULT 'PayPal'"
+      },
+      {
+        "name": "transaction_id",
+        "definition": "varchar(128) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "order_status_id",
+        "definition": "int NOT NULL DEFAULT '5'"
+      },
+      {
+        "name": "ip",
+        "definition": "varchar(40) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      },
+      {
+        "name": "date_modified",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "order_id"
+    ],
+    "indexes": [
+      {
+        "name": "member_id",
+        "unique": false,
+        "columns": [
+          "member_id"
+        ]
+      },
+      {
+        "name": "seller_id",
+        "unique": false,
+        "columns": [
+          "seller_id"
+        ]
+      },
+      {
+        "name": "extension_id",
+        "unique": false,
+        "columns": [
+          "extension_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=1003 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_order_status",
+    "line": 1768,
+    "columns": [
+      {
+        "name": "order_status_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "language_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(32) NOT NULL"
+      }
+    ],
+    "pk": [
+      "order_status_id",
+      "language_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_seo_url",
+    "line": 1789,
+    "columns": [
+      {
+        "name": "seo_url_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "store_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "language_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "query",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "keyword",
+        "definition": "varchar(255) NOT NULL"
+      }
+    ],
+    "pk": [
+      "seo_url_id"
+    ],
+    "indexes": [
+      {
+        "name": "query",
+        "unique": false,
+        "columns": [
+          "query"
+        ]
+      },
+      {
+        "name": "keyword",
+        "unique": false,
+        "columns": [
+          "keyword"
+        ]
+      }
+    ],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_session",
+    "line": 1805,
+    "columns": [
+      {
+        "name": "session_id",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "data",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "expire",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "session_id"
+    ],
+    "indexes": [],
+    "engine": "InnoDB DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_setting",
+    "line": 1817,
+    "columns": [
+      {
+        "name": "setting_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "store_id",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "code",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "key",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "value",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "serialized",
+        "definition": "tinyint(1) NOT NULL"
+      }
+    ],
+    "pk": [
+      "setting_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=80 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_showcase",
+    "line": 1913,
+    "columns": [
+      {
+        "name": "showcase_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "showcase_category_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "link",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "image",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "date_launch",
+        "definition": "date NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "showcase_id"
+    ],
+    "indexes": [
+      {
+        "name": "showcase_category_id",
+        "unique": false,
+        "columns": [
+          "showcase_category_id"
+        ]
+      },
+      {
+        "name": "member_id",
+        "unique": false,
+        "columns": [
+          "member_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_showcase_category",
+    "line": 1953,
+    "columns": [
+      {
+        "name": "showcase_category_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "sort_order",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      }
+    ],
+    "pk": [
+      "showcase_category_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_statistics",
+    "line": 1975,
+    "columns": [
+      {
+        "name": "statistics_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "code",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "value",
+        "definition": "decimal(15,4) NOT NULL"
+      }
+    ],
+    "pk": [
+      "statistics_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_store",
+    "line": 1993,
+    "columns": [
+      {
+        "name": "store_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "url",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "ssl",
+        "definition": "varchar(255) NOT NULL"
+      }
+    ],
+    "pk": [
+      "store_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_subscription",
+    "line": 2006,
+    "columns": [
+      {
+        "name": "subscription_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "subscription_plan_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "member_payment_id",
+        "definition": "int NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "subscription_status_id",
+        "definition": "int NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "admin_email",
+        "definition": "varchar(96) NOT NULL"
+      },
+      {
+        "name": "admin_username",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "store_status",
+        "definition": "varchar(32) NOT NULL DEFAULT 'running'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      },
+      {
+        "name": "date_modified",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "subscription_id"
+    ],
+    "indexes": [
+      {
+        "name": "member_id",
+        "unique": false,
+        "columns": [
+          "member_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_subscription_backup",
+    "line": 2030,
+    "columns": [
+      {
+        "name": "backup_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "subscription_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "type",
+        "definition": "varchar(32) NOT NULL DEFAULT 'file'"
+      },
+      {
+        "name": "status",
+        "definition": "varchar(32) NOT NULL DEFAULT 'complete'"
+      },
+      {
+        "name": "created",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "backup_id"
+    ],
+    "indexes": [
+      {
+        "name": "subscription_id",
+        "unique": false,
+        "columns": [
+          "subscription_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=103 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_subscription_domain",
+    "line": 2049,
+    "columns": [
+      {
+        "name": "subscription_domain_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "subscription_id",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "varchar(32) NOT NULL DEFAULT 'active'"
+      },
+      {
+        "name": "pointed",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "subscription_domain_id"
+    ],
+    "indexes": [
+      {
+        "name": "member_id",
+        "unique": false,
+        "columns": [
+          "member_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_subscription_history",
+    "line": 2069,
+    "columns": [
+      {
+        "name": "subscription_history_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "subscription_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "comment",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "subscription_history_id"
+    ],
+    "indexes": [
+      {
+        "name": "subscription_id",
+        "unique": false,
+        "columns": [
+          "subscription_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_subscription_plan",
+    "line": 2087,
+    "columns": [
+      {
+        "name": "subscription_plan_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "description",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "price",
+        "definition": "decimal(15,2) NOT NULL DEFAULT '0.00'"
+      },
+      {
+        "name": "label_active",
+        "definition": "tinyint(1) NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "sort_order",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      }
+    ],
+    "pk": [
+      "subscription_plan_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_subscription_status",
+    "line": 2108,
+    "columns": [
+      {
+        "name": "subscription_status_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(64) NOT NULL"
+      }
+    ],
+    "pk": [
+      "subscription_status_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_subscription_transaction",
+    "line": 2125,
+    "columns": [
+      {
+        "name": "subscription_transaction_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "subscription_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "member_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "transaction_id",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "amount",
+        "definition": "decimal(15,2) NOT NULL"
+      },
+      {
+        "name": "store_name",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "transaction_card",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "transaction_card_image",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "subscription_transaction_id"
+    ],
+    "indexes": [
+      {
+        "name": "member_id",
+        "unique": false,
+        "columns": [
+          "member_id"
+        ]
+      }
+    ],
+    "engine": "MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_support_enquiry",
+    "line": 2147,
+    "columns": [
+      {
+        "name": "enquiry_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "type",
+        "definition": "varchar(32) NOT NULL DEFAULT 'contact'"
+      },
+      {
+        "name": "reason",
+        "definition": "varchar(64) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "partner_id",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "email",
+        "definition": "varchar(96) NOT NULL"
+      },
+      {
+        "name": "telephone",
+        "definition": "varchar(64) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "company",
+        "definition": "varchar(128) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "website",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "country_id",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "order_id",
+        "definition": "varchar(64) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "version_id",
+        "definition": "int NOT NULL DEFAULT '0'"
+      },
+      {
+        "name": "extension_url",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "original_url",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "subject",
+        "definition": "varchar(255) NOT NULL DEFAULT ''"
+      },
+      {
+        "name": "enquiry",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "enquiry_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_translation",
+    "line": 2176,
+    "columns": [
+      {
+        "name": "translation_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "store_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "language_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "route",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "key",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "value",
+        "definition": "text NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "translation_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_upload",
+    "line": 2192,
+    "columns": [
+      {
+        "name": "upload_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "filename",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "code",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "upload_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_user",
+    "line": 2206,
+    "columns": [
+      {
+        "name": "user_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "user_group_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "username",
+        "definition": "varchar(20) NOT NULL"
+      },
+      {
+        "name": "password",
+        "definition": "varchar(40) NOT NULL"
+      },
+      {
+        "name": "salt",
+        "definition": "varchar(9) NOT NULL"
+      },
+      {
+        "name": "firstname",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "lastname",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "email",
+        "definition": "varchar(96) NOT NULL"
+      },
+      {
+        "name": "image",
+        "definition": "varchar(255) NOT NULL"
+      },
+      {
+        "name": "code",
+        "definition": "varchar(40) NOT NULL"
+      },
+      {
+        "name": "ip",
+        "definition": "varchar(40) NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL"
+      },
+      {
+        "name": "date_added",
+        "definition": "datetime NOT NULL"
+      }
+    ],
+    "pk": [
+      "user_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_user_group",
+    "line": 2231,
+    "columns": [
+      {
+        "name": "user_group_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(64) NOT NULL"
+      },
+      {
+        "name": "permission",
+        "definition": "text NOT NULL"
+      }
+    ],
+    "pk": [
+      "user_group_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  },
+  {
+    "name": "oc_zone",
+    "line": 2246,
+    "columns": [
+      {
+        "name": "zone_id",
+        "definition": "int NOT NULL AUTO_INCREMENT"
+      },
+      {
+        "name": "country_id",
+        "definition": "int NOT NULL"
+      },
+      {
+        "name": "name",
+        "definition": "varchar(128) NOT NULL"
+      },
+      {
+        "name": "code",
+        "definition": "varchar(32) NOT NULL"
+      },
+      {
+        "name": "status",
+        "definition": "tinyint(1) NOT NULL DEFAULT '1'"
+      }
+    ],
+    "pk": [
+      "zone_id"
+    ],
+    "indexes": [],
+    "engine": "MyISAM AUTO_INCREMENT=4239 DEFAULT CHARSET=utf8mb3",
+    "foreign_keys": []
+  }
+]

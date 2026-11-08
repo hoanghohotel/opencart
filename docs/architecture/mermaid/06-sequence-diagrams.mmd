@@ -1,0 +1,19 @@
+---
+title: Request frontend → response
+---
+sequenceDiagram
+    participant A0 as Client
+    participant A1 as index / framework
+    participant A2 as Router / Action
+    participant A3 as Controller / Loader
+    participant A4 as Model / DB
+    participant A5 as Template / Response
+    A0->>A1: GET route=marketplace/extension
+    A1->>A2: pre-actions rồi dispatch startup/router
+    A2->>A3: before → Action::execute(index)
+    A3->>A4: getTotalExtensions rồi getExtensions
+    A4->>A3: SQL rows qua DB::query()
+    A3->>A5: load-&gt;view(extension_list) → setOutput
+    A3->>A2: return → controller after
+    A1->>A5: Response::output()
+    A5->>A0: HTTP HTML

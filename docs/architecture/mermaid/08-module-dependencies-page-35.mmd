@@ -1,0 +1,13 @@
+---
+title: application/common · phụ thuộc 1
+---
+flowchart TB
+    n1["common/footer.php<br/>index() · L4"]
+    n2["model/cms/information<br/>đã có file"]
+    n3["oc_information, oc_information_description"]
+    n4["common/image.php<br/>index() · L67"]
+    n5["model/tool/image<br/>đã có file"]
+    n6["Không có SQL literal được trích xuất"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5

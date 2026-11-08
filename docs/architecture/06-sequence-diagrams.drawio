@@ -1,0 +1,809 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" agent="source-evidence-generator" version="24.7.17" type="device">
+  <diagram id="06-sequence-diagrams-1" name="Request frontend → response">
+    <mxGraphModel dx="1670" dy="1212" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1670" pageHeight="1212" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Request frontend → response" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1570" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Trình tự rút gọn; pre-actions chi tiết ở 03; session close là shutdown sau xử lý." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1570" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="06-sequence-diagrams · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1170" width="1570" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="Client" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="50" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n2" value="index / framework&#10;[system/framework.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="315" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n3" value="Router / Action&#10;[system/engine/action.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="580" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n4" value="Controller / Loader&#10;[application/controller/startup/router.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="845" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n5" value="Model / DB&#10;[application/model/marketplace/extension.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="1110" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n6" value="Template / Response&#10;[system/library/template/twig.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="1375" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n7" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="1130" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n8" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="1130" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n9" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="1130" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n10" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="1130" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n11" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="1130" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n12" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1486" y="1130" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n13" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="285" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n14" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="285" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n15" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="375" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n16" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="375" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n17" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="465" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n18" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="465" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n19" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="555" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n20" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="555" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n21" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="645" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n22" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="645" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n23" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="735" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n24" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1486" y="735" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n25" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="825" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n26" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="825" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n27" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="915" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n28" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1486" y="915" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n29" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1486" y="1005" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n30" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="1005" width="2" height="2" />
+        </mxCell>
+        <mxCell id="e0" value="" edge="1" parent="1" source="n1" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" edge="1" parent="1" source="n2" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" value="" edge="1" parent="1" source="n5" target="n11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e5" value="" edge="1" parent="1" source="n6" target="n12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e6" value="1. GET route=marketplace/extension" edge="1" parent="1" source="n13" target="n14" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e7" value="2. pre-actions rồi dispatch startup/router" edge="1" parent="1" source="n15" target="n16" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e8" value="3. before → Action::execute(index)" edge="1" parent="1" source="n17" target="n18" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e9" value="4. getTotalExtensions rồi getExtensions" edge="1" parent="1" source="n19" target="n20" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e10" value="5. SQL rows qua DB::query()" edge="1" parent="1" source="n21" target="n22" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e11" value="6. load-&gt;view(extension_list) → setOutput" edge="1" parent="1" source="n23" target="n24" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e12" value="7. return → controller after" edge="1" parent="1" source="n25" target="n26" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e13" value="8. Response::output()" edge="1" parent="1" source="n27" target="n28" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e14" value="9. HTTP HTML" edge="1" parent="1" source="n29" target="n30" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="06-sequence-diagrams-2" name="Đăng nhập member · nhánh thành công">
+    <mxGraphModel dx="1440" dy="1122" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1122" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Đăng nhập member · nhánh thành công" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Sai mật khẩu → addLoginAttempt; chưa verified → mail/register. Magic-link là nhánh riêng trong index()." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="06-sequence-diagrams · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="1080" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="Browser" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="50" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n2" value="AccountLogin&#10;[application/controller/account/login.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="315" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n3" value="ModelAccountMember&#10;[application/model/account/member.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="580" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n4" value="Cart\Member&#10;[system/library/cart/member.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="845" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n5" value="DB / Session&#10;[system/library/session/db.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="1110" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n6" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="1040" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n7" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="1040" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n8" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="1040" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n9" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="1040" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n10" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="1040" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n11" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="285" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n12" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="285" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n13" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="375" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n14" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="375" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n15" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="465" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n16" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="465" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n17" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="555" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n18" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="555" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n19" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="645" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n20" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="645" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n21" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="735" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n22" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="735" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n23" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="825" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n24" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="825" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n25" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="915" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n26" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="915" width="2" height="2" />
+        </mxCell>
+        <mxCell id="e0" value="" edge="1" parent="1" source="n1" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" edge="1" parent="1" source="n2" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" value="" edge="1" parent="1" source="n5" target="n10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e5" value="1. POST email + password → validate()" edge="1" parent="1" source="n11" target="n12" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e6" value="2. getMemberByLogin(email)" edge="1" parent="1" source="n13" target="n14" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e7" value="3. SELECT oc_member" edge="1" parent="1" source="n15" target="n16" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e8" value="4. login(email,password) nếu active + verified" edge="1" parent="1" source="n17" target="n18" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e9" value="5. SELECT member; set session token; UPDATE ip; SELECT member_ip" edge="1" parent="1" source="n19" target="n20" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e10" value="6. deleteLoginAttempts(email)" edge="1" parent="1" source="n21" target="n22" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e11" value="7. hasPin() rồi isIpVerified()" edge="1" parent="1" source="n23" target="n24" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e12" value="8. redirect PIN / security / saved redirect / account" edge="1" parent="1" source="n25" target="n26" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="06-sequence-diagrams-3" name="Yêu cầu thêm giỏ hàng · không có triển khai">
+    <mxGraphModel dx="1440" dy="493" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="493" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Yêu cầu thêm giỏ hàng · không có triển khai" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Các cơ chế/nhánh độc lập; không có thứ tự gọi giữa các khối. Luồng cụ thể xem sequence và dẫn chiếu source." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="06-sequence-diagrams · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="451" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="Không tìm thấy checkout/cart controller, Cart\Cart library hay oc_cart trong schema&#10;Không có bằng chứng để vẽ sequence add-to-cart" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe4e4;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n2" value="Hành vi có thật: extension_info.twig Buy → AJAX checkout/checkout&#10;Truyền extension_id và quantity trực tiếp, không lưu basket&#10;[application/view/template/marketplace/extension_info.twig:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="305" width="1180" height="108" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="06-sequence-diagrams-4" name="Checkout · chọn phương thức thanh toán">
+    <mxGraphModel dx="1440" dy="942" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="942" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Checkout · chọn phương thức thanh toán" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Gate sai trả 401 + Location login; đây là mua trực tiếp một extension." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="06-sequence-diagrams · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="900" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="Browser / modal&#10;[application/view/template/marketplace/extension_info.twig:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="50" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n2" value="CheckoutCheckout&#10;[application/controller/checkout/checkout.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="315" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n3" value="Extension model&#10;[application/model/marketplace/extension.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="580" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n4" value="Payment model&#10;[application/model/account/payment.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="845" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n5" value="PaymentGateway&#10;[system/library/payment_gateway.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="1110" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n6" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="860" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n7" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="860" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n8" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="860" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n9" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="860" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n10" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="860" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n11" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="285" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n12" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="285" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n13" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="375" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n14" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="405" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n15" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="465" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n16" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="465" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n17" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="555" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n18" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="555" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n19" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="645" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n20" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="645" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n21" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="735" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n22" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="735" width="2" height="2" />
+        </mxCell>
+        <mxCell id="e0" value="" edge="1" parent="1" source="n1" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" edge="1" parent="1" source="n2" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" value="" edge="1" parent="1" source="n5" target="n10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e5" value="1. AJAX checkout/checkout + extension_id" edge="1" parent="1" source="n11" target="n12" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e6" value="2. isLogged / member_token gate" edge="1" parent="1" source="n13" target="n14" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="502" y="376" />
+              <mxPoint x="502" y="406" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" value="3. getExtension(extension_id)" edge="1" parent="1" source="n15" target="n16" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e8" value="4. getPayments(member_id)" edge="1" parent="1" source="n17" target="n18" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e9" value="5. isStripeEnabled / isBraintreeEnabled / isPayPalEnabled" edge="1" parent="1" source="n19" target="n20" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e10" value="6. view checkout/checkout → modal HTML" edge="1" parent="1" source="n21" target="n22" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="06-sequence-diagrams-5" name="Tạo đơn · ModelAccountOrder::addOrder">
+    <mxGraphModel dx="1440" dy="1032" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1032" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Tạo đơn · ModelAccountOrder::addOrder" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="SQL seed dùng MyISAM; method không mở transaction bao phủ chuỗi ghi này." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="06-sequence-diagrams · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="990" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="Caller&#10;[application/controller/checkout/payment.php:217]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="50" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n2" value="ModelAccountOrder&#10;[application/model/account/order.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="315" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n3" value="DB&#10;[system/library/db/mysqli.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="580" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n4" value="Mail controller&#10;[application/controller/mail/order.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="845" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n5" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n6" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n7" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n8" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n9" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="285" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n10" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="285" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n11" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="375" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n12" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="375" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n13" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="465" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n14" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="465" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n15" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="555" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n16" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="555" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n17" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="645" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n18" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="645" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n19" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="735" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n20" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="735" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n21" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="825" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n22" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="825" width="2" height="2" />
+        </mxCell>
+        <mxCell id="e0" value="" edge="1" parent="1" source="n1" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" edge="1" parent="1" source="n2" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" value="1. addOrder(data)" edge="1" parent="1" source="n9" target="n10" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e5" value="2. SELECT extension nếu thiếu seller/name" edge="1" parent="1" source="n11" target="n12" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e6" value="3. INSERT oc_order; getLastId()" edge="1" parent="1" source="n13" target="n14" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e7" value="4. Nếu complete: UPDATE extension.sales" edge="1" parent="1" source="n15" target="n16" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e8" value="5. Nếu seller + total&gt;0: SELECT commission; INSERT member_transaction" edge="1" parent="1" source="n17" target="n18" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e9" value="6. load-&gt;controller(mail/order, order_id,status=true)" edge="1" parent="1" source="n19" target="n20" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e10" value="7. return order_id" edge="1" parent="1" source="n21" target="n22" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="06-sequence-diagrams-6" name="Thanh toán thẻ · confirm pending stripe/braintree">
+    <mxGraphModel dx="1440" dy="1032" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1032" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Thanh toán thẻ · confirm pending stripe/braintree" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Chỉ nhánh thẻ pending; nhánh fallback/PayPal không được mô tả là charge thành công." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="06-sequence-diagrams · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="990" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="Browser&#10;[application/view/template/checkout/confirm.twig:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="50" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n2" value="CheckoutPayment&#10;[application/controller/checkout/payment.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="315" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n3" value="PaymentGateway&#10;[system/library/payment_gateway.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="580" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n4" value="Gateway HTTP" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="845" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n5" value="ModelAccountOrder&#10;[application/model/account/order.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="1110" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n6" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n7" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n8" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n9" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n10" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n11" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="285" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n12" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="285" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n13" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="375" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n14" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="375" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n15" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="465" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n16" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="465" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n17" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="555" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n18" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="555" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n19" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="645" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n20" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="675" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n21" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="735" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n22" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="735" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n23" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="825" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n24" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="825" width="2" height="2" />
+        </mxCell>
+        <mxCell id="e0" value="" edge="1" parent="1" source="n1" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" edge="1" parent="1" source="n2" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" value="" edge="1" parent="1" source="n5" target="n10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e5" value="1. POST confirm → check isLogged + pending" edge="1" parent="1" source="n11" target="n12" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e6" value="2. chargeStripe(...) hoặc chargeBraintree(...)" edge="1" parent="1" source="n13" target="n14" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e7" value="3. Stripe API hoặc Braintree GraphQL" edge="1" parent="1" source="n15" target="n16" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e8" value="4. error / transaction_id" edge="1" parent="1" source="n17" target="n18" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e9" value="5. Nếu không lỗi: unset pending; gắn transaction_id nếu có" edge="1" parent="1" source="n19" target="n20" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="502" y="646" />
+              <mxPoint x="502" y="676" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" value="6. addOrder(order_data)" edge="1" parent="1" source="n21" target="n22" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e11" value="7. JSON error hoặc order_id + success" edge="1" parent="1" source="n23" target="n24" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="06-sequence-diagrams-7" name="Admin cập nhật “sản phẩm” = extension">
+    <mxGraphModel dx="1440" dy="1032" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="1032" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Admin cập nhật “sản phẩm” = extension" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Không có catalog/product controller. Request không hợp lệ quay về form hoặc permission/login action." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="06-sequence-diagrams · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="990" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="Admin browser" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="50" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n2" value="Pre-actions&#10;[system/config/admin.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="315" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n3" value="MarketplaceExtension&#10;[admin/controller/marketplace/extension.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="580" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n4" value="ModelMarketplaceExtension&#10;[admin/model/marketplace/extension.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="845" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n5" value="DB&#10;[install/opencart.sql:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#e5edff;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="1110" y="145" width="225" height="85" />
+        </mxCell>
+        <mxCell id="n6" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n7" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n8" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n9" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n10" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="950" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n11" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="285" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n12" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="285" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n13" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="426" y="375" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n14" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="375" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n15" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="465" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n16" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="495" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n17" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="555" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n18" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="555" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n19" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="645" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n20" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="645" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n21" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="956" y="735" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n22" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="1221" y="735" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n23" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="691" y="825" width="2" height="2" />
+        </mxCell>
+        <mxCell id="n24" value="" vertex="1" parent="1" style="ellipse;fillColor=none;strokeColor=none;">
+          <mxGeometry as="geometry" x="161" y="825" width="2" height="2" />
+        </mxCell>
+        <mxCell id="e0" value="" edge="1" parent="1" source="n1" target="n6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" edge="1" parent="1" source="n2" target="n7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e4" value="" edge="1" parent="1" source="n5" target="n10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;dashed=1;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e5" value="1. POST marketplace/extension/edit + user_token" edge="1" parent="1" source="n11" target="n12" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e6" value="2. login + access gate → edit()" edge="1" parent="1" source="n13" target="n14" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e7" value="3. load language/model → validateForm() [modify]" edge="1" parent="1" source="n15" target="n16" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1">
+            <Array as="points">
+              <mxPoint x="767" y="466" />
+              <mxPoint x="767" y="496" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e8" value="4. editExtension(extension_id,post)" edge="1" parent="1" source="n17" target="n18" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e9" value="5. UPDATE extension; DELETE/INSERT extension_image" edge="1" parent="1" source="n19" target="n20" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e10" value="6. SELECT old downloads; DELETE paths/downloads; INSERT new rows" edge="1" parent="1" source="n21" target="n22" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e11" value="7. session success → redirect list" edge="1" parent="1" source="n23" target="n24" style="edgeStyle=none;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

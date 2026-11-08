@@ -1,0 +1,19 @@
+---
+title: Frontend · thứ tự khởi tạo
+---
+flowchart TB
+    n1["index.php → config.php → system/startup.php → start(application)"]
+    n2["startup.php: vendor autoload, library autoloader, engine classes, helpers<br/>framework.php: Registry → Config(default, application) → Log → Event → Loader"]
+    n3["framework.php: Request → Response → DB (+ SET time_zone) → Session object<br/>Session chưa start vì application.session_autostart=false"]
+    n4["Cache → Language → Document → autoload → Router::dispatch()"]
+    n5["pre-actions: startup/session → startup/startup → startup/error<br/>→ startup/event → startup/maintenance → startup/seo_url"]
+    n6["startup/startup: settings + store URL, language, Cart\Member, PIN/IP gate, currency<br/>Gán member_token từ session vào request khi đã đăng nhập"]
+    n7["startup/router::index() → controller before → Action::execute()<br/>→ controller after → framework Response::output()"]
+    n8["Shutdown: Session::close() → Session\DB::write() → oc_session"]
+    n1 --> n2
+    n2 --> n3
+    n3 --> n4
+    n4 --> n5
+    n5 --> n6
+    n6 --> n7
+    n7 --> n8

@@ -1,0 +1,15 @@
+---
+title: Tạo đơn · ModelAccountOrder::addOrder
+---
+sequenceDiagram
+    participant A0 as Caller
+    participant A1 as ModelAccountOrder
+    participant A2 as DB
+    participant A3 as Mail controller
+    A0->>A1: addOrder(data)
+    A1->>A2: SELECT extension nếu thiếu seller/name
+    A1->>A2: INSERT oc_order; getLastId()
+    A1->>A2: Nếu complete: UPDATE extension.sales
+    A1->>A2: Nếu seller + total&gt;0: SELECT commission; INSERT member_transaction
+    A1->>A3: load-&gt;controller(mail/order, order_id,status=true)
+    A1->>A0: return order_id

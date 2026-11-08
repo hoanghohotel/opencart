@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1255" viewBox="0 0 1440 1255">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1440" height="1255" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">application/mail · phụ thuộc 1</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Mỗi hàng là load-&gt;model literal có thật. Truy cập bảng là tham chiếu SQL tĩnh ở cấp file model, không phải mọi method đều query mọi bảng.</text>
+<text x="50" y="1226" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">08-module-dependencies · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="50" y="145" width="380" height="100" rx="10" fill="#dcf4ec" stroke="#94a3b8"/>
+<text x="64" y="167" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">mail/comment.php</text>
+<text x="64" y="187" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index() · L11</text>
+<text x="64" y="233" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/mail/comment.php:11</text>
+<rect x="500" y="145" width="360" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="514" y="167" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">model/marketplace/extension</text>
+<text x="514" y="187" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">đã có file</text>
+<text x="514" y="233" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/marketplace/extension.php:1</text>
+<rect x="950" y="145" width="440" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="964" y="167" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_download, oc_extension, oc_extension_category,</text>
+<text x="964" y="184" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_extension_comment, oc_extension_download,</text>
+<text x="964" y="201" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_extension_download_path, oc_extension_image,</text>
+<text x="964" y="218" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_extension_promotion, oc_extension_rating,</text>
+<text x="964" y="235" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_member, oc_member_seller</text>
+<rect x="50" y="300" width="380" height="100" rx="10" fill="#dcf4ec" stroke="#94a3b8"/>
+<text x="64" y="322" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">mail/comment.php</text>
+<text x="64" y="342" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index() · L12</text>
+<text x="64" y="388" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/mail/comment.php:12</text>
+<rect x="500" y="300" width="360" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="514" y="322" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">model/account/member</text>
+<text x="514" y="342" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">đã có file</text>
+<text x="514" y="388" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/account/member.php:1</text>
+<rect x="950" y="300" width="440" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="964" y="322" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_member, oc_member_ip, oc_member_login,</text>
+<text x="964" y="342" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_newsletter</text>
+<rect x="50" y="455" width="380" height="100" rx="10" fill="#dcf4ec" stroke="#94a3b8"/>
+<text x="64" y="477" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">mail/extension.php</text>
+<text x="64" y="497" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index() · L9</text>
+<text x="64" y="543" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/mail/extension.php:9</text>
+<rect x="500" y="455" width="360" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="514" y="477" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">model/marketplace/extension</text>
+<text x="514" y="497" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">đã có file</text>
+<text x="514" y="543" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/marketplace/extension.php:1</text>
+<rect x="950" y="455" width="440" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="964" y="477" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_download, oc_extension, oc_extension_category,</text>
+<text x="964" y="494" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_extension_comment, oc_extension_download,</text>
+<text x="964" y="511" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_extension_download_path, oc_extension_image,</text>
+<text x="964" y="528" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_extension_promotion, oc_extension_rating,</text>
+<text x="964" y="545" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_member, oc_member_seller</text>
+<rect x="50" y="610" width="380" height="100" rx="10" fill="#dcf4ec" stroke="#94a3b8"/>
+<text x="64" y="632" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">mail/extension.php</text>
+<text x="64" y="652" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index() · L10</text>
+<text x="64" y="698" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/mail/extension.php:10</text>
+<rect x="500" y="610" width="360" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="514" y="632" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">model/tool/image</text>
+<text x="514" y="652" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">đã có file</text>
+<text x="514" y="698" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/tool/image.php:1</text>
+<rect x="950" y="610" width="440" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="964" y="632" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">Không có SQL literal được trích xuất</text>
+<rect x="50" y="765" width="380" height="100" rx="10" fill="#dcf4ec" stroke="#94a3b8"/>
+<text x="64" y="787" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">mail/order.php</text>
+<text x="64" y="807" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index() · L16</text>
+<text x="64" y="853" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/mail/order.php:16</text>
+<rect x="500" y="765" width="360" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="514" y="787" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">model/account/order</text>
+<text x="514" y="807" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">đã có file</text>
+<text x="514" y="853" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/account/order.php:1</text>
+<rect x="950" y="765" width="440" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="964" y="787" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_country, oc_extension, oc_member,</text>
+<text x="964" y="807" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_member_seller, oc_member_transaction,</text>
+<text x="964" y="827" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_order, oc_order_status</text>
+<rect x="50" y="920" width="380" height="100" rx="10" fill="#dcf4ec" stroke="#94a3b8"/>
+<text x="64" y="942" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">mail/order.php</text>
+<text x="64" y="962" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index() · L17</text>
+<text x="64" y="1008" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/mail/order.php:17</text>
+<rect x="500" y="920" width="360" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="514" y="942" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">model/marketplace/extension</text>
+<text x="514" y="962" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">đã có file</text>
+<text x="514" y="1008" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/marketplace/extension.php:1</text>
+<rect x="950" y="920" width="440" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="964" y="942" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_download, oc_extension, oc_extension_category,</text>
+<text x="964" y="959" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_extension_comment, oc_extension_download,</text>
+<text x="964" y="976" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_extension_download_path, oc_extension_image,</text>
+<text x="964" y="993" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_extension_promotion, oc_extension_rating,</text>
+<text x="964" y="1010" font-family="DejaVu Sans,Arial,sans-serif" font-size="12" font-weight="normal" fill="#1e293b">oc_member, oc_member_seller</text>
+<rect x="50" y="1075" width="380" height="100" rx="10" fill="#dcf4ec" stroke="#94a3b8"/>
+<text x="64" y="1097" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">mail/order.php</text>
+<text x="64" y="1117" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">index() · L18</text>
+<text x="64" y="1163" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/controller/mail/order.php:18</text>
+<rect x="500" y="1075" width="360" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="514" y="1097" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">model/account/member</text>
+<text x="514" y="1117" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">đã có file</text>
+<text x="514" y="1163" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">application/model/account/member.php:1</text>
+<rect x="950" y="1075" width="440" height="100" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="964" y="1097" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_member, oc_member_ip, oc_member_login,</text>
+<text x="964" y="1117" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_newsletter</text>
+<polyline points="430,195.0 500,195.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="434.2" y="187.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">load-&gt;model</text>
+<polyline points="860,195.0 950,195.0" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="871.4" y="187.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">SQL cấp file</text>
+<polyline points="430,350.0 500,350.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="434.2" y="342.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">load-&gt;model</text>
+<polyline points="860,350.0 950,350.0" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="871.4" y="342.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">SQL cấp file</text>
+<polyline points="430,505.0 500,505.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="434.2" y="497.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">load-&gt;model</text>
+<polyline points="860,505.0 950,505.0" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="871.4" y="497.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">SQL cấp file</text>
+<polyline points="430,660.0 500,660.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="434.2" y="652.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">load-&gt;model</text>
+<polyline points="430,815.0 500,815.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="434.2" y="807.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">load-&gt;model</text>
+<polyline points="860,815.0 950,815.0" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="871.4" y="807.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">SQL cấp file</text>
+<polyline points="430,970.0 500,970.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="434.2" y="962.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">load-&gt;model</text>
+<polyline points="860,970.0 950,970.0" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="871.4" y="962.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">SQL cấp file</text>
+<polyline points="430,1125.0 500,1125.0" fill="none" stroke="#64748b" stroke-width="1.5"  marker-end="url(#arrow)"/>
+<text x="434.2" y="1117.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">load-&gt;model</text>
+<polyline points="860,1125.0 950,1125.0" fill="none" stroke="#64748b" stroke-width="1.5" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="871.4" y="1117.0" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#334155">SQL cấp file</text>
+</svg>

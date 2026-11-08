@@ -1,0 +1,367 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" agent="source-evidence-generator" version="24.7.17" type="device">
+  <diagram id="05-admin-flow-1" name="Đăng nhập quản trị và phân quyền">
+    <mxGraphModel dx="1440" dy="958" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="958" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Đăng nhập quản trị và phân quyền" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="05-admin-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="916" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="GET /admin → pre-action startup/login → common/login::index()&#10;[admin/controller/startup/login.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n2" value="POST common/login → validate() → user/user::getLoginAttempts()&#10;Chặn nếu vượt max_attempts trong một giờ&#10;[admin/controller/common/login.php:87]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="305" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n3" value="Cart\User::login() → oc_user; lưu session user_id&#10;Request kế tiếp: User::__construct() đọc oc_user_group.permission JSON&#10;[system/library/cart/user.php:42]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="460" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n4" value="Request kế tiếp: startup/login kiểm tra session + user_token&#10;startup/permission kiểm tra access; write controller kiểm tra modify&#10;[admin/controller/startup/permission.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="615" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n5" value="common/dashboard::index() query trực tiếp extension/member/order/partner/showcase&#10;KPI + recent orders/members/extensions → common/dashboard.twig&#10;[admin/controller/common/dashboard.php:3]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="770" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="e0" value="" edge="1" parent="1" source="n1" target="n2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" value="" edge="1" parent="1" source="n2" target="n3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" value="" edge="1" parent="1" source="n3" target="n4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e3" value="" edge="1" parent="1" source="n4" target="n5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=0;endArrow=block;fontSize=12;fontFamily=DejaVu Sans;labelBackgroundColor=#f8fafc;strokeColor=#64748b;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="05-admin-flow-2" name="Quản lý extension, category, member và order">
+    <mxGraphModel dx="1440" dy="958" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="958" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Quản lý extension, category, member và order" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Các cơ chế/nhánh độc lập; không có thứ tự gọi giữa các khối. Luồng cụ thể xem sequence và dẫn chiếu source." vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="05-admin-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="916" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="marketplace/extension index/add/edit/delete → ModelMarketplaceExtension&#10;validateForm/validateDelete kiểm tra modify + dữ liệu&#10;[admin/controller/marketplace/extension.php:35]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n2" value="editExtension(): UPDATE oc_extension → thay ảnh → thay downloads + version paths&#10;Đây là sản phẩm số; không có admin/catalog/product trong checkout&#10;[admin/model/marketplace/extension.php:33]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="305" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n3" value="marketplace/category → marketplace/category model → oc_extension_category&#10;member/member, member/seller, member/partner quản lý identity/profile&#10;[admin/controller/marketplace/category.php:5]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="460" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n4" value="sale/order::index()/info() → sale/order model&#10;Thông tin đơn / update trạng thái; xem method inventory cho endpoint chính xác&#10;[admin/controller/sale/order.php:5]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="615" width="1180" height="108" />
+        </mxCell>
+        <mxCell id="n5" value="setting/payment + setting/setting: gateway, SMTP, cloud storage settings&#10;Không tìm thấy controller shipping; không dựng quy trình vận chuyển&#10;[admin/controller/setting/payment.php:5]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff7d6;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="770" width="1180" height="108" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="05-admin-flow-3" name="Admin · danh mục controller 1">
+    <mxGraphModel dx="1450" dy="990" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="990" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Admin · danh mục controller 1" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Danh sách từ mã nguồn; có file không đồng nghĩa đã được kích hoạt hoặc route an toàn để gọi" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="05-admin-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="948" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="cloud/subscription.php&#10;ControllerCloudSubscription&#10;index, add, edit, delete, getFilterUrl, getList, getForm, validateForm, validateDelete&#10;[admin/controller/cloud/subscription.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n2" value="cms/blog.php&#10;ControllerCmsBlog&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/cms/blog.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n3" value="cms/blog_category.php&#10;ControllerCmsBlogCategory&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/cms/blog_category.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n4" value="cms/blog_comment.php&#10;ControllerCmsBlogComment&#10;index, edit, approve, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/cms/blog_comment.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n5" value="cms/download.php&#10;ControllerCmsDownload&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/cms/download.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n6" value="cms/information.php&#10;ControllerCmsInformation&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/cms/information.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n7" value="cms/showcase.php&#10;ControllerCmsShowcase&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/cms/showcase.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n8" value="common/column_left.php&#10;ControllerCommonColumnLeft&#10;index&#10;[admin/controller/common/column_left.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n9" value="common/dashboard.php&#10;ControllerCommonDashboard&#10;index&#10;[admin/controller/common/dashboard.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n10" value="common/developer.php&#10;ControllerCommonDeveloper&#10;index, edit, theme, sass&#10;[admin/controller/common/developer.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="750" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n11" value="common/filemanager.php&#10;ControllerCommonFileManager&#10;index, upload, folder, delete&#10;[admin/controller/common/filemanager.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="750" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n12" value="common/footer.php&#10;ControllerCommonFooter&#10;index&#10;[admin/controller/common/footer.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="750" width="420" height="160" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="05-admin-flow-4" name="Admin · danh mục controller 2">
+    <mxGraphModel dx="1450" dy="990" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="990" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Admin · danh mục controller 2" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Danh sách từ mã nguồn; có file không đồng nghĩa đã được kích hoạt hoặc route an toàn để gọi" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="05-admin-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="948" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="common/forgotten.php&#10;ControllerCommonForgotten&#10;index, validate&#10;[admin/controller/common/forgotten.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n2" value="common/header.php&#10;ControllerCommonHeader&#10;index&#10;[admin/controller/common/header.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n3" value="common/login.php&#10;ControllerCommonLogin&#10;index, validate&#10;[admin/controller/common/login.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n4" value="common/logout.php&#10;ControllerCommonLogout&#10;index&#10;[admin/controller/common/logout.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n5" value="common/profile.php&#10;ControllerCommonProfile&#10;index, validateForm&#10;[admin/controller/common/profile.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n6" value="common/reset.php&#10;ControllerCommonReset&#10;index, validate&#10;[admin/controller/common/reset.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n7" value="common/security.php&#10;ControllerCommonSecurity&#10;index, move&#10;[admin/controller/common/security.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n8" value="design/banner.php&#10;ControllerDesignBanner&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/design/banner.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n9" value="design/seo_url.php&#10;ControllerDesignSeoUrl&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/design/seo_url.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n10" value="error/not_found.php&#10;ControllerErrorNotFound&#10;index&#10;[admin/controller/error/not_found.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="750" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n11" value="error/permission.php&#10;ControllerErrorPermission&#10;index&#10;[admin/controller/error/permission.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="750" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n12" value="event/language.php&#10;ControllerEventLanguage&#10;index, before, after&#10;[admin/controller/event/language.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="750" width="420" height="160" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="05-admin-flow-5" name="Admin · danh mục controller 3">
+    <mxGraphModel dx="1450" dy="990" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="990" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Admin · danh mục controller 3" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Danh sách từ mã nguồn; có file không đồng nghĩa đã được kích hoạt hoặc route an toàn để gọi" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="05-admin-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="948" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="event/statistics.php&#10;ControllerEventStatistics&#10;removeReview, removeReturn&#10;[admin/controller/event/statistics.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n2" value="event/theme.php&#10;ControllerEventTheme&#10;index&#10;[admin/controller/event/theme.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n3" value="localisation/country.php&#10;ControllerLocalisationCountry&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete, country&#10;[admin/controller/localisation/country.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n4" value="localisation/currency.php&#10;ControllerLocalisationCurrency&#10;index, add, edit, delete, refresh, getList, getForm, validateForm, validateDelete, validateRefresh&#10;[admin/controller/localisation/currency.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n5" value="localisation/language.php&#10;ControllerLocalisationLanguage&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/localisation/language.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n6" value="localisation/order_status.php&#10;ControllerLocalisationOrderStatus&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/localisation/order_status.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n7" value="localisation/zone.php&#10;ControllerLocalisationZone&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/localisation/zone.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n8" value="mail/affiliate.php&#10;ControllerMailAffiliate&#10;approve, deny&#10;[admin/controller/mail/affiliate.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n9" value="mail/customer.php&#10;ControllerMailCustomer&#10;approve, deny&#10;[admin/controller/mail/customer.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n10" value="mail/forgotten.php&#10;ControllerMailForgotten&#10;index&#10;[admin/controller/mail/forgotten.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="750" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n11" value="mail/return.php&#10;ControllerMailReturn&#10;index&#10;[admin/controller/mail/return.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="750" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n12" value="mail/reward.php&#10;ControllerMailReward&#10;index&#10;[admin/controller/mail/reward.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="750" width="420" height="160" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="05-admin-flow-6" name="Admin · danh mục controller 4">
+    <mxGraphModel dx="1450" dy="990" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="990" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Admin · danh mục controller 4" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Danh sách từ mã nguồn; có file không đồng nghĩa đã được kích hoạt hoặc route an toàn để gọi" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="05-admin-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="948" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="mail/transaction.php&#10;ControllerMailTransaction&#10;index&#10;[admin/controller/mail/transaction.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n2" value="marketplace/category.php&#10;ControllerMarketplaceCategory&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/marketplace/category.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n3" value="marketplace/comment.php&#10;ControllerMarketplaceComment&#10;index, edit, approve, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/marketplace/comment.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n4" value="marketplace/extension.php&#10;ControllerMarketplaceExtension&#10;index, add, edit, delete, getFilterUrl, getList, getForm, validateForm, validateDelete&#10;[admin/controller/marketplace/extension.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n5" value="marketplace/promotion.php&#10;ControllerMarketplacePromotion&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/marketplace/promotion.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n6" value="member/member.php&#10;ControllerMemberMember&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/member/member.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n7" value="member/partner.php&#10;ControllerMemberPartner&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/member/partner.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n8" value="member/seller.php&#10;ControllerMemberSeller&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/member/seller.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n9" value="sale/order.php&#10;ControllerSaleOrder&#10;index, add, edit, delete, getList, info, getForm, validateForm, validateDelete, getStatusClass&#10;[admin/controller/sale/order.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n10" value="setting/payment.php&#10;ControllerSettingPayment&#10;index, testStripe, testBraintree, testPaypal, validate&#10;[admin/controller/setting/payment.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="750" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n11" value="setting/setting.php&#10;ControllerSettingSetting&#10;index, validate, testSmtp, testStorage&#10;[admin/controller/setting/setting.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="750" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n12" value="setting/store.php&#10;ControllerSettingStore&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/setting/store.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="750" width="420" height="160" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="05-admin-flow-7" name="Admin · danh mục controller 5">
+    <mxGraphModel dx="1450" dy="990" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1450" pageHeight="990" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Admin · danh mục controller 5" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1350" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Danh sách từ mã nguồn; có file không đồng nghĩa đã được kích hoạt hoặc route an toàn để gọi" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1350" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="05-admin-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="948" width="1350" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="startup/error.php&#10;ControllerStartupError&#10;index, handler&#10;[admin/controller/startup/error.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n2" value="startup/event.php&#10;ControllerStartupEvent&#10;index&#10;[admin/controller/startup/event.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n3" value="startup/login.php&#10;ControllerStartupLogin&#10;index&#10;[admin/controller/startup/login.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n4" value="startup/permission.php&#10;ControllerStartupPermission&#10;index&#10;[admin/controller/startup/permission.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n5" value="startup/router.php&#10;ControllerStartupRouter&#10;index&#10;[admin/controller/startup/router.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n6" value="startup/sass.php&#10;ControllerStartupSass&#10;index&#10;[admin/controller/startup/sass.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="350" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n7" value="startup/startup.php&#10;ControllerStartupStartup&#10;index&#10;[admin/controller/startup/startup.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n8" value="support/enquiry.php&#10;ControllerSupportEnquiry&#10;index, info, delete, getFilterUrl, getList, validateDelete&#10;[admin/controller/support/enquiry.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n9" value="tool/backup.php&#10;ControllerToolBackup&#10;index, import, export&#10;[admin/controller/tool/backup.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="550" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n10" value="tool/log.php&#10;ControllerToolLog&#10;index, download, clear&#10;[admin/controller/tool/log.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="750" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n11" value="tool/upload.php&#10;ControllerToolUpload&#10;index, delete, getList, validateDelete, download, upload&#10;[admin/controller/tool/upload.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="750" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n12" value="user/api.php&#10;ControllerUserApi&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete, deleteSession&#10;[admin/controller/user/api.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="980" y="750" width="420" height="160" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="05-admin-flow-8" name="Admin · danh mục controller 6">
+    <mxGraphModel dx="1440" dy="390" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1440" pageHeight="390" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="Admin · danh mục controller 6" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=27;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="25" width="1340" height="45" />
+        </mxCell>
+        <mxCell id="subtitle" value="Danh sách từ mã nguồn; có file không đồng nghĩa đã được kích hoạt hoặc route an toàn để gọi" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=14;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="78" width="1340" height="50" />
+        </mxCell>
+        <mxCell id="footer" value="05-admin-flow · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv" vertex="1" parent="1" style="text;html=0;align=left;verticalAlign=middle;whiteSpace=wrap;overflow=hidden;fontSize=13;fontFamily=DejaVu Sans;fontColor=#334155;">
+          <mxGeometry as="geometry" x="50" y="348" width="1340" height="30" />
+        </mxCell>
+        <mxCell id="n1" value="user/user.php&#10;ControllerUserUser&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/user/user.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="60" y="150" width="420" height="160" />
+        </mxCell>
+        <mxCell id="n2" value="user/user_permission.php&#10;ControllerUserUserPermission&#10;index, add, edit, delete, getList, getForm, validateForm, validateDelete&#10;[admin/controller/user/user_permission.php:1]" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#f1e5fc;strokeColor=#94a3b8;fontColor=#0f172a;fontSize=15;fontFamily=DejaVu Sans;align=left;verticalAlign=middle;spacingLeft=14;spacingRight=14;">
+          <mxGeometry as="geometry" x="520" y="150" width="420" height="160" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

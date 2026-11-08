@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="dependency-problems" name="Các điểm phụ thuộc có bằng chứng">
+    <mxGraphModel grid="1" page="1" pageWidth="1550" pageHeight="1250">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n0" value="CheckoutPayment và legacy endpoints&#10;PAY-01: nhiều đường addOrder" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe4e4;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="60" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n1" value="ModelAccountOrder → mail/order Controller&#10;QUAL-04: IO notification đồng bộ" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe4e4;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="560" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n2" value="Registry / magic model proxies&#10;QUAL-03; system/engine/loader.php" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="1060" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n3" value="Frontend startup ghi token request&#10;SEC-01; startup/startup.php:137" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe4e4;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="60" y="400" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n4" value="Controller token gate&#10;account/extension.php::delete" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#dcf4ec;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="560" y="400" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n5" value="Admin missing model targets&#10;QUAL-01: setting/statistics, setting/extension" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe4e4;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="1060" y="400" width="420" height="155" />
+        </mxCell>
+        <mxCell id="title" value="Các điểm phụ thuộc có bằng chứng&#10;Xanh: hiện tại; đỏ: finding; xanh lam: đề xuất; vàng: kế hoạch. Source audit, không benchmark." vertex="1" parent="1" style="text;whiteSpace=wrap;html=0;fontSize=22;align=left;">
+          <mxGeometry as="geometry" x="60" y="30" width="1420" height="100" />
+        </mxCell>
+        <mxCell id="e0" edge="1" parent="1" source="n0" target="n1" value="order/notification" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="n2" target="n0" value="shared mutable services" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="n3" target="n4" value="ghi đè trước kiểm tra" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;html=0;fontSize=13;labelBackgroundColor=#ffffff;">
+          <mxGeometry as="geometry" relative="1" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

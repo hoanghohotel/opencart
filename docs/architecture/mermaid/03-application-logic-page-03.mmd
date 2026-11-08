@@ -1,0 +1,10 @@
+---
+title: Event, localization và modification
+---
+flowchart TB
+    n1["framework.php đăng ký action_event từ config; Event::register() sắp theo priority"]
+    n2["startup/event → setting/event::getEvents() → oc_event<br/>Frontend lọc application/*; admin lọc admin/*; bỏ prefix trước register"]
+    n3["Loader::controller/model/view/language/config phát before/after<br/>Event::trigger() gọi Action; kết quả non-null có thể thay thế xử lý"]
+    n4["Frontend event/language before/after backup/restore; view inject language<br/>language/*/after → event/translation → design/translation → oc_translation"]
+    n5["Admin config có 2 khóa view/*/before: PHP giữ khóa sau<br/>Vì vậy event/theme ở khóa trước không được kích hoạt qua config này"]
+    n6["startup.php::modification() tìm file thay thế trong DIR_MODIFICATION<br/>Có oc_modification; chưa xác minh pipeline cài đặt/refresh OCMOD đầy đủ"]

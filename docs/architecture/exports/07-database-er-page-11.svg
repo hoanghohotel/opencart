@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1450" height="1055" viewBox="0 0 1450 1055">
+<defs><marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 Z" fill="#64748b"/></marker></defs>
+<rect width="1450" height="1055" fill="#f8fafc"/>
+<text x="50" y="52" font-family="DejaVu Sans,Arial,sans-serif" font-size="27" font-weight="bold" fill="#334155">Từ điển bảng 03</text>
+<text x="50" y="92" font-family="DejaVu Sans,Arial,sans-serif" font-size="14" font-weight="normal" fill="#334155">Tất cả 59 bảng được liệt kê; PK đúng theo DDL. Các cột còn lại xem evidence/schema.json và database-schema.md.</text>
+<text x="50" y="1026" font-family="DejaVu Sans,Arial,sans-serif" font-size="13" font-weight="normal" fill="#334155">07-database-er · 7fcbe3b27bb7 · Chứng cứ: evidence/diagram-trace.csv</text>
+<rect x="60" y="150" width="420" height="385" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="74" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_extension</text>
+<text x="74" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK: extension_id</text>
+<text x="74" y="212" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">extension_id</text>
+<text x="74" y="232" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">member_id</text>
+<text x="74" y="252" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">extension_category_id</text>
+<text x="74" y="272" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">28 cột · MyISAM</text>
+<text x="74" y="292" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">FK: không khai báo</text>
+<text x="74" y="523" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:578</text>
+<rect x="520" y="150" width="420" height="385" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="534" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_extension_category</text>
+<text x="534" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK: extension_category_id</text>
+<text x="534" y="212" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">extension_category_id</text>
+<text x="534" y="232" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">4 cột · MyISAM</text>
+<text x="534" y="252" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">FK: không khai báo</text>
+<text x="534" y="523" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:655</text>
+<rect x="980" y="150" width="420" height="385" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="994" y="172" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_extension_comment</text>
+<text x="994" y="192" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK: extension_comment_id</text>
+<text x="994" y="212" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">extension_comment_id</text>
+<text x="994" y="232" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">extension_id</text>
+<text x="994" y="252" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">parent_id</text>
+<text x="994" y="272" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">member_id</text>
+<text x="994" y="292" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">7 cột · MyISAM</text>
+<text x="994" y="312" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">FK: không khai báo</text>
+<text x="994" y="523" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:684</text>
+<rect x="60" y="590" width="420" height="385" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="74" y="612" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_extension_download</text>
+<text x="74" y="632" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK: extension_download_id</text>
+<text x="74" y="652" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">extension_download_id</text>
+<text x="74" y="672" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">extension_id</text>
+<text x="74" y="692" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">9 cột · MyISAM</text>
+<text x="74" y="712" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">FK: không khai báo</text>
+<text x="74" y="963" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:708</text>
+<rect x="520" y="590" width="420" height="385" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="534" y="612" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_extension_download_path</text>
+<text x="534" y="632" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK: extension_download_id, download_id</text>
+<text x="534" y="652" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">extension_download_id</text>
+<text x="534" y="672" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">download_id</text>
+<text x="534" y="692" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">2 cột · MyISAM</text>
+<text x="534" y="712" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">FK: không khai báo</text>
+<text x="534" y="963" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:765</text>
+<rect x="980" y="590" width="420" height="385" rx="10" fill="#fff0d3" stroke="#94a3b8"/>
+<text x="994" y="612" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">oc_extension_image</text>
+<text x="994" y="632" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">PK: extension_image_id</text>
+<text x="994" y="652" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">extension_image_id</text>
+<text x="994" y="672" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">extension_id</text>
+<text x="994" y="692" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">4 cột · MyISAM</text>
+<text x="994" y="712" font-family="DejaVu Sans,Arial,sans-serif" font-size="15" font-weight="normal" fill="#1e293b">FK: không khai báo</text>
+<text x="994" y="963" font-family="DejaVu Sans,Arial,sans-serif" font-size="10" font-weight="normal" fill="#475569">install/opencart.sql:1250</text>
+</svg>

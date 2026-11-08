@@ -1,0 +1,13 @@
+---
+title: Đăng nhập quản trị và phân quyền
+---
+flowchart TB
+    n1["GET /admin → pre-action startup/login → common/login::index()"]
+    n2["POST common/login → validate() → user/user::getLoginAttempts()<br/>Chặn nếu vượt max_attempts trong một giờ"]
+    n3["Cart\User::login() → oc_user; lưu session user_id<br/>Request kế tiếp: User::__construct() đọc oc_user_group.permission JSON"]
+    n4["Request kế tiếp: startup/login kiểm tra session + user_token<br/>startup/permission kiểm tra access; write controller kiểm tra modify"]
+    n5["common/dashboard::index() query trực tiếp extension/member/order/partner/showcase<br/>KPI + recent orders/members/extensions → common/dashboard.twig"]
+    n1 --> n2
+    n2 --> n3
+    n3 --> n4
+    n4 --> n5

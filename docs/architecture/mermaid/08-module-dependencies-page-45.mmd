@@ -1,0 +1,10 @@
+---
+title: Phụ thuộc dùng chung và hook
+---
+flowchart TB
+    n1["checkout/payment + checkout/checkout → PaymentGateway<br/>Settings quyết định gateway; HTTP Stripe/Braintree, PayPal frontend SDK"]
+    n2["account/extension::upload + marketplace/download::download → CloudStorage<br/>File local hoặc object storage theo settings"]
+    n3["ModelAccountOrder::addOrder → Loader::controller(mail/order) → Mail<br/>Model cũng có thể gọi controller; không phải phân lớp một chiều tuyệt đối"]
+    n4["Loader::model → Proxy::__call → callback → Model + Event before/after<br/>Registry cung cấp DB, Cache, Session, Config cho cả Controller và Model"]
+    n5["startup/event → model setting/event → oc_event → Event::register<br/>Seed không có INSERT event: chưa có bằng chứng hook DB nào được bật mặc định"]
+    n6["modification() → DIR_MODIFICATION override; bundled packages → vendor/autoload.php<br/>Marketplace extension là hàng hóa số, không đồng nghĩa plugin đã cài vào runtime"]

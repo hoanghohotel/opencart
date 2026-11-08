@@ -1,0 +1,13 @@
+{
+  "commit": "7fcbe3b27bb7ac04e10895f9d5a64fa964659fbe",
+  "files": 3590,
+  "php_files": 1548,
+  "first_party_php": 435,
+  "controllers": 166,
+  "models": 73,
+  "tables": 59,
+  "foreign_keys": 0,
+  "literal_loads": 1269,
+  "model_calls": 746,
+  "sql_table_references": 873
+}

@@ -1,0 +1,9 @@
+---
+title: application/cloud · phụ thuộc 1
+---
+flowchart TB
+    n1["cloud/store.php<br/>index() · L11"]
+    n2["model/account/subscription<br/>đã có file"]
+    n3["oc_member, oc_member_payment, oc_subscription,<br/>oc_subscription_backup, oc_subscription_domain,<br/>oc_subscription_history, oc_subscription_plan,<br/>oc_subscription_status,<br/>oc_subscription_transaction"]
+    n1 --> n2
+    n2 -.-> n3

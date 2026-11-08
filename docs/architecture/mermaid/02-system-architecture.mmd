@@ -1,0 +1,28 @@
+---
+title: Kiến trúc phân lớp
+---
+flowchart TB
+    n1["Client / Browser<br/>HTML, AJAX, SDK thanh toán JS"]
+    n2["Web Server<br/>.htaccess rewrite / static assets"]
+    n3["Entry + Bootstrap<br/>index.php / admin/index.php → start()"]
+    n4["Registry + Config + DB + Session<br/>framework.php"]
+    n5["Router → pre-actions → startup/router<br/>Action::execute()"]
+    n6["Controller frontend / admin<br/>Business logic nằm cả trong controller"]
+    n7["Loader → Proxy → Model<br/>SQL trực tiếp, không ORM"]
+    n8["MySQL / MariaDB<br/>59 bảng trong SQL seed; không FK khai báo"]
+    n9["Cache<br/>Cache\File mặc định"]
+    n10["Session\DB<br/>oc_session; close() lúc shutdown"]
+    n11["Event + Loader hooks<br/>controller/model/view/language/config"]
+    n12["Template → Twig → Response<br/>setOutput() → output()"]
+    n1 --> n2
+    n2 --> n3
+    n3 --> n4
+    n4 --> n5
+    n5 --> n6
+    n6 --> n7
+    n7 --> n8
+    n6 -.-> n8
+    n4 -.-> n9
+    n4 -.-> n10
+    n5 -.-> n11
+    n6 -.-> n12

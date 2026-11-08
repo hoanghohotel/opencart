@@ -1,0 +1,38 @@
+---
+title: application/mail · phụ thuộc 1
+---
+flowchart TB
+    n1["mail/comment.php<br/>index() · L11"]
+    n2["model/marketplace/extension<br/>đã có file"]
+    n3["oc_download, oc_extension, oc_extension_category,<br/>oc_extension_comment, oc_extension_download,<br/>oc_extension_download_path, oc_extension_image,<br/>oc_extension_promotion, oc_extension_rating,<br/>oc_member, oc_member_seller"]
+    n4["mail/comment.php<br/>index() · L12"]
+    n5["model/account/member<br/>đã có file"]
+    n6["oc_member, oc_member_ip, oc_member_login,<br/>oc_newsletter"]
+    n7["mail/extension.php<br/>index() · L9"]
+    n8["model/marketplace/extension<br/>đã có file"]
+    n9["oc_download, oc_extension, oc_extension_category,<br/>oc_extension_comment, oc_extension_download,<br/>oc_extension_download_path, oc_extension_image,<br/>oc_extension_promotion, oc_extension_rating,<br/>oc_member, oc_member_seller"]
+    n10["mail/extension.php<br/>index() · L10"]
+    n11["model/tool/image<br/>đã có file"]
+    n12["Không có SQL literal được trích xuất"]
+    n13["mail/order.php<br/>index() · L16"]
+    n14["model/account/order<br/>đã có file"]
+    n15["oc_country, oc_extension, oc_member,<br/>oc_member_seller, oc_member_transaction,<br/>oc_order, oc_order_status"]
+    n16["mail/order.php<br/>index() · L17"]
+    n17["model/marketplace/extension<br/>đã có file"]
+    n18["oc_download, oc_extension, oc_extension_category,<br/>oc_extension_comment, oc_extension_download,<br/>oc_extension_download_path, oc_extension_image,<br/>oc_extension_promotion, oc_extension_rating,<br/>oc_member, oc_member_seller"]
+    n19["mail/order.php<br/>index() · L18"]
+    n20["model/account/member<br/>đã có file"]
+    n21["oc_member, oc_member_ip, oc_member_login,<br/>oc_newsletter"]
+    n1 --> n2
+    n2 -.-> n3
+    n4 --> n5
+    n5 -.-> n6
+    n7 --> n8
+    n8 -.-> n9
+    n10 --> n11
+    n13 --> n14
+    n14 -.-> n15
+    n16 --> n17
+    n17 -.-> n18
+    n19 --> n20
+    n20 -.-> n21

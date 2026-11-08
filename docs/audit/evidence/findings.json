@@ -1,0 +1,715 @@
+[
+  {
+    "id": "PAY-01",
+    "priority": "P0",
+    "kind": "Đã xác minh bằng source",
+    "title": "Có đường tạo đơn Complete không xác nhận thanh toán",
+    "evidence": [
+      {
+        "path": "application/controller/checkout/payment.php",
+        "line": 217,
+        "needle": "public function confirm"
+      },
+      {
+        "path": "application/controller/marketplace/paypal.php",
+        "line": 30,
+        "needle": "public function send"
+      },
+      {
+        "path": "application/controller/marketplace/braintree.php",
+        "line": 33,
+        "needle": "public function payment"
+      },
+      {
+        "path": "application/model/account/order.php",
+        "line": 3,
+        "needle": "public function addOrder"
+      }
+    ],
+    "proof": "confirm() nhánh không pending gọi addOrder với status=5 và transaction token tự tạo; các endpoint legacy cũng tạo đơn trực tiếp. Source đủ chứng minh thiếu bước xác nhận gateway trong các nhánh này; chưa gửi request tạo đơn.",
+    "impact": "Nếu endpoint được mở và account vượt gate, đơn hoàn tất và sales/commission có thể phát sinh trước khi nhận tiền.",
+    "fix": "Tập trung create/complete tại OrderService. Chỉ chuyển Paid sau verify server-side transaction ID, amount, currency, merchant và order binding. Endpoint legacy dùng cùng service; nếu cần khóa tạm phải có kế hoạch hỗ trợ khách đang checkout.",
+    "test": "Gateway mock từ chối/thiếu proof/amount sai không tạo Paid, không tăng sales/commission; hợp lệ tạo đúng một order. Characterization cho tất cả route legacy.",
+    "effort": "8–12 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "PAY-02",
+    "priority": "P0",
+    "kind": "Đã xác minh bằng source",
+    "title": "Trang success có side effect tạo đơn từ session",
+    "evidence": [
+      {
+        "path": "application/controller/checkout/checkout.php",
+        "line": 83,
+        "needle": "public function success"
+      },
+      {
+        "path": "application/controller/checkout/payment.php",
+        "line": 36,
+        "needle": "public function paypal"
+      }
+    ],
+    "proof": "success() dùng pending_extension_order và isLogged để addOrder; paypal() có thể đặt pending trước capture. Không thấy verify gateway trong success.",
+    "impact": "Điều hướng hiển thị thành công có thể cấp đơn/entitlement mà chưa có bằng chứng thu tiền.",
+    "fix": "success chỉ đọc order thuộc member và render; pending phải có order intent ID, server verification độc lập. Không dựa vào callback UI hoặc tồn tại session.",
+    "test": "GET success không ghi order dù pending tồn tại; failure/cancel/refresh không cấp quyền mua; dữ liệu cũ vẫn xem invoice được.",
+    "effort": "3–5 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "SEC-01",
+    "priority": "P0",
+    "kind": "Đã xác minh bằng source",
+    "title": "Startup ghi đè token request bằng token session",
+    "evidence": [
+      {
+        "path": "application/controller/startup/startup.php",
+        "line": 137,
+        "needle": "$this->request->get['member_token'] ="
+      },
+      {
+        "path": "application/controller/account/extension.php",
+        "line": 150,
+        "needle": "public function delete"
+      }
+    ],
+    "proof": "startup/startup chạy trước controller và thay member_token từ client bằng session token. So sánh token trong controller sau đó không chứng minh client đã gửi đúng token.",
+    "impact": "Cơ chế token chống CSRF ở frontend mất tác dụng phân biệt token thiếu/sai. Khả năng tấn công ngoài browser còn phụ thuộc cookie/SameSite/deployment.",
+    "fix": "Không ghi đè input; dùng CSRF middleware kiểm tra token POST và hash_equals, tách token URL/session khỏi chống CSRF. Đổi mutation GET sang POST với chuyển tiếp an toàn.",
+    "test": "Request ghi với token thiếu/sai bị 403; token đúng đi tiếp; GET không ghi; kiểm thử flow PIN/IP và deep link để tránh khóa người dùng.",
+    "effort": "5–8 ngày công",
+    "compatibility": "Thay đổi GET mutation/token URL có tác động client và bookmark; phối hợp frontend, không silently phá legacy."
+  },
+  {
+    "id": "SEC-02",
+    "priority": "P1",
+    "kind": "Đã xác minh bằng source",
+    "title": "Các HTTP client gateway/storage tắt xác minh TLS",
+    "evidence": [
+      {
+        "path": "system/library/payment_gateway.php",
+        "line": 234,
+        "needle": "CURLOPT_SSL_VERIFYPEER, false"
+      },
+      {
+        "path": "system/library/cloud_storage.php",
+        "line": 612,
+        "needle": "CURLOPT_SSL_VERIFYHOST, 0"
+      }
+    ],
+    "proof": "stripeRequest, Braintree/PayPal HTTP và S3/GCS chứa CURLOPT_SSL_VERIFYPEER=false; S3 còn VERIFYHOST=0.",
+    "impact": "Mất xác thực server TLS khi thực sự gọi network; nguy cơ lộ credentials, sửa response qua MITM. Không khẳng định đã xảy ra.",
+    "fix": "Bật peer/hostname verification mặc định; cấu hình CA bundle đáng tin cho proxy/hosting; fail closed và log mã lỗi không kèm secret.",
+    "test": "CA hợp lệ thành công; cert sai hostname/hết hạn/untrusted thất bại; smoke sandbox gateway trên staging.",
+    "effort": "2–4 ngày công",
+    "compatibility": "Hosting dùng CA tùy chỉnh phải cấu hình trust trước rollout; không fallback insecure."
+  },
+  {
+    "id": "SEC-03",
+    "priority": "P1",
+    "kind": "Đã xác minh bằng source",
+    "title": "Mật khẩu dùng SHA1 lặp và chấp nhận MD5",
+    "evidence": [
+      {
+        "path": "system/library/cart/member.php",
+        "line": 92,
+        "needle": "SHA1(CONCAT"
+      },
+      {
+        "path": "system/library/cart/user.php",
+        "line": 43,
+        "needle": "md5($password)"
+      },
+      {
+        "path": "application/model/account/member.php",
+        "line": 7,
+        "needle": "sha1($salt"
+      }
+    ],
+    "proof": "Login xác thực SHA1 salt hoặc MD5; addMember lưu SHA1. Không dùng password_hash trong các nhánh này.",
+    "impact": "Hash bị lộ có chi phí đoán thấp hơn Argon2id/bcrypt; đây là điểm yếu lưu mật khẩu, không phải bằng chứng DB đã lộ.",
+    "fix": "Verifier hỗ trợ đọc legacy rồi rehash sau login hợp lệ bằng password_hash/password_needs_rehash; kiểm tra độ dài cột trước mở rộng; reset cho account rủi ro.",
+    "test": "Login legacy/current đúng sai, rehash chỉ sau thành công, reset và admin tạo user; rollback đọc hash mới.",
+    "effort": "4–6 ngày công",
+    "compatibility": "Không rehash hàng loạt từ hash cũ; phải giữ validator legacy trong giai đoạn chuyển đổi."
+  },
+  {
+    "id": "SEC-04",
+    "priority": "P1",
+    "kind": "Đã xác minh bằng source",
+    "title": "Member login ghi attempt nhưng không chặn theo attempt",
+    "evidence": [
+      {
+        "path": "application/controller/account/login.php",
+        "line": 123,
+        "needle": "protected function validate"
+      },
+      {
+        "path": "admin/controller/common/login.php",
+        "line": 94,
+        "needle": "getLoginAttempts"
+      }
+    ],
+    "proof": "validate member gọi addLoginAttempt/deleteLoginAttempts nhưng không đọc ngưỡng; admin có kiểm tra ngưỡng/time window.",
+    "impact": "Thiếu rate limit ở lớp ứng dụng của member; edge limiter production chưa biết.",
+    "fix": "Giới hạn theo account + IP, backoff và telemetry; tránh khóa vĩnh viễn/cho phép DoS vào account. Áp dụng cả magic link/PIN/email resend.",
+    "test": "Vượt ngưỡng bị throttle, hết TTL hồi phục; không tiết lộ tồn tại email; proxy IP lấy từ danh sách trust.",
+    "effort": "3–5 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "SEC-05",
+    "priority": "P1",
+    "kind": "Nguy cơ tiềm ẩn",
+    "title": "Session ID không được xoay khi đăng nhập trong custom session",
+    "evidence": [
+      {
+        "path": "system/library/session.php",
+        "line": 57,
+        "needle": "public function start"
+      },
+      {
+        "path": "system/library/cart/member.php",
+        "line": 96,
+        "needle": "$this->session->data['member_id'] ="
+      },
+      {
+        "path": "system/library/cart/user.php",
+        "line": 46,
+        "needle": "$this->session->data['user_id'] ="
+      }
+    ],
+    "proof": "start nhận ID hợp lệ từ cookie và login đặt identity; chưa thấy rotate custom session ID trong hai login. Member token có xoay, khác session ID.",
+    "impact": "Nguy cơ fixation nếu kẻ khác có cách đặt/biết cookie trước login; chưa chứng minh được điều kiện đặt cookie ngoài production.",
+    "fix": "Thêm rotate cho custom Session/adapter, invalidate ID cũ sau authentication/privilege change; set secure, httponly, samesite bằng cookie options.",
+    "test": "ID cũ không truy cập identity sau login, tab đồng thời và API session không hỏng; kiểm tra cookie thực trên HTTPS staging.",
+    "effort": "4–6 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "SEC-06",
+    "priority": "P1",
+    "kind": "Nguy cơ tiềm ẩn",
+    "title": "Output encoding dựa vào input cleaning, Twig autoescape tắt",
+    "evidence": [
+      {
+        "path": "system/library/template/twig.php",
+        "line": 61,
+        "needle": "'autoescape'  => false"
+      },
+      {
+        "path": "system/library/request.php",
+        "line": 47,
+        "needle": "htmlspecialchars"
+      },
+      {
+        "path": "application/controller/marketplace/extension.php",
+        "line": 543,
+        "needle": "nl2br($result['comment'])"
+      }
+    ],
+    "proof": "Request clean encode HTML ENT_COMPAT; Twig tắt autoescape; comment truyền nl2br vào template. Có xử lý input nên không kết luận stored XSS chỉ từ autoescape=false.",
+    "impact": "Dữ liệu từ SQL/import/rich text và ngữ cảnh JS/attribute có thể thiếu escaping đúng; phải trace từng source→sink.",
+    "fix": "Phân loại plain/rich text; escape tại sink theo HTML/attr/JS, dùng JSON_HEX_* cho data script; sanitize allowlist cho rich content; bật autoescape từng template sau compatibility test.",
+    "test": "Fixture ký tự quote/tag vào HTML, attr, JS; rich text hợp lệ không bị double escape; không thực thi script.",
+    "effort": "8–15 ngày công",
+    "compatibility": "Không bật autoescape toàn cục một lần vì nhiều template dựa vào HTML đã encode/nl2br."
+  },
+  {
+    "id": "SEC-07",
+    "priority": "P1",
+    "kind": "Nguy cơ tiềm ẩn",
+    "title": "Upload archive thiếu giới hạn kích thước ở controller",
+    "evidence": [
+      {
+        "path": "application/controller/account/extension.php",
+        "line": 509,
+        "needle": "$allowed = array('zip'"
+      },
+      {
+        "path": "php.ini",
+        "line": 6,
+        "needle": "upload_max_filesize = 999M"
+      }
+    ],
+    "proof": "upload kiểm tra basename, độ dài, extension zip/rar và error; không thấy quota/size/signature scan ở method. Có token hóa tên và storage path riêng, không kết luận RCE/path traversal.",
+    "impact": "Nếu cấu hình upload lớn có hiệu lực: tiêu tốn disk/bandwidth, phát tán archive nguy hiểm; server thực chưa biết.",
+    "fix": "Bổ sung size/quota, MIME/signature archive, quarantine và scan async trước publish; chặn zip bomb nếu có bước giải nén; không tự động giải nén file người dùng.",
+    "test": "Oversize/extension giả/signature sai từ chối; basename xử lý tên path; quota concurrency; package hợp lệ vẫn tải được.",
+    "effort": "4–7 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "SEC-08",
+    "priority": "P1",
+    "kind": "Nguy cơ tiềm ẩn",
+    "title": "Config tracked mặc định DB root và mật khẩu rỗng",
+    "evidence": [
+      {
+        "path": "config.php",
+        "line": 40,
+        "needle": "define('DB_USERNAME', 'root')"
+      },
+      {
+        "path": "admin/config.php",
+        "line": 45,
+        "needle": "define('DB_PASSWORD', '')"
+      }
+    ],
+    "proof": "Hai config chứa root/empty password/retail. Runtime dev trước đó dùng overlay ngoài checkout, không chứng minh production dùng mặc định.",
+    "impact": "Nếu triển khai nguyên trạng: quyền DB quá rộng hoặc kết nối lỗi; secret/config khó quản lý.",
+    "fix": "Nạp config qua env/secret file ngoài webroot, user least privilege; guard môi trường production từ chối default; migration user DB riêng ngoài audit.",
+    "test": "Missing config fail rõ ràng; không in secret; user app không có DROP/GRANT; CLI và admin cùng binding.",
+    "effort": "2–4 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "DB-01",
+    "priority": "P1",
+    "kind": "Đã xác minh bằng source",
+    "title": "Chuỗi ghi tài chính không có atomic transaction trên schema MyISAM",
+    "evidence": [
+      {
+        "path": "install/opencart.sql",
+        "line": 1738,
+        "needle": "CREATE TABLE `oc_order`"
+      },
+      {
+        "path": "application/model/account/order.php",
+        "line": 3,
+        "needle": "public function addOrder"
+      }
+    ],
+    "proof": "58/59 bảng seed dùng MyISAM; riêng oc_session dùng InnoDB. addOrder ghi order, sales và member_transaction rồi gọi mail; không BEGIN/COMMIT bao phủ.",
+    "impact": "Lỗi giữa chừng có thể để đơn, doanh số và commission không khớp; chưa đo tỷ lệ lỗi thực tế.",
+    "fix": "Lập reconciliation invariant; rehearsal convert các bảng tài chính cùng boundary sang InnoDB; transaction ghi order/ledger/outbox, mail xử lý sau commit. FK chỉ thêm sau orphan cleanup có kế hoạch.",
+    "test": "Fault injection sau từng ghi phải rollback toàn bộ; mail lỗi không mất order; reconcile tổng ledger/sales sau replay.",
+    "effort": "10–18 ngày công",
+    "compatibility": "DDL có thể khóa bảng; cần backup restore thử, staging dữ liệu tương đương, cửa sổ cutover và rollback, tuyệt đối chưa chạy migration."
+  },
+  {
+    "id": "PAY-03",
+    "priority": "P1",
+    "kind": "Nguy cơ tiềm ẩn",
+    "title": "Chưa có idempotency bền vững cho charge và tạo đơn",
+    "evidence": [
+      {
+        "path": "application/controller/checkout/payment.php",
+        "line": 217,
+        "needle": "public function confirm"
+      },
+      {
+        "path": "application/model/account/order.php",
+        "line": 3,
+        "needle": "public function addOrder"
+      },
+      {
+        "path": "install/opencart.sql",
+        "line": 1738,
+        "needle": "CREATE TABLE `oc_order`"
+      }
+    ],
+    "proof": "confirm dựa trên pending session rồi unset; addOrder INSERT mới, transaction_id không có UNIQUE trong DDL; chưa có durable checkout attempt key ở boundary này.",
+    "impact": "Retry/concurrent requests hoặc timeout sau charge có thể charge/ghi đơn lặp; chưa mô phỏng race.",
+    "fix": "Checkout intent ID + unique gateway event/payment reference có scope provider/merchant; gateway idempotency key, lock/atomic transition và reconciliation, không dùng session làm lock.",
+    "test": "Hai confirm song song/replay webhook/timeout trả cùng order và tối đa một charge/ledger entry; legitimate renewals không bị chặn.",
+    "effort": "6–10 ngày công",
+    "compatibility": "Không UNIQUE transaction_id mù quáng: dữ liệu lịch sử có token tự tạo/giá trị rỗng; cần inventory và dedup theo quy tắc kinh doanh."
+  },
+  {
+    "id": "DB-02",
+    "priority": "P2",
+    "kind": "Nguy cơ tiềm ẩn",
+    "title": "Quan hệ profile không được DB bảo đảm duy nhất",
+    "evidence": [
+      {
+        "path": "install/opencart.sql",
+        "line": 1626,
+        "needle": "CREATE TABLE `oc_member_seller`"
+      },
+      {
+        "path": "application/model/account/order.php",
+        "line": 40,
+        "needle": "SELECT commission FROM"
+      }
+    ],
+    "proof": "member_seller có PK riêng và member_id không UNIQUE, trong khi addOrder dùng một commission row từ query.",
+    "impact": "Nếu duplicate profile xuất hiện, commission có thể không nhất quán; chưa kiểm tra dữ liệu production hoặc khẳng định seed có duplicate.",
+    "fix": "Đo duplicate/orphan read-only trên bản sao; thống nhất một seller profile/member nếu nghiệp vụ yêu cầu, merge có audit rồi mới unique constraint.",
+    "test": "Hai tạo profile song song không tạo duplicate; profile multi-region nếu có được mô hình rõ; reconciliation không đổi commission lịch sử.",
+    "effort": "3–6 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "QUAL-01",
+    "priority": "P1",
+    "kind": "Đã xác minh bằng source",
+    "title": "Tham chiếu model literal không có file đích",
+    "evidence": [
+      {
+        "path": "admin/controller/event/statistics.php",
+        "line": 5,
+        "needle": "model('setting/statistics')"
+      },
+      {
+        "path": "admin/controller/setting/store.php",
+        "line": 314,
+        "needle": "model('setting/extension')"
+      },
+      {
+        "path": "admin/controller/localisation/country.php",
+        "line": 376,
+        "needle": "model('customer/customer')"
+      },
+      {
+        "path": "system/engine/loader.php",
+        "line": 99,
+        "needle": "Error: Could not load model"
+      }
+    ],
+    "proof": "Inventory literal-loads chỉ ra thiếu các model trên và một số model legacy khác; Loader ném exception khi load model vắng. Chưa khẳng định tất cả endpoint đang được UI dùng.",
+    "impact": "Nhánh được thực thi có thể fatal; cấu hình store/localisation/admin chưa đủ kiểm thử.",
+    "fix": "Lập route reachability matrix; khôi phục model đúng domain member hoặc loại đường gọi obsolete sau kiểm tra data contract; không tạo stub luôn trả success.",
+    "test": "Characterization các route lỗi với role/fixture đủ điều kiện; dependency resolver không còn thiếu target literal ngoài prefix động được giải thích.",
+    "effort": "5–10 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "QUAL-02",
+    "priority": "P2",
+    "kind": "Đã xác minh bằng source",
+    "title": "Khóa action_event admin bị khai báo trùng",
+    "evidence": [
+      {
+        "path": "system/config/admin.php",
+        "line": 42,
+        "needle": "'view/*/before'"
+      }
+    ],
+    "proof": "action_event có hai khóa view/*/before; PHP giữ khóa sau, entry event/theme trong khóa trước bị ghi đè.",
+    "impact": "Theme hook dự kiến không được đăng ký từ config này; hook DB khác vẫn có thể tồn tại.",
+    "fix": "Gộp một array theo priority, xác định event/theme có nên hoạt động bằng snapshot output hiện tại trước khi bật.",
+    "test": "Test effective config có một khóa và callbacks đúng thứ tự; visual regression admin; không kích hoạt hook obsolete ngoài ý muốn.",
+    "effort": "1–2 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "QUAL-03",
+    "priority": "P2",
+    "kind": "Đã xác minh bằng source",
+    "title": "Controller lớn và validation/gateway logic lặp giữa các route",
+    "evidence": [
+      {
+        "path": "application/controller/marketplace/extension.php",
+        "line": 3,
+        "needle": "public function index"
+      },
+      {
+        "path": "application/controller/checkout/payment.php",
+        "line": 89,
+        "needle": "public function prepare"
+      },
+      {
+        "path": "application/controller/account/extension.php",
+        "line": 494,
+        "needle": "public function upload"
+      }
+    ],
+    "proof": "index marketplace kéo dài tới declaration info ở dòng 308; controller account/extension gồm CRUD/upload/comments; token gate lặp nhiều endpoint.",
+    "impact": "Đổi auth/payment phải sửa nhiều nơi; dependency Registry động làm khó inject fake và unit test.",
+    "fix": "Giữ controllers như adapters; trích Checkout/Entitlement/UploadPolicy nhỏ, inject qua Registry factory để tương thích framework. Viết characterization trước thay route.",
+    "test": "Output/status/redirect public API giữ contract; unit test policies không cần DB/network; gate đúng ở mọi route.",
+    "effort": "12–20 ngày công",
+    "compatibility": "Không kết luận mọi vi phạm SOLID từ LOC; nhận xét SRP/DIP dựa trên trách nhiệm và dependency trực tiếp đã chỉ ra."
+  },
+  {
+    "id": "QUAL-04",
+    "priority": "P2",
+    "kind": "Đã xác minh bằng source",
+    "title": "Model order gọi mail controller đồng bộ sau ghi dữ liệu",
+    "evidence": [
+      {
+        "path": "application/model/account/order.php",
+        "line": 48,
+        "needle": "controller('mail/order'"
+      },
+      {
+        "path": "application/controller/mail/order.php",
+        "line": 3,
+        "needle": "public function index"
+      }
+    ],
+    "proof": "addOrder/editOrderStatus gọi Loader controller mail/order, trộn persistence với presentation/notification.",
+    "impact": "Mail chậm/lỗi kéo dài request hoặc tạo trạng thái ghi xong nhưng response lỗi; coupling ngược model→controller.",
+    "fix": "Trong boundary transaction mới ghi outbox; worker gửi mail theo order event. Transitional adapter giữ nội dung mail hiện tại.",
+    "test": "Mail service ngừng vẫn trả order đã commit; worker retry không gửi trùng; template/invoice snapshot không đổi.",
+    "effort": "4–7 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "PERF-01",
+    "priority": "P2",
+    "kind": "Đã xác minh bằng source",
+    "title": "N+1 query trong danh sách comment",
+    "evidence": [
+      {
+        "path": "application/controller/marketplace/extension.php",
+        "line": 262,
+        "needle": "foreach ($results as $result)"
+      },
+      {
+        "path": "application/controller/marketplace/extension.php",
+        "line": 506,
+        "needle": "getTotalRepliesByCommentId"
+      },
+      {
+        "path": "application/model/marketplace/extension.php",
+        "line": 426,
+        "needle": "public function getRepliesByCommentId"
+      }
+    ],
+    "proof": "Trong loop comment gọi count và getReplies cho mỗi parent; pattern 2N truy vấn thêm hiện hữu trong source, chưa đo latency.",
+    "impact": "Chi phí DB tăng theo page size, cộng resize ảnh và correlated subquery.",
+    "fix": "Batch parent IDs, group reply counts và lấy tối đa 5 replies/parent theo query tương thích DB pin; giữ paging/ordering.",
+    "test": "Query counter trên fixture 1/10/50 parent không tăng tuyến tính vì fetch replies; output identical và EXPLAIN trên staging.",
+    "effort": "3–5 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "PERF-02",
+    "priority": "P2",
+    "kind": "Nguy cơ tiềm ẩn",
+    "title": "Search LIKE leading wildcard và count tương quan cần đo query plan",
+    "evidence": [
+      {
+        "path": "application/model/marketplace/extension.php",
+        "line": 45,
+        "needle": "e.name LIKE '%"
+      },
+      {
+        "path": "application/model/marketplace/extension.php",
+        "line": 16,
+        "needle": "AS comment_total"
+      }
+    ],
+    "proof": "Search name/tag/description dùng %term%; listing có correlated count. B-tree thường không tối ưu được leading wildcard; optimizer/volume thực chưa đo.",
+    "impact": "Có thể full scan/CPU cao khi catalog tăng; không khẳng định hiện tại chậm.",
+    "fix": "Capture query digest và EXPLAIN ANALYZE trên bản sao; đánh giá FULLTEXT theo tiếng Việt/tokenization, composite index theo filter/selectivity, precompute counts nếu cần.",
+    "test": "Dataset 10k/100k với query mix thật; so p50/p95, rows examined, freshness/relevance; không thêm index không có plan.",
+    "effort": "4–8 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "PERF-03",
+    "priority": "P2",
+    "kind": "Nguy cơ tiềm ẩn",
+    "title": "DB session read-modify-write không có lock bao phủ request",
+    "evidence": [
+      {
+        "path": "system/library/session/db.php",
+        "line": 16,
+        "needle": "public function read"
+      },
+      {
+        "path": "system/library/session/db.php",
+        "line": 28,
+        "needle": "REPLACE INTO"
+      },
+      {
+        "path": "system/library/session.php",
+        "line": 34,
+        "needle": "register_shutdown_function"
+      }
+    ],
+    "proof": "read dữ liệu JSON lúc start, write REPLACE lúc shutdown; không có version/compare-and-swap/lock xuyên request trong adapter.",
+    "impact": "Các AJAX request cùng session có thể last-write-wins mất pending/token changes; chưa benchmark concurrent.",
+    "fix": "Tách checkout intent khỏi session; session lock/versioned updates có TTL, đo ảnh hưởng chờ; shared store chỉ khi cần nhiều app instance.",
+    "test": "Hai requests thay keys khác nhau không làm mất dữ liệu; crash lock tự hết hạn; đo p95 chờ session.",
+    "effort": "4–7 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "PERF-04",
+    "priority": "P2",
+    "kind": "Nguy cơ tiềm ẩn",
+    "title": "Cache file quét và xử lý ảnh trong request",
+    "evidence": [
+      {
+        "path": "system/library/cache/file.php",
+        "line": 9,
+        "needle": "glob(DIR_CACHE . 'cache.*')"
+      },
+      {
+        "path": "application/model/tool/image.php",
+        "line": 66,
+        "needle": "$image = new Image"
+      }
+    ],
+    "proof": "Cache constructor glob+unlink hết hạn; resize ảnh tạo file cache trong request khi miss. Đây là work đồng bộ, chưa đo tải.",
+    "impact": "Cold cache hoặc cache directory lớn có thể tăng IO/CPU, stampede ảnh cùng kích thước.",
+    "fix": "Đo hit/miss/IO; job warm image variants, atomic temp+rename/lock nhẹ; GC cache theo scheduler; Redis chỉ khi multi-instance cần shared cache.",
+    "test": "Cache cold/warm và 20 miss đồng thời; ảnh hợp lệ, không file một phần; cache isolation và invalidation đúng.",
+    "effort": "4–7 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "OPS-01",
+    "priority": "P1",
+    "kind": "Đã xác minh bằng source",
+    "title": "Build/dependency config không khớp layout source",
+    "evidence": [
+      {
+        "path": "composer.json",
+        "line": 9,
+        "needle": "./upload/system/storage/vendor/"
+      },
+      {
+        "path": "build.xml",
+        "line": 3,
+        "needle": "value=\"upload\""
+      },
+      {
+        "path": "system/startup.php",
+        "line": 70,
+        "needle": "vendor/autoload.php"
+      }
+    ],
+    "proof": "Composer vendor-dir upload/... và build targets upload/tests khác actual system/storage/vendor và thiếu upload/tests; runtime dùng vendor bundled.",
+    "impact": "Install/build mới có thể ghi sai directory hoặc không kiểm tra đúng source; chưa chạy các command gây thay đổi dependency.",
+    "fix": "Trong coding task riêng sửa config sau baseline vendor manifest/lock; frozen install vào layout thật trên clean checkout; test build độc lập snapshot hiện tại.",
+    "test": "Fresh clone CI install theo lock + autoload + smoke + lint đúng target; không thay lock ngoài update đã review.",
+    "effort": "3–5 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "OPS-02",
+    "priority": "P1",
+    "kind": "Đã xác minh bằng source",
+    "title": "Thiếu test suite first-party và CI definition trong checkout",
+    "evidence": [
+      {
+        "path": "build.xml",
+        "line": 47,
+        "needle": "tests/phpcs/OpenCart/ruleset.xml"
+      },
+      {
+        "path": "composer.json",
+        "line": 11,
+        "needle": "\"require\""
+      }
+    ],
+    "proof": "git ls-files không có .github workflow hay first-party unit/integration suite; vendor có tests riêng không kiểm chứng business app. Không chứng minh CI ngoài repo không tồn tại.",
+    "impact": "Thanh toán/auth thay đổi không có regression guard; coverage ứng dụng chưa đo, không báo 0% khi chưa chạy coverage.",
+    "fix": "Pipeline lint + isolated MariaDB + characterization checkout/auth/admin + gateway mocks; contract tests API; thêm coverage baseline cho critical code trước ngưỡng tổng.",
+    "test": "CI fail khi bỏ gate hoặc hoàn tất order chưa paid; schema fixture disposable; test count >0, artifact report và secret-free logs.",
+    "effort": "10–18 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "OPS-03",
+    "priority": "P2",
+    "kind": "Nguy cơ tiềm ẩn",
+    "title": "php.ini chứa giá trị legacy và giới hạn mâu thuẫn tài liệu",
+    "evidence": [
+      {
+        "path": "php.ini",
+        "line": 4,
+        "needle": "memory_limit = 64M"
+      },
+      {
+        "path": "php.ini",
+        "line": 5,
+        "needle": "max_execution_time = 36000"
+      },
+      {
+        "path": "INSTALL.md",
+        "line": 18,
+        "needle": "memory_limit >= 128M"
+      }
+    ],
+    "proof": "php.ini memory 64M, timeout 36000, upload 999M và directive PHP cũ; INSTALL yêu cầu >=128M. Chưa xác minh file này thực sự được SAPI nạp.",
+    "impact": "Environment drift, timeout dài hoặc lỗi xử lý ảnh nếu áp dụng; không khẳng định runtime đang dùng các số này.",
+    "fix": "Cung cấp SAPI config versioned ngoài source, kiểm tra php --ini/phpinfo nội bộ được bảo vệ; align request/body/time limits theo quota và proxy.",
+    "test": "CI/staging assert effective limits/extensions; request quá lớn/time out bị xử lý kiểm soát, không lộ phpinfo.",
+    "effort": "2–3 ngày công",
+    "compatibility": "Giữ route/data contract; rollout sau regression, không sửa source trong audit."
+  },
+  {
+    "id": "OPS-04",
+    "priority": "P2",
+    "kind": "Đề xuất cải tiến",
+    "title": "Cần telemetry tài chính và diễn tập restore",
+    "evidence": [
+      {
+        "path": "system/framework.php",
+        "line": 46,
+        "needle": "$log->write('PHP '"
+      },
+      {
+        "path": "admin/controller/tool/backup.php",
+        "line": 136,
+        "needle": "public function export"
+      },
+      {
+        "path": "application/model/account/order.php",
+        "line": 3,
+        "needle": "public function addOrder"
+      }
+    ],
+    "proof": "Framework log PHP error; có endpoint backup; chưa có bằng chứng tracing checkout, alert reconciliation, retention/offsite restore drill tự động trong repo.",
+    "impact": "Khó phân biệt charge thành công/order lỗi hoặc phục hồi khi mất DB; quy trình vận hành ngoài repo chưa được cung cấp.",
+    "fix": "Correlation ID không chứa token/PII; audit event charge/order/status/ledger; dashboard errors/reconciliation; backup encrypted offsite + restore staging theo RPO/RTO đã chốt.",
+    "test": "Mô phỏng gateway timeout, mail fail có correlation; backup restore kiểm checksum và financial invariants; alert trong SLO đã thống nhất.",
+    "effort": "5–8 ngày công",
+    "compatibility": "Không ghi PAN, payment token, password, secret hoặc member_token vào logs."
+  },
+  {
+    "id": "BIZ-01",
+    "priority": "P1",
+    "kind": "Đã xác minh bằng source",
+    "title": "Thông báo cloud provision vượt quá bằng chứng trong model",
+    "evidence": [
+      {
+        "path": "application/controller/account/subscription.php",
+        "line": 142,
+        "needle": "has been provisioned and is ready"
+      },
+      {
+        "path": "application/model/account/subscription.php",
+        "line": 27,
+        "needle": "public function addSubscription"
+      }
+    ],
+    "proof": "Controller thông báo provision ready; addSubscription tạo subscription/metadata/history/payment records. Chưa thấy gọi provisioning infrastructure trong chuỗi method được trace.",
+    "impact": "Người dùng có thể hiểu store sẵn sàng trong khi code chỉ ghi nhận subscription; worker/control plane ngoài repo chưa xác minh.",
+    "fix": "Chốt integration contract với hạ tầng; dùng Requested/Provisioning/Ready/Failed, chỉ Ready sau probe/control-plane acknowledgement. Nếu chỉ portal demo, đổi thông báo theo capability thật.",
+    "test": "Provision fail không báo ready; retry idempotent; existing subscriptions mapping được duyệt; fake provider mô phỏng lifecycle.",
+    "effort": "5–10 ngày công",
+    "compatibility": "Cần xác nhận integration ngoài repository trước khi kết luận production không provision được."
+  },
+  {
+    "id": "SEC-09",
+    "priority": "P2",
+    "kind": "Đề xuất cải tiến",
+    "title": "Dependency version pin chưa có kiểm chứng advisory hiện hành",
+    "evidence": [
+      {
+        "path": "composer.lock",
+        "line": 8,
+        "needle": "\"packages\""
+      },
+      {
+        "path": "composer.json",
+        "line": 12,
+        "needle": "3.40.0"
+      }
+    ],
+    "proof": "Dependency lock/bundled có package version cụ thể; audit này chưa query advisory database, không gán CVE từ tuổi version.",
+    "impact": "Có thể giữ package không còn hỗ trợ hoặc có advisory, nhưng chưa có chứng cứ lỗ hổng package cụ thể.",
+    "fix": "Xuất SBOM từ lock và installed metadata; scan composer audit/OSV từ mạng được phép trong CI, xác minh advisory/range/reachability; update một nhóm/lần với contract tests.",
+    "test": "Archive advisory timestamp/source + dependency version installed; trường hợp không có network ghi unavailable; gateway/Twig regression trước merge.",
+    "effort": "2–4 ngày công",
+    "compatibility": "Không composer update hàng loạt; package SDK mới có thể đổi API/PHP baseline."
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "markdown_links_checked": 210,
+  "drawio_xml": 5,
+  "xml_ids_edges": "PASS",
+  "source_findings": 27,
+  "drawio_plugin_editor_roundtrip": "NOT VERIFIED: tool unavailable",
+  "runtime_security_business_tests": "NOT RUN",
+  "source_writes": "NONE; only docs and architecture documentation correction"
+}

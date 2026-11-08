@@ -1,0 +1,20 @@
+---
+title: Quan hệ logic đã có bằng chứng 2
+---
+flowchart TB
+    n1["oc_download<br/>PK download_id"]
+    n2["oc_extension_download_path<br/>PK extension_download_id, download_id"]
+    n3["admin/model/marketplace/extension.php::editExtension()"]
+    n4["oc_member<br/>PK member_id"]
+    n5["oc_order<br/>PK order_id"]
+    n6["application/model/account/order.php::getOrder()"]
+    n7["oc_member<br/>PK member_id"]
+    n8["oc_order<br/>PK order_id"]
+    n9["application/model/account/order.php::getOrder()"]
+    n10["oc_extension<br/>PK extension_id"]
+    n11["oc_order<br/>PK order_id"]
+    n12["application/model/account/order.php::getOrder()"]
+    n1 -.-> n2
+    n4 -.-> n5
+    n7 -.-> n8
+    n10 -.-> n11

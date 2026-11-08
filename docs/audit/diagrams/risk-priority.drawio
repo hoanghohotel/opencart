@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<mxfile host="app.diagrams.net" type="device">
+  <diagram id="risk-priority" name="Ưu tiên audit · không phải ma trận xác suất đã đo">
+    <mxGraphModel grid="1" page="1" pageWidth="1550" pageHeight="1250">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="n0" value="P0 · 3 finding&#10;PAY-01, PAY-02, SEC-01&#10;11-risk-register.md; tất cả OPEN" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe4e4;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="60" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n1" value="P1 · 13 finding&#10;SEC-02, SEC-03, SEC-04, SEC-05, SEC-06, SEC-07, SEC-08, DB-01, PAY-03, QUAL-01, OPS-01, OPS-02, BIZ-01&#10;11-risk-register.md; tất cả OPEN" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#ffe4e4;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="560" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n2" value="P2 · 11 finding&#10;DB-02, QUAL-02, QUAL-03, QUAL-04, PERF-01, PERF-02, PERF-03, PERF-04, OPS-03, OPS-04, SEC-09&#10;11-risk-register.md; tất cả OPEN" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="1060" y="170" width="420" height="155" />
+        </mxCell>
+        <mxCell id="n3" value="P3 · 0 finding&#10;&#10;11-risk-register.md; tất cả OPEN" vertex="1" parent="1" style="rounded=1;whiteSpace=wrap;html=0;fillColor=#fff0d3;fontSize=16;align=left;spacing=16;strokeColor=#64748b;">
+          <mxGeometry as="geometry" x="60" y="400" width="420" height="155" />
+        </mxCell>
+        <mxCell id="title" value="Ưu tiên audit · không phải ma trận xác suất đã đo&#10;Xanh: hiện tại; đỏ: finding; xanh lam: đề xuất; vàng: kế hoạch. Source audit, không benchmark." vertex="1" parent="1" style="text;whiteSpace=wrap;html=0;fontSize=22;align=left;">
+          <mxGeometry as="geometry" x="60" y="30" width="1420" height="100" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

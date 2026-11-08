@@ -1,0 +1,13 @@
+{
+  "original_source_hashes": 3590,
+  "source_unchanged": "PASS",
+  "diagram_files": 8,
+  "pages": 91,
+  "source_references": 813,
+  "source_reference_paths_and_lines": "PASS",
+  "schema_tables_represented": 59,
+  "local_document_links": 1226,
+  "png_decode": "PASS",
+  "drawio_editor_roundtrip": "NOT VERIFIED: plugin/tool unavailable",
+  "runtime_business_paths": "NOT RUN: source analysis task, no writes to app/database"
+}

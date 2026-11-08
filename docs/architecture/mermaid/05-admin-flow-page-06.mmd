@@ -1,0 +1,16 @@
+---
+title: Admin · danh mục controller 4
+---
+flowchart TB
+    n1["mail/transaction.php<br/>ControllerMailTransaction<br/>index"]
+    n2["marketplace/category.php<br/>ControllerMarketplaceCategory<br/>index, add, edit, delete, getList, getForm, validateForm, validateDelete"]
+    n3["marketplace/comment.php<br/>ControllerMarketplaceComment<br/>index, edit, approve, delete, getList, getForm, validateForm, validateDelete"]
+    n4["marketplace/extension.php<br/>ControllerMarketplaceExtension<br/>index, add, edit, delete, getFilterUrl, getList, getForm, validateForm, validateDelete"]
+    n5["marketplace/promotion.php<br/>ControllerMarketplacePromotion<br/>index, add, edit, delete, getList, getForm, validateForm, validateDelete"]
+    n6["member/member.php<br/>ControllerMemberMember<br/>index, add, edit, delete, getList, getForm, validateForm, validateDelete"]
+    n7["member/partner.php<br/>ControllerMemberPartner<br/>index, add, edit, delete, getList, getForm, validateForm, validateDelete"]
+    n8["member/seller.php<br/>ControllerMemberSeller<br/>index, add, edit, delete, getList, getForm, validateForm, validateDelete"]
+    n9["sale/order.php<br/>ControllerSaleOrder<br/>index, add, edit, delete, getList, info, getForm, validateForm, validateDelete, getStatusClass"]
+    n10["setting/payment.php<br/>ControllerSettingPayment<br/>index, testStripe, testBraintree, testPaypal, validate"]
+    n11["setting/setting.php<br/>ControllerSettingSetting<br/>index, validate, testSmtp, testStorage"]
+    n12["setting/store.php<br/>ControllerSettingStore<br/>index, add, edit, delete, getList, getForm, validateForm, validateDelete"]

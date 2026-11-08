@@ -1,0 +1,15 @@
+---
+title: Đăng ký, đăng nhập, tài khoản và đơn đã mua
+---
+flowchart TB
+    n1["account/register::index() POST → validate() → account/member::addMember()<br/>oc_member verified=0; tùy notify cập nhật oc_newsletter"]
+    n2["getMember() → mail/register → redirect account/success<br/>Xác minh email xử lý riêng tại account/verify"]
+    n3["account/login::validate() → getMemberByLogin() → Cart\Member::login()<br/>Kiểm tra status/verified; sai → addLoginAttempt; đúng → deleteLoginAttempts"]
+    n4["Cart\Member::login(): query oc_member, tạo member_id/member_token trong session<br/>Cập nhật IP → query oc_member_ip; controller kiểm tra hasPin()/isIpVerified()"]
+    n5["account/account → menu và các trang profile, seller, extension, payment, subscription<br/>Không gọi đây là oc_customer: identity thực là oc_member"]
+    n6["account/order::index()/info() → account/order getOrders/getOrder<br/>History hóa đơn số và trạng thái; không tìm thấy tracking vận chuyển"]
+    n1 --> n2
+    n2 --> n3
+    n3 --> n4
+    n4 --> n5
+    n5 --> n6
