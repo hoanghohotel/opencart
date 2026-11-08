@@ -1,0 +1,35 @@
+{{ header }}
+<div id="account-edit">
+  <div class="page-header">
+    <div class="container">
+      <h1>Your Stores</h1>
+      <p>Register your store to get access to the marketplace API</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        {% if error_warning %}
+          <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+        <form action="{{ action }}" method="post" enctype="multipart/form-data">
+          <fieldset>
+            <legend>Add your store information</legend>
+            <div class="form-group">
+              <label for="input-domain">Domain Name e.g. (www.hostname.com)</label><input type="text" name="domain" value="{{ domain }}" placeholder="Domain" id="input-domain" class="form-control"/>
+              {% if error_domain %}
+                <div class="text-danger">{{ error_domain }}</div>
+              {% endif %}</div>
+          </fieldset>
+          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+{{ footer }} 

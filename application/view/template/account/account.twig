@@ -1,0 +1,271 @@
+{{ header }}
+<div id="account-account">
+  <div class="page-header">
+    <div class="container">
+      <h1>Account</h1>
+      <p>Welcome to OpenCart!</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        {% if success %}
+          <div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+        <div id="short-cut">
+          <p id="pp-banner"><a href="/index.php?route=marketplace/extension/info&extension_id=38358"><img width="100%" src="application/view/image/banner/paypal_banner_large.jpg" alt="paypal"/></a></p>
+          <h2>Account</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="media">
+                <div class="media-left"><a href="{{ edit }}"><img src="application/view/image/account/icons/account_details.svg" alt="Account" class="media-object"/></a></div>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="{{ edit }}">Account Details</a></h4>
+                  <p><a href="{{ edit }}">Edit your account details</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="media">
+                <div class="media-left"><a href="{{ password }}"><img src="application/view/image/account/icons/change_password.svg" alt="Change password" class="media-object"/></a></div>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="{{ password }}">Change Password</a></h4>
+                  <p><a href="{{ password }}">Reset your password</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="media">
+                <div class="media-left"><a href="{{ payment }}"><img src="application/view/image/account/icons/payment_methods.svg" alt="Payment Methods" class="media-object"/></a></div>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="{{ payment }}">Payment Methods</a></h4>
+                  <p><a href="{{ payment }}">Modify your payment methods</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="media">
+                <div class="media-left"><a href="{{ showcase }}"><img src="application/view/image/account/icons/showcase.svg" alt="Showcase" class="media-object"/></a></div>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="{{ showcase }}">Showcase</a></h4>
+                  <p><a href="{{ showcase }}">Submit your store to OpenCart's showcase</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            {% if not partner_status %}
+              <div class="col-md-6">
+                <div class="media">
+                  <div class="media-left"><a href="{{ partner }}"><img src="application/view/image/account/icons/partner_up.svg" alt="Apply to become a partner" class="media-object"/></a></div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ partner }}">Partner Up</a></h4>
+                    <p><a href="{{ partner }}">Apply to become a partner</a></p>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              <div class="col-md-6">
+                <div class="media">
+                  <div class="media-left"><a href="{{ partner }}"><img src="application/view/image/account/icons/partner_edit.svg" alt="Edit Partner Information" class="media-object"/></a></div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ partner }}">Edit Partner Information</a></h4>
+                    <p><a href="{{ partner }}">Change your address, logo</a></p>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          </div>
+
+          {% if moderator %}
+            <h2>Cloud Stores</h2>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="media">
+                  <div class="media-left"><a href="{{ subscription }}"><img src="application/view/image/account/icons/showcase.svg" alt="Cloud Stores" class="media-object"/></a></div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ subscription }}">Cloud Stores</a></h4>
+                    <p><a href="{{ subscription }}">View all of your OpenCart subscriptions</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+
+          <h2>Purchases</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="media">
+                <div class="media-left"><a href="{{ order }}"><img src="application/view/image/account/icons/your_orders.svg" alt="Your Orders" class="media-object"/></a></div>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="{{ order }}">Your Orders</a></h4>
+                  <p><a href="{{ order }}">View the extensions you have previously purchased</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="media">
+                <div class="media-left"><a href="{{ download }}"><img src="application/view/image/account/icons/your_downloads.svg" alt="Your Downloads" class="media-object"/></a></div>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="{{ download }}">Your Downloads</a></h4>
+                  <p><a href="{{ download }}">Your Purchased extensions</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="media">
+                <div class="media-left"><a href="{{ store }}"><img src="application/view/image/account/icons/your_stores.svg" alt="Your Stores" class="media-object"/></a></div>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="{{ store }}">Your Stores</a></h4>
+                  <p><a href="{{ store }}">Register your store to access the marketplace API</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="media">
+                <div class="media-left"><a href="{{ rating }}"><img src="application/view/image/account/icons/rate_your_downloads.svg" alt="Rate your Downloads" class="media-object"/></a></div>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="{{ rating }}">Rate your Downloads</a></h4>
+                  <p><a href="{{ rating }}">Rate your previously downloaded extensions</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <h2>Extensions</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="media">
+                <div class="media-left"><a href="{{ extension }}"><img src="application/view/image/account/icons/manage_your_extentions.svg" alt="Manage your Extensions" class="media-object"/></a></div>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="{{ extension }}">Manage your Extensions</a></h4>
+                  <p><a href="{{ extension }}">Manage the extensions you have uploaded</a></p>
+                </div>
+              </div>
+            </div>
+
+            {% if not seller_status %}
+              <div class="col-md-6">
+                <div class="media">
+                  <div class="media-left"><a href="{{ seller }}"><img src="application/view/image/account/icons/apply_to_become_a_seller.svg" alt="Apply to become a seller" class="media-object"/></a></div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ seller }}">Apply to become a seller</a></h4>
+                    <p><a href="{{ seller }}">Get paid by selling your work!</a></p>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+              <div class="col-md-6">
+                <div class="media">
+                  <div class="media-left"><a href="{{ seller }}"><img src="application/view/image/account/icons/apply_to_become_a_seller.svg" alt="Edit Seller Information" class="media-object"/></a></div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ seller }}">Edit Seller Information</a></h4>
+                    <p><a href="{{ seller }}">Modify your current seller details</a></p>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+
+          </div>
+
+          {% if seller_status %}
+            <div class="row">
+              <div class="col-md-6">
+                <div class="media">
+                  <div class="media-left"><a href="{{ sale }}"><img src="application/view/image/account/icons/sales.svg" alt="Sales" class="media-object"/></a></div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ sale }}">Sales</a></h4>
+                    <p><a href="{{ sale }}">View your Sales</a></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="media">
+                  <div class="media-left"><a href="{{ transaction }}"><img src="application/view/image/account/icons/transactions.svg" alt="Transactions" class="media-object"/></a></div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ transaction }}">Transactions</a></h4>
+                    <p><a href="{{ transaction }}">View your commission rate for sales</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if false %}
+            <div class="row">
+              <div class="col-md-6">
+                <div class="media">
+                  <div class="media-left"><a href="{{ promotion }}"><img src="application/view/image/account/icons/promote-extensions.png" alt="Promote Extensions" class="media-object"/></a></div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ promotion }}">Promote Extensions</a></h4>
+                    <p></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          {% endif %}
+
+          {% if comment %}
+          <div class="row">
+            <div class="col-md-6">
+              <div class="media">
+                <div class="media-left"><a href="{{ comment }}"><img src="application/view/image/account/icons/manage_your_extensions_comments.svg" alt="Manage your Extensions Comments" class="media-object"/></a></div>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="{{ comment }}">Manage your Extensions Comments</a></h4>
+                  <p><a href="{{ comment }}">Manage the comments member left under your extensions</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          
+          {% if cloud %}
+          <h2>Cloud Stores</h2>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="media">
+                <div class="media-left"><a href="{{ subscription }}"><img src="application/view/image/account/icons/cloud_stores.svg" alt="Cloud Stores" class="media-object"/></a></div>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="{{ subscription }}">Cloud Stores</a></h4>
+                  <p><a href="{{ subscription }}">View all of your OpenCart Cloud Stores</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="media">
+                <div class="media-left"><a href="{{ subscription_domain }}"><img src="application/view/image/account/icons/cloud_stores.svg" alt="Cloud Domains" class="media-object"/></a></div>
+                <div class="media-body">
+                  <h4 class="media-heading"><a href="{{ subscription_domain }}">Cloud Domains</a></h4>
+                  <p><a href="{{ subscription_domain }}">View all of your OpenCart Cloud Domains</a></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+                <div class="media">
+                  <div class="media-left"><a href="{{ subscription_invoice }}"><img src="application/view/image/account/icons/invoices.svg" alt="Edit seller information" class="media-object"/></a></div>
+                  <div class="media-body">
+                    <h4 class="media-heading"><a href="{{ subscription_invoice }}">Invoices</a></h4>
+                    <p><a href="{{ subscription_invoice }}">Check your subscription invoice(s)</a></p>
+                  </div>
+                </div>
+              </div>
+          </div>
+          {% endif %}
+        </div>
+      
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}
+      <p><a href="/index.php?route=marketplace/extension/info&extension_id=38358"><img width="100%" src="application/view/image/banner/paypal_banner.jpg" alt="paypal"/></a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

@@ -1,0 +1,303 @@
+{{ header }} 
+<!-- START OF 1/1 (FULL WIDTH) COLUMN BLOCK-->
+<table bgcolor="#ffffff" width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td valign="top" width="100%"><table align="center" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="100%"><table width="600" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="100%"><table width="600" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td class="spacer" width="30"></td>
+                      <td width="540"><table class="full" align="left" width="540" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                          
+                          <!-- START OF HEADING-->
+                          <tr>
+                            <td class="center" align="left" style="padding: 0px; font-weight: bold; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#23a1d1; font-size:22px; line-height:32px; mso-line-height-rule: exactly;"><span><a class="heading-link" href="#" style="color:#23a1d1; text-decoration: none; font-style: normal; font-weight: bold;">Extension Alert</a></span></td>
+                          </tr>
+                          <!-- END OF HEADING--> 
+                          
+                          <!-- START OF TEXT-->
+                          <tr>
+                            <td class="center" align="left" style="margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;mso-line-height-rule: exactly;"><span>An update has been made to an extension you have purchased. For more information about this update please read the comment below or contact the developer.</span></td>
+                          </tr>
+                          <!-- END OF TEXT--> 
+                          
+                          {% if comment %} 
+                          <!-- START OF HEADING-->
+                          <tr>
+                            <td class="center" align="left" style="padding: 0px; padding-top:15px; font-weight: bold; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#23a1d1; font-size:16px; line-height:32px; mso-line-height-rule: exactly;"><span>Comment from developer</span></td>
+                          </tr>
+                          <!-- END OF HEADING--> 
+                          
+                          <!-- START OF TEXT-->
+                          <tr>
+                            <td class="center" align="left" style="margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;mso-line-height-rule: exactly;"><span>{{ comment }}</span></td>
+                          </tr>
+                          <!-- END OF TEXT--> 
+                          {% endif %} 
+                          
+                          <!-- START OF TEXT-->
+                          <tr>
+                            <td class="center" align="left" style="margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;mso-line-height-rule: exactly;"><p style="text-align:left;"><br />
+                                Kind regards,<br />
+                                The {{ store }} team</p></td>
+                          </tr>
+                          <!-- END OF TEXT-->
+                        </table></td>
+                      <td class="spacer" width="30"></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table>
+            
+            <!-- START OF VERTICAL SPACER-->
+            
+            <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="100%" height="40">&nbsp;</td>
+              </tr>
+            </table>
+            
+            <!-- END OF VERTICAL SPACER--></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<!-- END OF 1/1 (FULL WIDTH) COLUMN BLOCK--> 
+
+<!-- START OF 1/3 AND 2/3 COL LEFT IMAGE BLOCK-->
+<table bgcolor="#ffffff" width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td valign="top" width="100%"><table align="center" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="100%"><table cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="100%"><table width="600" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td class="spacer" width="30"></td>
+                      <td width="540"><!-- START OF LEFT COLUMN-->
+                        
+                        <table class="full" align="left" width="160" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                          <tr>
+                            <td class="center" align="left" style="margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;"><span> <a href="{{ extension }}" style="color:#23A1D1;"> <img src="{{ image }}" alt="img-160-93" width="160" height="93" border="0" style="display: inline-block;" /></a></span></td>
+                          </tr>
+                        </table>
+                        
+                        <!-- END OF LEFT COLUMN--> 
+                        
+                        <!-- START OF SPACER-->
+                        
+                        <table width="25" align="left" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                          <tr>
+                            <td width="100%" height="30"></td>
+                          </tr>
+                        </table>
+                        
+                        <!-- END OF SPACER--> 
+                        
+                        <!-- START OF RIGHT COLUMN-->
+                        
+                        <table class="full" align="right" width="350" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                          <!-- START OF HEADING-->
+                          <tr>
+                            <td class="center" align="left" style="padding-bottom: 10px; font-weight: bold; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#23A1D1; font-size:22px; line-height:32px; mso-line-height-rule: exactly;"><span><a class="heading-link" href="{{ extension }}" style="color:#23A1D1; text-decoration: none; font-style: normal; font-weight: bold;">{{ name }}</a></span></td>
+                          </tr>
+                          <!-- END OF HEADING--> 
+                          
+                          <!-- START OF TEXT-->
+                          <tr>
+                            <td class="center" align="left" style="margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;mso-line-height-rule: exactly;"><span>{{ description }}</span></td>
+                          </tr>
+                          <!-- END OF TEXT--> 
+                          
+                          <!-- START BUTTON-->
+                          <tr>
+                            <td align="left" valign="top" style="padding-top: 17px;"><table border="0" align="left" cellpadding="0" cellspacing="0" style="border-radius: 2px; margin: 0;">
+                                <tr>
+                                  <td align="center" valign="middle" bgcolor="#23A1D1" style="border-radius: 2px; padding: 6px 15px; font-weight: bold;  font-size: 13px; line-height: 18px; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#ffffff; margin: 0 !important; "><a href="{{ download }}" style="border: none; font-weight: bold; font-style: normal; color:#ffffff; text-decoration: none; margin:5px;">My account</a></td>
+                                </tr>
+                              </table></td>
+                          </tr>
+                          <!-- END BUTTON-->
+                        </table>
+                        
+                        <!-- END OF RIGHT COLUMN--></td>
+                      <td class="spacer" width="30"></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table>
+            
+            <!-- START OF VERTICAL SPACER-->
+            
+            <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="100%" height="40">&nbsp;</td>
+              </tr>
+            </table>
+            
+            <!-- END OF VERTICAL SPACER--></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<!-- END OF 1/3 AND 2/3 COL LEFT IMAGE BLOCK--> 
+
+{% if extensions %} 
+<!-- START OF DIVIDER IMAGE BLOCK-->
+
+<table bgcolor="#ffffff" width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td valign="top" width="100%"><table align="center" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="100%"><table width="600" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="100%"><table align="center" width="540" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td align="center" style="margin: 0; font-size:14px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 0;"><span> <img class="divider" src="https://s3-us-west-2.amazonaws.com/opencart-email-asset/divider-image.png" alt="divider image" width="540" height="1" border="0" style="display: inline-block;" /></span></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table>
+            
+            <!-- START OF VERTICAL SPACER-->
+            
+            <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="100%" height="40">&nbsp;</td>
+              </tr>
+            </table>
+            
+            <!-- END OF VERTICAL SPACER--></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+
+<!-- END OF DIVIDER IMAGE BLOCK--> 
+<!-- START OF 1/1 (FULL WIDTH) COLUMN BLOCK-->
+
+<table bgcolor="#ffffff" width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td valign="top" width="100%"><table align="center" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="100%"><table width="600" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="100%"><table width="600" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td class="spacer" width="30"></td>
+                      <td width="540"><table class="full" align="left" width="540" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                          <!-- START OF HEADING-->
+                          <tr>
+                            <td class="center" align="left" style="padding: 0px; font-weight: bold; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#23A1D1; font-size:22px; line-height:32px; mso-line-height-rule: exactly;"><span> <a class="heading-link" href="#" style="color:#23A1D1; text-decoration: none; font-style: normal; font-weight: bold;">Featured Extensions</a></span></td>
+                          </tr>
+                          <!-- END OF HEADING-->
+                        </table></td>
+                      <td class="spacer" width="30"></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table>
+            
+            <!-- START OF VERTICAL SPACER-->
+            
+            <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="100%" height="40">&nbsp;</td>
+              </tr>
+            </table>
+            
+            <!-- END OF VERTICAL SPACER--></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+
+<!-- END OF 1/1 (FULL WIDTH) COLUMN BLOCK--> 
+{% for extension in extensions %} 
+<!-- START OF 1/3 AND 2/3 COL LEFT IMAGE BLOCK-->
+
+<table bgcolor="#ffffff" width="100%" align="center" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td valign="top" width="100%"><table align="center" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td width="100%"><table cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="100%"><table width="600" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                      <td class="spacer" width="30"></td>
+                      <td width="540"><!-- START OF LEFT COLUMN-->
+                        
+                        <table class="full" align="left" width="160" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                          <tr>
+                            <td class="center" align="left" style="margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;"><span><a href="{{ extension.href }}" style="color:#23A1D1;"><img src="{{ extension.image }}" alt="img-160-93" width="160" height="93" border="0" style="display: inline-block;" /></a></span></td>
+                          </tr>
+                        </table>
+                        
+                        <!-- END OF LEFT COLUMN--> 
+                        
+                        <!-- START OF SPACER-->
+                        
+                        <table width="25" align="left" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                          <tr>
+                            <td width="100%" height="30"></td>
+                          </tr>
+                        </table>
+                        
+                        <!-- END OF SPACER--> 
+                        
+                        <!-- START OF RIGHT COLUMN-->
+                        
+                        <table class="full" align="right" width="350" cellpadding="0" cellspacing="0" border="0" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
+                          <!-- START OF HEADING-->
+                          <tr>
+                            <td class="center" align="left" style="padding-bottom: 10px; font-weight: bold; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#23A1D1; font-size:22px; line-height:32px; mso-line-height-rule: exactly;"><span> <a class="heading-link" href="{{ extension.href }}" style="color:#23A1D1; text-decoration: none; font-style: normal; font-weight: bold;">{{ extension.name }}</a></span></td>
+                          </tr>
+                          <!-- END OF HEADING--> 
+                          
+                          <!-- START OF TEXT-->
+                          <tr>
+                            <td class="center" align="left" style="margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;mso-line-height-rule: exactly;"><span>{{ extension.description }}</span></td>
+                          </tr>
+                          <!-- END OF TEXT--> 
+                          
+                          <!-- START BUTTON-->
+                          <tr>
+                            <td align="left" valign="top" style="padding-top: 17px;"><table border="0" align="left" cellpadding="0" cellspacing="0" style="border-radius: 2px; margin: 0;">
+                                <tr>
+                                  <td align="center" valign="middle" bgcolor="#23A1D1" style="border-radius: 2px; padding: 6px 15px; font-weight: bold;  font-size: 13px; line-height: 18px; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#ffffff; margin: 0 !important; "><a href="{{ extension.href }}" style="border: none; font-weight: bold; font-style: normal; color:#ffffff; text-decoration: none;">Read more</a></td>
+                                </tr>
+                              </table></td>
+                          </tr>
+                          <!-- END BUTTON-->
+                        </table>
+                        
+                        <!-- END OF RIGHT COLUMN--></td>
+                      <td class="spacer" width="30"></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table>
+            
+            <!-- START OF VERTICAL SPACER-->
+            
+            <table width="600" align="center" cellpadding="0" cellspacing="0" border="0">
+              <tr>
+                <td width="100%" height="40">&nbsp;</td>
+              </tr>
+            </table>
+            
+            <!-- END OF VERTICAL SPACER--></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+
+<!-- END OF 1/3 AND 2/3 COL LEFT IMAGE BLOCK--> 
+{% endfor %}
+{% endif %}
+
+
+
+{{ footer }}

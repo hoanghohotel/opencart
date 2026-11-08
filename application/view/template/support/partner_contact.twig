@@ -1,0 +1,144 @@
+{{ header }}
+<div id="support-partner-contact">
+	<div class="page-header">
+		<div class="container">
+			<h1>Contact Partner</h1>
+			<p>Anything we can help you?</p>
+		</div>
+	</div>
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-8">
+				<form id="form-contact">
+					<div class="form-group required">
+						<label for="input-name">What is your name?</label> <input type="text" name="name" value="{{ name }}" placeholder="Name" id="input-name" class="form-control">
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group required">
+								<label for="input-email">E-Mail</label> <input type="text" name="email" value="{{ email }}" placeholder="Email address" id="input-email" class="form-control"/>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="input-telephone">Phone</label> <input type="text" name="telephone" value="" placeholder="Phone" id="input-telephone" class="form-control"/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="input-website">Web Site</label> <input type="text" name="website" value="" placeholder="Web Site" id="input-website" class="form-control"/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group required">
+								<label for="input-subject">Subject</label> <input type="text" name="subject" value="" placeholder="Subject" id="input-subject" class="form-control">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group required">
+								<label for="input-enquiry">Message</label> <textarea name="enquiry" rows="7" id="input-enquiry" class="form-control"></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div data-captcha="#button-contact"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<button type="button" id="button-contact" class="btn btn-primary btn-lg btn-block" disabled="disabled">Send Message</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-4">
+				<div class="well">
+					<div class="media">
+						<div class="media-left media-middle"><img src="{{ partner_image }}" alt="{{ partner_username }}" title="{{ partner_username }}" class="media-object img-circle"/></div>
+						<div class="media-body">
+							<span>{{ partner_username }}</span>
+							<br/>
+							<small>Member since: {{ partner_date_added }}</small>
+						</div>
+					</div>
+					<br/>
+					<h4>Phone</h4>
+					<p><a href="tel:{{ partner_telephone }}">{{ partner_telephone }}</a></p>
+					<h4>Address</h4>
+					<p>{{ partner_address }}</p>
+					<h4>Partner Status</h4>
+					<p>{{ status_name }}</p>
+					{% if partner_facebook or partner_twitter or partner_linkedin %}
+						<h4>Social Media</h4>
+						<p>{% if partner_facebook %}
+								<a href="{{ partner_facebook }}"><img src="application/view/image/icon/facebook.jpg" alt="Facebook" title="Facebook"/></a>
+							{% endif %}
+							{% if partner_twitter %}
+								<a href="{{ partner_twitter }}"><img src="application/view/image/icon/twitter.jpg" alt="Twitter" title="Twitter"/></a>
+							{% endif %}
+							{% if partner_linkedin %}
+								<a href="{{ partner_linkedin }}"><img src="application/view/image/icon/linkedin.jpg" alt="Linkedin" title="Linkedin"/></a>
+							{% endif %}</p>
+					{% endif %}</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript"><!--
+$('#button-contact').on('click', function() {
+    var element = this;
+
+    $.ajax({
+        url: 'index.php?route=support/partner/send&member_token={{ member_token }}&partner_id={{ partner_id }}',
+        type: 'post',
+        data: $('#form-contact :input'),
+        dataType: 'json',
+        beforeSend: function() {
+            $(element).button('loading');
+        },
+        complete: function() {
+            $(element).button('reset');
+        },
+        success: function(json) {
+            $('.alert, .text-danger').remove();
+            $('.form-group').removeClass('has-error');
+
+            if (json['redirect']) {
+                location = json['redirect'];
+            }
+
+            if (json['error']) {
+                if (json['error']['warning']) {
+                    $('.alert-info').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                }
+
+                for (i in json['error']) {
+                    var element = $('#input-' + i.replace('_', '-'));
+
+                    if ($(element).parent().hasClass('form-group')) {
+                        $(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+                    } else {
+                        $(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+                    }
+                }
+
+                // Highlight any found errors
+                $('.text-danger').parent().addClass('has-error');
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+//--></script>
+<script type="text/javascript" src="https://www.google.com/recaptcha/api.js"></script>
+{{ footer }}

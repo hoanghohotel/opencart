@@ -1,0 +1,176 @@
+<fieldset id="payment-credit-card">
+	<legend>Extension Details</legend>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th class="text-left">Extension Name</th>
+				<th class="text-right">Quantity</th>
+				<th class="text-right">Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-left">{{ extension }}</td>
+				<td class="text-right" style="min-width: 90px;">{{ quantity }}</td>
+				<td class="text-right">{{ total }}</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<fieldset>
+	<legend>Pay by Credit Card</legend>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th class="text-left">Credit Card</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-left"><img src="{{ payment_image }}"/> {{ payment_name }}</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<div class="text-right">
+	<button id="button-confirm" class="btn btn-lg btn-default">Continue</button>
+</div>
+<div id="fadeLoader">
+	<div id="loader">Loading...</div>
+</div>
+<script><!--
+function showLoader() {
+    $("#fadeLoader").css("display", "flex");
+    $('#loader').css("display", "flex");
+}
+
+function closeLoader() {
+    $("#fadeLoader").css("display", "none");
+    $('#loader').css("display", "none");
+}
+
+showLoader();
+
+setTimeout(function() {
+    closeLoader()
+}, 1500)
+
+{% if three_d_secure %}
+var threeDSecureParameters = {
+    amount: '{{ total }}',
+    nonce: '{{ payment_nonce }}',
+    bin: '{{ payment_bin }}',
+    email: '{{ member_email }}',
+    billingAddress: {
+        givenName: '{{ member_firstname }}',
+        surname: '{{ member_lastname }}'
+    },
+    onLookupComplete: function(data, next) {
+        next();
+    }
+};
+braintree.client.create({
+    authorization: '{{ client_token }}'
+}).then(function(clientInstance) {
+    dataCollectorPromise = braintree.dataCollector.create({
+        client: clientInstance,
+        paypal: false
+    });
+    threeDSecurePromise = braintree.threeDSecure.create({
+        version: 2,
+        client: clientInstance
+    });
+    return Promise.all([dataCollectorPromise, threeDSecurePromise]);
+}).then(function(instance) {
+    var button = document.getElementById('button-confirm');
+    deviceData = instance[0].deviceData;
+    threeDSecure = instance[1];
+    threeDSecure.verifyCard(threeDSecureParameters).then(function(response) {
+        button.addEventListener('click', function(event) {
+            $.ajax({
+                url: 'index.php?route=checkout/payment/confirm&member_token={{ member_token }}&extension_id={{ extension_id }}&member_payment_id={{ member_payment_id }}&order_id={{ order_id }}',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    nonce: response.nonce,
+                    device_data: deviceData
+                },
+                cache: false,
+                beforeSend: function() {
+                    $('#button-confirm').button('loading');
+                },
+                complete: function() {
+                    $('#button-confirm').button('reset');
+                    setTimeout(function() {
+                        $('#button-confirm').prop("disabled", true);
+                    }, 500);
+                },
+                success: function(json) {
+                    if (json['error']) {
+                        $('#confirm-title').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    } else {
+                        window.location.href = 'index.php?route=checkout/checkout/success';
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    window.location.href = 'index.php?route=checkout/checkout/success';
+                }
+            });
+        });
+    }).catch(function(error) {
+        console.log(error)
+    });
+}).catch(function(err) {
+    console.log(err)
+});
+{% else %}
+braintree.client.create({
+    authorization: '{{ client_token }}'
+}, function(err, clientInstance) {
+    var button = document.querySelector('#button-confirm');
+    button.addEventListener('click', function(event) {
+        braintree.dataCollector.create({
+            client: clientInstance,
+            paypal: false
+        }, function(err, dataCollectorInstance) {
+            if (err) {
+                // Handle error in creation of data collector
+                return;
+            }
+            // At this point, you should access the dataCollectorInstance.deviceData value and provide it
+            // to your server, e.g. by injecting it into your form as a hidden input.
+            var deviceData = dataCollectorInstance.deviceData;
+            $.ajax({
+                url: 'index.php?route=checkout/payment/confirm&member_token={{ member_token }}&extension_id={{ extension_id }}',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    nonce: '{{ payment_nonce }}',
+                    device_data: deviceData
+                },
+                cache: false,
+                beforeSend: function() {
+                    $('#button-confirm').button('loading');
+                },
+                complete: function() {
+                    $('#button-confirm').button('reset');
+                    setTimeout(function() {
+                        $('#button-confirm').prop('disabled', true);
+                    }, 500);
+                },
+                success: function(json) {
+                    if (json['error']) {
+                        $('#modal-checkout .modal-body').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    } else {
+                        window.location.href = 'index.php?route=checkout/checkout/success';
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    window.location.href = 'index.php?route=checkout/checkout/success';
+                }
+            });
+        });
+    });
+});
+{% endif %}
+//--></script>

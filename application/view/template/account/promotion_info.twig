@@ -1,0 +1,123 @@
+{{ header }}
+<div id="account-order-info">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="row">
+          <div class="col-xs-6">
+            <div><img src="application/view/image/icon/opencart-logo.png" title="{{ title }}" alt="{{ logo }}" /></div>
+            <strong>From</strong>
+            <p><small><strong>OpenCart Limited</strong><br/>
+              Unit 16, 26/F, Tuen Mun Central Square,<br/>
+              22 Hoi Wing Road, Tuen Mun, Hong Kong<br/>
+              Email: support@opencart.com</small></p>
+            <strong>To</strong>
+            <p> <small> <strong>{% if company %}{{ company }}{% else %}{{ firstname }} {{ lastname }}{% endif %}</strong><br />
+              {% if address_1 %}
+              {{ address_1 }}<br />
+              {% endif %}
+              {% if address_2 %}
+              {{ address_2 }}<br />
+              {% endif %}
+              {% if city %}
+              {{ city }} {% if postcode %}  - {{ postcode }} {% endif %}<br />
+              {% endif %}
+              {% if zone %}
+              {{ zone }}<br />
+              {% endif %}
+              {% if country %}
+              {{ country }}<br />
+              {% endif %}
+              {% if telephone %}
+              {{ telephone }} /
+              {% endif %}
+              {{ email }} </small> </p>
+          </div>
+          <div class="col-xs-6">
+            <div class="text-right text-uppercase">
+              <h2>Invoice</h2>
+            </div>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-xs-5">Invoice No.</div>
+                  <div class="col-xs-7"><strong>INV{{ promotion_id }}</strong></div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-xs-5">Due Date</div>
+                  <div class="col-xs-7">{{ date_added }}</div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-xs-5">Account ID</div>
+                  <div class="col-xs-7">{{ username }}</div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-xs-5">Purchased Via</div>
+                  <div class="col-xs-7">{{ payment_method }}</div>
+                </div>
+              </li>
+              <li class="list-group-item">
+                <div class="row">
+                  <div class="col-xs-5">Transaction ID</div>
+                  <div class="col-xs-7">{{ transaction_id }}</div>
+                </div>
+              </li>
+              <li class="list-group-item list-group-item-info">
+                <div class="row">
+                  <div class="col-xs-5">Total Due</div>
+                  <div class="col-xs-7"><strong>{{ total }}</strong></div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        <div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th class="text-right">Ext. ID</th>
+                  <th class="text-left">Promotion Name</th>
+                  <th class="text-right">Days</th>
+                  <th class="text-right">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-right">{{ promotion_id }}</td>
+                  <td class="text-left">{{ extension }}</td>
+                  <td class="text-right">{{ days }}</td>
+                  <td class="text-right">{{ total }}</td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td class="text-right" colspan="5">Total Due: <span class="h2 text-info">{{ total }}</span></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <div class="text-center">
+          <p><small>If you have any question about this invoice, please contact our <a href="{{ support }}">support team</a>.</small></p>
+          <h3>Thank You For Your Business!</h3>
+          <hr />
+          <div class="visible-print-block"><small>&copy; Copyright {{ 'now'|date('Y') }} OpenCart</small></div>
+          <div class="hidden-print"><a href="{{ cancel }}" class="btn btn-link">Cancel</a>
+            <button type="button" onclick="window.print();" class="btn btn-danger btn-lg"><i class="fa fa-print"></i> Print</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+<link rel="stylesheet" type="text/css" href="application/view/stylesheet/print.css" media="print" />
+{{ footer }} 

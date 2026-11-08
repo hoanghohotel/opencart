@@ -1,0 +1,620 @@
+{{ header }}
+<div id="subscription-info">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h1 class="main-heading">Store Details</h1>
+                {% if error_warning %}
+                    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+                {% endif %}
+                {% if success %}
+                    <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}</div>
+                {% endif %}
+                {% if countdown %}
+                <div id="countdown-alert">
+                    <div class="alert alert-info"><i class="fa fa-exclamation-circle"></i> Store is restarting now. It would be up and running in <strong class="countdown">{{ countdown }}</strong></div>
+                </div>
+                {% endif %}
+                <div id="status-alert"></div>
+                <fieldset class="subscription-description-block">
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p class="form-title">Store Name</p>
+                                <p class="form-subtitle">The name used to identify your store</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="name" name="address_1" disabled="disabled"
+                               value="{{ subscription.subscription_store.name }}" placeholder="Store Name" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p class="form-title">Store Email</p>
+                                <p class="form-subtitle">The store admin email address</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="admin_email" name="admin_email" disabled="disabled"
+                                value="{{ subscription.subscription_store.admin_email }}" placeholder="Address 1"
+                                class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p class="form-title">Store Admin</p>
+                                <p class="form-subtitle">The store admin name</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="admin_username" name="admin_username" disabled="disabled"
+                                value="{{ subscription.subscription_store.admin_username }}" placeholder="Store Username"
+                                class="form-control">
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if subscription.subscription_status_id == subscription_active_status %}
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <p class="form-title">Store Status</p>
+                                <p class="form-subtitle">The status shows if store running now</p>
+                            </div>
+                            <div class="col-sm-8">
+                            {% if store_info.status == 1 %}
+                                <span id="store-status-badge" class="label label-success">Active</span>
+                                <div class="pull-right">
+                                    <input type="button" class="btn btn-lg btn-danger" value="Stop Store" id="stop-store"/>
+                                </div>
+                            {% else %}
+                                <span id="store-status-badge" class="label label-danger">Stopped</span>
+                                <div class="pull-right">
+                                    <input type="button" class="btn btn-lg btn-success" value="Activate Store" id="activate-store"/>
+                                </div>
+                            {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </fieldset>
+
+                <fieldset class="subscription-domains-block">
+                    <div class="domains-heading">Domain Details</div>
+                    <div class="domains-subheading">Your store can accessed via our system subdomain or via your custom domain. The store can be accessed only by multiple domains.</div>
+                    {% if active_domains %}
+                    <div class="form-group domain-block">
+                        <div class="row">
+                            <div id="domain_alert"></div>
+                            <div class="col-sm-12">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p class="form-title">Active Store Domains</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        {% for domain in active_domains %}
+                                        <p>
+                                            <a href="{{ domain.url }}" target="_blank">{{ domain.url }}</a><a href="{{ domain.unpoint_href }}" data-toggle="tooltip" title="Disconnect custom domain" class="btn btn-link btn-md" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                        </p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if active_domains|length < 2 %}
+                    <div class="form-group domain-selection-block">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                <th>Domain</th>
+                                <th>Status</th>
+                                <th>Connected To</th>
+                                <th class="text-right">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% if domains %}
+                                {% for domain in domains %}
+                                    <tr>
+                                    <td>{{ domain.name }}</td>
+                                    <td class="text-center">
+                                        {% if domain.status == 'initalizing' %}
+                                        <span class="label label-warning text-uppercase">{{ domain.status }}</span>
+                                        {% elseif domain.status == 'pending' %}
+                                        <span class="label label-primary text-uppercase">{{ domain.status }}</span>
+                                        {% elseif domain.status == 'active' %}
+                                        <span class="label label-success text-uppercase">{{ domain.status }}</span>
+                                        {% endif %}</td>
+                                    <td>
+                                        {% if domain.connected_to %}
+                                        <span class="label label-primary">{{ domain.connected_to }}</span>
+                                        {% else %}
+                                        <span class="label label-success">Not connected</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-right">
+                                        <a href="{{ domain.point }}" data-toggle="tooltip" title="Connect custom domain" class="btn btn-primary"><i class="fa fa-link" aria-hidden="true"></i></a>
+                                        <a href="{{ domain.delete }}" data-toggle="tooltip" title="Remove custom domain" class="btn btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                    </td>
+                                    </tr>
+                                {% endfor %}
+                                {% else %}
+                                <tr>
+                                    <td class="text-center" colspan="3">No Domains Found! <a href="{{ add_domain }}">Want to add new one?</a></td>
+                                </tr>
+                                {% endif %}
+                            </tbody>
+                        </table>
+                        {% if domains %}
+                        <a href="{{ add_domain }}" id="btn_add_new_domain" width="100%" class="btn btn-large btn-default">Add new Domain</a>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </fieldset>
+                {% if member_id != 78238 %}
+                <fieldset class="subscription-plan-block">
+                    <div class="subscription-plan-heading">Subscription Details</div>
+                    <div class="subscription-plan-subheading">Currently we offer one simple plan for all. In the future, we will add more plans</div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div id="plan_alert"></div>
+                            <div class="col-sm-4">
+                                <p class="form-title">Your Subscription plan</p>
+                                <p class="form-subtitle">You will be charged on monthly bases</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="cloud-d-flex">
+                                    <span id="current_plan_name">{{ subscription.subscription_plan.name }} Plan</span><span id="current_plan_price">{{ subscription.subscription_plan.price }}</span>
+                                    <a data-toggle="collapse" 
+                                            href="#planCollapse" 
+                                            aria-expanded="false" 
+                                            aria-controls="planCollapse" 
+                                            type="button" id="edit_plan_btn" class="btn btn-default">CHANGE
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="collapse" id="planCollapse">
+                                    <div class="plan-selection-block">
+                                        <div class="row">
+                                            {% for subscription_plan in subscription_plans %}
+                                            <div class="col-sm-4">
+                                                {% if subscription_plan.subscription_plan_id == subscription.subscription_plan_id %}
+                                                <label class="cloud-d-flex active">
+                                                <input class="subscription-info-plan-selection" type="radio" checked name="subscription_plan_id" value="{{ subscription_plan.subscription_plan_id }}">
+                                                {% else %}
+                                                <label class="cloud-d-flex">
+                                                <input class="subscription-info-plan-selection" type="radio" name="subscription_plan_id" value="{{ subscription_plan.subscription_plan_id }}">
+                                                {% endif %}
+                                                        <span id="plan_name_{{ subscription_plan.subscription_plan_id }}" class="subscription-plan-selection-name">{{ subscription_plan.name }}</span>
+                                                        <span id="plan_price_{{ subscription_plan.subscription_plan_id }}" class="subscription-plan-selection-price">{{ subscription_plan.price }}</span>
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                            <div class="col-sm-12">
+                                                <a type="button" id="btn_plan_save" class="btn btn-primary pull-right">SAVE</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="subscription-payment-block">
+                    <div class="subscription-payment-heading">Payment Methods</div>
+                    <div class="subscription-payment-subheading">We accept credit and debit cards. You can change your payment method at any time.</div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div id="payment_alert"></div>
+                            <div class="col-sm-4">
+                                <p class="form-title">Active Payment Method</p>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="payment-badge">
+                                    <img id="payment_current_image" src="{{ subscription.subscription_payment.image }}"/>
+                                    <span id="payment_current_mask" class="payment-mask">{{ subscription.subscription_payment.name }}</span>
+                                    <a data-toggle="collapse" 
+                                        href="#paymentCollapse" 
+                                        aria-expanded="false" 
+                                        aria-controls="paymentCollapse" 
+                                        type="button" id="edit_payment_btn" class="btn btn-default">CHANGE
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="collapse" id="paymentCollapse">
+                                    <div class="payment-selection-block">
+                                        <div class="row">
+                                        {% for payment_method in payment_methods %}
+                                            <div class="col-sm-4">
+                                                {% if payment_method.payment_id == subscription.member_payment_id %}
+                                                <label class="cloud-d-flex active">
+                                                    <input class="subscription-info-payment-selection" type="radio" checked name="payment_id" value="{{ payment_method.payment_id }}">
+                                                {% else %}
+                                                <label class="cloud-d-flex">
+                                                    <input class="subscription-info-payment-selection" type="radio" name="payment_id" value="{{ payment_method.payment_id }}">
+                                                {% endif %}
+                                                        <img id="payment_image_{{ payment_method.payment_id }}" src="{{ payment_method.image }}"/>
+                                                        <span id="payment_mask_{{ payment_method.payment_id }}" class="payment-mask">{{ payment_method.name|length > 16 ? payment_method.name|slice(0, 16) ~ '...' : payment_method.name  }}</span>
+                                                </label>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="col-sm-4">
+                                                <a href="{{ add_payment }}">
+                                                    <label class="cloud-d-flex new-payment">
+                                                        <div><i class="fa fa-plus"></i></div>
+                                                        <div>Add new payment</div>
+                                                    </label>
+                                                </a>
+                                            </div>
+                                            <div class="col-sm-12">
+                                                    <a type="button" id="btn_payment_save" class="btn btn-primary pull-right">SAVE</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="subscription-actions-block">
+                    {% if subscription.subscription_status_id == subscription_active_status %}
+                    <div class="subscription-action-card">
+                        <div class="subscription-heading-title">Cancel Subscription</div>
+                        <div class="subscription-info-window subscription-danger">
+                            <div class="row">
+                                <div class="col-sm-10 col-xs-12">
+                                    <span>
+                                        You can cancel your subscription at any time. When cancelling your subscription, the store will be turned off and deleted permanently. Please, be sure to backup any store valuable data, before canceling your subscription.
+                                    </span>
+                                </div>
+                                <div class="col-sm-2 col-xs-12">
+                                    <input type="button"
+                                        class="cancel-subscription btn btn-danger subscription-cancel button-click-load button-use-confirm pull-right"
+                                        data-toggle="tooltip" data-placement="top" title="Cancel cloud subscription"
+                                        data-original-title="Cancel cloud subscription" value="CANCEL"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% elseif subscription.subscription_status_id == subscription_canceled_status %}
+                    <div class="subscription-action-card">
+                        <div class="subscription-heading-title">Renew Subscription</div>
+                        <div class="subscription-info-window subscription-warning">
+                            <div class="row">
+                                <div class="col-sm-10 col-xs-12">
+                                    <span>
+                                        Renew your subscription to continue enjoying the benefits of OpenCart Cloud
+                                    </span>
+                                </div>
+                                <div class="col-sm-2 col-xs-12">
+                                    <input type="button"
+                                        class="renew-subscription btn btn-warning subscription-cancel button-click-load button-use-confirm pull-right"
+                                        data-toggle="tooltip" data-placement="top" title="Renew cloud subscription"
+                                        data-original-title="Renew cloud subscription" value="RENEW"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% else %}
+                    <div class="subscription-action-card">
+                        <div class="subscription-heading-title">Restart Subscription</div>
+                        <div class="subscription-info-window subscription-warning">
+                            <div class="row">
+                                <div class="col-sm-10 col-xs-12">
+                                    <span>
+                                        Your store can still be restored. We will delete your store soon. By restoring your subscription, all store data is revived. You must have an active payment methods on record before restoring the subscription.
+                                    </span>
+                                </div>
+                                <div class="col-sm-2 col-xs-12">
+                                <input type="button"
+                                        class="restart-subscription btn btn-warning subscription-cancel button-click-load button-use-confirm pull-right"
+                                        data-toggle="tooltip" data-placement="top" title="Restart Cloud Store"
+                                        data-original-title="Restart Cloud Store" value="RESTART"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                </fieldset>
+                {% endif %}
+                <div id="results"></div>
+
+                <div class="text-right">
+                    <a href="{{ cancel }}" class="btn btn-link">Cancel</a>
+                </div>
+            </div>
+
+            <div class="col-md-3 hidden-xs">{{ menu }}</div>
+        </div>
+    </div>
+</div>
+<script src="application/view/javascript/jquery/jquery.timer.js"></script>
+<script>
+{% if countdown %}
+    var timer2 = "{{ countdown }}";
+    var interval = setInterval(function() {
+        var timer = timer2.split(':');
+        //by parsing integer, I avoid all extra string processing
+        var minutes = parseInt(timer[0], 10);
+        var seconds = parseInt(timer[1], 10);
+        --seconds;
+        minutes = (seconds < 0) ? --minutes : minutes;
+        if (minutes < 0) clearInterval(interval);
+        seconds = (seconds < 0) ? 59 : seconds;
+        seconds = (seconds < 10) ? '0' + seconds : seconds;
+        //minutes = (minutes < 10) ?  minutes : minutes;
+        $('.countdown').html(minutes + ':' + seconds);
+        timer2 = minutes + ':' + seconds;
+        if(timer2 == '0:00') {
+            $("#countdown-alert").html('');
+        }
+    }, 1000);
+{% endif %}
+
+    $('#btn_payment_save').on('click', function (e) {
+        
+        $.ajax({
+            url: 'index.php?route=account/subscription/update&member_token={{ member_token }}',
+            dataType: 'json',
+            method: "POST",
+            data: { payment_id: $('input[name="payment_id"]:checked').val(), subscription_id: {{ subscription.subscription_id }} }, 
+            beforeSend: function () {
+                $("#payment_alert").html('');   
+                $('#btn_payment_save').button('loading');
+            }, 
+            complete: function () {
+                $('#btn_payment_save').button('reset');
+            },
+            success: function (json) {
+                if (json['error']) {
+                    
+                    $('#payment_alert').prepend('<div class="alert alert-danger"><i class="fa fa-check-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                
+                } else if (json['success']) {
+                    
+                    $('#payment_alert').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    
+                    var element_id =  $('input[name="payment_id"]:checked').val();
+                    
+                    $('#payment_current_image').attr('src', $('#payment_image_' + element_id).attr('src'));
+                    $('#payment_current_mask').text($('#payment_mask_' + element_id).text());
+                    $('#paymentCollapse').collapse('toggle');
+
+                }
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+    {% if subscription.subscription_status_id == subscription_active_status %}
+    $('.cancel-subscription ').on('click', function (e) {
+        
+        $.ajax({
+            url: 'index.php?route=account/subscription/cancelSubscription&member_token={{ member_token }}',
+            dataType: 'json',
+            method: "POST",
+            data: { subscription_id: {{ subscription.subscription_id }} }, 
+            beforeSend: function () {
+                $('.cancel-subscription').button('loading');
+            }, 
+            complete: function () {
+                $('.cancel-subscription').button('reset');
+            },
+            success: function (json) {
+                
+                if (json['redirect']) {
+                    
+                    if (json['redirect']) {
+                        location = json['redirect'];
+                    }
+
+                }
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+    {% endif %}
+
+    {% if subscription.subscription_status_id == subscription_canceled_status %}
+    $('.renew-subscription ').on('click', function (e) {
+        
+        $.ajax({
+            url: 'index.php?route=account/subscription/renewSubscription&member_token={{ member_token }}',
+            dataType: 'json',
+            method: "POST",
+            data: { subscription_id: {{ subscription.subscription_id }} }, 
+            beforeSend: function () {
+                $('.renew-subscription').button('loading');
+            }, 
+            complete: function () {
+                $('.renew-subscription').button('reset');
+            },
+            success: function (json) {
+                
+                if (json['redirect']) {
+                    
+                    if (json['redirect']) {
+                        location = json['redirect'];
+                    }
+                }
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+    {% endif %}
+
+
+    $('#btn_plan_save').on('click', function (e) {
+        
+        $.ajax({
+            url: 'index.php?route=account/subscription/update&member_token={{ member_token }}',
+            dataType: 'json',
+            method: "POST",
+            data: { subscription_plan_id: $('input[name="subscription_plan_id"]:checked').val(), subscription_id: {{ subscription.subscription_id }} }, 
+            beforeSend: function () {
+                $("#plan_alert").html('');
+                $('#btn_plan_save').button('loading');
+            }, 
+            complete: function () {
+                $('#btn_plan_save').button('reset');
+            },
+            success: function (json) {
+                if (json['error']) {
+                    
+                    $('#plan_alert').prepend('<div class="alert alert-danger"><i class="fa fa-check-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                
+                } else if (json['success']) {
+                    
+                    $('#plan_alert').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    
+                    var element_id = $('input[name="subscription_plan_id"]:checked').val();
+                    
+                    $('#current_plan_name').text($('#plan_name_' + element_id).text() + ' Plan');
+                    $('#current_plan_price').text($('#plan_price_' + element_id).text());
+                    $('#planCollapse').collapse('toggle');
+
+                }
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+
+    $(document).ready(function(){
+        $('.subscription-info-plan-selection').on('change', function() {
+            $(".subscription-info-plan-selection").parent().removeClass("active");
+            $('.subscription-info-plan-selection:checked').parent().addClass("active");
+        });
+
+        $('.subscription-info-payment-selection').on('change', function() {
+            $(".subscription-info-payment-selection").parent().removeClass("active");
+            $('.subscription-info-payment-selection:checked').parent().addClass("active");
+        });
+    });
+
+    $('#activate-store').on('click', function (e) {  
+        $.ajax({
+        url: 'index.php?route=cloud/store/startStore&member_token={{ member_token }}',
+        dataType: 'json',
+        method: "POST",
+        data: {
+            subscription_id: {{ subscription.subscription_id }}
+        },
+        beforeSend: function () {
+            $('#activate-store').button('loading');
+        },
+        complete: function () {
+            $('#activate-store').button('reset');
+        },
+        success: function (json) {
+            if (json['error']) {
+              $('#status-alert').html('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+            }
+
+            if (json['redirect']) {
+                    
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+
+});
+
+    $('#stop-store').on('click', function (e) {  
+        $.ajax({
+        url: 'index.php?route=cloud/store/stopStore&member_token={{ member_token }}',
+        dataType: 'json',
+        method: "POST",
+        data: {
+            subscription_id: {{ subscription.subscription_id }}
+        },
+        beforeSend: function () {
+            $('#stop-store').button('loading');
+        },
+        complete: function () {
+            $('#stop-store').button('reset');
+        },
+        success: function (json) {
+            if (json['error']) {
+              $('#status-alert').html('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+            }
+
+            if (json['redirect']) {
+                    
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+$('.restart-subscription').on('click', function (e) {
+    
+    $.ajax({
+        url: 'index.php?route=account/subscription/restartSubscription&member_token={{ member_token }}',
+        dataType: 'json',
+        method: "POST",
+        data: { subscription_id: {{ subscription.subscription_id }} }, 
+        beforeSend: function () {
+            $("#payment_alert").html('');   
+            $('.renew-subscription').button('loading');
+        }, 
+        complete: function () {
+            $('.renew-subscription').button('reset');
+        },
+        success: function (json) {
+            if (json['error']) {
+                
+                //$('#payment_alert').prepend('<div class="alert alert-danger"><i class="fa fa-check-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+            
+            } else if (json['redirect']) {
+                
+                if (json['redirect']) {
+                    location = json['redirect'];
+                }
+
+            }
+
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+</script>
+
+{{ footer }}

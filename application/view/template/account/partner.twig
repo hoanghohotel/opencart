@@ -1,0 +1,305 @@
+{{ header }}
+<div id="account-partner">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data">
+
+
+          {% if error_warning %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+          {% endif %}
+
+
+          <fieldset>
+
+            <legend>Register for a partner account</legend>
+          {% if not partner_status %}
+
+            {% if route == 'account/partner/add' %}
+            <h1>Partner Up</h1>
+            <p>Apply to become a partner</p>
+          {% else %}
+            <h1>My Partner Info</h1>
+            <p>Edit partner information</p>
+          {% endif %}
+
+              <p>Please check before applying to become a partner if you qualify or not.</p>
+              <h4><strong>Attention</strong></h4>
+              <div class="alert alert-info">
+                <ol>
+                  <li>Contribution in OpenCart Forum (3 post & 10 reply monthly).</li>
+                  <li>Submit at least one extension to OpenCart Marketplace.</li>
+                  <li>Write a blog article about OpenCart.</li>
+                  <li>Place an OpenCart logo on your website.</li>
+                  <li>Advertise in Opencart website.</li>
+                </ol>
+              </div>
+            </fieldset>
+          {% endif %}
+
+          <fieldset>
+            <legend>Edit Your Partner Contact Details</legend>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group required">
+                  <label class="control-label" for="input-firstname">First Name</label> <input type="text" name="firstname" value="{{ firstname }}" placeholder="First Name" id="input-firstname" class="form-control"/>
+                  {% if error_firstname %}
+                    <div class="text-danger">{{ error_firstname }}</div>
+                  {% endif %}</div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group required">
+                  <label class="control-label" for="input-lastname">Last Name</label> <input type="text" name="lastname" value="{{ lastname }}" placeholder="Last Name" id="input-lastname" class="form-control"/>
+                  {% if error_lastname %}
+                    <div class="text-danger">{{ error_lastname }}</div>
+                  {% endif %}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group required">
+                  <label class="control-label" for="input-company">Company</label> <input type="text" name="company" value="{{ company }}" placeholder="Company" id="input-company" class="form-control"/>
+                  {% if error_company %}
+                    <div class="text-danger">{{ error_company }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group required">
+                  <label class="control-label" for="input-website">Web Site</label> <input type="text" name="website" value="{{ website }}" placeholder="Web Site" id="input-website" class="form-control"/>
+                  {% if error_website %}
+                    <div class="text-danger">{{ error_website }}</div>
+                  {% endif %}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group required">
+                  <label class="control-label" for="input-email">E-Mail</label> <input type="text" name="email" value="{{ email }}" placeholder="E-Mail" id="input-email" class="form-control"/>
+                  {% if error_email %}
+                    <div class="text-danger">{{ error_email }}</div>
+                  {% endif %}</div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group required">
+                  <label class="control-label" for="input-telephone">Telephone</label> <input type="text" name="telephone" value="{{ telephone }}" placeholder="Telephone" id="input-telephone" class="form-control"/>
+                  <div class="help-block">(Include the country code)</div>
+                  {% if error_telephone %}
+                    <div class="text-danger">{{ error_telephone }}</div>
+                  {% endif %}</div>
+              </div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>About Your Company</legend>
+            <div class="form-group required">
+              <label class="control-label" for="input-partner-type">Partner Type</label> <select name="member_partner_type_id" id="input-partner-type" class="form-control">
+                <option value=""></option>
+                {% for partner_type in partner_types %}
+                  {% if partner_type.member_partner_type_id == member_partner_type_id %}
+                    <option value="{{ partner_type.member_partner_type_id }}" selected="selected">{{ partner_type.name }}</option>
+                  {% else %}
+                    <option value="{{ partner_type.member_partner_type_id }}">{{ partner_type.name }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+              {% if error_partner_type %}
+                <div class="text-danger">{{ error_partner_type }}</div>
+              {% endif %}
+            </div>
+            <div class="form-group required">
+              <label for="input-description-short">Short Description</label> <textarea name="description_short" placeholder="Short description about your company" rows="5" id="input-description-short" class="form-control">{{ description_short }}</textarea>
+              {% if error_description_short %}
+                <div class="text-danger">{{ error_description_short }}</div>
+              {% endif %} </div>
+            <div class="form-group required">
+              <label for="input-description-long">Long Description</label> <textarea name="description_long" placeholder="Long description about your company" rows="8" id="input-description-long" class="form-control">{{ description_long }}</textarea>
+              {% if error_description_long %}
+                <div class="text-danger">{{ error_description_long }}</div>
+              {% endif %}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Address</legend>
+            <div class="form-group required">
+              <label class="control-label" for="input-address-1">Address 1</label> <input type="text" name="address_1" value="{{ address_1 }}" placeholder="Address 1" id="input-address-1" class="form-control"/>
+              {% if error_address_1 %}
+                <div class="text-danger">{{ error_address_1 }}</div>
+              {% endif %}</div>
+            <div class="form-group">
+              <label class="control-label" for="input-address-2">Address 2</label> <input type="text" name="address_2" value="{{ address_2 }}" placeholder="Address 2" id="input-address-2" class="form-control"/>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group required">
+                  <label class="control-label" for="input-city">City</label> <input type="text" name="city" value="{{ city }}" placeholder="City" id="input-city" class="form-control"/>
+                  {% if error_city %}
+                    <div class="text-danger">{{ error_city }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group required">
+                  <label class="control-label" for="input-postcode">Postcode</label> <input type="text" name="postcode" value="{{ postcode }}" placeholder="Postcode" id="input-postcode" class="form-control"/>
+                  {% if error_postcode %}
+                    <div class="text-danger">{{ error_postcode }}</div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            <div class="form-group required">
+              <label class="control-label" for="input-country">Country</label> <select name="country_id" id="input-country" class="form-control">
+                <option value=""></option>
+                {% for country in countries %}
+                  {% if country.country_id == country_id %}
+                    <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
+                  {% else %}
+                    <option value="{{ country.country_id }}">{{ country.name }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+              {% if error_country %}
+                <div class="text-danger">{{ error_country }}</div>
+              {% endif %}</div>
+            <div class="form-group required">
+              <label class="control-label" for="input-zone">Region / State</label> <select name="zone_id" id="input-zone" class="form-control"></select>
+              {% if error_zone %}
+                <div class="text-danger">{{ error_zone }}</div>
+              {% endif %}
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Image</legend>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="thumbnail"><img src="{{ thumb }}" alt="" title="" id="thumb-image"/> <input type="hidden" name="image" value="{{ image }}" id="input-image"/></div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-2">
+                  <button type="button" data-toggle="image" data-target="#input-image" data-thumb="#thumb-image" class="btn btn-success btn-block">Browse</button>
+                </div>
+                <div class="col-sm-2">
+                  <button type="button" data-toggle="clear" data-target="#input-image" data-thumb="#thumb-image" data-placeholder="{{ placeholder }}" class="btn btn-default btn-block">Clear</button>
+                </div>
+              </div>
+              <div class="help-block">Company image size should be 110 x 40px</div>
+            </div>
+          </fieldset>
+          <fieldset>
+            <legend>Social Platform</legend>
+            <div class="form-group">
+              <label for="input-facebook">Facebook</label>
+              <div class="input-group">
+                <input type="text" name="facebook" value="{{ facebook }}" placeholder="Facebook page link" id="input-facebook" class="form-control"/>
+                <div class="input-group-addon"><i class="fa fa-facebook"></i></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="input-twitter">Twitter</label>
+              <div class="input-group">
+                <input type="text" name="twitter" value="{{ twitter }}" placeholder="Twitter link" id="input-twitter" class="form-control"/>
+                <div class="input-group-addon"><i class="fa fa-twitter"></i></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="input-linkedin">LinkedIn</label>
+              <div class="input-group">
+                <input type="text" name="linkedin" value="{{ linkedin }}" id="input-linkedin" class="form-control" placeholder="LinkedIn link"/>
+                <div class="input-group-addon"><i class="fa fa-linkedin"></i></div>
+              </div>
+            </div>
+          </fieldset>
+          {% if route == 'account/partner/add' %}
+            <fieldset>
+              <legend>Terms &amp; Conditions</legend>
+              <textarea rows="8" class="form-control" readonly="readonly">Limitation of Liability
+  To the fullest extent permitted by law in each applicable jurisdiction, Opencart, its officers, directors, shareholders, employees, affiliates and/or agents shall not be liable to you for any direct, indirect, incidental, special, punitive, exemplary or consequential damages whatsoever, including any damages resulting from
+
+  (1) errors, mistakes, or inaccuracies of or in any content;
+
+  (2) any personal injury or property damage related to your use of the Opencart Services;
+
+  (3) any unauthorized access to or use of our servers and/or any personal information and/or other information stored therein;
+
+  (4) any interruption or cessation of transmission to or from the OpenCart Services;
+
+  (5) the use or display of any Content or User Content posted, emailed, transmitted, or otherwise made available via the Opencart Services;
+
+  (6) events beyond the reasonable control of Opencart, including any internet failures, equipment failures, electrical power failures, strikes, labor disputes, riots, insurrections, civil disturbances, shortages of labor or materials, fires, floods, storms, earthquakes, explosions, acts of God, war, terrorism, intergalactic struggles, governmental actions, orders of courts, agencies or tribunals or non-performance of third parties; and/or
+
+  (7) loss of use, data, profits, goodwill, or other intangible losses, resulting from the use or the inability to use any or all of Opencart Services.</textarea>
+              <div class="checkbox">
+                <label>{% if agree %}
+                    <input type="checkbox" name="agree" value="1" checked="checked"/>
+                  {% else %}
+                    <input type="checkbox" name="agree" value="1"/>
+                  {% endif %}
+                  I agree with the above terms & conditions</label>
+              </div>
+            </fieldset>
+          {% endif %}
+          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+<link href="application/view/javascript/jquery/colorpicker/css/bootstrap-colorpicker.css" rel="stylesheet"/>
+<script type="text/javascript" src="application/view/javascript/jquery/colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="application/view/javascript/bbcode.js"></script>
+<script type="text/javascript"><!--
+$('textarea[name=\'description_long\']').bbcode();
+//--></script>
+<script type="text/javascript"><!--
+$('select[name=\'country_id\']').on('change', function() {
+	$.ajax({
+		url: 'index.php?route=localisation/country&member_token={{ member_token }}&country_id=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'zone_id\']').prop('disabled', true);
+		},
+		complete: function() {
+			$('select[name=\'zone_id\']').prop('disabled', false);
+		},
+		success: function(json) {
+			if (json['postcode_required'] == '1') {
+				$('input[name=\'postcode\']').parent().addClass('required');
+			} else {
+				$('input[name=\'postcode\']').parent().removeClass('required');
+			}
+
+			html = '<option value=""></option>';
+
+			if (json['zone'] && json['zone'] != '') {
+				for (i = 0; i < json['zone'].length; i++) {
+					html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+
+					if (json['zone'][i]['zone_id'] == '{{ zone_id }}') {
+						html += ' selected="selected"';
+					}
+
+					html += '>' + json['zone'][i]['name'] + '</option>';
+				}
+			} else {
+				html += '<option value="0" selected="selected"> --- None --- </option>';
+			}
+
+			$('select[name=\'zone_id\']').html(html);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+$('select[name=\'country_id\']').trigger('change');
+//--></script>
+{{ footer }}

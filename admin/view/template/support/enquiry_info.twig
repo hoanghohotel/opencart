@@ -1,0 +1,92 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-envelope-o"></i> {{ text_info }} (#{{ enquiry.enquiry_id }})</h3>
+      </div>
+      <div class="panel-body">
+        <table class="table table-bordered">
+          <tbody>
+            <tr>
+              <td style="width: 25%;"><strong>Sender Name</strong></td>
+              <td>{{ enquiry.name }}</td>
+            </tr>
+            <tr>
+              <td><strong>E-Mail</strong></td>
+              <td><a href="mailto:{{ enquiry.email }}">{{ enquiry.email }}</a></td>
+            </tr>
+            {% if enquiry.telephone %}
+            <tr>
+              <td><strong>Telephone</strong></td>
+              <td>{{ enquiry.telephone }}</td>
+            </tr>
+            {% endif %}
+            {% if enquiry.company %}
+            <tr>
+              <td><strong>Company</strong></td>
+              <td>{{ enquiry.company }}</td>
+            </tr>
+            {% endif %}
+            {% if enquiry.website %}
+            <tr>
+              <td><strong>Website</strong></td>
+              <td><a href="{{ enquiry.website }}" target="_blank">{{ enquiry.website }}</a></td>
+            </tr>
+            {% endif %}
+            {% if enquiry.country_name %}
+            <tr>
+              <td><strong>Country</strong></td>
+              <td>{{ enquiry.country_name }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+              <td><strong>Enquiry Type / Reason</strong></td>
+              <td>{{ enquiry.type }}{% if enquiry.reason %} / {{ enquiry.reason }}{% endif %}</td>
+            </tr>
+            {% if enquiry.partner_company %}
+            <tr>
+              <td><strong>Partner</strong></td>
+              <td>{{ enquiry.partner_company }}</td>
+            </tr>
+            {% endif %}
+            {% if enquiry.order_id %}
+            <tr>
+              <td><strong>Order ID</strong></td>
+              <td>#{{ enquiry.order_id }}</td>
+            </tr>
+            {% endif %}
+            {% if enquiry.subject %}
+            <tr>
+              <td><strong>Subject</strong></td>
+              <td>{{ enquiry.subject }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+              <td><strong>Date Submitted</strong></td>
+              <td>{{ enquiry.date_added }}</td>
+            </tr>
+            <tr>
+              <td><strong>Message</strong></td>
+              <td>{{ enquiry.enquiry|nl2br }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

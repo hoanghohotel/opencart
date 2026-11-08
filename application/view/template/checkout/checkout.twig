@@ -1,0 +1,91 @@
+<fieldset>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th class="text-left">Extension Name</th>
+				<th class="text-right">Quantity</th>
+				<th class="text-right">Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-left">{{ extension }}</td>
+				<td class="text-right" style="min-width: 90px;"><select name="quantity" class="form-control">
+						{% for value in quantities %}
+							<option value="{{ value }}"{% if (value == quantity) %} selected{% endif %}>{{ value }}</option>
+						{% endfor %}
+					</select></td>
+				<td class="text-right">{{ total }}</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<fieldset>
+	<legend>Please choose a payment method below</legend>
+	<div class="form-group">
+		<select name="payment_method" class="form-control">
+			{% if vaulted %}
+				<optgroup label="Stored Payment Methods">
+					{% for vault in vaulted %}
+						<option value="{{ vault.value }}">{{ vault.text }}</option>
+					{% endfor %}
+				</optgroup>
+			{% endif %}
+			{% for payment_method in payment_methods %}
+				<option value="{{ payment_method.value }}">{{ payment_method.text }}</option>
+			{% endfor %}
+		</select>
+	</div>
+</fieldset>
+<div class="text-right">
+	<button type="button" id="button-continue" class="btn btn-primary">Continue</button>
+</div>
+<script type="text/javascript">
+$('select[name=\'quantity\']').on('change', function(e) {
+    var element = this;
+
+    $.ajax({
+        url: 'index.php?route=checkout/checkout&member_token={{ member_token }}&extension_id={{ extension_id }}&quantity=' + $(element).val(),
+        dataType: 'html',
+        beforeSend: function() {
+            $(element).prop('disabled', true);
+        },
+        complete: function() {
+            $(element).prop('disabled', false);
+        },
+        success: function(html) {
+            $('#modal-checkout .modal-body').html(html);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+$('#button-continue').on('click', function(e) {
+    var element = this;
+
+    $.ajax({
+        url: $('select[name=\'payment_method\']').val(),
+        dataType: 'html',
+        beforeSend: function() {
+            $(element).button('loading');
+        },
+        complete: function(xhr) {
+            $(element).prop('disabled', false);
+
+            if (xhr.status == 401) {
+                location = xhr.getResponseHeader('Location');
+            }
+        },
+        success: function(html) {
+            //console.log(html);
+
+            $('#modal-checkout .modal-body').html(html);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+</script>

@@ -1,0 +1,229 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-partner" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-partner" class="form-horizontal">
+          <div class="form-group required">
+            <label class="col-sm-2 control-label" for="input-company">{{ entry_company }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="company" value="{{ company }}" placeholder="{{ entry_company }}" id="input-company" class="form-control" />
+              {% if error_company %}
+              <div class="text-danger">{{ error_company }}</div>
+              {% endif %}
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-member">{{ entry_member }}</label>
+            <div class="col-sm-10">
+              <select name="member_id" id="input-member" class="form-control">
+                {% for member in members %}
+                {% if member.member_id == member_id %}
+                <option value="{{ member.member_id }}" selected="selected">{{ member.username }} ({{ member.firstname }} {{ member.lastname }})</option>
+                {% else %}
+                <option value="{{ member.member_id }}">{{ member.username }} ({{ member.firstname }} {{ member.lastname }})</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-partner-type">{{ entry_partner_type }}</label>
+            <div class="col-sm-10">
+              <select name="member_partner_type_id" id="input-partner-type" class="form-control">
+                {% for ptype in partner_types %}
+                {% if ptype.member_partner_type_id == member_partner_type_id %}
+                <option value="{{ ptype.member_partner_type_id }}" selected="selected">{{ ptype.name }}</option>
+                {% else %}
+                <option value="{{ ptype.member_partner_type_id }}">{{ ptype.name }}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-partner-status">{{ entry_partner_status }}</label>
+            <div class="col-sm-10">
+              <select name="member_partner_status_id" id="input-partner-status" class="form-control">
+                {% for pstatus in partner_statuses %}
+                {% if pstatus.member_partner_status_id == member_partner_status_id %}
+                <option value="{{ pstatus.member_partner_status_id }}" selected="selected">{{ pstatus.name }}</option>
+                {% else %}
+                <option value="{{ pstatus.member_partner_status_id }}">{{ pstatus.name }}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-firstname">{{ entry_firstname }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="firstname" value="{{ firstname }}" placeholder="{{ entry_firstname }}" id="input-firstname" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-lastname">{{ entry_lastname }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="lastname" value="{{ lastname }}" placeholder="{{ entry_lastname }}" id="input-lastname" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-website">{{ entry_website }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="website" value="{{ website }}" placeholder="{{ entry_website }}" id="input-website" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-email">{{ entry_email }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="email" value="{{ email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-telephone">{{ entry_telephone }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="telephone" value="{{ telephone }}" placeholder="{{ entry_telephone }}" id="input-telephone" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-description-short">{{ entry_description_short }}</label>
+            <div class="col-sm-10">
+              <textarea name="description_short" rows="3" placeholder="{{ entry_description_short }}" id="input-description-short" class="form-control">{{ description_short }}</textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-description-long">{{ entry_description_long }}</label>
+            <div class="col-sm-10">
+              <textarea name="description_long" rows="6" placeholder="{{ entry_description_long }}" id="input-description-long" data-toggle="summernote" data-lang="{{ summernote }}" class="form-control">{{ description_long }}</textarea>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-address-1">{{ entry_address_1 }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="address_1" value="{{ address_1 }}" placeholder="{{ entry_address_1 }}" id="input-address-1" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-city">{{ entry_city }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="city" value="{{ city }}" placeholder="{{ entry_city }}" id="input-city" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-postcode">{{ entry_postcode }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="postcode" value="{{ postcode }}" placeholder="{{ entry_postcode }}" id="input-postcode" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-country">{{ entry_country }}</label>
+            <div class="col-sm-10">
+              <select name="country_id" id="input-country" class="form-control">
+                {% for country in countries %}
+                {% if country.country_id == country_id %}
+                <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
+                {% else %}
+                <option value="{{ country.country_id }}">{{ country.name }}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-zone">{{ entry_zone }}</label>
+            <div class="col-sm-10">
+              <select name="zone_id" id="input-zone" class="form-control"></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-image">{{ entry_image }}</label>
+            <div class="col-sm-10"><a href="" id="thumb-image" data-toggle="image" class="img-thumbnail"><img src="{{ thumb }}" alt="" title="" data-placeholder="{{ placeholder }}" style="max-width:100px;" /></a>
+              <input type="hidden" name="image" value="{{ image }}" id="input-image" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-facebook">{{ entry_facebook }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="facebook" value="{{ facebook }}" placeholder="{{ entry_facebook }}" id="input-facebook" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-twitter">{{ entry_twitter }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="twitter" value="{{ twitter }}" placeholder="{{ entry_twitter }}" id="input-twitter" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-linkedin">{{ entry_linkedin }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="linkedin" value="{{ linkedin }}" placeholder="{{ entry_linkedin }}" id="input-linkedin" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <select name="status" id="input-status" class="form-control">
+                {% if status %}
+                <option value="1" selected="selected">{{ text_enabled }}</option>
+                <option value="0">{{ text_disabled }}</option>
+                {% else %}
+                <option value="1">{{ text_enabled }}</option>
+                <option value="0" selected="selected">{{ text_disabled }}</option>
+                {% endif %}
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript"><!--
+$('select[name=\'country_id\']').on('change', function() {
+	$.ajax({
+		url: 'index.php?route=localisation/country/country&user_token={{ user_token }}&country_id=' + this.value,
+		dataType: 'json',
+		success: function(json) {
+			html = '<option value="0">{{ text_none }}</option>';
+
+			if (json['zone'] && json['zone'] != '') {
+				for (i = 0; i < json['zone'].length; i++) {
+					html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+
+					if (json['zone'][i]['zone_id'] == '{{ zone_id }}') {
+						html += ' selected="selected"';
+					}
+
+					html += '>' + json['zone'][i]['name'] + '</option>';
+				}
+			}
+
+			$('select[name=\'zone_id\']').html(html);
+		}
+	});
+});
+
+$('select[name=\'country_id\']').trigger('change');
+//--></script>
+</div>
+{{ footer }}

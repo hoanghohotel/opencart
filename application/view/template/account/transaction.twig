@@ -1,0 +1,47 @@
+{{ header }}
+<div id="account-transaction">
+	<div class="page-header">
+		<div class="container">
+			<h1>Your Transactions</h1>
+			<p>View your commission rate for sales</p>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<h2>Transactions</h2>
+				<p>Your seller group: <strong>{{ seller_group }}</strong>.</p>
+				<p>Your current balance is <strong>{{ balance }}</strong>.</p>
+				<div class="table-responsive">
+					<table class="table table-bordered table-hover">
+						<thead>
+							<tr>
+								<th class="text-left">Date Added</th>
+								<th class="text-left">Description</th>
+								<th class="text-right">Amount</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% if transactions %}
+								{% for transaction in transactions %}
+									<tr>
+										<td class="text-left">{{ transaction.date_added }}</td>
+										<td class="text-left">{{ transaction.description }}</td>
+										<td class="text-right">{{ transaction.amount }}</td>
+									</tr>
+								{% endfor %}
+							{% else %}
+								<tr>
+									<td class="text-center" colspan="3">No results!</td>
+								</tr>
+							{% endif %}
+						</tbody>
+					</table>
+				</div>
+				<nav>{{ pagination }}</nav>
+			</div>
+			<div class="col-md-3 hidden-xs">{{ menu }}</div>
+		</div>
+	</div>
+</div>
+{{ footer }} 

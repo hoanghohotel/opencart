@@ -1,0 +1,92 @@
+{{ header }}
+<div id="account-edit">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <h2>Your Stores</h2>
+        <p>Register your store to get access to the marketplace API</p>
+
+
+        {% if error_warning %}
+          <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+        <form action="{{ action }}" method="post" enctype="multipart/form-data">
+          <fieldset>
+            <legend>Your Store API Information</legend>
+            <div class="form-group">
+              <label for="input-domain">Domain Name</label>
+              <div>{{ domain }}</div>
+            </div>
+            <div class="form-group">
+              <label for="input-username">API Username</label>
+              <div>{{ username }}</div>
+            </div>
+            <div class="form-group">
+              <label for="input-secret">API Secret</label><textarea type="text" name="secret" rows="8" id="input-secret" placeholder="API Secret" readonly class="form-control">{{ secret }}</textarea>
+            </div>
+          </fieldset>
+          <div class="text-right">
+            <a href="{{ cancel }}" class="btn btn-link">Cancel</a>
+            <button type="button" id="button-secret" class="btn btn-warning btn-lg">Generate API Secret</button>
+            <button type="button" id="button-copy" data-toggle="tooltip" data-title="Copy to clipboard" class="btn btn-info btn-lg"><i class="fa fa-copy"></i></button>
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('#button-secret').on('click', function(e) {
+	var element = this;
+
+	$.ajax({
+		url: 'index.php?route=account/store/secret&member_token={{ member_token }}&store_id={{ store_id }}',
+		dataType: 'json',
+		beforeSend: function() {
+			$(element).button('loading');
+		},
+		complete: function() {
+			$(element).button('reset');
+		},
+		success: function(json) {
+			$('.alert').remove();
+
+			if (json['error']) {
+				$('fieldset').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+			}
+
+			if (json['success']) {
+				$('fieldset').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+			}
+
+			if (json['secret']) {
+				$('textarea[name=\'secret\']').val(json['secret']);
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+$('#button-copy').on('click', function() {
+	copyToClipboard('#input-secret');
+});
+
+function copyToClipboard(element) {
+	var $temp = $('<input>');
+
+	$('body').append($temp);
+
+	$temp.val($(element).text()).select();
+
+	document.execCommand('copy');
+
+	$temp.remove();
+}
+
+//--></script>
+{{ footer }}

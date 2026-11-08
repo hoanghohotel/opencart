@@ -1,0 +1,42 @@
+{{ header }}
+<div id="account-register-success">
+	<div id="register" class="container">
+		<div class="row">
+			<div class="col-md-8">
+				{% if verified %}
+				<h3 style="margin-top: 0px;">Account has been successfully verified</h3>
+				<p>Please, login to have access to your own account area. You can edit your profile, view past orders, download modules and apply for a seller account. Be sure to checkout the community forums for any help or advice you need.</p>
+				<p>To get started with OpenCart you can <a href="{{ download }}">download</a> and host yourself or <a href="{{ cloud }}">create a Cloud Store</a> within a few minutes.</p>
+				<div class="buttons text-right">
+					<a href="{{ login }}" class="btn btn-primary pull-right">Continue</a>
+				</div>
+				{% else %}
+				<h3 style="margin-top: 0px;">Something went wrong</h3>
+				<p>Verification link is invalid or account has been already verified.</p>
+				<div class="buttons text-right">
+					<a href="/" class="btn btn-primary pull-right">Return to Home</a>
+				</div>
+				{% endif %}
+			</div>
+			<div class="col-md-offset-1 col-md-3 hidden-xs">
+				<div id="register-newsletter">
+					<h4>OpenCart Newsletter</h4>
+					<div class="text-center">
+						<p><img src="application/view/image/icon/newsletter-subscribe-icon.png" class="img-responsive"/></p>
+						<p>Subscribe to our newsletters and stay informed of new releases and other OpenCart events.</p>
+					</div>
+					<div>
+						<div class="input-group newsletter">
+							<input type="text" name="newsletter" value="" placeholder="Enter your email" class="form-control"/>
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-primary subscribe"><i class="fa fa-angle-right"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="side-banner">{{ banner }}</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{ footer }}

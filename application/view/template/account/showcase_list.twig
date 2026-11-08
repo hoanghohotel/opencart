@@ -1,0 +1,68 @@
+{{ header }}
+<div id="account-showcase">
+  <div class="page-header">
+    <div class="container">
+      <h1>Showcase</h1>
+      <p></p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+
+        {% if error_warning %}
+          <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>{{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+        {% if success %}
+          <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+
+        <h2>Showcase</h2>
+
+        <fieldset>
+          <legend>Submit your store</legend>
+
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="text-left">Project Name</th>
+                  <th class="text-left">Type</th>
+                  <th class="text-left">Status</th>
+                  <th class="text-left">Date Added</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if showcases %}
+                  {% for showcase in showcases %}
+                    <tr>
+                      <td class="text-left">{{ showcase.name }}</td>
+                      <td class="text-left">{{ showcase.category }}</td>
+                      <td class="text-left"> {% if showcase.status %}<span class="label label-success">Enabled</span>{% else %}<span class="label label-danger">Disabled</span>{% endif %}</td>
+                      <td class="text-left">{{ showcase.date_added }}</td>
+                      <td class="text-right"><a href="{{ showcase.delete }}" data-toggle="tooltip" title="Delete" class="btn btn-danger"><i class="fa fa-times"></i></a></td>
+                    </tr>
+                  {% endfor %}
+                {% else %}
+                  <tr>
+                    <td class="text-center" colspan="5">No results!</td>
+                  </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+          <nav>{{ pagination }}</nav>
+        </fieldset>
+        <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a> <a href="{{ add }}" class="btn btn-primary">Add Project</a></div>
+
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+{{ footer }}

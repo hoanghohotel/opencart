@@ -1,0 +1,138 @@
+{{ header }}
+<div id="cms-download-history">
+  <div class="container">
+    <section>
+      <div class="row">
+        <div class="col-md-9">
+          <div id="steps">
+            <h2>How to install OpenCart</h2>
+            <ul>
+              <li>
+                <h2>1</h2>
+                <h4>Download OpenCart</h4>
+                <p>The latest version of OpenCart can be downloaded from the OpenCart website (recommended)</p>
+                <div class="arrow arrow-color"></div>
+                <div class="arrow arrow-border"></div>
+              </li>
+              <li>
+                <h2>2</h2>
+                <h4>Upload files to your server</h4>
+                <p>Upload to your web server established and the OpenCart archive extracted. We will now use File Transfer Protocol (FTP) client to upload these uncompressed files to a web server.</p>
+                <div class="arrow arrow-color"></div>
+                <div class="arrow arrow-border"></div>
+              </li>
+              <li>
+                <h2>3</h2>
+                <h4>Run automatic installer</h4>
+                <p>Goto the OpenCart location and it will install automatically.</p>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h2>Previous & Release Notes</h2>
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#tab-general" data-toggle="tab">Previous</a></li>
+              <li><a href="#tab-history" data-toggle="tab">Release Notes</a></li>
+            </ul>
+            <div class="tab-content">
+              <div id="tab-general" class="tab-pane active">
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Version</th>
+                        <th>Release Date</th>
+                        <th class="text-right">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% if downloads %}
+                        {% for download in downloads %}
+                          <tr>
+                            <td>{{ download.name }}</td>
+                            <td>{{ download.date_added }}</td>
+                            <td class="text-right"><a href="{{ download.href }}" data-toggle="tooltip" title="Download {{ download.name }}" class="btn btn-primary"><i class="fa fa-download"></i></a></td>
+                          </tr>
+                        {% endfor %}
+                      {% else %}
+                        <tr>
+                          <td class="text-center" colspan="3">No results!</td>
+                        </tr>
+                      {% endif %}
+                    <tbody>
+                  </table>
+                </div>
+                <nav>{{ pagination }}</nav>
+              </div>
+              <div id="tab-history" class="tab-pane">
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                        <th>Version</th>
+                        <th>Release Notes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% if downloads %}
+                        {% for download in downloads %}
+                          <tr>
+                            <td>{{ download.name }}</td>
+                            <td>{{ download.description }}</td>
+                          </tr>
+                        {% endfor %}
+                      {% else %}
+                        <tr>
+                          <td class="text-center" colspan="2">No results!</td>
+                        </tr>
+                      {% endif %}
+                    <tbody>
+                  </table>
+                </div>
+                <nav>{{ pagination }}</nav>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="well">
+            <h3>Other download options</h3>
+            <p><img src="application/view/image/partner/github.png" height="40" alt="" title=""/>
+              <br/>
+              Clone the latest OpenCart version from GitHub. <a href="https://github.com/opencart/opencart">Visit repository</a>.
+            </p>
+            <p><img src="application/view/image/partner/softaculous.gif" height="40" alt="" title=""/>
+              <br/>
+              Install OpenCart on your server via Softaculous. <a href="https://www.softaculous.com/softaculous/apps/ecommerce/OpenCart">Learn more</a>.
+            </p>
+            <p><img src="application/view/image/partner/amazon-webservices.png" height="40" alt="" title=""/>
+              <br/>
+              Download OpenCart in Amazon Web Services. <a href="https://aws.amazon.com/marketplace/search/results?x=0&y=0&searchTerms=opencart&page=1&ref_=nav_search_box">Learn more</a>.
+            </p>
+          </div>
+          <div id="side-banner">{{ banner }}</div>
+          <div class="well">
+            <h3>Requirements</h3>
+            These are minimum requirements needed so that OpenCart can be installed and work properly.
+            <ul class="list-check  list-color-blue">
+              <li>Web Server (Apache suggested)</li>
+              <li>PHP (at least 5.3)</li>
+              <li>Curl enabled</li>
+              <li>Database (MySQLi suggested)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  </div>
+  <div class="container-fluid">
+    <div class="container">
+      <h2>Ready to jump start your OpenCart project?</h2>
+      <h3>View our expert OpenCart Partners list</h3>
+      <p>
+        <a href="{{ partner }}" class="btn btn-primary btn-lg hidden-xs">View Partners</a> <a href="{{ partner }}" class="btn btn-primary btn-lg btn-block visible-xs-block">View Partners</a>
+      </p>
+    </div>
+  </div>
+</div>
+{{ footer }}

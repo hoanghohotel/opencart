@@ -1,0 +1,31 @@
+{{ header }}
+<div id="account-pin">
+  <div class="page-header">
+    <div class="container">
+      <h1>Setup PIN for your account</h1>
+      <p>Protect your account</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h3>Setup PIN for your account</h3>
+        <p>Please enter a 4 digit PIN number to protect your account. This is a one time PIN that you enter as security question whenever you login from an unknown device or computer.</p>
+        <form action="{{ action }}" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="input-pin">PIN</label> <input type="password" name="pin" value="{{ pin }}" placeholder="PIN" id="input-pin" class="form-control"/>
+            {% if error_pin %}
+              <div class="text-danger">{{ error_pin }}</div>
+            {% endif %}
+          </div>
+          <input type="hidden" name="redirect" value="{{ redirect }}"/>
+          <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+        </form>
+      </div>
+      <div class="col-md-4">
+        <div id="side-banner">{{ banner }}</div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

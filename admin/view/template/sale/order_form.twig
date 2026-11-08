@@ -1,0 +1,120 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-order" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-order" class="form-horizontal">
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-member">{{ entry_member }}</label>
+            <div class="col-sm-10">
+              <select name="member_id" id="input-member" class="form-control">
+                {% for member in members %}
+                {% if member.member_id == member_id %}
+                <option value="{{ member.member_id }}" selected="selected">{{ member.username }} ({{ member.firstname }} {{ member.lastname }})</option>
+                {% else %}
+                <option value="{{ member.member_id }}">{{ member.username }} ({{ member.firstname }} {{ member.lastname }})</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-seller">{{ entry_seller }}</label>
+            <div class="col-sm-10">
+              <select name="seller_id" id="input-seller" class="form-control">
+                {% for member in members %}
+                {% if member.member_id == seller_id %}
+                <option value="{{ member.member_id }}" selected="selected">{{ member.username }} ({{ member.firstname }} {{ member.lastname }})</option>
+                {% else %}
+                <option value="{{ member.member_id }}">{{ member.username }} ({{ member.firstname }} {{ member.lastname }})</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-extension-id">{{ entry_extension }}</label>
+            <div class="col-sm-10">
+              <select name="extension_id" id="input-extension-id" class="form-control" onchange="var opt=this.options[this.selectedIndex]; $('#input-extension').val(opt.getAttribute('data-name'));">
+                {% for ext in extensions %}
+                {% if ext.extension_id == extension_id %}
+                <option value="{{ ext.extension_id }}" data-name="{{ ext.name }}" selected="selected">{{ ext.name }}</option>
+                {% else %}
+                <option value="{{ ext.extension_id }}" data-name="{{ ext.name }}">{{ ext.name }}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+              <input type="hidden" name="extension" value="{{ extension }}" id="input-extension" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-quantity">{{ entry_quantity }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="quantity" value="{{ quantity }}" id="input-quantity" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-price">{{ entry_price }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="price" value="{{ price }}" id="input-price" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-total">{{ entry_total }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="total" value="{{ total }}" id="input-total" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-payment-method">{{ entry_payment_method }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="payment_method" value="{{ payment_method }}" id="input-payment-method" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-transaction-id">{{ entry_transaction_id }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="transaction_id" value="{{ transaction_id }}" id="input-transaction-id" class="form-control" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-2 control-label" for="input-order-status">{{ entry_order_status }}</label>
+            <div class="col-sm-10">
+              <select name="order_status_id" id="input-order-status" class="form-control">
+                {% for order_status in order_statuses %}
+                {% if order_status.order_status_id == order_status_id %}
+                <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                {% else %}
+                <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                {% endif %}
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

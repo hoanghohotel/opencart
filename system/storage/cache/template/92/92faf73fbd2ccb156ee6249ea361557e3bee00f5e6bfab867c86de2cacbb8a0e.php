@@ -1,0 +1,254 @@
+<?php
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Extension\SandboxExtension;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedTagError;
+use Twig\Sandbox\SecurityNotAllowedFilterError;
+use Twig\Sandbox\SecurityNotAllowedFunctionError;
+use Twig\Source;
+use Twig\Template;
+
+/* mail/footer.twig */
+class __TwigTemplate_23e59930a4461a94b67d741c77c323834217049d688a700452b61af6542ba152 extends Template
+{
+    private $source;
+    private $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->parent = false;
+
+        $this->blocks = [
+        ];
+    }
+
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        // line 1
+        echo "<!-- START OF CALL TO ACTION BLOCK-->
+
+<table bgcolor=\"#ffffff\" width=\"100%\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+  <tr>
+    <td valign=\"top\" width=\"100%\"><table background=\"https://s3-us-west-2.amazonaws.com/opencart-email-asset/call-to-action-background.png\" bgcolor=\"#23A1D1\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"height:306px;\">
+        <!--[if gte mso 9]>
+                        <v:rect xmlns:v=\"urn:schemas-microsoft-com:vml\" fill=\"true\" stroke=\"false\" style=\"width:600px;height:306px;\">
+                          <v:fill type=\"tile\" src=\"https://s3-us-west-2.amazonaws.com/opencart-email-asset/call-to-action-background.png\" color=\"#23A1D1\" />
+                          <v:textbox inset=\"0,0,0,0\">
+                        <![endif]-->
+        <tr>
+          <td width=\"100%\"><!-- START OF VERTICAL SPACER-->
+            
+            <table class=\"table_scale\" width=\"600\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+              <tr>
+                <td width=\"100%\" height=\"60\">&nbsp;</td>
+              </tr>
+            </table>
+            
+            <!-- END OF VERTICAL SPACER-->
+            
+            <table class=\"table_scale\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+              <tr>
+                <td width=\"100%\"><table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+                    <tr>
+                      <td class=\"spacer\" width=\"30\"></td>
+                      <td width=\"540\"><table class=\"full\" align=\"left\" width=\"540\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;\">
+                          <!-- START OF IMAGE-->
+                          <tr>
+                            <td align=\"center\" style=\"margin: 0; padding-bottom: 20px; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 18px;\"><span> <img src=\"https://s3-us-west-2.amazonaws.com/opencart-email-asset/tack-icon.png\" alt=\"tack-icon\" width=\"24\" height=\"35\" border=\"0\" style=\"display: inline-block;\" /> </span></td>
+                          </tr>
+                          <!-- END OF IMAGE--> 
+                          
+                          <!-- START OF HEADING-->
+                          <tr>
+                            <td class=\"center\" align=\"center\" style=\"padding-bottom: 10px; font-weight: bold; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#ffffff; font-size:22px; line-height:32px; mso-line-height-rule: exactly;\"><span> Over 10,000 extensions available to download </span></td>
+                          </tr>
+                          <!-- END OF HEADING--> 
+                          
+                          <!-- START OF TEXT-->
+                          <tr>
+                            <td class=\"center\" align=\"center\" style=\"margin: 0; padding: 0px; font-size:13px ; color:#ffffff; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;mso-line-height-rule: exactly;\"><span>The extensions store is full of 3rd party modules to enhance your OpenCart store</span></td>
+                          </tr>
+                          <!-- END OF TEXT--> 
+                          
+                          <!-- START BUTTON-->
+                          <tr>
+                            <td align=\"center\" valign=\"top\" style=\"padding-top: 15px;\"><table border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" style=\"border-radius: 2px; margin: 0;\">
+                                <tr>
+                                  <td align=\"center\" valign=\"middle\" bgcolor=\"#ffffff\" style=\"border-radius: 2px; padding: 6px 15px; font-weight: bold;  font-size: 13px; line-height: 18px; font-family: 'Open Sans', Helvetica, Arial, sans-serif; color:#ffffff; margin: 0 !important; \"><a href=\"";
+        // line 50
+        echo ($context["marketplace"] ?? null);
+        echo "\" style=\"border: none; font-weight: bold; font-style: normal; color:#23A1D1; text-decoration: none;\"> Browse the extension store </a></td>
+                                </tr>
+                              </table></td>
+                          </tr>
+                          <!-- END BUTTON-->
+                        </table></td>
+                      <td class=\"spacer\" width=\"30\"></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table>
+            
+            <!-- START OF VERTICAL SPACER-->
+            
+            <table class=\"table_scale\" width=\"600\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+              <tr>
+                <td width=\"100%\" height=\"60\">&nbsp;</td>
+              </tr>
+            </table>
+            
+            <!-- END OF VERTICAL SPACER--></td>
+        </tr>
+        <!--[if gte mso 9]>
+                        </v:textbox>
+                        </v:rect>
+                        <![endif]-->
+      </table></td>
+  </tr>
+</table>
+
+<!-- END OF CALL TO ACTION BLOCK--> 
+
+<!-- START OF SUB FOOTER BLOCK-->
+
+<table bgcolor=\"#fcfcfc\" width=\"100%\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-bottom-right-radius: 6px; border-bottom-left-radius: 6px;\">
+  <tr>
+    <td valign=\"top\" width=\"100%\"><table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-top:1px solid #ececec;\">
+        <tr>
+          <td width=\"100%\"><!-- START OF VERTICAL SPACER-->
+            
+            <table class=\"table_scale\" width=\"600\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+              <tr>
+                <td width=\"100%\" height=\"30\">&nbsp;</td>
+              </tr>
+            </table>
+            
+            <!-- END OF VERTICAL SPACER-->
+            
+            <table class=\"table_scale\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+              <tr>
+                <td width=\"100%\"><table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+                    <tr>
+                      <td class=\"spacer\" width=\"30\"></td>
+                      <td width=\"540\"><table class=\"full\" align=\"center\" width=\"540\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;\">
+                          <!-- START OF TEXT-->
+                          <tr>
+                            <td class=\"center\" align=\"center\" style=\"padding-bottom: 10px; margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;mso-line-height-rule: exactly;\"><span> You are receiving this email because you have registered on OpenCart.com </span></td>
+                          </tr>
+                          <!-- END OF TEXT--> 
+                          
+                          <!-- START OF SOCIAL ICONS-->
+                          <tr>
+                            <td class=\"center\" align=\"center\" style=\"padding-top: 10px; margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;\"><span> <a href=\"https://www.linkedin.com/company/opencart\" style=\"color:#23A1D1; text-decoration: none;\"> <img src=\"https://s3-us-west-2.amazonaws.com/opencart-email-asset/linkedin.png\" alt=\"tumblr\" width=\"32\" height=\"32\" border=\"0\" /> </a> &nbsp; <a href=\"https://twitter.com/opencart\" style=\"color:#23A1D1; text-decoration: none;\"> <img src=\"https://s3-us-west-2.amazonaws.com/opencart-email-asset/twitter.png\" alt=\"facebook\" width=\"32\" height=\"32\" border=\"0\" /> </a> &nbsp; <a href=\"https://www.facebook.com/opencart/\" style=\"color:#23A1D1; text-decoration: none;\"> <img src=\"https://s3-us-west-2.amazonaws.com/opencart-email-asset/facebook.png\" alt=\"facebook\" width=\"32\" height=\"32\" border=\"0\" /></a></span></td>
+                          </tr>
+                          <!-- END OF SOCIAL ICONS-->
+                        </table></td>
+                      <td class=\"spacer\" width=\"30\"></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table>
+            
+            <!-- START OF VERTICAL SPACER-->
+            
+            <table class=\"table_scale\" width=\"600\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+              <tr>
+                <td width=\"100%\" height=\"30\">&nbsp;</td>
+              </tr>
+            </table>
+            
+            <!-- END OF VERTICAL SPACER--></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+
+<!-- END OF SUB FOOTER BLOCK-->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<!-- END OF CONTAINER--> 
+
+<!-- START OF FOOTER BLOCK-->
+<table bgcolor=\"#f5f5f5\" width=\"100%\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"\">
+  <tr>
+    <td valign=\"top\" width=\"100%\"><table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"\">
+        <tr>
+          <td width=\"100%\"><!-- START OF VERTICAL SPACER-->
+            
+            <table class=\"table_scale\" width=\"600\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+              <tr>
+                <td width=\"100%\" height=\"30\">&nbsp;</td>
+              </tr>
+            </table>
+            
+            <!-- END OF VERTICAL SPACER-->
+            
+            <table class=\"table_scale\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+              <tr>
+                <td width=\"100%\"><table width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+                    <tr>
+                      <td width=\"540\"><table align=\"center\" width=\"600\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" style=\"border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;\">
+                          <!-- START OF TEXT-->
+                          <tr>
+                            <td class=\"center\" align=\"center\" style=\"padding-bottom: 10px; margin: 0; font-size:13px ; color:#aaaaaa; font-family: 'Open Sans', Helvetica, Arial, sans-serif; line-height: 23px;mso-line-height-rule: exactly;\"><span> 2015 OpenCart All Rights Reserved. </span></td>
+                          </tr>
+                          <!-- END OF TEXT-->
+                        </table></td>
+                    </tr>
+                  </table></td>
+              </tr>
+            </table>
+            
+            <!-- START OF VERTICAL SPACER-->
+            
+            <table class=\"table_scale\" width=\"600\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\">
+              <tr>
+                <td width=\"100%\" height=\"30\">&nbsp;</td>
+              </tr>
+            </table>
+            
+            <!-- END OF VERTICAL SPACER--></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<!-- END OF FOOTER BLOCK-->
+</body></html>";
+    }
+
+    public function getTemplateName()
+    {
+        return "mail/footer.twig";
+    }
+
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    public function getDebugInfo()
+    {
+        return array (  88 => 50,  37 => 1,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("", "mail/footer.twig", "");
+    }
+}

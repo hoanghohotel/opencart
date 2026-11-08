@@ -1,0 +1,111 @@
+{{ header }}
+<div id="support-partner">
+	<div class="page-header">
+		<div class="container">
+			<h1>Your eCommerce success delivered by seasoned OpenCart experts</h1>
+			<p>Connect with the right team to design, develop and build your eCommerce store</p>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4 col-md-3">
+				<section id="partner-country">
+					<h4>Country</h4>
+					<div class="form-group">
+						<select class="form-control" onchange="location = this.value">
+							{% for country in countries %}
+								{% if country.country_id == filter_country_id %}
+									<option value="{{ country.href }}" selected="selected">{{ country.name }}</option>
+								{% else %}
+									<option value="{{ country.href }}">{{ country.name }}</option>
+								{% endif %}
+							{% endfor %}
+						</select>
+					</div>
+				</section>
+
+				<section id="partner-type">
+					<h4>Type</h4>
+					{% for partner_type in partner_types %}
+						{% if partner_type.member_partner_type_id == filter_type_id %}
+							<div class="radio">
+								<label onclick="location = '{{ type.href }}'"> <input type="radio" name="partner_type" value="{{ partner_type.href }}" checked="checked">
+									{{ partner_type.name }}</label>
+							</div>
+						{% else %}
+							<div class="radio" onclick="location = '{{ partner_type.href }}'">
+								<label> <input type="radio" name="partner_type" value="{{ partner_type.href }}"/>
+									{{ partner_type.name }}</label>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</section>
+
+				<section id="partner-status">
+					<h4>Status</h4>
+					{% for partner_status in partner_statuses %}
+						{% if partner_status.member_partner_status_id == filter_status_id %}
+							<div class="radio">
+								<label onclick="location = '{{ partner_status.href }}'"> <input type="radio" name="partner_status" value="{{ partner_status.member_partner_status_id }}" checked="checked">
+									{{ partner_status.name }}</label>
+							</div>
+						{% else %}
+							<div class="radio">
+								<label onclick="location = '{{ partner_status.href }}'"> <input type="radio" name="partner_status" value="{{ partner_status.member_partner_status_id }}"/>
+									{{ partner_status.name }}</label>
+							</div>
+						{% endif %}
+					{% endfor %}
+				</section>
+			</div>
+			<div class="col-sm-8 col-md-9">
+				{% if country %}
+					<h3>Partners for {{ country }}</h3>
+				{% else %}
+					<h3>Worldwide Partners</h3>
+				{% endif %}
+
+				{% for partner in partners %}
+					<section id="partner-list">
+						<div class="row">
+							<div class="col-xs-6">
+								<div class="media">
+									<div class="media-left"><img src="{{ partner.status_image }}" title="{{ partner.status_name }}" alt="{{ partner.status_name }}" class="media-object"/></div>
+									<div class="media-body">
+										<h4>{{ partner.company }}</h4>
+										<h6>{{ partner.country }}</h6>
+									</div>
+								</div>
+							</div>
+							{% if partner.image %}
+								<div class="col-xs-6 text-right"><img src="{{ partner.image }}" title="{{ partner.company }}" alt="{{ partner.company }}"/></div>
+							{% endif %}
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<p>{{ partner.description }}</p>
+								<p><a href="{{ partner.href }}" class="btn btn-primary btn-sm">View Partner</a></p>
+							</div>
+						</div>
+					</section>
+					<hr/>
+				{% endfor %}
+				<nav>{{ pagination }}</nav>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid">
+		<div class="container">
+			<div class="media">
+				<div class="media-left"><img src="application/view/image/partner/device.png" title="" alt="" class="media-object"/></div>
+				<div class="media-body">
+					<h4 class="media-heading">About the Professional Partners Programme</h4>
+					<p>Opencart partner works closely with to strengthen the existence of the project by continuing to improve the services provided to the growing community, and to secure relationships with businesses that care about the projects existence.</p>
+					<p>To apply to become a OpenCart Certified Partner please email OpenCart for further details.</p>
+					<p><a href="{{ add }}" class="btn btn-primary">Apply Now</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{{ footer }}

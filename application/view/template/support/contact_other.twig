@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="col-md-5">
+		<div class="form-group">
+			<label for="input-company" class="control-label">Company Name</label> <input type="text" name="company" value="" placeholder="Company Name" id="input-company" class="form-control">
+		</div>
+	</div>
+	<div class="col-md-7">
+		<div class="form-group">
+			<label for="input-website" class="control-label">Web Site</label> <input type="text" name="website" value="" placeholder="Web Site" id="input-website" class="form-control"/>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-5">
+		<div class="form-group">
+			<label for="input-telephone" class="control-label">Phone</label> <input type="text" name="telephone" value="" placeholder="Phone" id="input-telephone" class="form-control"/>
+		</div>
+	</div>
+	<div class="col-md-7">
+		<div class="form-group required">
+			<label for="input-country" class="control-label">Country</label> <select name="country_id" id="input-country" class="form-control">
+				<option value=""></option>
+				{% for country in countries %}
+					{% if country.country_id == country_id %}
+						<option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
+					{% else %}
+						<option value="{{ country.country_id }}">{{ country.name }}</option>
+					{% endif %}
+				{% endfor %}
+			</select>
+		</div>
+	</div>
+</div>

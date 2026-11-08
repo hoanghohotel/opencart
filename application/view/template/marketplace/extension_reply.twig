@@ -1,0 +1,22 @@
+<div class="reply-page">{% if replies %}
+  {% for reply in replies %}
+    <div class="media">
+      <div class="media-left"><img src="{{ reply.image }}" alt="{{ reply.member }}" title="{{ reply.member }}" class="media-object"/></div>
+      <div class="media-body">
+        {% if reply.remove %}
+        <div class="pull-right"><a href="{{ reply.remove }}" class="btn btn-link btn-xs reply-remove">Remove</a></div>
+        {% endif %}
+        <p class="media-heading">{{ reply.member }} <span>{{ reply.date_added }}</span></p>
+        <p>{{ reply.comment }}</p>
+        {% if reply.remove %}
+          <p></p>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+  {% if next %}
+    <div class="text-center"><a href="{{ next }}" class="btn btn-lg btn-block">see more replies...</a></div>
+  {% endif %}
+{% endif %}
+<a href="{{ refresh }}" class="reply-refresh hide">refresh</a>
+</div>

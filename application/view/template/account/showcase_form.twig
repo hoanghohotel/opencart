@@ -1,0 +1,86 @@
+{{ header }}
+<div id="account-showcase">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<h1>Showcase Info</h1>
+				<form action="{{ action }}" method="post" enctype="multipart/form-data">
+					<fieldset>
+						<legend>Showcase Details</legend>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group required">
+									<label for="input-name">Showcase Name</label> <input type="text" name="name" value="{{ name }}" placeholder="Project Name" id="input-name" class="form-control"/>
+									{% if error_name %}
+										<div class="text-danger">{{ error_name }}</div>
+									{% endif %}</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group required">
+									<label for="input-category">Showcase Type</label> <select name="showcase_category_id" id="input-category" class="form-control">
+										<option value=""> --- Please Select ---</option>
+										{% for category in categories %}
+											<option value="{{ category.showcase_category_id }}">{{ category.name }}</option>
+										{% endfor %}
+									</select>
+									{% if error_category %}
+										<div class="text-danger">{{ error_category }}</div>
+									{% endif %} </div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group required">
+									<label for="input-date-launch">Launch Date</label>
+									<div class="input-group date">
+										<input type="text" name="date_launch" value="{{ date_launch }}" data-date-format="YYYY-MM-DD" placeholder="Launch Date" id="input-date-launch" class="form-control"/>
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-default btn-group"><i class="fa fa-calendar"></i></button>
+										</div>
+									</div>
+									{% if error_date_launch %}
+										<div class="text-danger">{{ error_date_launch }}</div>
+									{% endif %} </div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group required">
+									<label for="input-link">Web Site</label> <input type="text" name="link" value="{{ link }}" placeholder="Project Web Site" id="input-link" class="form-control"/>
+									{% if error_link %}
+										<div class="text-danger">{{ error_link }}</div>
+									{% endif %} </div>
+							</div>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Screenshot</legend>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="thumbnail"><img src="{{ thumb }}" alt="" title="" id="thumb-image"/> <input type="hidden" name="image" value="{{ image }}" id="input-image"/></div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-2">
+									<button type="button" data-toggle="image" data-target="#input-image" data-thumb="#thumb-image" class="btn btn-success btn-block">Browse</button>
+								</div>
+								<div class="col-sm-2">
+									<button type="button" data-toggle="clear" data-target="#input-image" data-thumb="#thumb-image" data-placeholder="{{ placeholder }}" class="btn btn-default btn-block">Clear</button>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					<div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-3 hidden-xs">{{ menu }}</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript"><!--
+$('.date').datetimepicker({
+    pickTime: false
+});
+//--></script>
+{{ footer }} 

@@ -1,0 +1,142 @@
+{{ header }}
+<div id="marketplace-purchase">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {% if error_warning %}
+          <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+      <h1>Purchase License</h1>
+      <fieldset>
+        <legend>Buy an extension license</legend>
+        <form enctype="multipart/form-data" method="POST" actio="{{ action }}">
+          <table id="purchase" class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="text-left">Extension Name</th>
+                <th class="text-right">Quantity</th>
+                <th class="text-right">Price</th>
+                <th class="text-right">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-left">{{ name }}</td>
+                <td class="text-right" style="width: 20%;"><div class="input-group">
+                    <input type="text" name="quantity" value="{{ quantity }}" class="form-control" />
+                    <div class="input-group-btn">
+                      <button type="submit" class="btn btn-default"><i class="fa fa-refresh"></i></button>
+                    </div>
+                  </div></td>
+                <td class="text-right">{{ price }}</td>
+                <td class="text-right">{{ total }}</td>
+              </tr>
+            </tbody>
+            {% if coupon %}
+            <tfoot>
+              <tr>
+                <td class="text-right" colspan="3">Coupon</td>
+                <td class="text-right"><div class="input-group">
+                    <div class="input-group-btn">
+                      <input type="text" name="Coupon" value="{{ coupon }}" class="form-control" />
+                    </div>
+                  </div></td>
+              </tr>
+              <tr>
+                <td class="text-right" colspan="3">Discount</td>
+                <td>-10%</td>
+              </tr>
+              <tr>
+                <td class="text-right" colspan="3">Total</td>
+                <td>{{ discount_price }}</td>
+              </tr>
+            </tfoot>
+            {% endif %}
+          </table>
+        </form>
+        <div class="form-group">
+          <div class="checkbox">
+            <label class="form-check-inline">
+              <input class="form-check-input" type="checkbox" name="agree" value="1" id="agree" />
+              I agree with the <a href="index.php?route=marketplace/purchase/terms" class="agree">terms &amp; conditions</a>
+            </label>
+          </div>
+          </div>
+      </fieldset>
+      <fieldset>
+        <legend>Choose your payment method</legend>
+
+        {% if paypal_status %}
+          <div class="radio">
+            <label><input type="radio" name="payment" value="paypal" checked="checked" />PayPal</label>
+          </div>
+        {% endif %}
+
+        {% if braintree_status %}
+          <div class="radio">
+            <label><input type="radio" name="payment" value="braintree" />Credit Card</label>
+          </div>
+        {% endif %}
+      </fieldset>
+      <div id="payment"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('input[name="payment"]').on('change', function() {
+	$.ajax({
+		url: 'index.php?route=marketplace/' + $('input[name="payment"]:checked').val() + '&extension_id={{ extension_id }}&quantity={{ quantity }}',
+		dataType: 'html',
+		beforeSend: function() {
+			$('#payment').html('<div class="text-right"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span></div>');
+		},
+		complete: function() {
+			$('#button-confirm').button('reset');
+		},
+		success: function(html) {
+			$('#payment').html(html);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+$('input[name="payment"]').trigger('change');
+
+/* Agree to Terms */
+$('.agree').on('click', function(e) {
+	e.preventDefault();
+
+	$('#modal-agree').remove();
+
+	var element = this;
+
+	$.ajax({
+		url: $(element).attr('href'),
+		type: 'get',
+		dataType: 'html',
+		success: function(data) {
+			html  = '<div id="modal-agree" class="modal">';
+			html += '  <div class="modal-dialog">';
+			html += '    <div class="modal-content">';
+			html += '      <div class="modal-header">';
+			html += '        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>';
+			html += '        <h4 class="modal-title">Terms &amp; Conditions</h4>';
+			html += '      </div>';
+			html += '      <div class="modal-body">' + data + '</div>';
+			html += '    </div';
+			html += '  </div>';
+			html += '</div>';
+
+			$('body').append(html);
+
+			$('#modal-agree').modal('show');
+		}
+	});
+});
+//--></script>
+{{ footer }}

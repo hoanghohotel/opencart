@@ -1,0 +1,59 @@
+{{ header }}
+<div id="account-download">
+  <div class="page-header">
+    <div class="container">
+      <h1>My Downloads</h1>
+      <p>Your Purchased extensions</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h1>My Downloads</h1>
+        {% if downloads %}
+
+          {% for download in downloads %}
+            <div id="downloads-list">
+              <div class="row">
+                <div class="col-sm-4"><img src="{{ download.image }}" alt="{{ download.name }}" title="{{ download.name }}" class="img-responsive"/></div>
+                <div class="col-sm-8">
+                  <h3>{{ download.name }}</h3>
+                  <ul>
+                    <li>Purchased on <strong>{{ download.date_added }}</strong></li>
+                    <li>Last updated on <strong>{{ download.date_modified }}</strong></li>
+                  </ul>
+                  <p id="download-buttons"><a href="{{ download.href }}" class="btn btn-primary btn-sm">Download Extension</a> <a href="{{ download.extension }}" class="btn btn-link">[Go to extension page]</a></p>
+                  {% if download.license %}
+                    {% if download.valid %}
+                      <div class="support-valid-date">
+                        <p>Support and Updates Available TILL</p>
+                        <h4>{{ download.date_valid }}</h4>
+                      </div>
+                    {% else %}
+                      <div class="support-valid-date support-valid-date-expired">
+                        <p>Support and Updates Available TILL</p>
+                        <h4>{{ download.date_valid }}</h4>
+                      </div>
+                    {% endif %}
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+          <nav>{{ pagination }}</nav>
+        {% else %}
+        <table class="table table-bordered table-hover">
+          <tbody>
+            <tr>
+              <td class="text-center">Sorry, You haven't purchased any items!</td>
+            </tr>
+          </tbody>
+        </table>
+        {% endif %}
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+{{ footer }}

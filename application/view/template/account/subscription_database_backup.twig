@@ -1,0 +1,38 @@
+{{ header }}
+<div id="subscription-backup">
+    <div class="page-header">
+        <div class="container">
+            <h1>Cloud Store Database Backup</h1>
+            <p>View your OpenCart Store Backup History</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h2>Cloud Store Database Backup</h2>
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#backup" role="tab" data-toggle="tab">Backup</a></li>
+                    <li><a href="#restore" role="tab" data-toggle="tab">Restore</a></li>
+                </ul>
+                 <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="backup">
+                        <div class="loader"></div>
+                        <div id="subscription-backup-list"></div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="restore">
+                        <div id="subscription-restore-history"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 hidden-xs">{{ menu }}</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $('#subscription-backup-list').load('{{ get_database_backup_list }}', function() {
+        $('.loader').remove();
+    });
+
+    $('#subscription-restore-history').load('{{ get_database_backup_restore_list }}');
+</script>
+{{ footer }}

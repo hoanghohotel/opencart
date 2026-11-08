@@ -1,0 +1,228 @@
+{{ header }}
+<div id="marketplace-extension">
+  <div class="page-header">
+    <div class="container">
+      <h1>Welcome to OpenCart Extension Store</h1>
+      <p>With a huge range of features included out-of-the-box and over 13 000+ additional extensions available to download</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-4 col-md-3">
+        <section id="extension-search">
+          <h4>Search extensions and themes</h4>
+          <div class="input-group">
+            <input type="text" name="filter_search" value="{{ filter_search }}" class="form-control"/> <input type="hidden" name="filter_category_id" value="{{ filter_category_id }}" class="form-control"/> <input type="hidden" name="filter_download_id" value="{{ filter_download_id }}" class="form-control"/> <input type="hidden" name="filter_rating" value="{{ filter_rating }}" class="form-control"/> <input type="hidden" name="filter_license" value="{{ filter_license }}" class="form-control"/> <input type="hidden" name="filter_partner" value="{{ filter_partner }}" class="form-control"/> <input type="hidden" name="sort" value="{{ sort }}" class="form-control"/>
+            <div class="input-group-btn">
+              <button type="button" id="button-search" class="btn btn-default btn-xs"><i class="fa fa-search"></i></button>
+            </div>
+          </div>
+        </section>
+        <div class="visible-xs">
+          <button id="mobile-switch" data-target="#collapse-filter" data-toggle="collapse" type="button" class="btn btn-primary btn-block btn-lg">Advanced Search</button>
+        </div>
+        <div id="collapse-filter" class="collapse">
+          <section id="extension-category">
+            <h4>Category</h4>
+            <ul class="list-unstyled">
+              {% for category in categories %}
+                {% if category.extension_category_id == filter_category_id %}
+                  <li class="active"><a href="{{ category.href }}">{{ category.name }}</a></li>
+                {% else %}
+                  <li><a href="{{ category.href }}">{{ category.name }}</a></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </section>
+          <section id="extension-opencart-version">
+            <h4>OpenCart version</h4>
+            <div class="form-group">
+              <div class="input-group">
+                <select onchange="location = this.value" class="form-control">
+                  {% for version in versions %}
+                    {% if version.download_id == filter_download_id %}
+                      <option value="{{ version.href }}" selected="selected">{{ version.name }}</option>
+                    {% else %}
+                      <option value="{{ version.href }}">{{ version.name }}</option>
+                    {% endif %}
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+          </section>
+          <section id="extension-developed">
+            <h4>Developed by</h4>
+            {% for partner_type in partner_types %}
+              {% if partner_type.value == filter_partner %}
+                <div class="radio">
+                  <label><input type="radio" onclick="location = '{{ partner_type.href }}'" checked="checked"/>
+                    {{ partner_type.text }}</label>
+                </div>
+              {% else %}
+                <div class="radio">
+                  <label><input type="radio" onclick="location = '{{ partner_type.href }}'"/>
+                    {{ partner_type.text }}</label>
+                </div>
+              {% endif %}
+            {% endfor %}</section>
+          <section id="extension-rating">
+            <h4>Rating</h4>
+            <ul class="list-unstyled">
+              {% for rating in ratings %}
+                {% if rating.value == filter_rating %}
+                  <li class="active"><a href="{{ rating.href }}">{% for i in 1..5 %}{% if rating.value >= i %}<i class="opencart-icon-star-light"></i>{% else %}<i class="opencart-icon-star-light-o"></i>{% endif %}{% endfor %} and up</a></li>
+                {% else %}
+                  <li><a href="{{ rating.href }}">{% for i in 1..5 %}{% if rating.value >= i %}<i class="opencart-icon-star-light"></i>{% else %}<i class="opencart-icon-star-light-o"></i>{% endif %}{% endfor %} and up</a></li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </section>
+        </div>
+      </div>
+      <div class="col-sm-8 col-md-9">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="btn-group hidden-xs hidden-sm"> {% if filter_license is empty %}<a href="{{ license_all }}" class="btn btn-default btn-lg active">All</a>{% else %}<a href="{{ license_all }}" class="btn btn-default btn-lg">All</a>{% endif %}
+              {% if filter_license == '1' %}<a href="{{ license_paid }}" class="btn btn-default btn-lg active">Commercial</a>{% else %}<a href="{{ license_paid }}" class="btn btn-default btn-lg">Commercial</a>{% endif %}
+              {% if filter_license == '0' %}<a href="{{ license_free }}" class="btn btn-default btn-lg active">Free</a>{% else %}<a href="{{ license_free }}" class="btn btn-default btn-lg">Free</a>{% endif %}</div>
+            <div class="btn-group btn-group-justified visible-xs-block visible-sm-block"> {% if filter_license is empty %}<a href="{{ license_all }}" class="btn btn-default btn-lg active">All</a>{% else %}<a href="{{ license_all }}" class="btn btn-default btn-lg">All</a>{% endif %}
+              {% if filter_license == '1' %}<a href="{{ license_paid }}" class="btn btn-default btn-lg active">Commercial</a>{% else %}<a href="{{ license_paid }}" class="btn btn-default btn-lg">Commercial</a>{% endif %}
+              {% if filter_license == '0' %}<a href="{{ license_free }}" class="btn btn-default btn-lg active">Free</a>{% else %}<a href="{{ license_free }}" class="btn btn-default btn-lg">Free</a>{% endif %}</div>
+          </div>
+          <div id="extension-sorting" class="col-md-6">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="input-sort" class="col-xs-4">Sort by</label>
+                <div class="col-xs-8">
+                  <select onchange="location = this.value" id="input-sort" class="form-control">
+                    {% for sorts in sorts %}
+                      {% if sorts.value == sort %}
+                        <option value="{{ sorts.href }}" selected="selected">{{ sorts.text }}</option>
+                      {% else %}
+                        <option value="{{ sorts.href }}">{{ sorts.text }}</option>
+                      {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div id="extension-list">
+          {% if banner or promotions %}
+            {% if banner %}
+              <div class="promotion-banner">
+                {{ banner }}
+              </div>
+            {% endif %}
+            {% if promotions %}
+              <h3>Featured</h3>
+              {% for row in promotions|batch(3, '') %}
+                <div class="row">
+                  {% for promotion in row %}
+                    {% if promotion %}
+                      <div class="col-md-4">
+                        <section>
+                          <div class="extension-preview"><a href="{{ promotion.href }}">
+                              <div class="extension-description">{{ promotion.description }}</div>
+                              <img src="{{ promotion.image }}" alt="{{ promotion.name }}" title="{{ promotion.name }}" class="img-responsive"/></a>
+                          </div>
+                          <div class="extension-name">
+                            <p><a href="{{ promotion.href }}">{{ promotion.name }}</a></p>
+                            <p><span>{{ promotion.price }}</span></p>
+                            {% if promotion.recommended %}
+                            <img class="recommended-label" src="/application/view/image/marketplace/recommended-label.svg"/>
+                            {% endif %}
+                          </div>
+                          <div>
+                            <div class="row">
+                              <div class="col-xs-6">
+                                <div>
+                                  {% for i in 1..5 %}
+                                    {% if promotion.rating >= i %}<i class="opencart-icon-star-light"></i>{% else %}<i class="opencart-icon-star-light-o"></i>{% endif %}
+                                  {% endfor %}
+                                </div>
+                              </div>
+                              <div class="col-xs-6">
+                                <div class="text-right"><span>{{ promotion.rating_total }} reviews</span></div>
+                              </div>
+                            </div>
+                          </div>
+                        </section>
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+              {% endfor %}
+            {% endif %}
+            <hr/>
+          {% endif %}
+          {% for row in extensions|batch(3, '') %}
+            <div class="row">
+              {% for extension in row %}
+                {% if extension %}
+                  <div class="col-md-4">
+                    <section>
+                      <div class="extension-preview">
+                        <a href="{{ extension.href }}">
+                          <div class="extension-description">{{ extension.description }}</div>
+                          <img src="{{ extension.image }}" alt="{{ extension.name }}" title="{{ extension.name }}" class="img-responsive"/> </a>
+                      </div>
+                      <div class="extension-name">
+                        <p><a href="{{ extension.href }}">{{ extension.name }}</a></p>
+                        <p><span>{{ extension.price }}</span></p>
+                        {% if extension.recommended %}
+                        <img class="recommended-label" src="/application/view/image/marketplace/recommended-label.svg"/>
+                        {% endif %}
+                      </div>
+                      <div>
+                        <div class="row">
+                          <div class="col-xs-6">
+                            <div>
+                              {% for i in 1..5 %}
+                                {% if extension.rating >= i %}<i class="opencart-icon-star-light"></i>{% else %}<i class="opencart-icon-star-light-o"></i>{% endif %}
+                              {% endfor %}
+                            </div>
+                          </div>
+                          <div class="col-xs-6">
+                            <div class="text-right"><span>{{ extension.rating_total }} reviews</span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          {% endfor %}
+        </div>
+        <nav>{{ pagination }}</nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript"><!--
+$('#button-search').on('click', function(e) {
+	var input = $('#extension-search :input');
+
+	var url = 'index.php?route=marketplace/extension';
+
+	for (i = 0; i < input.length; i++) {
+		if ($(input[i]).val() != '' && $(input[i]).val() != null) {
+			url += '&' + $(input[i]).attr('name') + '=' + $(input[i]).val()
+		}
+	}
+
+	location = url;
+});
+
+$('input[name=\'filter_search\']').keydown(function(e) {
+	if (e.keyCode == 13) {
+		e.preventDefault();
+
+		$('#button-search').trigger('click');
+	}
+});
+//--></script>
+{{ footer }}

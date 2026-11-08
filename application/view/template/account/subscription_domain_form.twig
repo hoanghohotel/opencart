@@ -1,0 +1,50 @@
+{{ header }}
+<div id="account-edit">
+  <div class="page-header">
+    <div class="container">
+      <h1>Your Cloud Domains</h1>
+      <p>Register your domain to use with your Cloud Store</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        {% if error_warning %}
+          <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+        <div class="alert alert-info">
+         <p>
+         <i class="fa fa-info-circle"></i> 
+          As soon as you add a domain, you will receive DNS records that must be added to your domain's DNS. You can find them by clicking the <strong>"Get Settings"</strong> button in the list of your domains.
+         </p>
+         <p>
+          After the DNS records are added, our system will need time to validate the domain and once the process is completed, its status will change to "Active". This means that the domain is completely ready.
+         </p>
+         <p>
+          You can also use our "*.opencart.shop" system subdomains. They do not need validation and can be immediately assigned to your store.
+         </p>
+         <p>
+          You can connect a domain to the store by clicking <a href="{{ subscription_list }}">here</a>
+         </p>
+				</div>
+        <form action="{{ action }}" method="post" enctype="multipart/form-data">
+          <fieldset>
+            <legend>Add your domain</legend>
+            <div class="form-group">
+              <label for="input-domain">Domain Name e.g. (hostname.com)</label><input type="text" name="cloud_domain" value="{{ cloud_domain }}" placeholder="Enter your domain you want to use with Cloud Store" id="input-cloud-domain" class="form-control"/>
+              {% if error_cloud_domain %}
+                <div class="text-danger">{{ error_cloud_domain }}</div>
+              {% endif %}</div>
+          </fieldset>
+          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-sm-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+{{ footer }} 

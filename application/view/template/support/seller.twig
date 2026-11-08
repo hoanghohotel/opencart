@@ -1,0 +1,135 @@
+{{ header }}
+<div id="support-seller">
+	<div class="page-header">
+		<div class="container">
+			<h1>Contact Seller</h1>
+			<p>Any usage problem on the extension?</p>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="alert alert-info"><i class="fa fa-info-circle"></i> Please provide as much information <u>in the form below</u> for our agents to be able to assist you.
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+				</div>
+				<form id="form-contact">
+					<div class="form-group required">
+						<label for="input-reason">How can we help you?</label> <select name="reason" id="input-reason" class="form-control">
+							<option value="question">I have a question</option>
+							<option value="support">I want to get support</option>
+							<option value="refund">I want to get a refund</option>
+						</select>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group required">
+								<label for="input-name">What is your name?</label> <input type="text" name="name" value="{{ name }}" placeholder="Name" id="input-name" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group">
+								<label for="input-website">Web Site</label> <input type="text" name="website" value="" placeholder="Web Site" id="input-website" class="form-control"/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-group required">
+								<label for="input-order-id">What is your order ID?</label> <input type="text" name="order_id" value="" placeholder="Order ID" id="input-order-id" class="form-control">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-group required">
+								<label class="control-label" for="input-version">Which Opencart version are you using?</label> <select name="version_id" id="input-version" class="form-control">
+									<option value=""></option>
+									{% for download in downloads %}
+										<option value="{{ download.download_id }}">{{ download.name }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group required">
+								<label for="input-enquiry">Message</label> <textarea name="enquiry" rows="7" id="input-enquiry" class="form-control">{{ enquiry }}</textarea>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div data-captcha="#button-contact"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<button type="button" id="button-contact" class="btn btn-primary btn-xl btn-block" disabled="disabled">Send Message</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-4">
+				<div class="well">
+					<div class="media">
+						<div class="media-left media-middle"><img src="{{ member_image }}" alt="{{ member_username }}" title="{{ member_username }}" class="media-object img-circle"/></div>
+						<div class="media-body"><span>{{ member_username }}</span>
+							<br/>
+							<small>Member since: {{ member_date_added }}</small>
+						</div>
+					</div>
+					<br/>
+					<a href="{{ filter_member }}" class="btn btn-primary btn-lg btn-block">View all extensions</a></div>
+				<div id="side-banner"> {{ banner }} </div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript"><!--
+  $('#button-contact').on('click', function() {
+      var element = this;
+
+      $.ajax({
+          url: 'index.php?route=support/seller/send&member_token={{ member_token }}&extension_id={{ extension_id }}',
+          type: 'post',
+          data: $('#form-contact :input'),
+          dataType: 'json',
+          beforeSend: function() {
+              $(element).button('loading');
+          },
+          complete: function() {
+              $(element).button('reset');
+          },
+          success: function(json) {
+              $('.alert, .text-danger').remove();
+              $('.form-group').removeClass('has-error');
+
+              if (json['redirect']) {
+                  location = json['redirect'];
+              }
+
+              if (json['error']) {
+                  if (json['error']['warning']) {
+                      $('.alert-info').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                  }
+
+                  for (i in json['error']) {
+                      var element = $('#input-' + i.replace('_', '-'));
+
+                      if ($(element).parent().hasClass('form-group')) {
+                          $(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+                      } else {
+                          $(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+                      }
+                  }
+
+                  // Highlight any found errors
+                  $('.text-danger').parent().addClass('has-error');
+              }
+          },
+          error: function(xhr, ajaxOptions, thrownError) {
+              alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+          }
+      });
+  });
+  //--></script>
+</div>
+{{ footer }}

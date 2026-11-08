@@ -1,0 +1,41 @@
+<div class="row">
+  <div class="col-md-7">
+    <h3>Register a new Store</h3>
+    <form action="{{ action }}" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+        <label for="input-store">Store Name</label> <input type="text" name="store" value="{{ store }}" placeholder="Store Name" id="input-store" class="form-control"/>
+      </div>
+      <div class="form-group">
+        <label for="input-email">E-Mail</label> <input type="text" name="email" value="{{ email }}" placeholder="E-Mail" id="input-email" class="form-control"/>
+      </div>
+      <div class="form-group required">
+        <label class="control-label" for="input-country">Country</label> <select name="country_id" id="input-country" class="form-control">
+          <option value=""></option>
+          {% for country in countries %}
+            {% if country.country_id == country_id %}
+              <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
+            {% else %}
+              <option value="{{ country.country_id }}">{{ country.name }}</option>
+            {% endif %}
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="input-password">Password</label> <input type="password" name="password" value="{{ password }}" id="input-password" class="form-control"/>
+        {% if error_password %}
+          <div class="text-danger">{{ error_password }}</div>
+        {% endif %}</div>
+      <div class="form-group">
+        <div data-captcha="#button-register button"></div>
+        {% if error_captcha %}
+          <div class="text-danger">{{ error_captcha }}</div>
+        {% endif %}
+      </div>
+      <div id="button-register" class="form-group">
+        <button type="submit" class="btn btn-primary btn-lg hidden-xs" disabled="disabled">Register</button>
+        <button type="submit" class="btn btn-primary btn-lg btn-block visible-xs-block" disabled="disabled">Register</button>
+      </div>
+      <input type="hidden" name="redirect" value="{{ redirect }}"/>
+    </form>
+  </div>
+</div>

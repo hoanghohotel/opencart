@@ -1,0 +1,248 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-subscription" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_form }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-subscription" class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+            <li><a href="#tab-domain" data-toggle="tab">{{ tab_domain }}</a></li>
+            <li><a href="#tab-history" data-toggle="tab">{{ tab_history }}</a></li>
+            <li><a href="#tab-transaction" data-toggle="tab">{{ tab_transaction }}</a></li>
+            <li><a href="#tab-plan" data-toggle="tab">{{ tab_plan }}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-general">
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="name" value="{{ name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
+                  {% if error_name %}
+                  <div class="text-danger">{{ error_name }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-member">{{ entry_member }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="member" value="{{ member }}" placeholder="{{ entry_member }}" id="input-member" class="form-control" />
+                  <input type="hidden" name="member_id" value="{{ member_id }}" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-plan">{{ entry_plan }}</label>
+                <div class="col-sm-10">
+                  <select name="subscription_plan_id" id="input-plan" class="form-control">
+                    {% for plan in subscription_plans %}
+                    {% if plan.subscription_plan_id == subscription_plan_id %}
+                    <option value="{{ plan.subscription_plan_id }}" selected="selected">{{ plan.name }} (${{ plan.price }}/mo)</option>
+                    {% else %}
+                    <option value="{{ plan.subscription_plan_id }}">{{ plan.name }} (${{ plan.price }}/mo)</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+                <div class="col-sm-10">
+                  <select name="subscription_status_id" id="input-status" class="form-control">
+                    {% for status in subscription_statuses %}
+                    {% if status.subscription_status_id == subscription_status_id %}
+                    <option value="{{ status.subscription_status_id }}" selected="selected">{{ status.name }}</option>
+                    {% else %}
+                    <option value="{{ status.subscription_status_id }}">{{ status.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-admin-username">{{ entry_admin_username }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="admin_username" value="{{ admin_username }}" placeholder="{{ entry_admin_username }}" id="input-admin-username" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-admin-email">{{ entry_admin_email }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="admin_email" value="{{ admin_email }}" placeholder="{{ entry_admin_email }}" id="input-admin-email" class="form-control" />
+                  {% if error_admin_email %}
+                  <div class="text-danger">{{ error_admin_email }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-store-status">{{ entry_store_status }}</label>
+                <div class="col-sm-10">
+                  <select name="store_status" id="input-store-status" class="form-control">
+                    {% if store_status %}
+                    <option value="1" selected="selected">{{ text_online }}</option>
+                    <option value="0">{{ text_offline }}</option>
+                    {% else %}
+                    <option value="1">{{ text_online }}</option>
+                    <option value="0" selected="selected">{{ text_offline }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-domain">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left">{{ column_domain }}</td>
+                      <td class="text-left">{{ column_pointed }}</td>
+                      <td class="text-left">{{ column_status }}</td>
+                      <td class="text-left">{{ column_date_added }}</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if domains %}
+                    {% for domain in domains %}
+                    <tr>
+                      <td class="text-left">{{ domain.name }}</td>
+                      <td class="text-left">{% if domain.pointed %}{{ text_yes }}{% else %}{{ text_no }}{% endif %}</td>
+                      <td class="text-left">{% if domain.status %}{{ text_enabled }}{% else %}{{ text_disabled }}{% endif %}</td>
+                      <td class="text-left">{{ domain.date_added }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                      <td class="text-center" colspan="4">{{ text_no_results }}</td>
+                    </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-history">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left">{{ column_date_added }}</td>
+                      <td class="text-left">{{ column_comment }}</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if histories %}
+                    {% for history in histories %}
+                    <tr>
+                      <td class="text-left">{{ history.date_added }}</td>
+                      <td class="text-left">{{ history.comment }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                      <td class="text-center" colspan="2">{{ text_no_results }}</td>
+                    </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-transaction">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left">{{ column_transaction_id }}</td>
+                      <td class="text-left">{{ column_card }}</td>
+                      <td class="text-right">{{ column_amount }}</td>
+                      <td class="text-left">{{ column_date_added }}</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if transactions %}
+                    {% for transaction in transactions %}
+                    <tr>
+                      <td class="text-left">{{ transaction.transaction_id }}</td>
+                      <td class="text-left">{{ transaction.transaction_card }}</td>
+                      <td class="text-right">${{ transaction.amount }}</td>
+                      <td class="text-left">{{ transaction.date_added }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                      <td class="text-center" colspan="4">{{ text_no_results }}</td>
+                    </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="tab-pane" id="tab-plan">
+              <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <td class="text-left">{{ column_name }}</td>
+                      <td class="text-left">Description</td>
+                      <td class="text-right">Monthly Price</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for plan in subscription_plans %}
+                    <tr>
+                      <td class="text-left"><strong>{{ plan.name }}</strong></td>
+                      <td class="text-left">{{ plan.description }}</td>
+                      <td class="text-right">${{ plan.price }}/mo</td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript"><!--
+$('input[name=\'member\']').autocomplete({
+	'source': function(request, response) {
+		$.ajax({
+			url: 'index.php?route=member/member/autocomplete&user_token={{ user_token }}&filter_username=' + encodeURIComponent(request),
+			dataType: 'json',
+			success: function(json) {
+				response($.map(json, function(item) {
+					return {
+						label: item['username'] + ' (' + item['name'] + ')',
+						value: item['member_id']
+					}
+				}));
+			}
+		});
+	},
+	'select': function(item) {
+		$('input[name=\'member\']').val(item['label']);
+		$('input[name=\'member_id\']').val(item['value']);
+	}
+});
+//--></script>
+</div>
+{{ footer }}

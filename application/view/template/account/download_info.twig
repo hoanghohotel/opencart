@@ -1,0 +1,78 @@
+{{ header }}
+<div id="account-download-info">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <div id="download-order">
+          <h1 class="pull-right">Order ID #{{ order_id }}</h1>
+          <a href="{{ cancel }}"><i class="fa fa-angle-left"></i> My Downloads</a></div>
+        <div id="downloads-list">
+          <div class="row">
+            <div class="col-sm-4"><img src="{{ image }}" alt="{{ extension }}" title="{{ extension }}" class="img-responsive"/></div>
+            <div class="col-sm-8">
+              <h3>{{ name }}</h3>
+              <p>Purchased on <strong>{{ date_added }}</strong></p>
+              <p><a href="{{ extension }}" class="btn btn-link">[Go to extension page]</a></p>
+              {% if license %}
+                {% if valid %}
+                  <div class="support-valid-date">
+                    <p>Support and Updates Available TILL</p>
+                    <h4>{{ date_valid }}</h4>
+                  </div>
+                {% else %}
+                  <div class="support-valid-date support-valid-date-expired">
+                    <p>Support and Updates Available TILL</p>
+                    <h4>{{ date_valid }}</h4>
+                  </div>
+                {% endif %}
+              {% endif %} </div>
+          </div>
+        </div>
+        <div id="downloads-details">
+          <br/>
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-download" data-toggle="tab">Downloads</a></li>
+            <li><a href="#tab-documentation" data-toggle="tab">Documentation</a></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane active" id="tab-download">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Download Name</th>
+                      <th>Compatibility</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% if downloads %}
+                      {% for download in downloads %}
+                        <tr>
+                          <td>{{ download.name }}</td>
+                          <td>{{ download.compatibility }}</td>
+                          <td> {% if download.href %}<a href="{{ download.href }}" class="btn btn-primary btn-sm">Download</a>{% else %}
+                              <button type="button" class="btn btn-primary btn-sm" disabled="disabled">Download</button>
+                            {% endif %}</td>
+                        </tr>
+                      {% endfor %}
+                    {% else %}
+                      <tr>
+                        <td colspan="3">No results!</td>
+                      </tr>
+                    {% endif %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div id="tab-documentation" class="tab-pane">
+              <br/>
+              {{ documentation }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+{{ footer }} 

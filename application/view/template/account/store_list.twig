@@ -1,0 +1,62 @@
+{{ header }}
+<div id="account-store">
+  <div class="page-header">
+    <div class="container">
+      <h1>Your Stores</h1>
+      <p>Register your store to get access to the marketplace API</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2>Your Registered Stores</h2>
+        {% if success %}
+          <div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+        <div class="table-responsive">
+          <table id="store" class="table table-bstoreed">
+            <thead>
+              <tr>
+                <th>Store</th>
+                <th>Date Added</th>
+                <th>Date Modified</th>
+                <th class="text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if stores %}
+                {% for store in stores %}
+                  <tr>
+                    <td>{{ store.domain }}</td>
+                    <td>{{ store.date_added }}</td>
+                    <td>{{ store.date_modified }}</td>
+                    <td class="text-right"><a href="{{ store.view }}" data-toggle="tooltip" title="View" class="btn btn-info"><i class="fa fa-eye"></i></a> <a href="{{ store.delete }}" data-toggle="tooltip" title="Delete" class="btn btn-danger"><i class="fa fa-times"></i></a></td>
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td class="text-center" colspan="4">No results!</td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+        <nav>{{ pagination }}</nav>
+        <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a> <a href="{{ add }}" class="btn btn-primary">Add Store</a></div>
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('#store .btn-danger').on('click', function(e) {
+	e.preventDefault();
+
+	if (confirm('Are you sure?')) {
+		location = $(this).attr('href');
+	}
+})
+//--></script>
+{{ footer }} 

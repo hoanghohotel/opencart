@@ -1,0 +1,54 @@
+{{ header }}
+<div id="account-account">
+    <div class="page-header">
+        <div class="container">
+            <h1>Subscription History</h1>
+            <p>View your subscription history</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h2>Subscription History</h2>
+                {% if error_warning %}
+                    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+                {% endif %}
+                {% if success %}
+                    <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}</div>
+                {% endif %}
+                <div class="table-responsive">
+                    <table id="subscription-table" class="table table-bordered table-hover">
+                        {% if subscription_history_rows %}
+                            <thead>
+                            <tr>
+                                <th class="text-left">Subscription Status</th>
+                                <th class="text-left">Comment</th>
+                                <th class="text-left">Date Added</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for subscription_history in subscription_history_rows %}
+                                <tr>
+                                    <td class="text-left">{{ subscription_history.status }}</td>
+                                    <td class="text-left">{{ subscription_history.comment }}</td>
+                                    <td class="text-left">{{ subscription_history.date_added }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        {% else %}
+                            <tbody>
+                            <tr>
+                                <td class="text-center">No Subscription History Found!</td>
+                            </tr>
+                            </tbody>
+                        {% endif %}
+                    </table>
+                </div>
+                <nav>{{ pagination }}</nav>
+                <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a></div>
+            </div>
+            <div class="col-md-3 hidden-xs">{{ menu }}</div>
+        </div>
+    </div>
+</div>
+{{ footer }}

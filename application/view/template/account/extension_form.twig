@@ -1,0 +1,424 @@
+{{ header }}
+<div id="account-extension">
+	<div class="page-header">
+		<div class="container">
+			<h1>New Extension</h1>
+			<p>Submit your extension</p>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<h1>Add Extension</h1>
+				{% if error_warning %}
+					<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+					</div>
+				{% endif %}
+				<div class="alert alert-info">
+					<ol>
+						<li>All uploaded files must be in zip or rar format and less than <strong>50MB</strong>.</li>
+						<li>Please remember to include <strong>install instructions</strong> with each extension uploaded.</li>
+					</ol>
+				</div>
+				<form action="{{ action }}" method="post" enctype="multipart/form-data">
+					<fieldset>
+						<legend>General Information</legend>
+						<div class="form-group required">
+							<label for="input-name">Extension Name</label> <input type="text" name="name" value="{{ name }}" id="input-name" class="form-control" placeholder="Extension Name"/>
+							{% if error_name %}
+								<div class="text-danger">{{ error_name }}</div>
+							{% endif %}
+						</div>
+						<div class="form-group required">
+							<label for="input-description">Description</label> <textarea type="text" name="description" rows="8" id="input-description" placeholder="Extension Description" class="form-control">{{ description }}</textarea>
+							{% if error_description %}
+								<div class="text-danger">{{ error_description }}</div>
+							{% endif %}
+						</div>
+						<div class="form-group required">
+							<label for="input-category">Category</label> <select name="extension_category_id" id="input-category" class="form-control">
+								<option value=""></option>
+								{% for category in categories %}
+									{% if category.extension_category_id == extension_category_id %}
+										<option value="{{ category.extension_category_id }}" selected="selected">{{ category.name }}</option>
+									{% else %}
+										<option value="{{ category.extension_category_id }}">{{ category.name }}</option>
+									{% endif %}
+								{% endfor %}
+							</select>
+							{% if error_category %}
+								<div class="text-danger">{{ error_category }}</div>
+							{% endif %}
+						</div>
+						<div class="form-group">
+							<label for="input-license">License</label> <select name="license" id="input-license" class="form-control">
+								{% if license == 0 %}
+									<option value="0" selected="selected">Free</option>
+								{% else %}
+									<option value="0">Free</option>
+								{% endif %}
+								{% if license == 1 %}
+									<option value="1" selected="selected">Paid</option>
+								{% else %}
+									<option value="1">Paid</option>
+								{% endif %}
+							</select>
+						</div>
+						<div class="row">
+							<div class="col-sm-8">
+								<div class="form-group">
+									<label for="input-license-period">License Period</label> <select name="license_period" id="input-license-period" class="form-control">
+										<option value=""></option>
+										{% for i in 1..12 %}
+											{% if license_period == i %}
+												<option value="{{ i }}" selected="selected">{{ i }} months</option>
+											{% else %}
+												<option value="{{ i }}">{{ i }} months</option>
+											{% endif %}
+										{% endfor %}
+									</select>
+									{% if error_license_period %}
+										<div class="text-danger">{{ error_license_period }}</div>
+									{% endif %}
+								</div>
+							</div>
+							<div class="col-sm-4">
+								<label for="input-price">Price</label> <input type="text" name="price" value="{{ price }}" placeholder="Price" id="input-price" class="form-control"/>
+								{% if error_price %}
+									<div class="text-danger">{{ error_price }}</div>
+								{% endif %}
+							</div>
+						</div>
+						<div class="form-group required">
+							<label for="input-cloud">Cloud Price / Per month</label> <input type="text" name="cloud" value="{{ cloud }}" placeholder="Cloud Price" id="input-cloud" class="form-control"/>
+							{% if error_cloud %}
+								<div class="text-danger">{{ error_cloud }}</div>
+							{% endif %}
+						</div>
+						<div class="form-group required">
+							<label for="input-tag">Tags</label> <textarea name="tag" placeholder="Tags" rows="10" id="input-tag" class="form-control">{{ tag }}</textarea>
+							<div class="help-block">Your extension can be visible to others you must type in some keywords that members might type in when searching for your extensions. Tags must be split using commas. e.g. widget, widget, etc</div>
+							{% if error_tag %}
+								<div class="text-danger">{{ error_tag }}</div>
+							{% endif %}
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Images</legend>
+						<div class="form-group required text-center">
+							<label for="input-banner">Image</label>
+							<br/>
+							<img src="{{ image_thumb }}" alt="" title="" id="image-thumb" class="img-thumbnail"/>
+							<br/>
+							<input type="hidden" name="image" value="{{ image }}" id="input-image"/>
+							<button type="button" data-toggle="image" data-target="#input-image" data-thumb="#image-thumb" class="btn btn-success">Browse</button>
+							<button type="button" data-toggle="clear" data-target="#input-image" data-thumb="#image-thumb" data-placeholder="{{ placeholder }}" class="btn btn-danger">Clear</button>
+							<div class="help-block">This will be used on the marketplace page thumbnail. Size Should be 260 x 152</div>
+						</div>
+						<div class="form-group required text-center">
+							<label for="input-banner">Banner</label>
+							<br/>
+							<img src="{{ banner_thumb }}" alt="" title="" id="banner-thumb" class="img-thumbnail"/>
+							<br/>
+							<input type="hidden" name="banner" value="{{ banner }}" id="input-banner"/>
+							<button type="button" data-toggle="image" data-target="#input-banner" data-thumb="#banner-thumb" class="btn btn-success">Browse</button>
+							<button type="button" data-toggle="clear" data-target="#input-banner" data-thumb="#banner-thumb" data-placeholder="{{ placeholder }}" class="btn btn-danger">Clear</button>
+							<div class="help-block">This will be used on the extension info page as well as a banner if your extension gets added to the feature list. Size Should be 710 x 380</div>
+						</div>
+						<div class="table-responsive">
+							<table id="image" class="table table-bordered">
+								<thead>
+									<tr>
+										<th>Additional Image</th>
+										<th>Filename</th>
+										<th class="text-right">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% set image_row = 0 %}
+									{% for extension_image in extension_images %}
+										<tr id="image-row{{ image_row }}">
+											<td><img src="{{ extension_image.thumb }}" alt="" title="" id="thumb-image{{ image_row }}" class="img-thumbnail"/> <input type="hidden" name="extension_image[{{ image_row }}][image]" value="{{ extension_image.image }}" id="input-image{{ image_row }}"/></td>
+											<td><button type="button" data-toggle="image" data-target="#input-image{{ image_row }}" data-thumb="#thumb-image{{ image_row }}" class="btn btn-success">Browse</button></td>
+											<td class="text-right"><button type="button" onclick="$('#image-row{{ image_row }}').remove();" class="btn btn-danger">Remove</button></td>
+										</tr>
+										{% set image_row = image_row + 1 %}
+									{% endfor %}
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="3" class="text-right"><button type="button" id="button-image" class="btn btn-success">Add Image</button></td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Documentation</legend>
+						<div class="form-group required">
+							<label for="input-documentation">Documentation</label> <textarea name="documentation" id="input-documentation" placeholder="Extension Documentation" rows="10" class="form-control">{{ documentation }}</textarea>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Extension Downloads</legend>
+						<div class="alert alert-info"><i class="fa fa-info-circle"></i> If you activate the cloud button your extension will be added to a queue waiting for approval before it will appear in the cloud marketplace. Any file changes will need to be reapproved.
+							<br/>
+							<strong>Requirement for the Cloud Marketplace:</strong>
+							<br/>
+							<ol>
+								<li>Only support OpenCart version 3.0 or above.</li>
+								<li>The folder name must be named "upload" / The file name must be "install.xml"</li>
+								<li>The compression should be in Zip format.</li>
+								<li>You are able to check Cloud Approval Status in your extension downloads list.</li>
+							</ol>
+						</div>
+						<div class="table-response">
+							<table class="table table-bordered" id="download">
+								<thead>
+									<tr>
+										<th>Download Name</th>
+										<th>Compatibility</th>
+										<th class="text-right">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									{% set download_row = 0 %}
+									{% for key, extension_download in extension_downloads %}
+										<tr id="download-row{{ download_row }}">
+											<td class="text-left"><input type="text" name="extension_download[{{ download_row }}][name]" value="{{ extension_download.name }}" class="form-control"/> <input type="hidden" name="extension_download[{{ download_row }}][extension_download_id]" value="{{ extension_download.extension_download_id }}"/> <input type="hidden" name="extension_download[{{ download_row }}][filename]" value="{{ extension_download.filename }}" id="input-filename{{ download_row }}"/> <input type="hidden" name="extension_download[{{ download_row }}][mask]" value="{{ extension_download.mask }}" id="input-mask{{ download_row }}"/>
+												{% if error_download[key] %}
+													<div class="text-danger">{{ error_download[key] }}</div>
+												{% endif %}</td>
+											<td class="text-left">
+												{% if extension_download.approved != '' %}
+													<div class="well well-sm text-center" style="max-height: 150px; overflow-y: scroll;">
+														{% if extension_download.approved == '1' %}<span class="label label-success">Approved for Cloud</span>{% elseif extension_download.approved == '0' %}<span class="label label-warning">Waiting for Cloud</span>{% elseif extension_download.approved == '-1' %}<span class="label label-danger">Denied for Cloud</span>{% endif %}
+													</div>
+												{% endif %}
+												<div class="well well-sm" style="max-height: 150px; overflow-y: scroll;">
+													{% if extension_download.cloud %}
+														<div class="checkbox">
+															<label> <input type="checkbox" name="extension_download[{{ download_row }}][cloud]" value="1" checked="checked"/> Cloud</label>
+														</div>
+													{% else %}
+														<div class="checkbox">
+															<label> <input type="checkbox" name="extension_download[{{ download_row }}][cloud]" value="1"/> Cloud</label>
+														</div>
+													{% endif %}
+													{% for download in downloads %}
+														{% if extension_download.download and download.download_id in extension_download.download %}
+															<div class="checkbox">
+																<label> <input type="checkbox" name="extension_download[{{ download_row }}][download][]" value="{{ download.download_id }}" checked="checked"/>
+																	{{ download.name }}</label>
+															</div>
+														{% else %}
+															<div class="checkbox">
+																<label> <input type="checkbox" name="extension_download[{{ download_row }}][download][]" value="{{ download.download_id }}"/>
+																	{{ download.name }}</label>
+															</div>
+														{% endif %}
+													{% endfor %}</div>
+											</td>
+											<td class="text-right">
+												<a href="{{ extension_download.href }}" class="btn btn-info">Download</a>
+												{# <button type="button" class="btn btn-info" value="{{ extension_download.extension_download_id }}">Download</button> #}
+												<button type="button" data-target="#input-filename{{ download_row }}" data-mask="#input-mask{{ download_row }}" class="btn btn-success">Browse</button>
+												<button type="button" onclick="$('#download-row{{ download_row }}').remove();" class="btn btn-danger">Remove</button></td>
+										</tr>
+										{% set download_row = download_row + 1 %}
+									{% endfor %}
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="4" class="text-right"><button type="button" id="button-download" class="btn btn-success">Add Download</button></td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Extension History</legend>
+						{% if error_history %}
+							<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_history }}
+								<button type="button" class="close" data-dismiss="alert">&times;</button>
+							</div>
+						{% endif %}
+						<div class="form-group required">
+							<label for="input-history">Reason for changes</label> <textarea name="history" id="input-history" placeholder="Reason for changes" rows="5" class="form-control">{{ history }}</textarea>
+						</div>
+					</fieldset>
+					<fieldset>
+						<legend>Extension Options</legend>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-6">
+									<p class="form-control-static">
+										<label class="control-label">Publish</label>
+									</p>
+								</div>
+								<div class="col-sm-6 text-right">
+									<div class="radio">{% if publish == '1' %}
+											<label class="radio-inline"> <input type="radio" name="publish" value="1" checked="checked"/> Yes</label>
+										{% else %}
+											<label class="radio-inline"> <input type="radio" name="publish" value="1"/> Yes</label>
+										{% endif %}
+										{% if publish == '0' %}
+											<label class="radio-inline"> <input type="radio" name="publish" value="0" checked="checked"/> No</label>
+										{% else %}
+											<label class="radio-inline"> <input type="radio" name="publish" value="0"/> No</label>
+										{% endif %}</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="row">
+									<div class="col-sm-6">
+										<p class="form-control-static">
+											<label class="control-label">Notify when new comments are made</label>
+										</p>
+									</div>
+									<div class="col-sm-6 text-right">
+										<div class="radio"> {% if notify == '1' %}
+												<label class="radio-inline"><input type="radio" name="notify" value="1" checked="checked"/> Yes</label>
+											{% else %}
+												<label class="radio-inline"><input type="radio" name="notify" value="1"/> Yes</label>
+											{% endif %}
+											{% if notify == '0' %}
+												<label class="radio-inline"><input type="radio" name="notify" value="0" checked="checked"/> No</label>
+											{% else %}
+												<label class="radio-inline"><input type="radio" name="notify" value="0"/> No</label>
+											{% endif %}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="row">
+								<div class="col-sm-6">
+									<p class="form-control-static">
+										<label class="control-label">Send update email to purchasers</label>
+									</p>
+								</div>
+								<div class="col-sm-6 text-right">
+									<div class="radio">{% if alert == '1' %}
+											<label class="radio-inline"><input type="radio" name="alert" value="1" checked="checked"/> Yes</label>
+										{% else %}
+											<label class="radio-inline"><input type="radio" name="alert" value="1"/> Yes</label>
+										{% endif %}
+										{% if alert == '0' %}
+											<label class="radio-inline"><input type="radio" name="alert" value="0" checked="checked"/> No</label>
+										{% else %}
+											<label class="radio-inline"><input type="radio" name="alert" value="0"/> No</label>
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					<div class="text-right">
+						<a href="{{ cancel }}" class="btn btn-link">Cancel</a>
+						<button type="submit" class="btn btn-primary">Submit</button>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-3">{{ menu }}</div>
+		</div>
+	</div>
+</div>
+<link href="application/view/javascript/jquery/colorpicker/css/bootstrap-colorpicker.css" rel="stylesheet"/>
+<script type="text/javascript" src="application/view/javascript/jquery/colorpicker/js/bootstrap-colorpicker.js"></script>
+<script type="text/javascript" src="application/view/javascript/bbcode.js"></script>
+<script type="text/javascript"><!--
+$('textarea[name=\'description\']').bbcode();
+$('textarea[name=\'documentation\']').bbcode();
+//--></script>
+<script type="text/javascript"><!--
+var download_row = {{ download_row }};
+
+$('#button-download').on('click', function() {
+    html = '<tr id="download-row' + download_row + '">';
+    html += '  <td class="text-left"><input type="text" name="extension_download[' + download_row + '][name]" value="" class="form-control" /><input type="hidden" name="extension_download[' + download_row + '][extension_download_id]" value="" /><input type="hidden" name="extension_download[' + download_row + '][filename]" value="" id="input-filename' + download_row + '" /><input type="hidden" name="extension_download[' + download_row + '][mask]" value="" id="input-mask' + download_row + '" /></td>';
+    html += '  <td class="text-left"><div class="well well-sm" style="max-height: 150px; overflow-y: scroll;">';
+    html += '    <div class="checkbox"><label>Cloud <input type="checkbox" name="extension_download[{{ download_row }}][cloud]" value="1" /></label></div>';
+	{% for download in downloads %}
+    html += '<div class="checkbox"><label><input type="checkbox" name="extension_download[' + download_row + '][download][]" value="{{ download.download_id }}" /> {{ download.name }}</label></div>';
+	{% endfor %}
+    html += '  </div></td>';
+    html += '  <td class="text-right"><button type="button" data-target="#input-filename' + download_row + '" data-mask="#input-mask' + download_row + '" class="btn btn-success">Browse</button> <button type="button" onclick="$(\'#download-row' + download_row + '\').remove();" class="btn btn-danger">Remove</button></td>';
+    html += '</tr>';
+
+    $('#download tbody').append(html);
+
+    download_row++;
+});
+
+
+$('#download tbody').on('click', '.btn-success', function() {
+    var element = this;
+
+    $('#form-upload').remove();
+
+    $('body').prepend('<form enctype="multipart/form-data" id="form-upload" style="display: none;"><input type="file" name="download" value="" /></form>');
+
+    $('#form-upload input[name="download"]').trigger('click');
+
+    if (typeof timer != 'undefined') {
+        clearInterval(timer);
+    }
+
+    timer = setInterval(function() {
+        if ($('#form-upload input[name=\'download\']').val() != '') {
+            clearInterval(timer);
+
+            $.ajax({
+                url: 'index.php?route=account/extension/upload&member_token={{ member_token }}',
+                type: 'post',
+                dataType: 'json',
+                data: new FormData($('#form-upload')[0]),
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    $(element).button('loading');
+                },
+                complete: function() {
+                    $(element).button('reset');
+                },
+                success: function(json) {
+                    console.log(json);
+
+                    if (json['error']) {
+                        alert(json['error']);
+                    }
+
+                    if (json['success']) {
+                        alert(json['success']);
+
+                        $($(element).attr('data-target')).val(json['filename']);
+                        $($(element).attr('data-mask')).val(json['mask']);
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        }
+    }, 500);
+});
+//--></script>
+<script type="text/javascript"><!--
+var image_row = {{ image_row }};
+
+$('#button-image').on('click', function() {
+    html = '<tr id="image-row' + image_row + '">';
+    html += '  <td><img src="{{ placeholder }}" alt="" title="" id="thumb-image' + image_row + '" class="img-thumbnail" /><input type="hidden" name="extension_image[' + image_row + '][image]" value="" id="input-image' + image_row + '"/></td>';
+    html += '  <td><button type="button" data-toggle="image" data-target="#input-image' + image_row + '" data-thumb="#thumb-image' + image_row + '" class="btn btn-success">Browse</button></td>';
+    html += '  <td class="text-right"><button type="button" onclick="$(\'#image-row' + image_row + '\').remove();" class="btn btn-danger">Remove</button></td>';
+    html += '</tr>';
+
+    $('#image tbody').append(html);
+
+    image_row++;
+});
+//--></script>
+{{ footer }}

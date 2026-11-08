@@ -1,0 +1,53 @@
+{{ header }}
+<div id="account-promotion">
+  <div class="page-header">
+    <div class="container">
+      <h1>Promote Your Extension</h1>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2>Your Promotions</h2>
+        <div class="table-responsive">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th class="text-right">ID</th>
+                <th>Extension</th>
+                <th>Date Start</th>
+                <th>Date End</th>
+                <th>Order Status</th>
+                <th>Date Added</th>
+                <th class="text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if promotions %}
+                {% for promotion in promotions %}
+                  <tr>
+                    <td class="text-right">{{ promotion.promotion_id }}</td>
+                    <td>{{ promotion.extension }}</td>
+                    <td>{{ promotion.date_start }}</td>
+                    <td>{{ promotion.date_end }}</td>
+                    <td>{% if promotion.order_status_id == config_download_status_id %}<span class="label label-success">{{ promotion.order_status }}</span>{% elseif promotion.order_status_id == config_order_status_id %}<span class="label label-warning">{{ promotion.order_status }}</span>{% else %}<span class="label label-danger">{{ promotion.order_status }}</span>{% endif %}</td>
+                    <td>{{ promotion.date_added }}</td>
+                    <td class="text-right"><a href="{{ promotion.href }}" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td class="text-center" colspan="7">No results!</td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+        <nav>{{ pagination }}</nav>
+        <div class="text-right"><a href="{{ add }}" class="btn btn-primary">New Promotion</a></div>
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+{{ footer }} 

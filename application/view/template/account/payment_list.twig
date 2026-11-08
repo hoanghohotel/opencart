@@ -1,0 +1,129 @@
+{{ header }}
+<div id="account-payment">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2>Registered Payment Methods</h2>
+        <fieldset>
+          <legend>You payment methods</legend>
+          {% if error_warning %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }} <button type="button" class="close" data-dismiss="alert">&times;</button></div>
+          {% endif %}
+          {% if success %}
+            <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }} <button type="button" class="close" data-dismiss="alert">&times;</button></div>
+          {% endif %}
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              {% if payment_methods %}
+                <thead>
+                  <tr>
+                    <th class="text-center">Type</th>
+                    <th class="text-left">Payment Name</th>
+                    <th class="text-left">Expires</th>
+                    <th class="text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for payment in payment_methods %}
+                    <tr>
+                      <td class="text-center"><img src="{{ payment.image }}" title="{{ payment.type }}" alt="{{ payment.type }}"/></td>
+                      <td class="text-left">{{ payment.name }}</td>
+                      <td class="text-left">{% if payment.type == 'paypal' %}Unlimited{% else %}{{ payment.date_expire }}{% endif %}</td>
+                      <td class="text-right">
+                      {% if payment.default == 1 %}
+                        <button data-toggle="tooltip" data-placement="top" disabled class="btn btn-default">DEFAULT</button>
+                      {% else %}
+                        <a href="{{ payment.make_default }}" data-toggle="tooltip" data-placement="top" title="Make Default" class="btn btn-default"><i class="fa fa-credit-card-alt fa-fw"></i></a>
+                      {% endif %}
+                        <a href="{{ payment.delete }}" data-toggle="tooltip" data-placement="top" title="Delete" class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i></a></td>
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              {% else %}
+                <tbody>
+                  <tr>
+                    <td colspan="4" class="text-center">No payment methods found!</td>
+                  </tr>
+                </tbody>
+              {% endif %}
+            </table>
+          </div>
+          <nav>{{ pagination }}</nav>
+          <div class="text-right">
+            <a href="{{ cancel }}" class="btn btn-link">Cancel</a> 
+            <span class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="paymentDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                Add Payment Method
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" aria-labelledby="paymentDropdown">
+                <li><a href="{{ create_card }}">Credit Card</a></li>
+                <li><a href="{{ create_paypal }}">Paypal</a></li>
+              </ul>
+            </span>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript"><!--
+$('#account-payment .btn-default').on('click', function(e) {
+	e.preventDefault();
+		$.ajax({
+			url: $(this).attr('href'),
+			dataType: 'json',
+			beforeSend: function() {
+				$(this).button('loading');
+			},
+			complete: function() {
+				$(this).button('reset');
+			},
+			success: function(json) {
+				$('.alert, .text-danger').remove();
+				if (json['error']) {
+					$('h2').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				}
+				if (json['redirect']) {
+					location = json['redirect'];
+				}
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+});
+
+$('#account-payment .btn-danger').on('click', function(e) {
+	e.preventDefault();
+
+	if (confirm('Are you sure?')) {
+		$.ajax({
+			url: $(this).attr('href'),
+			dataType: 'json',
+			beforeSend: function() {
+				$(this).button('loading');
+			},
+			complete: function() {
+				$(this).button('reset');
+			},
+			success: function(json) {
+				$('.alert, .text-danger').remove();
+
+				if (json['error']) {
+					$('h2').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				}
+
+				if (json['redirect']) {
+					location = json['redirect'];
+				}
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	}
+});
+//--></script>
+{{ footer }}

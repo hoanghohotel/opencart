@@ -1,0 +1,7 @@
+{% for row in banners|batch(2, '') %}
+<div class="row">
+  {% for banner in row %}
+  <div class="col-xs-6 col-sm-12"><a href="{{ banner.href }}"><img src="{{ banner.image }}" alt="{{ banner.title }}" title="{{ banner.title }}" class="img-responsive"></a></div>
+  {% endfor %}
+</div>
+{% endfor %}

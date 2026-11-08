@@ -1,0 +1,399 @@
+{{ header }}
+<div id="marketplace-extension-info">
+	<div class="container-fluid">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<ul class="breadcrumb">
+						{% for breadcrumb in breadcrumbs %}
+							<li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<div id="extension-search" class="input-group">
+						<input type="text" name="filter_search" value="{{ filter_search }}" placeholder="Search for extensions and themes" class="form-control"> <input type="hidden" name="filter_category_id" value="{{ filter_category_id }}" class="form-control"/> <input type="hidden" name="filter_download_id" value="{{ filter_download_id }}" class="form-control"/> <input type="hidden" name="filter_rating" value="{{ filter_rating }}" class="form-control"/> <input type="hidden" name="filter_license" value="{{ filter_license }}" class="form-control"/> <input type="hidden" name="filter_partner" value="{{ filter_partner }}" class="form-control"/> <input type="hidden" name="sort" value="{{ sort }}" class="form-control"/>
+						<div class="input-group-btn">
+							<button type="button" id="button-search" class="btn btn-link"><i class="fa fa-search"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<h3>{{ name }}</h3>
+		<div class="row">
+			<div class="col-md-8">
+				{% if banner %}
+					<div class="well"><img src="{{ banner }}" alt="{{ name }}" title="{{ name }}" class="img-responsive"/></div>
+				{% endif %}
+				{% for row in images|batch(6, '') %}
+					<div class="row">{% for image in row %}
+							{% if image %}
+								<div class="col-xs-4 col-sm-2 col-md-2"><a href="{{ image.popup }}" class="thumbnail" data-lightbox="lightbox-thumbnail"><img src="{{ image.thumb }}" alt="" title="" class="img-responsive"/></a></div>
+							{% endif %}
+						{% endfor %}</div>
+				{% endfor %}
+				<div>{{ description }}</div>
+				{% if reviews and reviews_enabled %}
+					<div class="extension-review">
+						<h3 class="text-center">What customers say about {{ name }}</h3>
+						{% for review in reviews %}
+							<div class="media">
+								<div class="media-left"><img src="{{ review.image }}" alt="{{ review.member }}" title="{{ review.member }}" class="media-object"/></div>
+								<div class="media-body">{{ review.comment }}
+									<br/>
+									<em>~{{ review.member }}</em></div>
+							</div>
+						{% endfor %}
+					</div>
+				{% endif %}
+				<br/>
+				<br/>
+                {% if comments_enabled %}
+				<div id="comment-input-box">
+					{% if not logged %}
+						<div class="login-layer">
+							<p>Login and write down your comment.</p>
+							<p><a href="{{ login }}" class="btn btn-primary">Login my OpenCart Account</a></p>
+						</div>
+					{% endif %}
+					<div class="media">
+						<div class="media-left"><img src="{{ comment_image }}" alt="{{ comment_username }}" title="{{ comment_username }}" class="media-object"/></div>
+						<div class="media-body">
+							<div class="form-group">
+								<label for="input-comment">Leave your comment</label> <textarea name="comment" placeholder="Write your comment here..." id="input-comment" class="form-control"></textarea>
+							</div>
+							<div class="text-right">
+								<button type="button" id="button-comment" class="btn btn-primary btn-sm">Comment</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br/>
+				<div id="comment-box"></div>
+                {% endif %}
+				<br/>
+			</div>
+			<div class="col-md-4">
+				<div id="buy" class="well">{% if download %}<a href="{{ download }}" class="btn btn-success btn-lg btn-block">Download</a>{% else %}<button type="button" id="button-purchase" class="btn btn-success btn-lg btn-block">Buy</button>{% endif %}
+					{% if license %}
+						<div id="price" class="row">
+							<div class="col-xs-5"><strong>Price</strong></div>
+							<div class="col-xs-7 text-right">{{ price }}</div>
+						</div>
+					{% endif %}
+					<hr/>
+					<ul class="list-check">
+						{% if partner_status %}
+							<li>Developed by OpenCart Partner</li>
+						{% else %}
+							<li>Developed by OpenCart Community</li>
+						{% endif %}
+						{% if license_period %}
+							<li>{{ license_period }} Months Free Support</li>
+						{% endif %}
+						<li>Documentation Included</li>
+                        {% if recommended %}
+							<img class="recommended-label" src="/application/view/image/marketplace/recommended-label.svg"/>
+						{% endif %}
+					</ul>
+					<hr/>
+					<div class="row">
+						<div class="col-xs-5"><strong>Rating</strong></div>
+						<div class="col-xs-7">
+							{% for i in 1..5 %}
+								{% if rating >= i %}<i class="opencart-icon-star-light"></i>{% else %}<i class="opencart-icon-star-light-o"></i>{% endif %}
+							{% endfor %}
+						</div>
+					</div>
+					<hr/>
+					<div class="row">
+						<div class="col-xs-5"><strong>Compatibility</strong></div>
+						<div class="col-xs-7">{{ compatibility }}</div>
+					</div>
+					<hr/>
+					<div class="row">
+						<div class="col-xs-5"><strong>Last Update</strong></div>
+						<div class="col-xs-7">{{ date_modified }}</div>
+					</div>
+					<hr/>
+					<div class="row">
+						<div class="col-xs-5"><strong>Created</strong></div>
+						<div class="col-xs-7">{{ date_added }}</div>
+					</div>
+				</div>
+				<div id="sales" class="well">
+					{% if license %}
+						<i class="opencart-icon-cart-mini"></i> <strong>{{ sales }}</strong> Sales
+					{% else %}
+						<i class="fa fa-cloud-download"></i> <strong>{{ downloaded }}</strong> Downloads
+					{% endif %}</div>
+				<div id="comment" class="well"><i class="opencart-icon-comment"></i> <strong>{{ comment_total }}</strong> Comments</div>
+				<div id="comment" class="well text-center">
+                    <div class="fb-share-button" data-href="{{ url }}" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+                </div>
+				<div class="well">
+					<div class="media">
+						<div class="media-left media-middle"><img src="{{ member_image }}" alt="{{ member_username }}" title="{{ member_username }}" class="media-object img-circle"/></div>
+						<div class="media-body"><span>{{ member_username }}</span>
+							<br/>
+							<small>Member since: {{ member_date_added }}</small>
+						</div>
+					</div>
+					<br/>
+					<a href="{{ filter_member }}" class="btn btn-primary btn-lg btn-block">View all extensions</a> <a href="{{ support }}" class="btn btn-ghost-dark btn-lg btn-block">Get Support</a></div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript"><!--
+$('#button-search').on('click', function(e) {
+    var url = 'index.php?route=marketplace/extension';
+
+    var input = $('#extension-search :input');
+
+    for (i = 0; i < input.length; i++) {
+        if ($(input[i]).val() != '' && $(input[i]).val() != null) {
+            url += '&' + $(input[i]).attr('name') + '=' + $(input[i]).val()
+        }
+    }
+
+    location = url;
+});
+
+$('input[name=\'filter_search\']').keydown(function(e) {
+    if (e.keyCode == 13) {
+        e.preventDefault();
+
+        $('#button-search').trigger('click');
+    }
+});
+//--></script>
+<script type="text/javascript"><!--
+$('#button-purchase').on('click', function() {
+    var element = this;
+
+    $('#modal-checkout').remove();
+
+    $.ajax({
+        url: 'index.php?route=checkout/checkout&extension_id={{ extension_id }}{% if member_token %}&member_token={{ member_token }}{% endif %}',
+        dataType: 'html',
+        beforeSend: function() {
+            $(element).prop('disabled', true);
+        },
+        complete: function(xhr, status) {
+            $(element).prop('disabled', false);
+
+            if (xhr.status == 401) {
+                location = xhr.getResponseHeader('Location');
+            }
+        },
+        success: function(html) {
+            string = '<div id="modal-checkout" class="modal">';
+            string += '  <div class="modal-dialog">';
+            string += '    <div class="modal-content">';
+            string += '      <div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button><h5 class="modal-title">Buy an extension license</h5></div>';
+            string += '      <div class="modal-body">' + html + '</div>';
+            string += '    </div>';
+            string += '  </div>';
+            string += '</div>';
+
+            $('body').append(string);
+
+            $('#modal-checkout').modal('show');
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+
+        }
+    });
+});
+
+{% if (logged) %}
+let searchParams = new URLSearchParams(window.location.search);
+
+if (searchParams.has('purchase')) {
+    $('#button-purchase').trigger('click', function() {
+    });
+}
+{% endif %}
+
+
+
+//Start
+$('#comment-box').load('index.php?route=marketplace/extension/comment&extension_id={{ extension_id }}');
+
+// Page
+$('#comment-box').on('click', '.pagination a', function(e) {
+    e.preventDefault();
+
+    $('#comment-box').load(this.href);
+});
+
+{% if logged %}
+// Add comment
+$('#button-comment').on('click', function() {
+    $.ajax({
+        url: 'index.php?route=marketplace/extension/addcomment&member_token={{ member_token }}&extension_id={{ extension_id }}',
+        type: 'post',
+        dataType: 'json',
+        data: 'comment=' + encodeURIComponent($('textarea[name=\'comment\']').val()),
+        beforeSend: function() {
+            $('#button-comment').button('loading');
+        },
+        complete: function() {
+            $('#button-comment').button('reset');
+        },
+        success: function(json) {
+            $('.alert').remove();
+
+            if (json['error']) {
+                $('#comment-input-box').before('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+            }
+
+            if (json['success']) {
+                $('#comment-input-box').before('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+                $('#comment-box').load('index.php?route=marketplace/extension/comment&extension_id={{ extension_id }}');
+
+                $('textarea[name=\'comment\']').val('');
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+{% endif %}
+
+// Next replies
+$('#comment-box').on('click', '.btn-block', function(e) {
+    e.preventDefault();
+
+    var element = this;
+
+    $.ajax({
+        url: $(element).attr('href'),
+        dataType: 'html',
+        beforeSend: function() {
+            $(element).button('loading');
+        },
+        complete: function() {
+            $(element).button('reset');
+        },
+        success: function(html) {
+            $(element).parentsUntil('.reply-page').parent().after(html);
+
+            $(element).remove();
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+// Reply
+$('#comment-box').on('click', '.btn-link', function(e) {
+    e.preventDefault();
+
+    $(this).parent().parent().find('.reply-input-box').toggle();
+});
+
+// Add reply
+$('#comment-box').on('click', '.btn-primary', function(e) {
+    e.preventDefault();
+
+    var element = this;
+
+    $.ajax({
+        url: $(element).attr('href'),
+        type: 'post',
+        dataType: 'json',
+        data: 'comment=' + encodeURIComponent($(element).parents('.reply-input-box').find('textarea[name=\'comment\']').val()),
+        beforeSend: function() {
+            $(element).button('loading');
+        },
+        complete: function() {
+            $(element).button('reset');
+        },
+        success: function(json) {
+            $('.alert').remove();
+
+            if (json['error']) {
+                $(element).parents('.reply-input-box').before('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+            }
+
+            if (json['success']) {
+                $(element).parents('.reply-input-box').before('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+                $(element).parents('.reply-input-box').parents('.media').find('.reply-refresh').last().trigger('click');
+
+                $(element).parents('.reply-input-box').find('textarea[name=\'comment\']').val('');
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+// Remove
+$('#comment-box').on('click', '.comment-remove, .reply-remove', function(e) {
+    e.preventDefault();
+
+    var element = this;
+
+    $.ajax({
+        url: $(element).attr('href'),
+        dataType: 'json',
+        beforeSend: function() {
+            $(element).button('loading');
+        },
+        complete: function() {
+            $(element).button('reset');
+        },
+        success: function(json) {
+            $('.alert').remove();
+
+            if (json['error']) {
+                $(element).parent().before('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+            }
+
+            if (json['success']) {
+                $(element).parent().before('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+
+                $(element).parents('.media:first').remove();
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+
+// Refresh
+$('#comment-box').on('click', '.reply-refresh', function(e) {
+    e.preventDefault();
+
+    var element = this;
+
+    $.ajax({
+        url: $(element).attr('href'),
+        dataType: 'html',
+        beforeSend: function() {
+            $(element).button('loading');
+        },
+        complete: function() {
+            $(element).button('reset');
+        },
+        success: function(html) {
+            $(element).parent().replaceWith(html);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+//--></script>
+{{ footer }}

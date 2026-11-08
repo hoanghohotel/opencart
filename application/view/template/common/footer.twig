@@ -1,0 +1,112 @@
+
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2">
+        <section>
+          <h5>OpenCart</h5>
+          <ul class="list-unstyled">
+            <li><a href="{{ feature }}">Features</a></li>
+            {% if cloud %}
+            <li><a href="{{ cloud }}">OpenCart Cloud</a></li>
+            {% endif %}
+            <li><a href="{{ showcase }}">Showcase</a></li>
+            <li><a href="{{ demo }}">Demo</a></li>
+            <li><a href="{{ download }}">Download</a></li>
+            <li><a href="{{ marketplace }}">Marketplace</a></li>
+            <li><a href="{{ login }}">Login</a></li>
+          </ul>
+        </section>
+      </div>
+      <div class="col-sm-2">
+        <section>
+          <h5>Company</h5>
+          <ul class="list-unstyled">
+            <li><a href="{{ contact }}">Contact Us</a></li>
+            <li><a href="{{ advertise }}">Extension Advertising</a></li>
+            <li><a href="{{ advertise }}">Marketplace Advertising</a></li>
+            <li><a href="{{ company }}">About Us</a></li>
+            <li><a href="{{ terms }}">Terms & Conditions</a></li>
+            <li><a href="{{ privacy }}">Privacy Policy</a></li>
+            <li><a href="{{ refund }}">Refund Policy</a></li>
+            <li><a href="{{ gdpr }}">GDPR</a></li>
+            {% for information in informations %}
+            <li><a href="{{ information.href }}">{{ information.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </section>
+      </div>
+      <div class="col-sm-2">
+        <section>
+          <h5>Support</h5>
+          <ul class="list-unstyled">
+            <li><a href="https://forum.opencart.com">Community Forum</a></li>
+            <li><a href="https://dedicated.opencart.com">Dedicated Support</a></li>
+            <li><a href="{{ partner }}">OpenCart Partners</a></li>
+            <li><a href="{{ support }}">Marketplace Support</a></li>
+            <li><a href="{{ cart2cart }}">Migrate to OpenCart</a></li>
+          </ul>
+        </section>
+      </div>
+      <div class="col-sm-2">
+        <section>
+          <h5>Resources</h5>
+          <ul class="list-unstyled">
+            <li><a href="{{ blog }}">OpenCart Blog</a></li>
+            <li><a href="https://docs.opencart.com">OpenCart Documentation</a></li>
+            <li><a target="_blank" href="https://github.com/opencart/opencart">GitHub</a></li>
+            <li><a href="https://docs.opencart.com/#additional-reading">OpenCart Books</a></li>
+            <li><a href="https://github.com/opencart/opencart/issues">Github Bug Tracker</a></li>
+            <li><a href="https://docs.opencart.com/developer/module/">Developer</a></li>
+          </ul>
+        </section>
+      </div>
+      <div class="col-sm-2 col-md-4">
+        <section id="newsletter">
+          <h5>Newsletter</h5>
+          <p>Subscribe to our newsletters and stay informed of new releases and other OpenCart events.</p>
+            <div class="input-group newsletter">
+              <input type="text" name="newsletter" value="" placeholder="Enter your email address" class="form-control">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-primary subscribe"><i class="fa fa-angle-right"></i></button>
+              </div>
+            </div>
+        </section>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 col-md-6">
+        <div id="copyright">
+          <ul class="list-unstyled">
+            <li class="company-logo"><img src="application/view/image/icon/opencart-logo-white.png" alt="OpenCart" title="OpenCart" /></li>
+            <li class="copyright-text">&copy; Copyright {{ 'now'|date('Y') }} OpenCart</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-6 col-md-6">
+        <div id="social">
+          <ul class="list-unstyled">
+            <li class="facebook-marketing-partner-logo"><a href="https://www.facebook.com/fmp/commerce/partner-badge" target="_blank"><img src="application/view/image/icon/facebook_marketing_partner.png" alt="Facebook Marketing Partner" title="Facebook Marketing Partner" /></a></li>
+            <li><a href="https://www.linkedin.com/company/5224021/" target="_blank">Linkedin</a></li>
+            <li><a href="https://www.facebook.com/opencart/?ref=aymt_homepage_panel" target="_blank">Facebook</a></li>
+            <li><a href="https://twitter.com/opencart" target="_blank">Twitter</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{% for script in scripts %}
+<script src="{{ script }}" type="text/javascript"></script>
+{% endfor %}
+
+<script src='https://js.braintreegateway.com/web/3.76.4/js/client.min.js'></script>
+<script src='https://js.braintreegateway.com/web/3.76.4/js/three-d-secure.min.js'></script>
+<script src='https://js.braintreegateway.com/web/3.76.4/js/hosted-fields.min.js'></script>
+<script src="https://js.braintreegateway.com/web/3.76.4/js/data-collector.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.76.4/js/paypal-checkout.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/cleave.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cleave.js/1.6.0/addons/cleave-phone.i18n.js"></script>
+</body></html>

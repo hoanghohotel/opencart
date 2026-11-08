@@ -1,0 +1,265 @@
+{{ header }}
+<div id="account-subscription-info">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+
+                <div class="wrapper-subscription-create-form">
+                    <div class="banner-block">
+                        <img src="application/view/image/cloud/subscription_create.png"/>
+                        <h2>Create Your Store</h2>
+                        <span>Please select a store name, subscription plan and payment method</span>
+                    </div>
+                    {% if error_warning %}
+                    <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+                    {% endif %}
+                    {% if success %}
+                        <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}</div>
+                    {% endif %}
+                    <form id="subscription-add" method="post" action="">
+                    <div class="store-name-block">
+                        <div class="store-title"><span>Store Name</span></div>
+                        <div class="input-group" id="input_name">
+                            <input type="text" name="name" value="{{ name }}" placeholder="Would be used as your default domain (can be removed later)" class="form-control"/>
+                            <span class="input-group-addon" id="basic-addon2">.opencart.shop</span>
+                        </div>
+                        <div class="store-help"><span>Do not use prohibited characters in the store name */_'</span></div>
+                    </div>
+                    {% if member_id != 78238 %}
+                    <div class="plan-block">
+                        <div class="plan-selection-title text-center">Subscription Plan</div>
+                        <div class="row badges-block">
+                            {% for subscription_plan in subscription_plans %}
+                            <div class="col-sm-4 cloud-centered-block">
+                                {% if subscription_plans|length > 1 %}
+                                    {% if loop.index == 2 %}
+                                    <label class="plan-badge active">
+                                    <input class="plan-selection" type="radio" checked name="subscription_plan_id" value="{{ subscription_plan.subscription_plan_id }}">
+                                    {% else %}
+                                    <label class="plan-badge">
+                                    <input class="plan-selection" type="radio" name="subscription_plan_id" value="{{ subscription_plan.subscription_plan_id }}">
+                                    {% endif %}
+                                {% else %}
+                                    {% if loop.index == 1 %}
+                                    <label class="plan-badge active">
+                                    <input class="plan-selection" type="radio" checked name="subscription_plan_id" value="{{ subscription_plan.subscription_plan_id }}">
+                                    {% else %}
+                                    <label class="plan-badge">
+                                    <input class="plan-selection" type="radio" name="subscription_plan_id" value="{{ subscription_plan.subscription_plan_id }}">
+                                    {% endif %}
+                                {% endif %}
+                                    <div>
+                                        {% if subscription_plan.label_active == 1 %}
+                                        <div class="plan-recommended">recommended</div>
+                                        {% endif %}
+                                        <div class="plan-name text-center">{{ subscription_plan.name }}</div>
+                                        <div class="badge-divider"></div>
+                                        <div class="plan-price text-center">{{ subscription_plan.price }}</div>
+                                        <div class="plan-desription text-center">{{ subscription_plan.description }}</div>
+                                    </div>
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="payment-block">
+                        <div class="payment-selection-title text-center">Payment Method</div>
+                        <div class="row badges-block">
+                        {% for payment_method in payment_methods %}
+                            <div class="col-sm-4">
+                                <label>
+                                    {% if loop.first %}
+                                    <input class="subscription-selection" type="radio" checked name="payment_id" value="{{ payment_method.payment_id }}">
+                                    <div class="payment-badge active">
+                                    {% else %}
+                                    <input class="subscription-selection" type="radio" name="payment_id" value="{{ payment_method.payment_id }}">
+                                    <div class="payment-badge">
+                                    {% endif %}
+                                        <img class="payment-image" src="{{ payment_method.image }}"/>
+                                        <div class="payment-title">{{ payment_method.name }}</div>
+                                        <div class="payment-date">{{ payment_method.date_expire }}</div>
+                                    </div>
+                                </label>
+                            </div>
+                        {% endfor %}
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <a title="{{ subscription_payment_create_info }}" href="{{ subscription_payment_create_url }}" class="btn btn-default btn-lg add-payment-button">Add new Payment Method</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {# <div class="server-block">
+                        <div class="server-selection-title text-center">Select Server Region</div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="server-map-container">
+                                    <img class="server-marker europe" src="application/view/image/cloud/server-marker-active.svg" />
+                                    <img src="application/view/image/cloud/server-map.svg"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="server-info">
+                                    <img src="application/view/image/cloud/server-marker-active.svg"/>
+                                    <span>Europe</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> #}
+                    <div class="admin-info-block">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <label for="input-name" class="control-label admin-info-label">Store Admin Email</label>
+                                <input type="text" name="admin_email" value="{{ admin_email }}" placeholder="This is just to help you find your store in your account area" id="input_admin_email" class="form-control"/>
+                            </div>
+                            <div class="col-sm-6">
+                            <label for="input-name" class="control-label admin-info-label">Store Admin Username</label>
+                                <input type="text" name="admin_username" value="{{ admin_username }}" placeholder="This is just to help you find your store in your account area" id="input_admin_username" class="form-control"/>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="form-check form-check-inline agree-block">
+                                    <input type="hidden" name="agree" value="-1" />
+                                    <input class="form-check-input" name="agree" type="checkbox" value="1">
+                                    <label class="form-check-label" id="input_agree" for="agree">I agree with <a href="{{ subscription_terms }}">Terms and Conditions</a></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <button type="button" id="button-store" class="btn btn-primary pull-right create-store-button">CREATE STORE</button>
+                    </form>
+                    <div class="modal" id="loaderStoreModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <div>
+                                        {% if banner %}
+                                        <div class="promotion-banner" style="margin-bottom: 45px;">
+                                            {{ banner }}
+                                        </div>
+                                        {% else %}
+                                        <img src="application/view/image/cloud/cloud_modal_loader_image.png"/>
+                                        {% endif %}
+                                    </div>
+                                    <p>
+                                        <strong>Hold on! We are setting up your new store in the clouds!</strong>
+                                    </p>
+                                    <div class="loader">Loading...</div>
+                                    <p id="modalStatusText">Getting to start...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 hidden-xs">{{ menu }}</div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('.subscription-selection').on('change', function() {
+            $(".subscription-selection").next(".payment-badge").removeClass("active");
+            $('.subscription-selection:checked').next('.payment-badge').addClass("active");
+        });
+
+        $('.plan-selection').on('change', function() {
+            $(".plan-selection").parent().removeClass("active");
+            $('.plan-selection:checked').parent().addClass("active");
+        }); 
+    });
+
+    function clearAlerts(form_id) {
+        $(form_id + ' .alert, ' + form_id + ' .text-danger').remove();
+        $(form_id + ' .form-group').removeClass('has-error');
+        $(form_id + ' input.error').removeClass('error');
+    }
+
+    function showAlert(form_id, json) {
+        $(form_id + ' .alert, ' + form_id + ' .text-danger').remove();
+        $(form_id + ' .form-group').removeClass('has-error');
+        $(form_id + ' input.error').removeClass('error');
+
+        if (json['error']) {
+            if (json['error']['warning']) {
+                $(form_id).prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                $("#subscription-add").parent()[0].scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            } else {
+                for (i in json['error']) {
+                    var element = $('#input_' + i);
+                    $(element).addClass('error');
+                    $(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+                }
+
+                $(".text-danger").parent()[0].scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+        }
+
+        if (json['success']) {
+            $(form_id).prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '  <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+        }
+    }
+
+    $('#button-store').on('click', function (e) {
+        e.preventDefault();
+        var element = this;
+        var form_id = "#subscription-add";
+
+            $.ajax({
+            url: 'index.php?route=account/subscription/add&member_token={{ member_token }}',
+            dataType: 'json',
+            method: "POST",
+            data: $("#subscription-add").serialize(),
+            beforeSend: function () {
+                clearAlerts(form_id);
+                $(element).button('loading');
+            },
+            complete: function () {
+                $(element).button('reset');
+            },
+            success: function (json) {
+                $('.alert').remove();
+
+                if (json['error']) {
+                    showAlert(form_id, json);
+                }
+
+                if (json['redirect']) {
+                    $('#loaderStoreModal').modal({backdrop: 'static', keyboard: false});
+                    var inst = setInterval(storeStatusChange, 30000);
+                    var parser = new DOMParser;
+                    setTimeout(function(){
+                        var dom = parser.parseFromString(
+                        '<!doctype html><body>' + json['redirect'],
+                        'text/html');
+                        var decodedRedirectUrl = dom.body.textContent;
+                        window.location.replace(decodedRedirectUrl);
+                    }, 300000);
+                    
+                    var statuses = json['process_statuses'];
+
+                    var counter = 0;
+                    function storeStatusChange() {
+                        $("#modalStatusText").text(statuses[counter]);
+                        counter++;
+                        if (counter >= statuses.length) {
+                            counter = 0;
+                        }
+                    }
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+    
+</script>
+{{ footer }}

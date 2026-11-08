@@ -1,0 +1,60 @@
+{{ header }}
+<div id="account-extension">
+  <div class="page-header">
+    <div class="container">
+      <h1>Extension</h1>
+      <p>Manage the extensions you have uploads</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2>Extensions</h2>
+        {% if error_warning %}
+          <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i>{{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+        {% if success %}
+          <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+        <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-extension">
+          <div class="table-responsive">
+            <table id="extension-list" class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="text-left">Extension Name</th>
+                  <th class="text-left">Status</th>
+                  <th class="text-left">Date Added</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% if extensions %}
+                  {% for extension in extensions %}
+                    <tr>
+                      <td class="text-left">{{ extension.name }}</td>
+                      <td class="text-left">{% if extension.publish %}<span class="label label-success">Enabled</span> {% else %} <span class="label label-danger">Disable</span> {% endif %} </td>
+                      <td class="text-left">{{ extension.date_added }}</td>
+                      <td class="text-right"><a href="{{ extension.view }}" class="btn btn-info">View</a> <a href="{{ extension.edit }}" class="btn btn-primary">Edit</a> <button type="button" onclick="confirm('Are you sure?') ? location = '{{ extension.delete }}' : '';" class="btn btn-danger">Delete</button></td>
+                    </tr>
+                  {% endfor %}
+                {% else %}
+                  <tr>
+                    <td class="text-center" colspan="4">No results!</td>
+                  </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+          <nav>{{ pagination }}</nav>
+          <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a> <a href="{{ add }}" class="btn btn-primary">Add Extension</a></div>
+        </form>
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+{{ footer }}

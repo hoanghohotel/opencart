@@ -1,0 +1,190 @@
+{{ header }}
+<div id="account-payment">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-9">
+				<h2>Register new payment method</h2>
+
+				{% if success %}
+					<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }}
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+					</div>
+				{% endif %}
+
+				{% if error_warning %}
+					<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+						<button type="button" class="close" data-dismiss="alert">&times;</button>
+					</div>
+				{% endif %}
+
+				<form id="form-payment" class="mb-3">
+					<fieldset id="payment-credit-card">
+						<div class="card-block">
+							<img src="application/view/image/cloud/cloud_credit_card.svg"/>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 mb-3">
+								<div class="form-group required">
+									<label for="input-card-number">Credit Card Number</label>
+									<div id="input-card-number" class="form-control"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6 mb-3">
+								<div class="form-group required">
+									<label for="input-card-expiration">Expiration Date</label>
+									<div id="input-card-expiration" class="form-control"></div>
+								</div>
+							</div>
+							<div class="col-sm-6 mb-3">
+								<div class="form-group required">
+									<label for="input-card-cvv">CVV</label>
+									<div id="input-card-cvv" class="form-control"></div>
+								</div>
+							</div>
+						</div>
+						<br/>
+					</fieldset>
+					<input type="hidden" name="nonce" value="" id="input-nonce"/>
+					<div class="text-center">
+						<a href="{{ cancel }}" class="btn btn btn-danger btn-lg">Cancel</a>&nbsp;&nbsp;
+						<button type="button" id="button-continue" class="btn btn-primary btn-lg">STORE <span id="card-brand">CREDIT CARD</span></button>
+					</div>
+				</form>
+			</div>
+			<div class="col-md-3 hidden-xs">{{ menu }}</div>
+		</div>
+	</div>
+</div>
+<script src='https://js.braintreegateway.com/web/3.76.4/js/client.min.js'></script>
+<script src='https://js.braintreegateway.com/web/3.76.4/js/three-d-secure.min.js'></script>
+<script src='https://js.braintreegateway.com/web/3.76.4/js/hosted-fields.min.js'></script>
+<script src="https://js.braintreegateway.com/web/3.48.0/js/data-collector.min.js"></script>
+<script src="https://js.braintreegateway.com/web/3.76.4/js/paypal-checkout.min.js"></script>
+<script type="text/javascript">
+var button = document.querySelector('#button-continue');
+
+braintree.client.create({
+    authorization: '{{ client_token }}'
+}, function(err, clientInstance) {
+    if (err) {
+        console.error(err);
+        return;
+    }
+
+    braintree.hostedFields.create({
+        client: clientInstance,
+        styles: {
+            'input': {
+                'font-size': '16pt',
+                'color': '#3A3A3A'
+            },
+            '.invalid': {
+                'font-family': 'monospace'
+            },
+            '.valid': {
+                'color': 'green'
+            }
+        },
+        fields: {
+            number: {
+                selector: '#input-card-number',
+                placeholder: '**** **** **** ****'
+            },
+            cvv: {
+                selector: '#input-card-cvv',
+                placeholder: '***'
+            },
+            expirationDate: {
+                selector: '#input-card-expiration',
+                placeholder: 'MM/YYYY'
+            },
+        }
+    }, function(err, hostedFieldsInstance) {
+        if (err) {
+            console.error(err);
+            return;
+        }
+
+        function createInputChangeEventListener(element) {
+            return function() {
+                validateInput(element);
+            }
+        }
+
+        button.addEventListener('click', function(event) {
+            $('.alert, .text-danger').remove();
+
+            hostedFieldsInstance.tokenize(function(err, payload) {
+                if (err) {
+                    if (err.code == 'HOSTED_FIELDS_FIELDS_EMPTY') {
+                        $('#payment-credit-card').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> Credit Card Fields are missing!<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    }
+
+                    if (err.details) {
+                        for (i in err.details.invalidFieldKeys) {
+                            key = err.details.invalidFieldKeys[i];
+
+                            if (key == 'number') {
+                                $('#input-card-number').after('<div class="text-danger">Credit card number is required</div>');
+                            }
+
+                            if (key == 'cvv') {
+                                $('#input-card-cvv').after('<div class="text-danger">Security code required</div>');
+                            }
+
+                            if (key == 'expirationDate') {
+                                $('#input-card-expiration').after('<div class="text-danger">Expiration date required</div>');
+                            }
+                        }
+                    }
+
+                    return;
+                } else {
+                    $('input[name=\'nonce\']').val(payload.nonce);
+
+                    $.ajax({
+                        url: 'index.php?route=account/payment/add&member_token={{ member_token }}&type=card',
+                        type: 'post',
+                        dataType: 'json',
+                        data: $('#input-nonce'),
+                        cache: false,
+                        beforeSend: function() {
+                            $('#button-credit-card').button('loading');
+                        },
+                        complete: function() {
+                            $('#button-credit-card').button('reset');
+                        },
+                        success: function(json, status, xhr) {
+                            $('.alert, .text-danger').remove();
+
+                            if (json['redirect']) {
+                                location = json['redirect'];
+                            }
+
+                            if (json['error']) {
+                                if (json['error']['warning']) {
+                                    $('#payment-credit-card').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                                }
+
+                                for (key in json['error']['merchant_errors']) {
+                                    $('#payment-credit-card').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['merchant_errors'][key] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                                }
+
+                                for (key in json['error']) {
+                                    $('#input-' + key.replace('_', '-')).after('<div class="text-danger">' + json['error'][key] + '</div>');
+                                }
+                            }
+                        },
+                        error: function(xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        }
+                    });
+                }
+            });
+        }, false);
+    });
+});
+//--></script>
+{{ footer }}

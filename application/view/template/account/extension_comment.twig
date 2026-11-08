@@ -1,0 +1,171 @@
+{{ header }}
+<div id="account-extension">
+    <div class="page-header">
+        <div class="container">
+            <h1>Extension</h1>
+            <p>Manage the extensions you have uploads</p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <h2>Extensions Comments</h2>
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-8">
+                        <button type="button" data-toggle="collapse" data-target="#collapse-sale" class="btn btn-default btn-lg btn-block"><i class="fa fa-filter"></i> Filter</button>
+                    </div>
+                </div>
+                <br/>
+                <div id="collapse-sale" class="collapse">
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="input-extension">Extension</label> <input type="text" name="filter_extension" value="{{ filter_extension }}" placeholder="Extension" id="input-extension" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="input-member">Member</label> <input type="text" name="filter_member" value="{{ filter_member }}" placeholder="Member" id="input-member" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                    <label class="control-label" for="input-date-added">Date Added</label>
+                                    <div class="input-group date">
+                                        <input type="text" name="filter_date_added" value="{{ filter_date_start }}" placeholder="Date Added" data-date-format="YYYY-MM-DD" id="input-date-added" class="form-control" />
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12 text-right">
+                                <button type="button" id="button-filter" class="btn btn-default"><i class="fa fa-search"></i> Filter</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="comment-alert"></div>
+                <div id="comments"></div>
+                <div id="comment-reply"></div>
+            </div>
+            <div class="col-md-3 hidden-xs">{{ menu }}</div>
+        </div>
+    </div>
+</div>
+{{ footer }}
+
+<script type="text/javascript">
+    $('#comments').on('click', '.btn-danger', function(e) {
+        e.preventDefault();
+
+        var element = this;
+
+        $(element).tooltip("hide");
+
+        if (confirm('Are you sure?')) {
+            $.ajax({
+                url: $(element).attr('href'),
+                dataType: 'json',
+                beforeSend: function() {
+                    $(element).button('loading');
+                },
+                complete: function() {
+                    $(element).button('reset');
+                },
+                success: function(json) {
+                    if (json['error']) {
+                        $('#comment-alert').html('<div class="alert alert-danger"><i class="fa fa-times-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                    }
+
+                    if (json['success']) {
+                        console.log(json['url'])
+                        $('#comment-alert').html('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                        $('#comments').load(json['url']);
+                    }
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    //alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                }
+            });
+        }
+    });
+
+    $('#comments').on('click', '.btn-info', function(e) {
+        e.preventDefault();
+
+        var element = this;
+
+        $(element).tooltip("hide");
+
+        $.ajax({
+            url: $(element).attr('href'),
+            dataType: 'json',
+            beforeSend: function() {
+                $(element).prop('disabled', true);
+            },
+            complete: function() {
+                $(element).prop('disabled', false);
+            },
+            success: function(json) {
+                $('.alert').remove();
+
+                if (json['error']) {
+                    $('#comment-alert').html('<div class="alert alert-danger"><i class="fa fa-times-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                }
+
+                if (json['html']) {
+                    $('#comment-reply').html(json['html']);
+                    $("#comment-reply #reply-comment-modal").modal('toggle');
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            }
+        });
+    });
+
+    $('#button-filter').on('click', function() {
+
+        var url = '';
+
+        var filter_extension = $('input[name=\'filter_extension\']').val();
+
+        if (filter_extension) {
+            url += '&filter_extension=' + encodeURIComponent(filter_extension);
+        }
+
+        var filter_member = $('input[name=\'filter_member\']').val();
+
+        if (filter_member) {
+            url += '&filter_member=' + encodeURIComponent(filter_member);
+        }
+
+        var filter_date_added = $('input[name=\'filter_date_added\']').val();
+
+        if (filter_date_added) {
+            url += '&filter_date_added=' + encodeURIComponent(filter_date_added);
+        }
+
+        $('#comments').load('index.php?route=account/extension/getCommentList&member_token={{ member_token }}' + url);
+    });
+
+    <!--
+    $('.date').datetimepicker({
+        pickTime: false
+    });
+    //-->
+
+    $('#comments').on('click', '.pagination a', function(e) {
+        e.preventDefault();
+
+        $('.alert').remove();
+
+        $('#comments').load(this.href);
+    });
+
+    $('#comments').load('index.php?route=account/extension/getCommentList&member_token={{ member_token }}');
+</script>

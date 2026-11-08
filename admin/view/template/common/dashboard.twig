@@ -1,0 +1,218 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="button" id="button-developer" title="{{ button_developer }}" data-loading-text="{{ text_loading }}" class="btn btn-info"><i class="fa fa-cog"></i></button>
+      </div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_install %}
+    <div class="alert alert-danger alert-dismissible">
+      <button type="button" class="close pull-right" data-dismiss="alert">&times;</button>
+      <i class="fa fa-exclamation-circle"></i> {{ error_install }}
+    </div>
+    {% endif %}
+
+    <!-- 4 KPI Summary Cards -->
+    <div class="row">
+      <div class="col-lg-3 col-md-3 col-sm-6">
+        <div class="tile tile-primary">
+          <div class="tile-heading">{{ text_total_extensions }} <span class="pull-right">{{ total_downloads }} DL</span></div>
+          <div class="tile-body"><i class="fa fa-puzzle-piece"></i>
+            <h2 class="pull-right">{{ total_extensions }}</h2>
+          </div>
+          <div class="tile-footer"><a href="{{ link_extensions }}">{{ text_view_more }}</a></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-6">
+        <div class="tile tile-success">
+          <div class="tile-heading">{{ text_total_members }} <span class="pull-right">{{ total_sellers }} Sellers</span></div>
+          <div class="tile-body"><i class="fa fa-users"></i>
+            <h2 class="pull-right">{{ total_members }}</h2>
+          </div>
+          <div class="tile-footer"><a href="{{ link_members }}">{{ text_view_more }}</a></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-6">
+        <div class="tile tile-warning">
+          <div class="tile-heading">{{ text_total_orders }} <span class="pull-right">{{ total_revenue }}</span></div>
+          <div class="tile-body"><i class="fa fa-shopping-cart"></i>
+            <h2 class="pull-right">{{ total_orders }}</h2>
+          </div>
+          <div class="tile-footer"><a href="{{ link_orders }}">{{ text_view_more }}</a></div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-6">
+        <div class="tile tile-danger">
+          <div class="tile-heading">{{ text_total_partners_showcase }} <span class="pull-right">{{ total_showcases }} Stores</span></div>
+          <div class="tile-body"><i class="fa fa-handshake-o"></i>
+            <h2 class="pull-right">{{ total_partners }} / {{ total_showcases }}</h2>
+          </div>
+          <div class="tile-footer"><a href="{{ link_partners }}">{{ text_view_more }}</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <!-- Recent Marketplace Orders -->
+      <div class="col-lg-6 col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-shopping-cart"></i> {{ text_recent_orders }}</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <td class="text-right">{{ column_order_id }}</td>
+                  <td class="text-left">{{ column_member }}</td>
+                  <td class="text-left">{{ column_extension }}</td>
+                  <td class="text-left">{{ column_status }}</td>
+                  <td class="text-right">{{ column_total }}</td>
+                  <td class="text-right">{{ column_action }}</td>
+                </tr>
+              </thead>
+              <tbody>
+                {% if orders %}
+                {% for order in orders %}
+                <tr>
+                  <td class="text-right">#{{ order.order_id }}</td>
+                  <td class="text-left">{{ order.buyer }}</td>
+                  <td class="text-left">{{ order.extension }}</td>
+                  <td class="text-left"><span class="label {{ order.status_class ? order.status_class : 'label-success' }}">{{ order.status }}</span></td>
+                  <td class="text-right">{{ order.total }}</td>
+                  <td class="text-right"><a href="{{ order.view }}" data-toggle="tooltip" title="{{ button_view }}" class="btn btn-info btn-xs"><i class="fa fa-eye"></i></a></td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                  <td class="text-center" colspan="6">{{ text_no_results }}</td>
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Latest Registered Members -->
+      <div class="col-lg-6 col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-users"></i> {{ text_latest_members }}</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <td class="text-left">{{ column_username }}</td>
+                  <td class="text-left">{{ column_name }}</td>
+                  <td class="text-left">{{ column_email }}</td>
+                  <td class="text-left">{{ column_status }}</td>
+                  <td class="text-left">{{ column_date_added }}</td>
+                  <td class="text-right">{{ column_action }}</td>
+                </tr>
+              </thead>
+              <tbody>
+                {% if members %}
+                {% for member in members %}
+                <tr>
+                  <td class="text-left"><strong>{{ member.username }}</strong></td>
+                  <td class="text-left">{{ member.name }}</td>
+                  <td class="text-left">{{ member.email }}</td>
+                  <td class="text-left">{{ member.status }}</td>
+                  <td class="text-left">{{ member.date_added }}</td>
+                  <td class="text-right"><a href="{{ member.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                  <td class="text-center" colspan="6">{{ text_no_results }}</td>
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Latest Marketplace Extensions -->
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title"><i class="fa fa-puzzle-piece"></i> {{ text_latest_extensions }}</h3>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <td class="text-left">{{ column_name }}</td>
+                  <td class="text-left">{{ column_category }}</td>
+                  <td class="text-left">{{ column_username }}</td>
+                  <td class="text-right">{{ column_price }}</td>
+                  <td class="text-right">{{ column_downloads }}</td>
+                  <td class="text-left">{{ column_status }}</td>
+                  <td class="text-right">{{ column_action }}</td>
+                </tr>
+              </thead>
+              <tbody>
+                {% if extensions %}
+                {% for extension in extensions %}
+                <tr>
+                  <td class="text-left"><strong>{{ extension.name }}</strong></td>
+                  <td class="text-left">{{ extension.category }}</td>
+                  <td class="text-left">{{ extension.seller }}</td>
+                  <td class="text-right">{{ extension.price }}</td>
+                  <td class="text-right">{{ extension.stats }}</td>
+                  <td class="text-left">{{ extension.status }}</td>
+                  <td class="text-right"><a href="{{ extension.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary btn-xs"><i class="fa fa-pencil"></i></a></td>
+                </tr>
+                {% endfor %}
+                {% else %}
+                <tr>
+                  <td class="text-center" colspan="7">{{ text_no_results }}</td>
+                </tr>
+                {% endif %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript"><!--
+$('#button-developer').on('click', function() {
+	$.ajax({
+		url: 'index.php?route=common/developer&user_token={{ user_token }}',
+		dataType: 'html',
+		beforeSend: function() {
+			$('#button-developer').button('loading');
+		},
+		complete: function() {
+			$('#button-developer').button('reset');
+		},
+		success: function(html) {
+			$('#modal-developer').remove();
+			
+			$('body').prepend('<div id="modal-developer" class="modal">' + html + '</div>');
+			
+			$('#modal-developer').modal('show');
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});	
+});	
+//--></script>
+</div>
+{{ footer }}

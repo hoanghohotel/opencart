@@ -1,0 +1,246 @@
+<fieldset id="payment-credit-card">
+	<legend>Extension Details</legend>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th class="text-left">Extension Name</th>
+				<th class="text-right">Quantity</th>
+				<th class="text-right">Total</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="text-left">{{ extension }}</td>
+				<td class="text-right" style="min-width: 90px;">{{ quantity }}</td>
+				<td class="text-right">{{ total }}</td>
+			</tr>
+		</tbody>
+	</table>
+</fieldset>
+<fieldset>
+	<legend>Pay by PayPal</legend>
+    {% if stored_paypal is empty %}
+    <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" {% if new_paypal %} checked {% endif %} id="pp_vault">
+        <label class="form-check-label" for="pp_vault">
+            Save my paypal account
+        </label>
+    </div>
+    {% endif %}
+	<div id="paypal"></div>
+</fieldset>
+
+<div id="fadeLoader">
+	<div id="loader">Loading...</div>
+</div>
+
+<script type="text/javascript">
+function showLoader() {
+    $("#fadeLoader").css("display", "flex");
+    $('#loader').css("display", "flex");
+}
+
+function closeLoader() {
+    $("#fadeLoader").css("display", "none");
+    $('#loader').css("display", "none");
+}
+
+showLoader();
+
+setTimeout(function() {
+    closeLoader()
+}, 1500)
+
+{% if stored_paypal %}
+braintree.client.create({
+  authorization: '{{ client_token }}',
+  currency: 'USD'
+}).then(function (clientInstance) {
+  // Create a PayPal Checkout component.
+  return braintree.paypalCheckout.create({
+    autoSetDataUserIdToken: true,
+    client: clientInstance
+  });
+}).then(function (paypalCheckoutInstance) {
+  return paypalCheckoutInstance.loadPayPalSDK({
+    currency: 'USD',
+    intent: 'capture'
+  });
+}).then(function (paypalCheckoutInstance) {
+  return paypal.Buttons({
+    fundingSource: paypal.FUNDING.PAYPAL,
+    createOrder: function () {
+      return paypalCheckoutInstance.createPayment({
+        flow: 'checkout',
+            amount: '{{ total }}',
+            currency: 'USD',
+            intent: 'capture',
+            enableShippingAddress: false,
+            shippingAddressEditable: false,
+            vault: false,
+            /*purchase_units: [{
+                reference_id: '{{ extension_id }}',
+                amount: {
+                    currency_code: 'USD',
+                    value: '{{ total }}'
+                },
+                items: [{
+                    name: '{{ extension }}',
+                    quantity: '{{ quantity }}',
+                    description: 'OpenCart Extension',
+                    url: '{{ extension_url }}',
+                    unit_amount: '{{ price }}'
+                }]
+            }],*/
+            lineItems: [{
+                    name: '{{ extension }}',
+                    quantity: '{{ quantity }}',
+                    description: 'OpenCart Extension',
+                    url: '{{ extension_url }}',
+                    unitAmount: '{{ price }}',
+                    kind: 'debit'
+                }],
+      });
+    },
+    onApprove: function (data, actions) {
+      return paypalCheckoutInstance.tokenizePayment(data).then(function (payload) {
+        $.ajax({
+            url: 'index.php?route=checkout/payment/confirm&member_token={{ member_token }}&extension_id={{ extension_id }}&quantity={{ quantity }}&type=paypal',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                nonce: payload.nonce,
+                vault: false
+            },
+            cache: false,
+            beforeSend: function() {
+                showLoader();
+            },
+            complete: function() {
+            },
+            success: function(json) {
+
+                if (json['error']) {
+                    $('#modal-checkout .modal-body').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                } else {
+                    window.location.href = 'index.php?route=checkout/checkout/success';
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                window.location.href = 'index.php?route=checkout/checkout/success';
+            }
+        });
+      });
+    },
+    onCancel: function (data) {
+      console.log('PayPal payment canceled', JSON.stringify(data, 0, 2));
+    },
+    onError: function (err) {
+      console.error('PayPal error', err);
+    }
+  }).render('#paypal');
+}).then(function () {}).catch(function (err) {});
+
+{% else %}
+
+$( "#pp_vault" ).on( "click", function() {
+    var url = '';
+    if($('#pp_vault').is(":checked")) {
+        url = '{{ store_url }}' + '&vault=1';
+        $('#modal-checkout .modal-body').load(url);
+    } else {
+        url = '{{ store_url }}';
+        $('#modal-checkout .modal-body').load(url);
+    }
+});
+
+braintree.client.create({
+    authorization: '{{ client_token }}'
+}).then(function(clientInstance) {
+    return braintree.paypalCheckout.create({
+        client: clientInstance
+    });
+}).then(function(paypalCheckoutInstance) {
+    return paypalCheckoutInstance.loadPayPalSDK({
+        currency: 'USD',
+        intent: 'capture',
+        vault: true
+    });
+}).then(function(paypalCheckoutInstance) {
+    return paypal.Buttons({
+        fundingSource: paypal.FUNDING.PAYPAL,
+        createOrder: function() {
+            return paypalCheckoutInstance.createPayment({
+                flow: 'checkout',
+                amount: '{{ total }}',
+                currency: 'USD',
+                intent: 'capture',
+                enableShippingAddress: false,
+                shippingAddressEditable: false,
+                /* purchase_units: [{
+                    reference_id: '{{ extension_id }}',
+                    amount: {
+                        currency_code: 'USD',
+                        value: '{{ total }}'
+                    },
+                    items: [{
+                        name: '{{ extension }}',
+                        quantity: '{{ quantity }}',
+                        description: 'OpenCart Extension',
+                        url: '{{ extension_url }}',
+                        unit_amount: '{{ price }}'
+                    }]
+                }], */
+                lineItems: [{
+                    name: '{{ extension }}',
+                    quantity: '{{ quantity }}',
+                    description: 'OpenCart Extension',
+                    url: '{{ extension_url }}',
+                    unitAmount: '{{ price }}',
+                    kind: 'debit'
+                }],
+                {% if new_paypal %}
+                requestBillingAgreement: true,
+                billingAgreementDetails: {
+                    description: 'Allow Opencart to charge your account to purchase extensions'
+                }
+                {% endif %}
+            });
+        },
+        onApprove: function(data, actions) {
+            return paypalCheckoutInstance.tokenizePayment(data).then(function(payload) {
+                $.ajax({
+                    url: 'index.php?route=checkout/payment/confirm&member_token={{ member_token }}&extension_id={{ extension_id }}&quantity={{ quantity }}&type=paypal&order_id={{ order_id }}',
+                    type: 'post',
+                    dataType: 'json',
+                    data: {
+                        nonce: payload.nonce
+                    },
+                    cache: false,
+                    beforeSend: function() {
+                        showLoader();
+                    },
+                    complete: function() {
+
+                    },
+                    success: function(json) {
+
+                        if (json['error']) {
+                            $('#modal-checkout .modal-body').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                        } else {
+                            window.location.href = 'index.php?route=checkout/checkout/success';
+                        }
+                    },
+                    error: function(xhr, ajaxOptions, thrownError) {
+                        window.location.href = 'index.php?route=checkout/checkout/success';
+                    }
+                });
+            });
+        },
+        onError: function(err) {
+            console.error('PayPal error', err);
+        }
+    }).render('#paypal');
+});
+{% endif %}
+</script>

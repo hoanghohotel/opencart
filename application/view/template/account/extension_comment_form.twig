@@ -1,0 +1,59 @@
+<div class="modal fade" id="reply-comment-modal" tabindex="-1" role="dialog" aria-labelledby="reply-comment-modal">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Reply Form</h4>
+      </div>
+      <div class="modal-body">
+            <div id="form-alert"></div>
+            <label>Extension comment from {{ comment.username }}</label>
+            <textarea disabled rows="4" class="form-control">{{ comment.comment }}</textarea><br>
+            <label>Your reply</label>
+            <textarea rows="4" id="text-reply" class="form-control"></textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="send-reply" class="btn btn-primary"><i class="fa fa-reply"></i> Reply</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$('#send-reply').on('click', function(e) {
+    e.preventDefault();
+
+    var element = this;
+
+    $.ajax({
+        url: '{{ reply }}',
+        dataType: 'json',
+        method: 'POST',
+        data: {
+            comment: $('#text-reply').val()
+        },
+        beforeSend: function() {
+            $(element).button('loading');
+        },
+        complete: function() {
+            $(element).button('reset');
+        },
+        success: function(json) {
+            $('.alert').remove();
+
+            if (json['error']) {
+                $('#form-alert').html('<div class="alert alert-danger"><i class="fa fa-times-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+            }
+
+            if (json['success']) {
+                $('#comment-alert').html('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                $('#comment-reply #reply-comment-modal').modal('toggle');
+                $('#comments').load('{{ update_list }}')
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+</script>

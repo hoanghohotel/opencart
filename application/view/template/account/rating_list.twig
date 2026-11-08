@@ -1,0 +1,53 @@
+{{ header }}
+<div id="account-review">
+  <div class="page-header">
+    <div class="container">
+      <h1>Rate your downloads</h1>
+      <p>Rate your downloads based on Functionality, Appearance, User friendly, Support and Documentation</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <h2>Rate your downloaded extensions</h2>
+        {% if success %}
+          <div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+        <div class="table-responsive">
+          <table id="order" class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Extension</th>
+                <th class="text-left">Rating</th>
+                <th class="text-right">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% if extensions %}
+                {% for extension in extensions %}
+                  <tr>
+                    <td>{{ extension.extension }}</td>
+                    <td class="text-left"> {% for i in 1..5 %}
+                        {% if extension.rating >= i %}<i class="opencart-icon-star-light"></i>{% else %}<i class="opencart-icon-star-light-o"></i>{% endif %}
+                      {% endfor %} </td>
+                    <td class="text-right"><a href="{{ extension.href }}" data-toggle="tooltip" title="Rate" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                  </tr>
+                {% endfor %}
+              {% else %}
+                <tr>
+                  <td class="text-center" colspan="3">No results!</td>
+                </tr>
+              {% endif %}
+            </tbody>
+          </table>
+        </div>
+        <nav>{{ pagination }}</nav>
+        <div class="text-right"><a href="{{ cancel }}" class="btn btn-link">Cancel</a></div>
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+{{ footer }}

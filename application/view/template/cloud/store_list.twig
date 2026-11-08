@@ -1,0 +1,86 @@
+{{ header }}
+<div id="account-account">
+  <div class="page-header">
+    <div class="container">
+      <h1>Cloud Stores</h1>
+      <p>View all of your OpenCart Cloud Stores</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <fieldset>
+          <legend>Cloud Stores</legend>
+          {% if error_warning %}
+            <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}</div>
+          {% endif %}
+          {% if success %}
+            <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}</div>
+          {% endif %}
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              {% if stores %}
+                <thead>
+                  <tr>
+                    <th class="text-left">Store Name</th>
+                    <th class="text-left">Plan</th>
+                    <th class="text-left col-sm-2">Created</th>
+                    <th class="text-center col-sm-2">Status</th>
+                    <th class="text-right col-sm-2">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for store in stores %}
+                    <tr>
+                      <td class="text-left">{{ store.store_name }}</td>
+                      <td class="text-left">{{ store.plan_name }}</td>
+                      <td class="text-left">{{ store.date_added }}</td>
+                      <td class="text-center">
+                        {% if store.status_id == 5 %}
+                          <span class="label label-success">{{ store.status }}</span>
+                        {% else %}
+                          <span class="label label-warning">{{ store.status }}</span>
+                        {% endif %}
+                      </td>
+                      <td class="text-right">
+                        {% if store.status_id == 5 %}
+                          <a href="{{ store.view }}" class="btn btn-info button-click-load" data-toggle="tooltip" data-placement="top" title="View Cloud Store"><i class="fa fa-eye"></i></a>
+                          <a href="{{ store.delete }}" class="btn btn-danger button-click-load button-use-confirm" data-toggle="tooltip" data-placement="top" title="Delete Cloud Store"><i class="fa fa-trash-o fa-fw"></i></a>
+                        {% endif %}
+                      </td>
+                    </tr>
+                  {% endfor %}
+              </tbody>
+              {% else %}
+                <tbody>
+                  <tr>
+                    <td class="text-center">No Cloud Stores Found!</td>
+                  </tr>
+                </tbody>
+              {% endif %}
+            </table>
+          </div>
+        </fieldset>
+        <div class="buttons">
+          <div class="text-left">
+            <a href="{{ cancel }}" class="btn btn-default"><i class="fa fa-arrow-left"></i>&nbsp;&nbsp;Account area</a>
+            <a href="{{ add }}" class="btn btn-primary pull-right" id="btn-new-store"><i class="fa fa-plus fa-fw"></i> New store</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+{{ footer }}
+<script type="text/javascript"><!--
+  $('body').on('click', '.button-use-confirm', function (event) {
+    return confirm('Are you sure?');
+  });
+  $('body').on('click', '.button-click-load', function (event) {
+    $(this).html('<i class="fa fa-refresh fa-spin fa-fw"></i>').prop("disabled", "disabled");
+  });
+  $('body').on('click', '#btn-new-store', function (event) {
+    $('#btn-new-store').button('loading').attr('disabled', true);
+  });
+//--></script>

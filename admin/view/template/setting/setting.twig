@@ -1,0 +1,691 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="pull-right">
+        <button type="submit" form="form-setting" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+        <a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ul class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+        <li><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <div class="container-fluid">
+    {% if error_warning %}
+    <div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    {% if success %}
+    <div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> {{ success }}
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+    </div>
+    {% endif %}
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ action }}" method="post" enctype="multipart/form-data" id="form-setting" class="form-horizontal">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#tab-general" data-toggle="tab">{{ tab_general }}</a></li>
+            <li><a href="#tab-store" data-toggle="tab">{{ tab_store }}</a></li>
+            <li><a href="#tab-local" data-toggle="tab">{{ tab_local }}</a></li>
+            <li><a href="#tab-option" data-toggle="tab">{{ tab_option }}</a></li>
+            <li><a href="#tab-image" data-toggle="tab">{{ tab_image }}</a></li>
+            <li><a href="#tab-mail" data-toggle="tab">{{ tab_mail }}</a></li>
+            <li><a href="#tab-storage" data-toggle="tab"><i class="fa fa-cloud-upload"></i> {{ tab_storage }}</a></li>
+            <li><a href="#tab-server" data-toggle="tab">{{ tab_server }}</a></li>
+          </ul>
+          <div class="tab-content">
+            <!-- General / Meta -->
+            <div class="tab-pane active" id="tab-general">
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-meta-title">{{ entry_meta_title }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_meta_title" value="{{ config_meta_title }}" placeholder="{{ entry_meta_title }}" id="input-meta-title" class="form-control" />
+                  {% if error_meta_title %}
+                  <div class="text-danger">{{ error_meta_title }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-meta-description">{{ entry_meta_description }}</label>
+                <div class="col-sm-10">
+                  <textarea name="config_meta_description" rows="4" placeholder="{{ entry_meta_description }}" id="input-meta-description" class="form-control">{{ config_meta_description }}</textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-meta-keyword">{{ entry_meta_keyword }}</label>
+                <div class="col-sm-10">
+                  <textarea name="config_meta_keyword" rows="3" placeholder="{{ entry_meta_keyword }}" id="input-meta-keyword" class="form-control">{{ config_meta_keyword }}</textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Store & Contact Details -->
+            <div class="tab-pane" id="tab-store">
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-name">{{ entry_name }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_name" value="{{ config_name }}" placeholder="{{ entry_name }}" id="input-name" class="form-control" />
+                  {% if error_name %}
+                  <div class="text-danger">{{ error_name }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-owner">{{ entry_owner }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_owner" value="{{ config_owner }}" placeholder="{{ entry_owner }}" id="input-owner" class="form-control" />
+                  {% if error_owner %}
+                  <div class="text-danger">{{ error_owner }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-address">{{ entry_address }}</label>
+                <div class="col-sm-10">
+                  <textarea name="config_address" placeholder="{{ entry_address }}" rows="4" id="input-address" class="form-control">{{ config_address }}</textarea>
+                  {% if error_address %}
+                  <div class="text-danger">{{ error_address }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-email">{{ entry_email }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_email" value="{{ config_email }}" placeholder="{{ entry_email }}" id="input-email" class="form-control" />
+                  {% if error_email %}
+                  <div class="text-danger">{{ error_email }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-telephone">{{ entry_telephone }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_telephone" value="{{ config_telephone }}" placeholder="{{ entry_telephone }}" id="input-telephone" class="form-control" />
+                  {% if error_telephone %}
+                  <div class="text-danger">{{ error_telephone }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-contact-support">{{ entry_contact_support }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_contact_support" value="{{ config_contact_support }}" placeholder="{{ entry_contact_support }}" id="input-contact-support" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-contact-partner">{{ entry_contact_partner }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_contact_partner" value="{{ config_contact_partner }}" placeholder="{{ entry_contact_partner }}" id="input-contact-partner" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-contact-marketing">{{ entry_contact_marketing }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_contact_marketing" value="{{ config_contact_marketing }}" placeholder="{{ entry_contact_marketing }}" id="input-contact-marketing" class="form-control" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Localisation -->
+            <div class="tab-pane" id="tab-local">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-country">{{ entry_country }}</label>
+                <div class="col-sm-10">
+                  <select name="config_country_id" id="input-country" class="form-control">
+                    {% for country in countries %}
+                    {% if country.country_id == config_country_id %}
+                    <option value="{{ country.country_id }}" selected="selected">{{ country.name }}</option>
+                    {% else %}
+                    <option value="{{ country.country_id }}">{{ country.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-zone">{{ entry_zone }}</label>
+                <div class="col-sm-10">
+                  <select name="config_zone_id" id="input-zone" class="form-control"></select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-language">{{ entry_language }}</label>
+                <div class="col-sm-10">
+                  <select name="config_language" id="input-language" class="form-control">
+                    {% for language in languages %}
+                    {% if language.code == config_language %}
+                    <option value="{{ language.code }}" selected="selected">{{ language.name }}</option>
+                    {% else %}
+                    <option value="{{ language.code }}">{{ language.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-admin-language">{{ entry_admin_language }}</label>
+                <div class="col-sm-10">
+                  <select name="config_admin_language" id="input-admin-language" class="form-control">
+                    {% for language in languages %}
+                    {% if language.code == config_admin_language %}
+                    <option value="{{ language.code }}" selected="selected">{{ language.name }}</option>
+                    {% else %}
+                    <option value="{{ language.code }}">{{ language.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-currency">{{ entry_currency }}</label>
+                <div class="col-sm-10">
+                  <select name="config_currency" id="input-currency" class="form-control">
+                    {% for currency in currencies %}
+                    {% if currency.code == config_currency %}
+                    <option value="{{ currency.code }}" selected="selected">{{ currency.title }}</option>
+                    {% else %}
+                    <option value="{{ currency.code }}">{{ currency.title }}</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Option -->
+            <div class="tab-pane" id="tab-option">
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-limit-admin"><span data-toggle="tooltip" title="{{ help_limit_admin }}">{{ entry_limit_admin }}</span></label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_limit_admin" value="{{ config_limit_admin }}" placeholder="{{ entry_limit_admin }}" id="input-limit-admin" class="form-control" />
+                  {% if error_limit_admin %}
+                  <div class="text-danger">{{ error_limit_admin }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-order-status"><span data-toggle="tooltip" title="{{ help_order_status }}">{{ entry_order_status }}</span></label>
+                <div class="col-sm-10">
+                  <select name="config_order_status_id" id="input-order-status" class="form-control">
+                    {% for order_status in order_statuses %}
+                    {% if order_status.order_status_id == config_order_status_id %}
+                    <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                    {% else %}
+                    <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-download-status"><span data-toggle="tooltip" title="{{ help_download_status }}">{{ entry_download_status }}</span></label>
+                <div class="col-sm-10">
+                  <select name="config_download_status_id" id="input-download-status" class="form-control">
+                    {% for order_status in order_statuses %}
+                    {% if order_status.order_status_id == config_download_status_id %}
+                    <option value="{{ order_status.order_status_id }}" selected="selected">{{ order_status.name }}</option>
+                    {% else %}
+                    <option value="{{ order_status.order_status_id }}">{{ order_status.name }}</option>
+                    {% endif %}
+                    {% endfor %}
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Image -->
+            <div class="tab-pane" id="tab-image">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-logo">{{ entry_logo }}</label>
+                <div class="col-sm-10"><a href="" id="thumb-logo" data-toggle="image" class="img-thumbnail"><img src="{{ logo }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                  <input type="hidden" name="config_logo" value="{{ config_logo }}" id="input-logo" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-icon">{{ entry_icon }}</label>
+                <div class="col-sm-10"><a href="" id="thumb-icon" data-toggle="image" class="img-thumbnail"><img src="{{ icon }}" alt="" title="" data-placeholder="{{ placeholder }}" /></a>
+                  <input type="hidden" name="config_icon" value="{{ config_icon }}" id="input-icon" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Mail -->
+            <div class="tab-pane" id="tab-mail">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-mail-engine">{{ entry_mail_engine }}</label>
+                <div class="col-sm-10">
+                  <select name="config_mail_engine" id="input-mail-engine" class="form-control">
+                    {% if config_mail_engine == 'mail' %}
+                    <option value="mail" selected="selected">{{ text_mail }}</option>
+                    {% else %}
+                    <option value="mail">{{ text_mail }}</option>
+                    {% endif %}
+                    {% if config_mail_engine == 'smtp' %}
+                    <option value="smtp" selected="selected">{{ text_smtp }}</option>
+                    {% else %}
+                    <option value="smtp">{{ text_smtp }}</option>
+                    {% endif %}
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-mail-parameter">{{ entry_mail_parameter }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_mail_parameter" value="{{ config_mail_parameter }}" placeholder="{{ entry_mail_parameter }}" id="input-mail-parameter" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-mail-smtp-hostname">{{ entry_mail_smtp_hostname }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_mail_smtp_hostname" value="{{ config_mail_smtp_hostname }}" placeholder="{{ entry_mail_smtp_hostname }}" id="input-mail-smtp-hostname" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-mail-smtp-username">{{ entry_mail_smtp_username }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_mail_smtp_username" value="{{ config_mail_smtp_username }}" placeholder="{{ entry_mail_smtp_username }}" id="input-mail-smtp-username" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-mail-smtp-password">{{ entry_mail_smtp_password }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_mail_smtp_password" value="{{ config_mail_smtp_password }}" placeholder="{{ entry_mail_smtp_password }}" id="input-mail-smtp-password" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-mail-smtp-port">{{ entry_mail_smtp_port }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_mail_smtp_port" value="{{ config_mail_smtp_port }}" placeholder="{{ entry_mail_smtp_port }}" id="input-mail-smtp-port" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-mail-smtp-timeout">{{ entry_mail_smtp_timeout }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_mail_smtp_timeout" value="{{ config_mail_smtp_timeout }}" placeholder="{{ entry_mail_smtp_timeout }}" id="input-mail-smtp-timeout" class="form-control" />
+                </div>
+              </div>
+              <hr />
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-mail-test-email"><span data-toggle="tooltip" title="{{ help_mail_test }}">{{ entry_mail_test_email }}</span></label>
+                <div class="col-sm-10">
+                  <div class="input-group">
+                    <input type="text" name="test_email" value="{{ config_email }}" placeholder="{{ entry_mail_test_email }}" id="input-mail-test-email" class="form-control" />
+                    <span class="input-group-btn">
+                      <button type="button" id="button-test-smtp" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Testing SMTP..." class="btn btn-info"><i class="fa fa-paper-plane"></i> {{ button_test_smtp }}</button>
+                    </span>
+                  </div>
+                  <div id="smtp-test-result" style="margin-top: 10px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Cloud Storage (Wasabi, Cloudflare R2, Amazon S3, Google Cloud Storage) -->
+            <div class="tab-pane" id="tab-storage">
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-storage-driver"><span data-toggle="tooltip" title="{{ help_storage_driver }}">{{ entry_storage_driver }}</span></label>
+                <div class="col-sm-10">
+                  <select name="config_storage_driver" id="input-storage-driver" class="form-control">
+                    <option value="local"{% if config_storage_driver == 'local' or not config_storage_driver %} selected="selected"{% endif %}>{{ text_storage_local }}</option>
+                    <option value="wasabi"{% if config_storage_driver == 'wasabi' %} selected="selected"{% endif %}>{{ text_storage_wasabi }}</option>
+                    <option value="cloudflare"{% if config_storage_driver == 'cloudflare' %} selected="selected"{% endif %}>{{ text_storage_cloudflare }}</option>
+                    <option value="s3"{% if config_storage_driver == 's3' %} selected="selected"{% endif %}>{{ text_storage_s3 }}</option>
+                    <option value="google"{% if config_storage_driver == 'google' %} selected="selected"{% endif %}>{{ text_storage_google }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div id="cloud-storage-fields">
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-storage-bucket">{{ entry_storage_bucket }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_storage_bucket" value="{{ config_storage_bucket }}" placeholder="my-opencart-uploads" id="input-storage-bucket" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-storage-region">{{ entry_storage_region }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_storage_region" value="{{ config_storage_region }}" placeholder="us-east-1 / ap-southeast-1 / auto" id="input-storage-region" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-storage-endpoint"><span data-toggle="tooltip" title="{{ help_storage_endpoint }}">{{ entry_storage_endpoint }}</span></label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_storage_endpoint" value="{{ config_storage_endpoint }}" placeholder="https://s3.wasabisys.com or https://<account_id>.r2.cloudflarestorage.com" id="input-storage-endpoint" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-storage-access-key">{{ entry_storage_access_key }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_storage_access_key" value="{{ config_storage_access_key }}" placeholder="Access Key ID / GCS Interop HMAC Key (GOOG1...)" id="input-storage-access-key" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-storage-secret-key">{{ entry_storage_secret_key }}</label>
+                  <div class="col-sm-10">
+                    <input type="password" name="config_storage_secret_key" value="{{ config_storage_secret_key }}" placeholder="Secret Access Key / HMAC Secret" id="input-storage-secret-key" class="form-control" autocomplete="new-password" />
+                  </div>
+                </div>
+
+                <div class="form-group" id="group-storage-gcs-json">
+                  <label class="col-sm-2 control-label" for="input-storage-gcs-json"><span data-toggle="tooltip" title="{{ help_storage_gcs_json }}">{{ entry_storage_gcs_json }}</span></label>
+                  <div class="col-sm-10">
+                    <textarea name="config_storage_gcs_json" rows="4" placeholder='{"type": "service_account", "project_id": "...", "private_key": "...", "client_email": "..."}' id="input-storage-gcs-json" class="form-control">{{ config_storage_gcs_json }}</textarea>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-storage-prefix">{{ entry_storage_prefix }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_storage_prefix" value="{{ config_storage_prefix }}" placeholder="opencart" id="input-storage-prefix" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-storage-public-url">{{ entry_storage_public_url }}</label>
+                  <div class="col-sm-10">
+                    <input type="text" name="config_storage_public_url" value="{{ config_storage_public_url }}" placeholder="https://cdn.yourdomain.com" id="input-storage-public-url" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label" for="input-storage-acl">{{ entry_storage_acl }}</label>
+                  <div class="col-sm-10">
+                    <select name="config_storage_acl" id="input-storage-acl" class="form-control">
+                      <option value="private"{% if config_storage_acl == 'private' or not config_storage_acl %} selected="selected"{% endif %}>{{ text_acl_private }}</option>
+                      <option value="public-read"{% if config_storage_acl == 'public-read' %} selected="selected"{% endif %}>{{ text_acl_public }}</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="col-sm-2 control-label"><span data-toggle="tooltip" title="{{ help_storage_keep_local }}">{{ entry_storage_keep_local }}</span></label>
+                  <div class="col-sm-10">
+                    <label class="radio-inline">
+                      <input type="radio" name="config_storage_keep_local" value="1"{% if config_storage_keep_local or config_storage_keep_local is null %} checked="checked"{% endif %} />
+                      {{ text_yes }}
+                    </label>
+                    <label class="radio-inline">
+                      <input type="radio" name="config_storage_keep_local" value="0"{% if config_storage_keep_local == '0' %} checked="checked"{% endif %} />
+                      {{ text_no }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <hr />
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ button_test_storage }}</label>
+                <div class="col-sm-10">
+                  <button type="button" id="button-test-storage" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Testing Storage..." class="btn btn-info"><i class="fa fa-cloud-upload"></i> {{ button_test_storage }}</button>
+                  <div id="storage-test-result" style="margin-top: 10px;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Server -->
+            <div class="tab-pane" id="tab-server">
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_maintenance }}</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    {% if config_maintenance %}
+                    <input type="radio" name="config_maintenance" value="1" checked="checked" />
+                    {{ text_yes }}
+                    {% else %}
+                    <input type="radio" name="config_maintenance" value="1" />
+                    {{ text_yes }}
+                    {% endif %}
+                  </label>
+                  <label class="radio-inline">
+                    {% if not config_maintenance %}
+                    <input type="radio" name="config_maintenance" value="0" checked="checked" />
+                    {{ text_no }}
+                    {% else %}
+                    <input type="radio" name="config_maintenance" value="0" />
+                    {{ text_no }}
+                    {% endif %}
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_seo_url }}</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    {% if config_seo_url %}
+                    <input type="radio" name="config_seo_url" value="1" checked="checked" />
+                    {{ text_yes }}
+                    {% else %}
+                    <input type="radio" name="config_seo_url" value="1" />
+                    {{ text_yes }}
+                    {% endif %}
+                  </label>
+                  <label class="radio-inline">
+                    {% if not config_seo_url %}
+                    <input type="radio" name="config_seo_url" value="0" checked="checked" />
+                    {{ text_no }}
+                    {% else %}
+                    <input type="radio" name="config_seo_url" value="0" />
+                    {{ text_no }}
+                    {% endif %}
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="input-encryption">{{ entry_encryption }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_encryption" value="{{ config_encryption }}" placeholder="{{ entry_encryption }}" id="input-encryption" class="form-control" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_error_display }}</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    {% if config_error_display %}
+                    <input type="radio" name="config_error_display" value="1" checked="checked" />
+                    {{ text_yes }}
+                    {% else %}
+                    <input type="radio" name="config_error_display" value="1" />
+                    {{ text_yes }}
+                    {% endif %}
+                  </label>
+                  <label class="radio-inline">
+                    {% if not config_error_display %}
+                    <input type="radio" name="config_error_display" value="0" checked="checked" />
+                    {{ text_no }}
+                    {% else %}
+                    <input type="radio" name="config_error_display" value="0" />
+                    {{ text_no }}
+                    {% endif %}
+                  </label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-2 control-label">{{ entry_error_log }}</label>
+                <div class="col-sm-10">
+                  <label class="radio-inline">
+                    {% if config_error_log %}
+                    <input type="radio" name="config_error_log" value="1" checked="checked" />
+                    {{ text_yes }}
+                    {% else %}
+                    <input type="radio" name="config_error_log" value="1" />
+                    {{ text_yes }}
+                    {% endif %}
+                  </label>
+                  <label class="radio-inline">
+                    {% if not config_error_log %}
+                    <input type="radio" name="config_error_log" value="0" checked="checked" />
+                    {{ text_no }}
+                    {% else %}
+                    <input type="radio" name="config_error_log" value="0" />
+                    {{ text_no }}
+                    {% endif %}
+                  </label>
+                </div>
+              </div>
+              <div class="form-group required">
+                <label class="col-sm-2 control-label" for="input-error-filename">{{ entry_error_filename }}</label>
+                <div class="col-sm-10">
+                  <input type="text" name="config_error_filename" value="{{ config_error_filename }}" placeholder="{{ entry_error_filename }}" id="input-error-filename" class="form-control" />
+                  {% if error_log %}
+                  <div class="text-danger">{{ error_log }}</div>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript"><!--
+$('select[name=\'config_country_id\']').on('change', function() {
+	$.ajax({
+		url: 'index.php?route=localisation/country/country&user_token={{ user_token }}&country_id=' + this.value,
+		dataType: 'json',
+		beforeSend: function() {
+			$('select[name=\'config_country_id\']').prop('disabled', true);
+		},
+		complete: function() {
+			$('select[name=\'config_country_id\']').prop('disabled', false);
+		},
+		success: function(json) {
+			html = '<option value="">{{ text_select }}</option>';
+
+			if (json['zone'] && json['zone'] != '') {
+				for (i = 0; i < json['zone'].length; i++) {
+					html += '<option value="' + json['zone'][i]['zone_id'] + '"';
+
+					if (json['zone'][i]['zone_id'] == '{{ config_zone_id }}') {
+						html += ' selected="selected"';
+					}
+
+					html += '>' + json['zone'][i]['name'] + '</option>';
+				}
+			} else {
+				html += '<option value="0" selected="selected">{{ text_none }}</option>';
+			}
+
+			$('select[name=\'config_zone_id\']').html(html);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+	});
+});
+
+$('select[name=\'config_country_id\']').trigger('change');
+
+$('#button-test-smtp').on('click', function() {
+	var $btn = $(this);
+	var $result = $('#smtp-test-result');
+	$.ajax({
+		url: 'index.php?route=setting/setting/testSmtp&user_token={{ user_token }}',
+		type: 'post',
+		dataType: 'json',
+		data: {
+			config_mail_engine: $('#input-mail-engine').val(),
+			config_mail_parameter: $('#input-mail-parameter').val(),
+			config_mail_smtp_hostname: $('#input-mail-smtp-hostname').val(),
+			config_mail_smtp_username: $('#input-mail-smtp-username').val(),
+			config_mail_smtp_password: $('#input-mail-smtp-password').val(),
+			config_mail_smtp_port: $('#input-mail-smtp-port').val(),
+			config_mail_smtp_timeout: $('#input-mail-smtp-timeout').val(),
+			config_email: $('#input-email').val(),
+			config_name: $('#input-name').val(),
+			test_email: $('#input-mail-test-email').val()
+		},
+		beforeSend: function() {
+			$btn.button('loading');
+			$result.html('');
+		},
+		complete: function() {
+			$btn.button('reset');
+		},
+		success: function(json) {
+			if (json['error']) {
+				$result.html('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+			}
+			if (json['success']) {
+				$result.html('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			$result.html('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + thrownError + ' ' + xhr.statusText + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+		}
+	});
+});
+
+function updateStorageUI() {
+	var driver = $('#input-storage-driver').val();
+	if (driver === 'local') {
+		$('#cloud-storage-fields').slideUp(150);
+	} else {
+		$('#cloud-storage-fields').slideDown(150);
+		if (driver === 'google') {
+			$('#group-storage-gcs-json').show();
+		} else {
+			$('#group-storage-gcs-json').hide();
+		}
+		if (driver === 'cloudflare' && ($('#input-storage-region').val() === '' || $('#input-storage-region').val() === 'us-east-1')) {
+			$('#input-storage-region').val('auto');
+		}
+	}
+}
+
+$('#input-storage-driver').on('change', updateStorageUI);
+updateStorageUI();
+
+$('#button-test-storage').on('click', function() {
+	var $btn = $(this);
+	var $result = $('#storage-test-result');
+	$.ajax({
+		url: 'index.php?route=setting/setting/testStorage&user_token={{ user_token }}',
+		type: 'post',
+		dataType: 'json',
+		data: {
+			config_storage_driver: $('#input-storage-driver').val(),
+			config_storage_bucket: $('#input-storage-bucket').val(),
+			config_storage_region: $('#input-storage-region').val(),
+			config_storage_endpoint: $('#input-storage-endpoint').val(),
+			config_storage_access_key: $('#input-storage-access-key').val(),
+			config_storage_secret_key: $('#input-storage-secret-key').val(),
+			config_storage_gcs_json: $('#input-storage-gcs-json').val(),
+			config_storage_prefix: $('#input-storage-prefix').val(),
+			config_storage_public_url: $('#input-storage-public-url').val(),
+			config_storage_acl: $('#input-storage-acl').val(),
+			config_storage_keep_local: $('input[name="config_storage_keep_local"]:checked').val()
+		},
+		beforeSend: function() {
+			$btn.button('loading');
+			$result.html('');
+		},
+		complete: function() {
+			$btn.button('reset');
+		},
+		success: function(json) {
+			if (json['error']) {
+				$result.html('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+			}
+			if (json['success']) {
+				$result.html('<div class="alert alert-success alert-dismissible"><i class="fa fa-check-circle"></i> ' + json['success'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			$result.html('<div class="alert alert-danger alert-dismissible"><i class="fa fa-exclamation-circle"></i> ' + thrownError + ' ' + xhr.statusText + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+		}
+	});
+});
+//--></script>
+</div>
+{{ footer }}

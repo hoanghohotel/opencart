@@ -1,0 +1,65 @@
+{{ header }}
+<div id="account-account">
+  <div class="page-header">
+    <div class="container">
+      <h1>Cloud Payment Methods</h1>
+      <p>Modify your payment methods</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        <fieldset>
+          <legend>Payment Method(s)</legend>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="text-left">Payment Gateway</th>
+                  <th class="text-left">Account</th>
+                  <th class="text-left">Status</th>
+                  <th class="text-right">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td class="text-left">Paypal</td>
+                <td class="text-left">example@gmail.com</td>
+                <td class="text-left"><span class="label label-success">Enabled</span></td>
+                <td class="text-right">
+                <a href="#" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+                </td>
+              </tr>
+
+
+              <tr>
+                <td class="text-left">Braintree</td>
+                <td class="text-left">example2@gmail.com</td>
+                <td class="text-left"><span class="label label-danger">Disable</span></td>
+                <td class="text-right">
+                <a href="#" class="btn btn-primary"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+                </td>
+              </tr>
+
+
+              <tr class="hidden">
+                <td class="text-center" colspan="5">No results!</td>
+              </tr>
+
+              </tbody>
+
+            </table>
+          </div>
+        </fieldset>
+
+        <div class="buttons">
+          <div class="text-right">
+            <a href="#" class="btn btn-primary"><i class="fa fa-plus fa-fw"></i> Add payment method</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+{{ footer }}
