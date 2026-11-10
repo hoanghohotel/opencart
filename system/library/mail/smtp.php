@@ -1,6 +1,15 @@
 <?php
 namespace Mail;
 class Smtp extends \stdClass {
+	public $to;
+	public $from;
+	public $sender;
+	public $reply_to;
+	public $subject;
+	public $text;
+	public $html;
+	public $attachments = array();
+	public $parameter;
 	public $smtp_hostname;
 	public $smtp_username;
 	public $smtp_password;
@@ -138,7 +147,7 @@ class Smtp extends \stdClass {
 		);
 	}
 
-	public function send() {
+	protected function buildMimeMessage() {
 		if (is_array($this->to)) {
 			$to = implode(',', $this->to);
 		} else {
@@ -147,6 +156,7 @@ class Smtp extends \stdClass {
 
 		$eol = "\r\n";
 		$boundary = '----=_NextPart_' . md5(uniqid((string)time(), true));
+		$has_attachments = !empty($this->attachments) && is_array($this->attachments);
 
 		$header  = 'MIME-Version: 1.0' . $eol;
 		$header .= 'To: <' . $to . '>' . $eol;
@@ -162,9 +172,13 @@ class Smtp extends \stdClass {
 
 		$header .= 'Return-Path: ' . $this->from . $eol;
 		$header .= 'X-Mailer: PHP/' . phpversion() . $eol;
-		$header .= 'Content-Type: multipart/mixed; boundary="' . $boundary . '"' . $eol . $eol;
 
-		if (!$this->html) {
+		if (!$this->html && !$has_attachments) {
+			$header .= 'Content-Type: text/plain; charset="utf-8"' . $eol;
+			$header .= 'Content-Transfer-Encoding: base64' . $eol . $eol;
+			$message = chunk_split(base64_encode((string)$this->text)) . $eol;
+		} elseif (!$this->html) {
+			$header .= 'Content-Type: multipart/mixed; boundary="' . $boundary . '"' . $eol . $eol;
 			$message  = '--' . $boundary . $eol;
 			$message .= 'Content-Type: text/plain; charset="utf-8"' . $eol;
 			$message .= 'Content-Transfer-Encoding: base64' . $eol . $eol;
@@ -172,10 +186,16 @@ class Smtp extends \stdClass {
 		} else {
 			$html_body = (string)$this->html;
 			$inline_images = array();
-			$root_dir = defined('DIR_SYSTEM') ? dirname(rtrim(DIR_SYSTEM, '/\\')) . '/' : '';
+			$root_dir = defined('DIR_SYSTEM') ? rtrim(str_replace('\\', '/', dirname(rtrim(DIR_SYSTEM, '/\\'))), '/') . '/' : '';
+			$cid_domain = preg_replace('/[^a-zA-Z0-9.-]/', '', $this->getServerName()) ?: 'localhost';
 
 			if ($root_dir) {
-				$html_body = preg_replace_callback('/(\bsrc=["\'])([^"\']+)(["\'])/i', function($m) use ($root_dir, &$inline_images) {
+				$allowed_dirs = array(
+					realpath($root_dir . 'image'),
+					realpath($root_dir . 'application/view/image')
+				);
+
+				$html_body = preg_replace_callback('/(<img\b[^>]*?\bsrc=["\'])([^"\']+)(["\'])/i', function($m) use ($root_dir, $allowed_dirs, $cid_domain, &$inline_images) {
 					$src = trim($m[2]);
 					if (stripos($src, 'cid:') === 0 || stripos($src, 'data:') === 0) {
 						return $m[0];
@@ -187,19 +207,14 @@ class Smtp extends \stdClass {
 							break;
 						}
 					}
-					$rel = preg_replace('#^(?:https?://[^/]+)?(?:/[^/]+)*?/(?=(?:image|application|admin)/)#i', '', $rel);
+					$rel = preg_replace('#^(?:https?://[^/]+)?(?:/[^/]+)*?/(?=(?:image|application/view/image)/)#i', '', $rel);
 					$rel = ltrim(rawurldecode(preg_replace('/\?.*$/', '', $rel)), '/');
 
 					if (!$rel || stripos($rel, 'http://') === 0 || stripos($rel, 'https://') === 0) {
 						return $m[0];
 					}
 
-					$candidate = $root_dir . $rel;
-					if (!is_file($candidate)) {
-						return $m[0];
-					}
-
-					$ext = strtolower(pathinfo($candidate, PATHINFO_EXTENSION));
+					$ext = strtolower(pathinfo($rel, PATHINFO_EXTENSION));
 					$mime_map = array(
 						'png'  => 'image/png',
 						'jpg'  => 'image/jpeg',
@@ -208,22 +223,49 @@ class Smtp extends \stdClass {
 						'webp' => 'image/webp',
 						'svg'  => 'image/svg+xml'
 					);
-					$mime = isset($mime_map[$ext]) ? $mime_map[$ext] : 'application/octet-stream';
-					$cid = 'ocimg_' . md5($candidate) . '@opencart.com';
+					if (!isset($mime_map[$ext])) {
+						return $m[0];
+					}
+
+					$real_candidate = realpath($root_dir . $rel);
+					if (!$real_candidate || !is_file($real_candidate)) {
+						return $m[0];
+					}
+
+					$in_allowed_dir = false;
+					foreach ($allowed_dirs as $allowed_dir) {
+						if ($allowed_dir && strpos($real_candidate, $allowed_dir . DIRECTORY_SEPARATOR) === 0) {
+							$in_allowed_dir = true;
+							break;
+						}
+					}
+					if (!$in_allowed_dir) {
+						return $m[0];
+					}
+
+					$cid = 'img_' . md5($real_candidate) . '@' . $cid_domain;
 
 					$inline_images[$cid] = array(
-						'path' => $candidate,
-						'name' => basename($candidate),
-						'mime' => $mime
+						'path' => $real_candidate,
+						'name' => basename($real_candidate),
+						'mime' => $mime_map[$ext]
 					);
 
 					return $m[1] . 'cid:' . $cid . $m[3];
 				}, $html_body);
 			}
 
-			$message  = '--' . $boundary . $eol;
-			$message .= 'Content-Type: multipart/alternative; boundary="' . $boundary . '_alt"' . $eol . $eol;
-			$message .= '--' . $boundary . '_alt' . $eol;
+			$alt_boundary = $has_attachments ? ($boundary . '_alt') : $boundary;
+			if ($has_attachments) {
+				$header .= 'Content-Type: multipart/mixed; boundary="' . $boundary . '"' . $eol . $eol;
+				$message  = '--' . $boundary . $eol;
+				$message .= 'Content-Type: multipart/alternative; boundary="' . $alt_boundary . '"' . $eol . $eol;
+			} else {
+				$header .= 'Content-Type: multipart/alternative; boundary="' . $alt_boundary . '"' . $eol . $eol;
+				$message = '';
+			}
+
+			$message .= '--' . $alt_boundary . $eol;
 			$message .= 'Content-Type: text/plain; charset="utf-8"' . $eol;
 			$message .= 'Content-Transfer-Encoding: base64' . $eol . $eol;
 
@@ -234,12 +276,12 @@ class Smtp extends \stdClass {
 			}
 
 			if (empty($inline_images)) {
-				$message .= '--' . $boundary . '_alt' . $eol;
+				$message .= '--' . $alt_boundary . $eol;
 				$message .= 'Content-Type: text/html; charset="utf-8"' . $eol;
 				$message .= 'Content-Transfer-Encoding: base64' . $eol . $eol;
 				$message .= chunk_split(base64_encode($html_body)) . $eol;
 			} else {
-				$message .= '--' . $boundary . '_alt' . $eol;
+				$message .= '--' . $alt_boundary . $eol;
 				$message .= 'Content-Type: multipart/related; boundary="' . $boundary . '_rel"' . $eol . $eol;
 				$message .= '--' . $boundary . '_rel' . $eol;
 				$message .= 'Content-Type: text/html; charset="utf-8"' . $eol;
@@ -261,10 +303,10 @@ class Smtp extends \stdClass {
 				$message .= '--' . $boundary . '_rel--' . $eol;
 			}
 
-			$message .= '--' . $boundary . '_alt--' . $eol;
+			$message .= '--' . $alt_boundary . '--' . $eol;
 		}
 
-		if (!empty($this->attachments) && is_array($this->attachments)) {
+		if ($has_attachments) {
 			foreach ($this->attachments as $attachment) {
 				if (file_exists($attachment)) {
 					$handle = fopen($attachment, 'r');
@@ -280,9 +322,17 @@ class Smtp extends \stdClass {
 					$message .= chunk_split(base64_encode($content));
 				}
 			}
+
+			$message .= '--' . $boundary . '--' . $eol;
 		}
 
-		$message .= '--' . $boundary . '--' . $eol;
+		return array('header' => $header, 'message' => $message);
+	}
+
+	public function send() {
+		$built = $this->buildMimeMessage();
+		$header = $built['header'];
+		$message = $built['message'];
 
 		list($hostname, $port, $use_starttls) = $this->parseHostAndTls();
 		$timeout = (int)$this->smtp_timeout ?: 10;

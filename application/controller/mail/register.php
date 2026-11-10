@@ -19,7 +19,7 @@ class ControllerMailRegister extends Controller {
 		$data['footer'] = $this->load->controller('mail/footer');
 		$data['verification_link'] = $this->url->link('account/verify', 'code=' . urlencode($code), true);
 		$data['store'] = $store_name;
-		$data['store_url'] = $this->url->link('common/home', '', true);
+		$data['store_url'] = rtrim((string)$this->config->get('config_url'), '/') . '/';
 		$data['text_team_formatted'] = sprintf($this->language->get('text_team'), $store_name);
 		$data['extension'] = array(
 			'link' => $this->url->link('marketplace/extension', '', true),

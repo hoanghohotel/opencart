@@ -17,7 +17,7 @@ class ControllerMailCloudStore extends Controller {
 		$data['url'] = !empty($args['url']) ? $args['url'] : $this->url->link('account/subscription', '', true);
 		$data['text'] = !empty($args['text']) ? $args['text'] : sprintf($this->language->get('text_default_message'), $data['name']);
 		$data['store'] = $store_name;
-		$data['store_url'] = $this->url->link('common/home', '', true);
+		$data['store_url'] = rtrim((string)$this->config->get('config_url'), '/') . '/';
 		$data['text_team_formatted'] = sprintf($this->language->get('text_team'), $store_name);
 
 		$html = $this->load->view('mail/cloud_store', $data);

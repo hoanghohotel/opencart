@@ -13,7 +13,7 @@ class ControllerMailForgotten extends Controller {
 		$data['footer'] = $this->load->controller('mail/footer');
 		$data['ip'] = isset($this->request->server['REMOTE_ADDR']) ? $this->request->server['REMOTE_ADDR'] : '127.0.0.1';
 		$data['store'] = $store_name;
-		$data['store_url'] = $this->url->link('common/home', '', true);
+		$data['store_url'] = rtrim((string)$this->config->get('config_url'), '/') . '/';
 		$data['reset'] = $this->url->link('account/reset', 'code=' . urlencode($member_info['code']), true);
 		$data['text_greeting_formatted'] = sprintf($this->language->get('text_greeting'), $store_name);
 		$data['text_team_formatted'] = sprintf($this->language->get('text_team'), $store_name);

@@ -16,7 +16,7 @@ class ControllerMailSubscription extends Controller {
 		$data['text'] = !empty($args['text']) ? $args['text'] : $this->language->get('text_default_message');
 		$data['mail_link'] = !empty($args['mail_link']) ? $args['mail_link'] : $this->url->link('account/subscription', '', true);
 		$data['store'] = $store_name;
-		$data['store_url'] = $this->url->link('common/home', '', true);
+		$data['store_url'] = rtrim((string)$this->config->get('config_url'), '/') . '/';
 		$data['text_team_formatted'] = sprintf($this->language->get('text_team'), $store_name);
 
 		$html = $this->load->view('mail/subscription', $data);

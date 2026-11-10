@@ -22,7 +22,7 @@ class ControllerMailExtension extends Controller {
 		$data['footer'] = $this->load->controller('mail/footer');
 		$data['comment'] = !empty($args['comment']) ? $args['comment'] : sprintf($this->language->get('text_default_comment'), $extension_info['name']);
 		$data['store'] = $store_name;
-		$data['store_url'] = $this->url->link('common/home', '', true);
+		$data['store_url'] = rtrim((string)$this->config->get('config_url'), '/') . '/';
 		$data['extension'] = $this->url->link('marketplace/extension/info', 'extension_id=' . $extension_id, true);
 		$data['text_team_formatted'] = sprintf($this->language->get('text_team'), $store_name);
 
