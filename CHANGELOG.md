@@ -5,6 +5,49 @@ This project adheres to [Semantic Versioning](https://semver.org/).
 
 ---
 
+## [v1.0.2] — 2026-11-10 (P0 Security Hardening: Payment Verification Boundary & Frontend CSRF Protection)
+
+### Highlights (English)
+
+#### 1. Verified Payment Completion Boundary (`PAY-01`, `PAY-02`, `SEC-02`)
+- **Read-Only Checkout Result Pages (`ControllerCheckoutCheckout::success()`)**:
+  - Removed order creation side effects (`addOrder()`) and session `pending_extension_order` consumption from `checkout/checkout/success`. Visiting or refreshing result pages can never grant paid extension entitlements.
+  - Updated `checkout/confirm.twig` and `checkout/paypal.twig` AJAX callbacks so network errors redirect to `checkout/checkout/failure` and only responses containing both `success` and `order_id` navigate to `success`.
+- **Fail-Closed Gateway Proof Validation (`ControllerCheckoutPayment::confirm()`, `PaymentGateway`)**:
+  - Enforced `POST`, authenticated member session, timing-safe `hash_equals` on `member_token`, and strict verification of `pending_extension_order` (`member_id`, `extension_id`, `currency` snapshot, integer `quantity`, exact `price * quantity == total`, and supported gateway).
+  - Removed all simulated/fallback transaction generation in `PaymentGateway::chargeStripe()`, `PaymentGateway::chargeBraintree()`, `ControllerCheckoutPayment::confirm()`, `marketplace/braintree/payment`, and `marketplace/paypal/send`.
+  - Enabled strict TLS verification (`CURLOPT_SSL_VERIFYPEER = true`, `CURLOPT_SSL_VERIFYHOST = 2`) across Stripe, Braintree, and PayPal cURL adapters.
+  - Added strict provider response schema & monetary precision validation (including zero-decimal currencies such as `VND`, `JPY`, `KRW`), rejecting malformed payloads, non-final statuses, manual-capture-only intents, and environment/merchant mismatches.
+
+#### 2. Frontend CSRF Protection & Immutable Request Tokens (`SEC-01`)
+- **Eliminated Startup Token Overwrite (`ControllerStartupStartup`)**:
+  - Removed `$this->request->get['member_token'] = $this->session->data['member_token'];` so inbound client tokens are never overwritten by session state before controller validation.
+- **Pre-Action CSRF & HTTP Method Policy (`ControllerStartupCsrf`, `ControllerErrorCsrf`)**:
+  - Added `startup/csrf` pre-action after `startup/seo_url` with `Action`-equivalent route/method resolution.
+  - Enforced `POST`-only execution (`405 Method Not Allowed`) across all 34 reviewed mutating routes (`csrf_post_routes`, including `support/seller/send`) and required timing-safe `hash_equals` `member_token` verification (`403 Forbidden` with `Cache-Control: no-store`) on all state-changing member requests.
+  - Added safe canonical redirects for read-only account deep links (`csrf_read_routes`) without mutating inbound request parameters.
+- **Same-Origin Client Helper & Full i18n Compatibility (`csrf.js`, `common/header`, `Response::optimizeCoreWebVitals()`)**:
+  - Added `application/view/javascript/csrf.js` to upgrade legacy same-origin `index.php` AJAX/navigation mutations to `POST` with scoped `member_token` attachment while never leaking tokens to external or admin URLs.
+  - Synchronized `defer` loading of `csrf.js` with `jquery` in `system/library/response.php` and localized all new security/checkout messages in `application/language/en-gb/`.
+- **Regression Test Suite (`tests/regression/*`)**:
+  - Added 145 automated regression test cases across `checkout_result_pages.php` (15), `payment_confirmation.php` (65), `frontend_csrf.php` (43), `payment_template_callbacks.js` (8), and `frontend_csrf_client.js` (14).
+
+---
+
+### Tóm tắt Phiên bản [v1.0.2] — 2026-11-10 (Tiếng Việt)
+
+1. **Siết chặt ranh giới xác nhận Thanh toán & Tạo đơn hàng (`PAY-01`, `PAY-02`, `SEC-02`)**:
+   - Loại bỏ hoàn toàn hành vi tạo đơn hàng từ trang hiển thị kết quả `checkout/checkout/success` và sửa lỗi điều hướng khi mất mạng về đúng `checkout/checkout/failure`.
+   - Khóa toàn bộ các đường tạo đơn hàng giả lập không có bằng chứng thu tiền thật trong `checkout/payment/confirm`, `PaymentGateway` (`chargeStripe`, `chargeBraintree`) và các route cũ `marketplace/braintree/payment`, `marketplace/paypal/send`.
+   - Bật xác thực chứng chỉ SSL/TLS (`CURLOPT_SSL_VERIFYPEER = true`, `CURLOPT_SSL_VERIFYHOST = 2`), kiểm tra nghiêm ngặt kiểu dữ liệu phản hồi từ cổng thanh toán, khớp số tiền, mã tiền tệ (hỗ trợ chuẩn tiền tệ 0 chữ số thập phân như `VND`), môi trường (`test`/`live`) và tài khoản merchant.
+2. **Bảo vệ chống giả mạo yêu cầu CSRF ở Frontend (`SEC-01`)**:
+   - Xóa dòng ghi đè `$this->request->get['member_token']` tại `startup/startup.php`.
+   - Bổ sung middleware `startup/csrf` và `error/csrf` chặn mọi thao tác ghi bằng `GET`/`HEAD` (`405 Method Not Allowed`) trên 34 route thay đổi dữ liệu (bao gồm cả `support/seller/send`) và bắt buộc đối chiếu `hash_equals` `member_token` (`403 Forbidden`) với mọi thao tác ghi của thành viên.
+   - Tích hợp `application/view/javascript/csrf.js` tương thích hoàn toàn với hệ thống đa ngôn ngữ i18n và cơ chế tối ưu `defer` của `Response::optimizeCoreWebVitals()`.
+   - Đính kèm bộ 145 kịch bản kiểm thử tự động trong `tests/regression/` đạt **100% PASS**.
+
+---
+
 ## [v1.0.1] — 2026-11-08 (Full Internationalization, Config-Driven Branding & Marketplace Enhancements)
 
 ### Highlights (English)

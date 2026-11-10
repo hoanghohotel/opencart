@@ -1,10 +1,10 @@
-# OpenCart Marketplace & Cloud E-Commerce Platform Suite — Developer Guide (Core v1.0.1)
+# OpenCart Marketplace & Cloud E-Commerce Platform Suite — Developer Guide (Core v1.0.2)
 
-[![Version](https://img.shields.io/badge/version-1.0.1-006bb3.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.0.2-006bb3.svg)](CHANGELOG.md)
 [![Architecture](https://img.shields.io/badge/architecture-MVC--L%20%2B%20Event%20Driven-2b7a1e.svg)](README.md)
 [![PHP](https://img.shields.io/badge/PHP-8.1%2B%20%7C%208.2%20%7C%208.3-777bb4.svg)](INSTALL.md)
 
-This document provides a comprehensive technical reference for software engineers and extension developers building new features, modules, payment gateways, cloud storage drivers, and custom workflows on the **OpenCart Marketplace & Cloud E-Commerce Platform Suite (Core v1.0.1)**.
+This document provides a comprehensive technical reference for software engineers and extension developers building new features, modules, payment gateways, cloud storage drivers, and custom workflows on the **OpenCart Marketplace & Cloud E-Commerce Platform Suite (Core v1.0.2)**.
 
 - **[Part I: English Developer Guide](#part-i-english-developer-guide)**
 - **[Phần II: Tài liệu Hướng dẫn Phát triển & Mở rộng Code (Tiếng Việt)](#phần-ii-tài-liệu-hướng-dẫn-phát-triển--mở-rộng-code-tiếng-việt)**
@@ -434,7 +434,7 @@ $mail->send();
 | `oc_order_status` | Localized order statuses (`Completed`, `Processing`, `Pending`, `Refunded`, `Canceled`). |
 | `oc_blog` / `oc_blog_category` / `oc_blog_comment` | CMS Blog articles, categories, authors, and moderated comment threads. |
 | `oc_partner` | Certified OpenCart Partners / Agencies (country, website, description, rating). |
-| `oc_download` | Official OpenCart Core software releases (`opencart-core-v1.0.1.zip`, etc.). |
+| `oc_download` | Official OpenCart Core software releases (`opencart-core-v1.0.2.zip`, etc.). |
 | `oc_setting` | Key-value system configuration (`config_*`, `config_storage_*`, `config_mail_*`, payment keys). |
 | `oc_seo_url` | Maps internal `query` strings (e.g., `route=cms/blog` or `extension_id=15`) to SEO `keyword` slugs. |
 

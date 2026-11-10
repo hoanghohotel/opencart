@@ -1,6 +1,6 @@
-# OpenCart Marketplace & Cloud E-Commerce Platform Suite (Core v1.0.1)
+# OpenCart Marketplace & Cloud E-Commerce Platform Suite (Core v1.0.2)
 
-[![Version](https://img.shields.io/badge/version-1.0.1-006bb3.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-1.0.2-006bb3.svg)](CHANGELOG.md)
 [![PHP](https://img.shields.io/badge/PHP-8.1%2B%20%7C%208.2%20%7C%208.3-777bb4.svg)](INSTALL.md)
 [![MySQL](https://img.shields.io/badge/MySQL-8.0%2B%20%7C%20MariaDB%2010.4%2B-00758f.svg)](INSTALL.md)
 [![License](https://img.shields.io/badge/license-Commercial%20Split%20%2F%20GPLv3-2b7a1e.svg)](LICENSE.md)
@@ -10,7 +10,7 @@
 ## PART I: ENGLISH DOCUMENTATION
 
 ### 1. Overview
-**OpenCart Marketplace & Cloud E-Commerce Platform Suite (v1.0.1)** is a complete, production-ready digital marketplace, cloud store provisioning portal, developer ecosystem, and content management platform modeled on the official `opencart.com` architecture.
+**OpenCart Marketplace & Cloud E-Commerce Platform Suite (v1.0.2)** is a complete, production-ready digital marketplace, cloud store provisioning portal, developer ecosystem, and content management platform modeled on the official `opencart.com` architecture.
 
 Built on a lightweight, high-performance MVC-L (Model-View-Controller-Language) PHP core with Twig templating, it is engineered for zero-configuration domain portability, enterprise security, and **100/100 Google Lighthouse** scores across Performance, Accessibility (WCAG 2.1 AA), Best Practices, and SEO.
 
@@ -65,7 +65,7 @@ Built on a lightweight, high-performance MVC-L (Model-View-Controller-Language) 
 ├── system/                 # Core Framework Engine, Libraries (Response, Mail/SMTP, PaymentGateway), Storage
 ├── .htaccess               # Apache Rewrite Rules, Dynamic Sitemap/Robots Routing, Gzip & Caching Headers
 ├── config.php              # Storefront Configuration (Auto-detects Domain, SSL & Directory Paths)
-├── index.php               # Storefront Front Controller (Defines VERSION = '1.0.1')
+├── index.php               # Storefront Front Controller (Defines VERSION = '1.0.2')
 ├── INSTALL.md              # Step-by-Step Installation Guide
 ├── UPGRADE.md              # Step-by-Step Upgrade & Migration Guide
 ├── DEVELOPER-GUIDE.md      # Architecture & Developer Extension Guide
@@ -80,7 +80,7 @@ Built on a lightweight, high-performance MVC-L (Model-View-Controller-Language) 
 - **[Installation Guide (`INSTALL.md`)](INSTALL.md)** — Fresh installation via Web Installer, Manual SQL Import, or CLI.
 - **[Upgrade Guide (`UPGRADE.md`)](UPGRADE.md)** — Upgrading existing installations and running the 10-step schema migration.
 - **[Developer Guide (`DEVELOPER-GUIDE.md`)](DEVELOPER-GUIDE.md)** — MVC-L architecture, creating modules, Event hooks, extending Cloud Storage & Payment Gateways.
-- **[Release Changelog (`CHANGELOG.md`)](CHANGELOG.md)** — Full list of features, fixes, and optimizations in **Core v1.0.1**.
+- **[Release Changelog (`CHANGELOG.md`)](CHANGELOG.md)** — Full list of features, fixes, and optimizations in **Core v1.0.2**.
 - **[License Agreement (`LICENSE.md`)](LICENSE.md)** — Commercial Split-License and GNU GPLv3 terms.
 
 ---
@@ -89,7 +89,7 @@ Built on a lightweight, high-performance MVC-L (Model-View-Controller-Language) 
 ## PHẦN II: TÀI LIỆU HƯỚNG DẪN TIẾNG VIỆT
 
 ### 1. Giới thiệu tổng quan
-**OpenCart Marketplace & Cloud E-Commerce Platform Suite (Core v1.0.1)** là bộ mã nguồn nền tảng chợ ứng dụng số (Digital Marketplace), cổng dịch vụ Cloud E-Commerce, cộng đồng nhà phát triển và hệ thống quản trị nội dung (CMS/Blog) hoàn chỉnh theo chuẩn kiến trúc `opencart.com`.
+**OpenCart Marketplace & Cloud E-Commerce Platform Suite (Core v1.0.2)** là bộ mã nguồn nền tảng chợ ứng dụng số (Digital Marketplace), cổng dịch vụ Cloud E-Commerce, cộng đồng nhà phát triển và hệ thống quản trị nội dung (CMS/Blog) hoàn chỉnh theo chuẩn kiến trúc `opencart.com`.
 
 Hệ thống được tối ưu hóa sẵn cho **PHP 8.1 / 8.2 / 8.3** và **MySQL 8.0+**, tự động nhận diện tên miền/SSL/thư mục cài đặt mà không cần cấu hình đường dẫn cứng, đồng thời đạt điểm tuyệt đối **100/100 Google Lighthouse** về Hiệu năng (Core Web Vitals), Khả năng truy cập (Accessibility WCAG 2.1 AA), Best Practices và SEO.
 
@@ -120,5 +120,5 @@ Hệ thống được tối ưu hóa sẵn cho **PHP 8.1 / 8.2 / 8.3** và **MyS
 - **[Hướng dẫn Cài đặt (`INSTALL.md`)](INSTALL.md)**: Hướng dẫn cài đặt mới trên Hosting (cPanel/DirectAdmin/VPS) và Localhost.
 - **[Hướng dẫn Nâng cấp (`UPGRADE.md`)](UPGRADE.md)**: Hướng dẫn cập nhật phiên bản và chạy trình nâng cấp CSDL tự động.
 - **[Hướng dẫn Phát triển & Mở rộng Code (`DEVELOPER-GUIDE.md`)](DEVELOPER-GUIDE.md)**: Kiến trúc MVC-L, cách viết module mới, Event hooks, tích hợp cổng thanh toán và Cloud Storage.
-- **[Lịch sử Phiên bản (`CHANGELOG.md`)](CHANGELOG.md)**: Chi tiết các tính năng và bản vá trong phiên bản **Core v1.0.1**.
+- **[Lịch sử Phiên bản (`CHANGELOG.md`)](CHANGELOG.md)**: Chi tiết các tính năng và bản vá trong phiên bản **Core v1.0.2**.
 - **[Điều khoản Bản quyền (`LICENSE.md`)](LICENSE.md)**: Quy định về Giấy phép Thương mại & GNU GPLv3.

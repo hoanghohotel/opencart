@@ -354,14 +354,16 @@ class Response {
 						'<script src="application/view/javascript/bootstrap/js/bootstrap.min.js"></script>',
 						'<script src="application/view/javascript/jquery/datetimepicker/moment.js" type="text/javascript"></script>',
 						'<script src="application/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>',
-						'<script src="application/view/javascript/common.js"></script>'
+						'<script src="application/view/javascript/common.js"></script>',
+						'<script src="application/view/javascript/csrf.js"></script>'
 					),
 					array(
 						'<script src="application/view/javascript/jquery/jquery-1.12.2.min.js" defer></script>',
 						'<script src="application/view/javascript/bootstrap/js/bootstrap.min.js" defer></script>',
 						'<script src="application/view/javascript/jquery/datetimepicker/moment.js" type="text/javascript" defer></script>',
 						'<script src="application/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript" defer></script>',
-						'<script src="application/view/javascript/common.js" defer></script>'
+						'<script src="application/view/javascript/common.js" defer></script>',
+						'<script src="application/view/javascript/csrf.js" defer></script>'
 					),
 					$html
 				);

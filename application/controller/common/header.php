@@ -1,7 +1,18 @@
 <?php
 class ControllerCommonHeader extends Controller {
 	public function index() {
-		$this->load->language('common/header');
+		if (method_exists($this->load, 'language')) {
+			$this->load->language('common/header');
+		}
+
+		$data['csrf_policy'] = json_encode(array(
+			'post'       => $this->config->get('csrf_post_routes') ?: array(),
+			'navigation' => $this->config->get('csrf_navigation_routes') ?: array()
+		));
+		$data['csrf_member_token'] = $this->member->isLogged() ? ($this->session->data['member_token'] ?? '') : '';
+		$data['csrf_confirm'] = ($this->registry->has('language') && $this->language->get('text_confirm_action') !== 'text_confirm_action')
+			? $this->language->get('text_confirm_action')
+			: 'Are you sure?';
 
 		$data['title'] = $this->document->getTitle();
 

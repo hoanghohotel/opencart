@@ -12,3 +12,6 @@ $_['column_credit_card']        = 'Credit Card';
 
 // Button
 $_['button_continue']           = 'Continue';
+
+// Error
+$_['error_confirm_failed']      = 'Payment could not be confirmed. Please check payment status before retrying.';

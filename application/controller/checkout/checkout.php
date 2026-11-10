@@ -1,7 +1,19 @@
 <?php
 class ControllerCheckoutCheckout extends Controller {
+	private function lang($key, $fallback) {
+		if ($this->registry->has('language')) {
+			$val = $this->language->get($key);
+			if ($val !== $key) {
+				return $val;
+			}
+		}
+		return $fallback;
+	}
+
 	public function index() {
-		$this->load->language('checkout/checkout');
+		if (method_exists($this->load, 'language')) {
+			$this->load->language('checkout/checkout');
+		}
 
 		$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 0;
 		$quantity = isset($this->request->get['quantity']) && (int)$this->request->get['quantity'] > 0 ? (int)$this->request->get['quantity'] : 1;
@@ -83,16 +95,15 @@ class ControllerCheckoutCheckout extends Controller {
 	}
 
 	public function success() {
-		$this->load->language('checkout/success');
-
-		$this->document->setTitle($this->language->get('heading_title'));
-
-		if ($this->member->isLogged() && !empty($this->session->data['pending_extension_order'])) {
-			$this->load->model('account/order');
-			$pending = $this->session->data['pending_extension_order'];
-			unset($this->session->data['pending_extension_order']);
-			$this->model_account_order->addOrder($pending);
+		if (method_exists($this->load, 'language')) {
+			$this->load->language('checkout/success');
 		}
+
+		$this->document->setTitle($this->lang('heading_title', 'Extension Purchase Success'));
+
+		// A result page is not payment confirmation. Order creation belongs to
+		// the payment flow; visiting or refreshing this page must not consume
+		// a pending checkout or grant a purchase without gateway verification.
 
 		$member_token = isset($this->session->data['member_token']) ? 'member_token=' . $this->session->data['member_token'] : '';
 
@@ -107,9 +118,11 @@ class ControllerCheckoutCheckout extends Controller {
 	}
 
 	public function failure() {
-		$this->load->language('checkout/failure');
+		if (method_exists($this->load, 'language')) {
+			$this->load->language('checkout/failure');
+		}
 
-		$this->document->setTitle($this->language->get('heading_title'));
+		$this->document->setTitle($this->lang('heading_title', 'Extension Purchase Failure'));
 
 		$data['contact'] = $this->url->link('support/contact');
 
@@ -120,9 +133,11 @@ class ControllerCheckoutCheckout extends Controller {
 	}
 
 	public function terms() {
-		$this->load->language('checkout/terms');
+		if (method_exists($this->load, 'language')) {
+			$this->load->language('checkout/terms');
+		}
 
-		$this->document->setTitle($this->language->get('heading_title'));
+		$this->document->setTitle($this->lang('heading_title', 'Extension Purchase Terms'));
 
 		$data['footer'] = $this->load->controller('common/footer');
 		$data['header'] = $this->load->controller('common/header');

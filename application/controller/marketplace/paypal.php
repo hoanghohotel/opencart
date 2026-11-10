@@ -30,48 +30,22 @@ class ControllerMarketplacePaypal extends Controller {
 	}
 
 	public function send() {
-		$this->load->language('marketplace/paypal');
-
-		$json = array();
-
-		if (!$this->member->isLogged()) {
-			$json['error'] = $this->language->get('error_login');
-		} elseif (empty($this->request->post['agree'])) {
-			$json['error'] = $this->language->get('error_agree');
+		if (method_exists($this->load, 'language')) {
+			$this->load->language('marketplace/paypal');
 		}
 
-		if (!$json) {
-			$this->load->model('marketplace/extension');
-			$this->load->model('account/order');
-
-			$extension_id = isset($this->request->get['extension_id']) ? (int)$this->request->get['extension_id'] : 0;
-			$quantity = isset($this->request->get['quantity']) && (int)$this->request->get['quantity'] > 0 ? (int)$this->request->get['quantity'] : 1;
-
-			$extension_info = $this->model_marketplace_extension->getExtension($extension_id);
-
-			if ($extension_info) {
-				$order_id = $this->model_account_order->addOrder(array(
-					'member_id'       => $this->member->getId(),
-					'seller_id'       => $extension_info['member_id'],
-					'extension_id'    => $extension_id,
-					'extension'       => $extension_info['name'],
-					'quantity'        => $quantity,
-					'price'           => $extension_info['price'],
-					'total'           => (float)$extension_info['price'] * $quantity,
-					'payment_method'  => 'PayPal',
-					'transaction_id'  => 'PP-' . strtoupper(token(10)),
-					'order_status_id' => 5
-				));
-
-				$json['invoice'] = $order_id;
-				$json['custom'] = $order_id;
-			} else {
-				$json['error'] = $this->language->get('error_extension');
-			}
-		}
+		// This legacy flow has no server-side capture verification. Keep the
+		// JSON endpoint, but do not manufacture an invoice or a paid order.
+		$extension_id = (int)($this->request->get['extension_id'] ?? 0);
+		$err_msg = ($this->registry->has('language') && $this->language->get('error_legacy_capture') !== 'error_legacy_capture')
+			? $this->language->get('error_legacy_capture')
+			: 'This payment flow cannot verify capture. Restart checkout and select a supported card gateway.';
 
 		$this->response->addHeader('Content-Type: application/json');
-		$this->response->setOutput(json_encode($json));
+		$this->response->setOutput(json_encode(array(
+			'error'    => $err_msg,
+			'redirect' => $this->url->link('marketplace/extension/info', 'extension_id=' . $extension_id . '&purchase=1', true)
+		)));
 	}
 
 	public function callback() {

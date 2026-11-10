@@ -1,3 +1,6 @@
+{% if error_warning %}
+<div class="alert alert-warning">{{ error_warning|escape }}</div>
+{% else %}
 <fieldset id="payment-credit-card">
 	<legend>{{ text_extension_details }}</legend>
 	<table class="table table-bordered">
@@ -104,15 +107,15 @@ braintree.client.create({
             complete: function() {
             },
             success: function(json) {
-
-                if (json['error']) {
-                    $('#modal-checkout .modal-body').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                json = json || {};
+                if (json['error'] || !json['success'] || !json['order_id']) {
+                    $('#modal-checkout .modal-body').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + (json['error'] || '{{ error_confirm_failed|default("Payment could not be confirmed. Please check payment status before retrying.")|e("js") }}') + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                 } else {
                     window.location.href = 'index.php?route=checkout/checkout/success';
                 }
             },
             error: function(xhr, ajaxOptions, thrownError) {
-                window.location.href = 'index.php?route=checkout/checkout/success';
+                window.location.href = 'index.php?route=checkout/checkout/failure';
             }
         });
       });
@@ -195,15 +198,15 @@ braintree.client.create({
 
                     },
                     success: function(json) {
-
-                        if (json['error']) {
-                            $('#modal-checkout .modal-body').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error'] + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+                        json = json || {};
+                        if (json['error'] || !json['success'] || !json['order_id']) {
+                            $('#modal-checkout .modal-body').after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + (json['error'] || '{{ error_confirm_failed|default("Payment could not be confirmed. Please check payment status before retrying.")|e("js") }}') + '<button type="button" class="close" data-dismiss="alert">&times;</button></div>');
                         } else {
                             window.location.href = 'index.php?route=checkout/checkout/success';
                         }
                     },
                     error: function(xhr, ajaxOptions, thrownError) {
-                        window.location.href = 'index.php?route=checkout/checkout/success';
+                        window.location.href = 'index.php?route=checkout/checkout/failure';
                     }
                 });
             });
@@ -215,3 +218,4 @@ braintree.client.create({
 });
 {% endif %}
 </script>
+{% endif %}

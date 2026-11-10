@@ -1,6 +1,6 @@
-# Upgrade & Migration Guide — Core v1.0.1 (Hướng dẫn Nâng cấp)
+# Upgrade & Migration Guide — Core v1.0.2 (Hướng dẫn Nâng cấp)
 
-This guide explains how to safely upgrade an existing OpenCart installation or an earlier build of the platform to **OpenCart Marketplace & Cloud E-Commerce Platform Suite Core v1.0.1**.
+This guide explains how to safely upgrade an existing OpenCart installation or an earlier build of the platform to **OpenCart Marketplace & Cloud E-Commerce Platform Suite Core v1.0.2**.
 
 ---
 
@@ -23,11 +23,11 @@ Before uploading any files or running database migrations, always create a full 
 
 ### 2. Step-by-Step Upgrade Procedure
 
-#### Step 1: Upload Core v1.0.1 Files
-1. Extract the `opencart-core-v1.0.1.zip` package.
+#### Step 1: Upload Core v1.0.2 Files
+1. Extract the `opencart-core-v1.0.2.zip` package.
 2. Upload all files to your server, overwriting existing core files **except** your database credentials in `config.php` and `admin/config.php` (and your custom uploads in `image/` and `system/storage/download/`).
 3. **Important — Upgrade `config.php` & `admin/config.php` to Dynamic Domain Detection**:
-   - Ensure the top of your `config.php` and `admin/config.php` uses the dynamic `HTTP_SERVER` / `HTTPS_SERVER` and `__DIR__` resolution introduced in **v1.0.1** while keeping your existing `DB_*` constants at the bottom.
+   - Ensure the top of your `config.php` and `admin/config.php` uses the dynamic `HTTP_SERVER` / `HTTPS_SERVER` and `__DIR__` resolution introduced in **v1.0.2** while keeping your existing `DB_*` constants at the bottom.
 
 #### Step 2: Run the Automated 10-Step Database Upgrade Wizard
 1. Make sure the `/install/` directory is present on your server.
@@ -64,7 +64,7 @@ Before uploading any files or running database migrations, always create a full 
 | Visiting `/install/` opens the **New Installation** wizard instead of **Upgrade** | `config.php` is empty or missing `DIR_APPLICATION` | Restore your `config.php` and `admin/config.php`, or navigate directly to `/index.php?route=upgrade/upgrade`. |
 | Layout or button colors appear unstyled after upgrade | Browser cached an older version of `stylesheet.css` or `bootstrap.css` | Perform a hard refresh (`Ctrl + F5`) or clear CDN/Cloudflare cache. |
 | "Permission Denied!" inside Admin panel on newly added routes | User Group permissions have not been refreshed | Go to `Admin -> System -> Users -> User Groups -> Top Administrator`, select all checkboxes, and save. |
-| Broken links after migrating from `localhost` to a live domain | Hardcoded `RewriteBase` or static `HTTP_SERVER` in an old config file | Use the v1.0.1 `.htaccess` (which omits hardcoded `RewriteBase`) and v1.0.1 dynamic `config.php` / `admin/config.php`. |
+| Broken links after migrating from `localhost` to a live domain | Hardcoded `RewriteBase` or static `HTTP_SERVER` in an old config file | Use the v1.0.2 `.htaccess` (which omits hardcoded `RewriteBase`) and v1.0.2 dynamic `config.php` / `admin/config.php`. |
 
 ---
 ---
@@ -73,7 +73,7 @@ Before uploading any files or running database migrations, always create a full 
 
 ### 1. Sao lưu Dữ liệu trước khi Nâng cấp (Bắt buộc)
 
-Trước khi thực hiện nâng cấp lên **Core v1.0.1**, hãy đảm bảo bạn đã sao lưu:
+Trước khi thực hiện nâng cấp lên **Core v1.0.2**, hãy đảm bảo bạn đã sao lưu:
 1. **Cơ sở dữ liệu (Database)**: Xuất file `.sql` qua phpMyAdmin hoặc công cụ `Admin -> System -> Maintenance -> Backup / Restore`.
 2. **Tệp cấu hình & Tài nguyên**: Sao lưu `config.php`, `admin/config.php`, thư mục `image/` và `system/storage/download/`.
 
@@ -81,9 +81,9 @@ Trước khi thực hiện nâng cấp lên **Core v1.0.1**, hãy đảm bảo b
 
 ### 2. Quy trình Nâng cấp từng bước
 
-#### Bước 1: Tải lên mã nguồn Core v1.0.1
-1. Giải nén gói `opencart-core-v1.0.1.zip` và tải đè các tệp hệ thống lên máy chủ (giữ nguyên thông số kết nối `DB_*` trong `config.php` và `admin/config.php`).
-2. Khuyến nghị sử dụng cấu trúc `config.php` và `admin/config.php` mới của bản **v1.0.1** để hệ thống tự động nhận diện Domain, HTTPS và đường dẫn thư mục bằng `__DIR__`.
+#### Bước 1: Tải lên mã nguồn Core v1.0.2
+1. Giải nén gói `opencart-core-v1.0.2.zip` và tải đè các tệp hệ thống lên máy chủ (giữ nguyên thông số kết nối `DB_*` trong `config.php` và `admin/config.php`).
+2. Khuyến nghị sử dụng cấu trúc `config.php` và `admin/config.php` mới của bản **v1.0.2** để hệ thống tự động nhận diện Domain, HTTPS và đường dẫn thư mục bằng `__DIR__`.
 
 #### Bước 2: Chạy Trình Nâng cấp CSDL Tự động (`/index.php?route=upgrade/upgrade`)
 1. Đảm bảo thư mục `/install/` đang tồn tại trên máy chủ.

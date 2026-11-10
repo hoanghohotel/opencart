@@ -22,6 +22,7 @@ $_['text_login']                = 'Login';
 $_['text_register']             = 'Register';
 $_['text_account']              = 'Account';
 $_['text_logout']               = 'Logout';
+$_['text_confirm_action']       = 'Are you sure?';
 
 // Meta Descriptions & Keywords
 $_['meta_description_home']     = '{store_name} is an open source PHP-based online e-commerce solution. Everything you need to create, scale and run your online store.';

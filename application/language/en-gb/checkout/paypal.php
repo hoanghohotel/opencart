@@ -11,3 +11,7 @@ $_['text_billing_agreement']    = 'Allow {store_name} to charge your account to 
 $_['column_extension_name']     = 'Extension Name';
 $_['column_quantity']           = 'Quantity';
 $_['column_total']              = 'Total';
+
+// Error
+$_['error_paypal_unavailable']  = 'PayPal checkout is unavailable until server-side capture verification is configured. Please select a card payment method.';
+$_['error_confirm_failed']      = 'Payment could not be confirmed. Please check payment status before retrying.';

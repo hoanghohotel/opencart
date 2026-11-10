@@ -10,3 +10,4 @@ $_['button_confirm']            = 'Confirm';
 $_['error_login']               = 'You must be logged in to purchase an extension!';
 $_['error_agree']               = 'You must agree to the Terms & Conditions!';
 $_['error_extension']           = 'Extension not found!';
+$_['error_legacy_capture']      = 'This payment flow cannot verify capture. Restart checkout and select a supported card gateway.';

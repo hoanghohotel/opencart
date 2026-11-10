@@ -1,6 +1,6 @@
-# Installation Guide — Core v1.0.1 (Hướng dẫn Cài đặt)
+# Installation Guide — Core v1.0.2 (Hướng dẫn Cài đặt)
 
-This document provides step-by-step instructions for installing **OpenCart Marketplace & Cloud E-Commerce Platform Suite v1.0.1** on production web hosting (cPanel, DirectAdmin, Plesk, CyberPanel, VPS) or local development environments (WAMP, XAMPP, Laragon, Docker).
+This document provides step-by-step instructions for installing **OpenCart Marketplace & Cloud E-Commerce Platform Suite v1.0.2** on production web hosting (cPanel, DirectAdmin, Plesk, CyberPanel, VPS) or local development environments (WAMP, XAMPP, Laragon, Docker).
 
 > Looking to upgrade an existing installation? Please read **[UPGRADE.md](UPGRADE.md)** instead.
 
@@ -21,10 +21,10 @@ Ensure your server meets the following requirements before starting:
 
 ### 2. Method A: Quick Installation (Pre-Seeded Database Import — Recommended)
 
-Because `config.php` and `admin/config.php` in **Core v1.0.1** automatically detect your domain (`HTTP_HOST`), SSL/HTTPS protocol (including Cloudflare / Reverse Proxy headers), and server filesystem paths (`__DIR__`), deploying to any live domain or subfolder takes only 3 steps:
+Because `config.php` and `admin/config.php` in **Core v1.0.2** automatically detect your domain (`HTTP_HOST`), SSL/HTTPS protocol (including Cloudflare / Reverse Proxy headers), and server filesystem paths (`__DIR__`), deploying to any live domain or subfolder takes only 3 steps:
 
 1. **Upload Source Files**:
-   - Extract the release archive (`opencart-core-v1.0.1.zip`) and upload all files to your web root (e.g., `public_html/`, `httpdocs/`, or a subdirectory).
+   - Extract the release archive (`opencart-core-v1.0.2.zip`) and upload all files to your web root (e.g., `public_html/`, `httpdocs/`, or a subdirectory).
 2. **Create & Import the Database**:
    - Create a new MySQL/MariaDB database and user in your hosting control panel (cPanel / phpMyAdmin).
    - Import the full database schema and seed file located at:
@@ -122,10 +122,10 @@ php install/cli_install.php install \
 
 ### 2. Cách 1: Cài đặt Nhanh bằng Import SQL (Khuyên dùng cho Hosting & Localhost)
 
-Nhờ cơ chế tự động nhận diện tên miền (`HTTP_HOST`), giao thức `HTTPS`/Cloudflare và đường dẫn thư mục (`__DIR__`) được tích hợp sẵn trong `config.php` và `admin/config.php` của bản **Core v1.0.1**, bạn không cần sửa bất kỳ đường dẫn URL hay thư mục nào khi đưa lên Hosting thật:
+Nhờ cơ chế tự động nhận diện tên miền (`HTTP_HOST`), giao thức `HTTPS`/Cloudflare và đường dẫn thư mục (`__DIR__`) được tích hợp sẵn trong `config.php` và `admin/config.php` của bản **Core v1.0.2**, bạn không cần sửa bất kỳ đường dẫn URL hay thư mục nào khi đưa lên Hosting thật:
 
 1. **Tải mã nguồn lên Hosting**:
-   - Giải nén gói `opencart-core-v1.0.1.zip` vào thư mục gốc của tên miền (ví dụ `public_html/` trên cPanel/DirectAdmin hoặc thư mục bất kỳ trên WAMP/XAMPP).
+   - Giải nén gói `opencart-core-v1.0.2.zip` vào thư mục gốc của tên miền (ví dụ `public_html/` trên cPanel/DirectAdmin hoặc thư mục bất kỳ trên WAMP/XAMPP).
 2. **Tạo Database & Import dữ liệu**:
    - Tạo một Database MySQL mới trên Hosting.
    - Mở **phpMyAdmin** (hoặc MySQL CLI) và import file dữ liệu chuẩn:

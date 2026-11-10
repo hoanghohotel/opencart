@@ -42,15 +42,22 @@ class ControllerMarketplacePurchase extends Controller {
 	}
 
 	public function terms() {
-		$this->load->language('marketplace/purchase');
+		if (method_exists($this->load, 'language')) {
+			$this->load->language('marketplace/purchase');
+		}
 
 		$this->response->setOutput($this->load->view('marketplace/terms'));
 	}
 
 	public function success() {
-		$this->load->language('marketplace/purchase');
+		if (method_exists($this->load, 'language')) {
+			$this->load->language('marketplace/purchase');
+		}
 
-		$this->document->setTitle($this->language->get('heading_success'));
+		$title = ($this->registry->has('language') && $this->language->get('heading_success') !== 'heading_success')
+			? $this->language->get('heading_success')
+			: 'Extension Purchase Success';
+		$this->document->setTitle($title);
 
 		$member_token = isset($this->session->data['member_token']) ? 'member_token=' . $this->session->data['member_token'] : '';
 
@@ -65,9 +72,14 @@ class ControllerMarketplacePurchase extends Controller {
 	}
 
 	public function failure() {
-		$this->load->language('marketplace/purchase');
+		if (method_exists($this->load, 'language')) {
+			$this->load->language('marketplace/purchase');
+		}
 
-		$this->document->setTitle($this->language->get('heading_failure'));
+		$title = ($this->registry->has('language') && $this->language->get('heading_failure') !== 'heading_failure')
+			? $this->language->get('heading_failure')
+			: 'Extension Purchase Failure';
+		$this->document->setTitle($title);
 
 		$data['contact'] = $this->url->link('support/contact');
 
