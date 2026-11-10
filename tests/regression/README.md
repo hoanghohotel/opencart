@@ -18,3 +18,8 @@ php tests/regression/render_payment_templates.php | node tests/regression/paymen
 php tests/regression/frontend_csrf.php
 node tests/regression/frontend_csrf_client.js
 ```
+
+## 4. JavaScript Library Upgrade & Syntax Verification
+```sh
+node tests/regression/js_library_compatibility.js
+```

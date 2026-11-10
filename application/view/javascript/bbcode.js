@@ -50,79 +50,60 @@
 			// Preview
 			$(this).parent().parent().find('button[data-event="preview"]').on('click', function() {
 				if (!$(this).hasClass('active')) {
-					var pattern = [];
-					var replace = [];
-					
-					// Bold
-					pattern[0] = /\[b\](.+?)\[\/b\]/igm;
-					replace[0] = '<strong>$1</strong>';
-					
-					// Italic
-					pattern[1] = /\[i\](.+?)\[\/i\]/igm;
-					replace[1] = '<em>$1</em>';
-					
-					// Underlined
-					pattern[2] = /\[u\](.+?)\[\/u\]/igm;
-					replace[2] = '<u>$1</u>';
-					
-					// Quote
-					pattern[3] = /\[quote\](.+?)\[\/quote]/igm;
-					replace[3] = '<blockquote>$1</blockquote>';
-					
-					// Code
-					pattern[4] = /\[code\](.+?)\[\/code\]/igm;
-					replace[4] = '<code>$1</code>';
-					
-					// Strikethrough
-					pattern[5] = /\[s\](.+?)\[\/s\]/gim;
-					replace[5] = '<s>$1</s>';
-					
-					// List Item
-					pattern[6] = /\[\*\]([\w\W]+?)\n?(?=(?:(?:\[\*\])|(?:\[\/list\])))/igm;
-					replace[6] = '<li>$1</li>';
-					
-					// List
-					pattern[7] = /\[list\](.+?)\[\/list\]/igm;
-					replace[7] = '<ul>$1</ul>';
-					
-					// Ordered List
-					pattern[8] = /\[list\=(1|A|a|I|i)\](.+?)\[\/list\]/igm;
-					replace[8] = '<ol type="$1">$2</ol>';
-					
-					// Image
-					pattern[9] = /\[img\](.*?)\[\/img\]/igm;
-					replace[9] = '<img src="$1" alt="" />';
-					
-					// URL
-					pattern[10] = /\[url\](.+?)\[\/url\]/igm;
-					replace[10] = '<a href="$1" rel="nofollow">$1</a>';
-					
-					// URL (named)
-					pattern[11] = /\[url\=([^\[]+?)\](.+?)\[\/url\]/igm;
-					replace[11] = '<a href="$1" rel="nofollow">$2</a>';
-					
-					// Font Size
-					pattern[12] = /\[size\=([\-\+]?\d+)\](.+?)\[\/size\]/igm;
-					replace[12] = '<span style="font-size: $1%;">$2</span>';	
-					
-					// Font Color
-					pattern[13] = /\[color\=(#[0-9a-f]{3}|#[0-9a-f]{6}|[a-z\-]+)\](.+?)\[\/color\]/igm;
-					replace[13] = '<span style="color: $1;">$2</span>';	
-					
-					
-					pattern[14] = /\[youtube\](.+?)\[\/youtube\]/igm;
-					replace[14] = '<iframe width="560" height="315" src="http://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>';	
-					
-					// Line Break
-					pattern[15] = /(?:\r\n|\r|\n)/g;
-					replace[15] = '<br />';	
+					var escapeHtml = function(str) {
+						return String(str)
+							.replace(/&/g, '&amp;')
+							.replace(/</g, '&lt;')
+							.replace(/>/g, '&gt;')
+							.replace(/"/g, '&quot;')
+							.replace(/'/g, '&#39;');
+					};
 
-					bbcode = $(element).val();
-					
-					for (i = 0; i < pattern.length; i++) {
-						bbcode = bbcode.replace(pattern[i], replace[i]);
-					}
-				
+					var sanitizeUrl = function(rawUrl) {
+						var u = String(rawUrl || '').trim();
+						if (/^(https?:\/\/|\/|image\/|application\/)/i.test(u)) {
+							return u;
+						}
+						return '#';
+					};
+
+					var bbcode = escapeHtml($(element).val());
+
+					// Bold, Italic, Underlined, Quote, Code, Strikethrough
+					bbcode = bbcode.replace(/\[b\]([\s\S]+?)\[\/b\]/gi, '<strong>$1</strong>');
+					bbcode = bbcode.replace(/\[i\]([\s\S]+?)\[\/i\]/gi, '<em>$1</em>');
+					bbcode = bbcode.replace(/\[u\]([\s\S]+?)\[\/u\]/gi, '<u>$1</u>');
+					bbcode = bbcode.replace(/\[quote\]([\s\S]+?)\[\/quote\]/gi, '<blockquote>$1</blockquote>');
+					bbcode = bbcode.replace(/\[code\]([\s\S]+?)\[\/code\]/gi, '<code>$1</code>');
+					bbcode = bbcode.replace(/\[s\]([\s\S]+?)\[\/s\]/gi, '<s>$1</s>');
+
+					// Linear non-backtracking List Item & Lists
+					bbcode = bbcode.replace(/\[\*\]([^\r\n\[]*)/g, '<li>$1</li>');
+					bbcode = bbcode.replace(/\[list\]([\s\S]+?)\[\/list\]/gi, '<ul>$1</ul>');
+					bbcode = bbcode.replace(/\[list=(1|A|a|I|i)\]([\s\S]+?)\[\/list\]/gi, '<ol type="$1">$2</ol>');
+
+					// Safe Image & URL protocols only
+					bbcode = bbcode.replace(/\[img\]([^\[]*?)\[\/img\]/gi, function(_, src) {
+						return '<img src="' + sanitizeUrl(src) + '" alt="" />';
+					});
+					bbcode = bbcode.replace(/\[url\]([^\[]+?)\[\/url\]/gi, function(_, href) {
+						var safe = sanitizeUrl(href);
+						return '<a href="' + safe + '" rel="nofollow noopener noreferrer">' + href + '</a>';
+					});
+					bbcode = bbcode.replace(/\[url=([^\]]+?)\]([\s\S]+?)\[\/url\]/gi, function(_, href, label) {
+						return '<a href="' + sanitizeUrl(href) + '" rel="nofollow noopener noreferrer">' + label + '</a>';
+					});
+
+					// Font Size & Font Color
+					bbcode = bbcode.replace(/\[size=([+-]?\d{1,3})\]([\s\S]+?)\[\/size\]/gi, '<span style="font-size: $1%;">$2</span>');
+					bbcode = bbcode.replace(/\[color=(#[0-9a-f]{3}|#[0-9a-f]{6}|[a-z-]+)\]([\s\S]+?)\[\/color\]/gi, '<span style="color: $1;">$2</span>');
+
+					// Safe HTTPS YouTube Embed ID only
+					bbcode = bbcode.replace(/\[youtube\]([a-zA-Z0-9_-]{6,20})\[\/youtube\]/gi, '<iframe width="560" height="315" src="https://www.youtube.com/embed/$1" frameborder="0" allowfullscreen></iframe>');
+
+					// Line Break
+					bbcode = bbcode.replace(/\r\n|\r|\n/g, '<br />');
+
 					$(element).parent().parent().find('.bbcode-preview').html(bbcode);
 				
 					$(this).addClass('active');
@@ -221,7 +202,7 @@
 						clearInterval(timer);		
 						
 						$.ajax({
-							url: 'index.php?route=common/image&member_token=' + getURLVar('member_token'),
+							url: 'index.php?route=common/image&member_token=' + encodeURIComponent(getURLVar('member_token')),
 							type: 'post',		
 							dataType: 'json',
 							data: new FormData($('#form-upload')[0]),

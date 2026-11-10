@@ -23,19 +23,21 @@ function getURLVar(key) {
 } 
 
 $(document).ready(function() {
-	route = getURLVar('route');
+	var route = getURLVar('route');
 	
 	if (!route) {
 		$('#menu #home').addClass('active');
 	} else {
-		part = route.split('/');
-		
-		url = part[0];
+		var part = route.split('/');
+		var url = part[0];
 		
 		if (part[1]) {
 			url += '/' + part[1];
-		}		
+		}
 		
-		$('#menu a[href*=\'index.php?route=' + url + '\']').parents('li[id]').addClass('active');
-	}	
+		$('#menu a[href]').filter(function() {
+			var href = $(this).attr('href') || '';
+			return href.indexOf('index.php?route=' + url) !== -1;
+		}).parents('li[id]').addClass('active');
+	}
 });

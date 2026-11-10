@@ -75,18 +75,19 @@ $(document).ready(function() {
 		sessionStorage.setItem('menu', $(this).attr('href'));
 	});
 
-	if (!sessionStorage.getItem('menu')) {
+	var lastMenu = sessionStorage.getItem('menu');
+	if (!lastMenu) {
 		$('#menu #dashboard').addClass('active');
 	} else {
-		// Sets active and open to selected page in the left column menu.
-		$('#menu a[href=\'' + sessionStorage.getItem('menu') + '\']').parent().addClass('active');
+		// Sets active and open to selected page in the left column menu safely without selector interpolation
+		var $matchedMenu = $('#menu a[href]').filter(function() {
+			return $(this).attr('href') === lastMenu;
+		});
+		$matchedMenu.parent().addClass('active');
+		$matchedMenu.parents('li > a').removeClass('collapsed');
+		$matchedMenu.parents('ul').addClass('in');
+		$matchedMenu.parents('li').addClass('active');
 	}
-	
-	$('#menu a[href=\'' + sessionStorage.getItem('menu') + '\']').parents('li > a').removeClass('collapsed');
-	
-	$('#menu a[href=\'' + sessionStorage.getItem('menu') + '\']').parents('ul').addClass('in');
-	
-	$('#menu a[href=\'' + sessionStorage.getItem('menu') + '\']').parents('li').addClass('active');
 	
 	// Image Manager
 	$(document).on('click', 'a[data-toggle=\'image\']', function(e) {
@@ -124,7 +125,7 @@ $(document).ready(function() {
 				$('#modal-image').remove();
 
 				$.ajax({
-					url: 'index.php?route=common/filemanager&user_token=' + getURLVar('user_token') + '&target=' + $element.parent().find('input').attr('id') + '&thumb=' + $element.attr('id'),
+					url: 'index.php?route=common/filemanager&user_token=' + encodeURIComponent(getURLVar('user_token')) + '&target=' + encodeURIComponent($element.parent().find('input').attr('id') || '') + '&thumb=' + encodeURIComponent($element.attr('id') || ''),
 					dataType: 'html',
 					beforeSend: function() {
 						$button.prop('disabled', true);

@@ -73,37 +73,53 @@ window.ga = window.ga || function() {};
         }
         var isAccountCardPage = !!document.getElementById('account-payment');
         var memberToken = getURLVar('member_token');
-        var tokenParam = memberToken ? '&member_token=' + memberToken : '';
+        var safeToken = memberToken ? encodeURIComponent(memberToken) : '';
 
         var banner = document.createElement('div');
         banner.id = 'oc-gateway-banner';
         banner.style.cssText = 'display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #e2e8f0;border-radius:6px;padding:10px 15px;margin-bottom:20px;';
 
-        var isLive = (mode === 'live' || mode === 'production');
-        var modeBadge = '<span class="label ' + (isLive ? 'label-success' : 'label-warning') + '" style="margin-left:8px;font-size:11px;padding:4px 8px;">' + (isLive ? 'LIVE MODE' : 'TEST MODE') + '</span>';
+        var leftDiv = document.createElement('div');
+        leftDiv.style.cssText = 'display:flex;align-items:center;';
 
-        var leftHtml = '';
         if (gateway === 'stripe') {
-            leftHtml = '<div style="display:flex;align-items:center;"><img src="application/view/image/payment/stripe.svg" alt="Stripe" style="height:24px;margin-right:10px;" /><strong>Stripe Card Gateway</strong>' + modeBadge + '</div>';
+            var img = document.createElement('img');
+            img.src = 'application/view/image/payment/stripe.svg';
+            img.alt = 'Stripe';
+            img.style.cssText = 'height:24px;margin-right:10px;';
+            leftDiv.appendChild(img);
         } else {
-            leftHtml = '<div style="display:flex;align-items:center;"><i class="fa fa-credit-card-alt" style="font-size:20px;margin-right:10px;color:#1e91cf;"></i><strong>Braintree Card Gateway</strong>' + modeBadge + '</div>';
+            var icon = document.createElement('i');
+            icon.className = 'fa fa-credit-card-alt';
+            icon.style.cssText = 'font-size:20px;margin-right:10px;color:#1e91cf;';
+            leftDiv.appendChild(icon);
         }
 
-        var rightHtml = '';
+        var strong = document.createElement('strong');
+        strong.textContent = (gateway === 'stripe') ? 'Stripe Card Gateway' : 'Braintree Card Gateway';
+        leftDiv.appendChild(strong);
+
+        var isLive = (mode === 'live' || mode === 'production');
+        var badge = document.createElement('span');
+        badge.className = 'label ' + (isLive ? 'label-success' : 'label-warning');
+        badge.style.cssText = 'margin-left:8px;font-size:11px;padding:4px 8px;';
+        badge.textContent = isLive ? 'LIVE MODE' : 'TEST MODE';
+        leftDiv.appendChild(badge);
+        banner.appendChild(leftDiv);
+
         if (isAccountCardPage) {
             var cfg = getPaymentConfig();
             var showStripe = !cfg || !cfg.stripe || cfg.stripe.status;
             var showBt = !cfg || !cfg.braintree || cfg.braintree.status;
             if (showStripe && showBt) {
-                if (gateway === 'stripe') {
-                    rightHtml = '<a href="index.php?route=account/payment/braintree' + tokenParam + '" class="btn btn-default btn-xs">Switch to Braintree</a>';
-                } else {
-                    rightHtml = '<a href="index.php?route=account/payment/stripe' + tokenParam + '" class="btn btn-default btn-xs">Switch to Stripe</a>';
-                }
+                var switchLink = document.createElement('a');
+                switchLink.className = 'btn btn-default btn-xs';
+                switchLink.href = 'index.php?route=account/payment/' + (gateway === 'stripe' ? 'braintree' : 'stripe') + (safeToken ? '&member_token=' + safeToken : '');
+                switchLink.textContent = (gateway === 'stripe') ? 'Switch to Braintree' : 'Switch to Stripe';
+                banner.appendChild(switchLink);
             }
         }
 
-        banner.innerHTML = leftHtml + rightHtml;
         fieldset.insertBefore(banner, fieldset.firstChild);
     }
 
@@ -825,7 +841,7 @@ window.ga = window.ga || function() {};
                         nonce: 'bt_paypal|' + Date.now(),
                         type: 'PayPalAccount',
                         details: {
-                            email: 'paypal@opencart.com',
+                            email: 'paypal@' + (window.location.hostname || 'localhost'),
                             payerId: (tokenizeOpts && tokenizeOpts.payerID) || 'PAYER_LOCAL'
                         }
                     };
@@ -881,17 +897,20 @@ window.ga = window.ga || function() {};
             dropdown.setAttribute('data-oc-enhanced', '1');
             var cfg = getPaymentConfig();
             var memberToken = getURLVar('member_token');
-            var tokenStr = memberToken ? '&member_token=' + memberToken : '';
             var firstLink = dropdown.querySelector('li a');
             if (!memberToken && firstLink && firstLink.href) {
                 var m = firstLink.href.match(/member_token=([a-zA-Z0-9]+)/);
-                if (m) tokenStr = '&member_token=' + m[1];
+                if (m) memberToken = m[1];
             }
+            var safeToken = memberToken ? encodeURIComponent(memberToken) : '';
 
             if (!cfg || !cfg.stripe || cfg.stripe.status) {
                 var stripeMode = (cfg && cfg.stripe && cfg.stripe.environment === 'live') ? 'Live' : 'Test';
                 var liStripe = document.createElement('li');
-                liStripe.innerHTML = '<a href="index.php?route=account/payment/stripe' + tokenStr + '">Stripe (' + stripeMode + ')</a>';
+                var aStripe = document.createElement('a');
+                aStripe.href = 'index.php?route=account/payment/stripe' + (safeToken ? '&member_token=' + safeToken : '');
+                aStripe.textContent = 'Stripe (' + stripeMode + ')';
+                liStripe.appendChild(aStripe);
                 dropdown.insertBefore(liStripe, dropdown.firstChild);
             }
         }
@@ -1095,7 +1114,7 @@ $(document).ready(function() {
                 clearInterval(timer);
 
                 $.ajax({
-                    url: 'index.php?route=common/image&member_token=' + getURLVar('member_token'),
+                    url: 'index.php?route=common/image&member_token=' + encodeURIComponent(getURLVar('member_token')),
                     type: 'post',
                     data: new FormData($('#form-upload')[0]),
                     dataType: 'json',

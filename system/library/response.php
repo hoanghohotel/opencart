@@ -350,7 +350,7 @@ class Response {
 			if (!$has_body_scripts && !$has_datepicker && !$needs_braintree) {
 				$html = str_replace(
 					array(
-						'<script src="application/view/javascript/jquery/jquery-1.12.2.min.js"></script>',
+						'<script src="application/view/javascript/jquery/jquery-3.7.1.min.js"></script>',
 						'<script src="application/view/javascript/bootstrap/js/bootstrap.min.js"></script>',
 						'<script src="application/view/javascript/jquery/datetimepicker/moment.js" type="text/javascript"></script>',
 						'<script src="application/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript"></script>',
@@ -358,7 +358,7 @@ class Response {
 						'<script src="application/view/javascript/csrf.js"></script>'
 					),
 					array(
-						'<script src="application/view/javascript/jquery/jquery-1.12.2.min.js" defer></script>',
+						'<script src="application/view/javascript/jquery/jquery-3.7.1.min.js" defer></script>',
 						'<script src="application/view/javascript/bootstrap/js/bootstrap.min.js" defer></script>',
 						'<script src="application/view/javascript/jquery/datetimepicker/moment.js" type="text/javascript" defer></script>',
 						'<script src="application/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.js" type="text/javascript" defer></script>',

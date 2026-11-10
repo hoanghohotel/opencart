@@ -30,7 +30,17 @@ This project adheres to [Semantic Versioning](https://semver.org/).
   - Added `application/view/javascript/csrf.js` to upgrade legacy same-origin `index.php` AJAX/navigation mutations to `POST` with scoped `member_token` attachment while never leaking tokens to external or admin URLs.
   - Synchronized `defer` loading of `csrf.js` with `jquery` in `system/library/response.php` and localized all new security/checkout messages in `application/language/en-gb/`.
 - **Regression Test Suite (`tests/regression/*`)**:
-  - Added 145 automated regression test cases across `checkout_result_pages.php` (15), `payment_confirmation.php` (65), `frontend_csrf.php` (43), `payment_template_callbacks.js` (8), and `frontend_csrf_client.js` (14).
+  - Added automated regression test suites across `checkout_result_pages.php` (15), `payment_confirmation.php` (65), `frontend_csrf.php` (43), `payment_template_callbacks.js` (8), `frontend_csrf_client.js` (14), and `js_library_compatibility.js`.
+
+#### 3. JavaScript Dependency Upgrades & GitHub Code Scanning (CodeQL) Remediation
+- **Drop-In Compatible Security Upgrades**:
+  - Upgraded **jQuery** across Storefront, Admin, and Installer (`1.12.2` / `3.7.0` -> **`3.7.1`**) with jQuery-3-compatible `bootstrap-datetimepicker`.
+  - Upgraded Storefront **Bootstrap JS** (`3.3.7` -> **`3.4.1`** with built-in XSS HTML sanitizer).
+  - Upgraded **Moment.js** (`2.8.3` / `2.18.1` -> **`2.30.1`**, resolving ReDoS & path traversal CVEs).
+  - Upgraded Admin **CodeMirror** (`5.15.3` -> **`5.65.18`**, resolving `CVE-2020-7760`), **Summernote** (`0.8.18` -> **`0.8.20`**), **Lightbox2** (`2.9.0` -> **`2.11.5`**), **Bootstrap Colorpicker** (`2.3.6` -> **`2.5.3`**), **Braintree Web SDK** (`3.48.0`/`3.76.4` -> **`3.106.0`**), and **intl-tel-input** (`17.0.8` -> **`17.0.21`**).
+- **Removed Dead Legacy Bundles & Fixed Custom JS CodeQL Sinks**:
+  - Removed 159 unused legacy files (`admin/view/javascript/jquery/flot` containing jQuery 1.8.3, `jquery-ui` containing jQuery 1.10.2 & jQuery UI 1.11.4, `jqvmap`, `magnific`, `paypal/bootstrap-switch`, `moment/tests.js`, and `install/view/javascript/cufon`).
+  - Eliminated DOM XSS (`js/xss`, `js/xss-through-dom`) and Polynomial ReDoS (`js/polynomial-redos`) patterns in `application/view/javascript/common.js`, `bbcode.js`, `admin/view/javascript/common.js`, and `install/view/javascript/common.js`, plus enabled `CURLOPT_SSL_VERIFYPEER = true` across `system/library/cloud_storage.php`.
 
 ---
 
@@ -44,7 +54,10 @@ This project adheres to [Semantic Versioning](https://semver.org/).
    - Xóa dòng ghi đè `$this->request->get['member_token']` tại `startup/startup.php`.
    - Bổ sung middleware `startup/csrf` và `error/csrf` chặn mọi thao tác ghi bằng `GET`/`HEAD` (`405 Method Not Allowed`) trên 34 route thay đổi dữ liệu (bao gồm cả `support/seller/send`) và bắt buộc đối chiếu `hash_equals` `member_token` (`403 Forbidden`) với mọi thao tác ghi của thành viên.
    - Tích hợp `application/view/javascript/csrf.js` tương thích hoàn toàn với hệ thống đa ngôn ngữ i18n và cơ chế tối ưu `defer` của `Response::optimizeCoreWebVitals()`.
-   - Đính kèm bộ 145 kịch bản kiểm thử tự động trong `tests/regression/` đạt **100% PASS**.
+   - Đính kèm bộ kiểm thử tự động trong `tests/regression/` đạt **100% PASS**.
+3. **Nâng cấp toàn diện Thư viện JavaScript & Xử lý triệt để GitHub Code Scanning (CodeQL)**:
+   - Nâng cấp đồng bộ **jQuery `3.7.1`** (Frontend, Admin, Install), **Bootstrap JS `3.4.1`**, **Moment.js `2.30.1`**, **CodeMirror `5.65.18`**, **Summernote `0.8.20`**, **Lightbox2 `2.11.5`**, **Bootstrap Colorpicker `2.5.3`**, **Braintree Web SDK `3.106.0`** và **intl-tel-input `17.0.21`** tương thích 100%.
+   - Xóa bỏ 159 tệp thư viện cũ không còn sử dụng (`flot`/jQuery 1.8.3, `jquery-ui` 1.11.4, `jqvmap`, `magnific`, `bootstrap-switch`, `moment/tests.js`, `cufon`) và chuẩn hóa DOM/Regex an toàn chống DOM XSS & ReDoS trong `common.js`, `bbcode.js`.
 
 ---
 
