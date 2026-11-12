@@ -8,6 +8,16 @@
   <div class="container">
     <div class="row">
       <div class="col-md-9">
+        {% if error_warning %}
+          <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+        {% if success %}
+          <div class="alert alert-success"><i class="fa fa-check-circle"></i> {{ success }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
         <h2>{{ text_promotions }}</h2>
         <div class="table-responsive">
           <table class="table table-bordered">
@@ -15,6 +25,8 @@
               <tr>
                 <th class="text-right">{{ column_promotion_id }}</th>
                 <th>{{ column_extension }}</th>
+                <th class="text-right">{{ column_days }}</th>
+                <th class="text-right">{{ column_total }}</th>
                 <th>{{ column_date_start }}</th>
                 <th>{{ column_date_end }}</th>
                 <th>{{ column_order_status }}</th>
@@ -28,16 +40,18 @@
                   <tr>
                     <td class="text-right">{{ promotion.promotion_id }}</td>
                     <td>{{ promotion.extension }}</td>
+                    <td class="text-right">{{ promotion.days }}</td>
+                    <td class="text-right">{{ promotion.total }}</td>
                     <td>{{ promotion.date_start }}</td>
                     <td>{{ promotion.date_end }}</td>
-                    <td>{% if promotion.order_status_id == config_download_status_id %}<span class="label label-success">{{ promotion.order_status }}</span>{% elseif promotion.order_status_id == config_order_status_id %}<span class="label label-warning">{{ promotion.order_status }}</span>{% else %}<span class="label label-danger">{{ promotion.order_status }}</span>{% endif %}</td>
+                    <td>{% if promotion.is_paid %}<span class="label label-success">{{ promotion.order_status }}</span>{% else %}<span class="label label-warning">{{ promotion.order_status }}</span>{% endif %}</td>
                     <td>{{ promotion.date_added }}</td>
-                    <td class="text-right"><a href="{{ promotion.href }}" class="btn btn-info"><i class="fa fa-eye"></i></a></td>
+                    <td class="text-right">{% if promotion.pay %}<a href="{{ promotion.pay }}" class="btn btn-success btn-sm">{{ button_pay }}</a> {% endif %}<a href="{{ promotion.href }}" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a></td>
                   </tr>
                 {% endfor %}
               {% else %}
                 <tr>
-                  <td class="text-center" colspan="7">{{ text_no_results }}</td>
+                  <td class="text-center" colspan="9">{{ text_no_results }}</td>
                 </tr>
               {% endif %}
             </tbody>

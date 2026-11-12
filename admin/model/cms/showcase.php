@@ -14,6 +14,10 @@ class ModelCmsShowcase extends Model {
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "showcase` WHERE showcase_id = '" . (int)$showcase_id . "'");
 	}
 
+	public function approveShowcase($showcase_id) {
+		$this->db->query("UPDATE `" . DB_PREFIX . "showcase` SET status = '1' WHERE showcase_id = '" . (int)$showcase_id . "'");
+	}
+
 	public function getShowcase($showcase_id) {
 		$query = $this->db->query("SELECT * FROM `" . DB_PREFIX . "showcase` WHERE showcase_id = '" . (int)$showcase_id . "'");
 

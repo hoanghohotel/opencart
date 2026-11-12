@@ -15,7 +15,22 @@ class ModelMemberSeller extends Model {
 	}
 
 	public function deleteSeller($member_seller_id) {
+		$seller_info = $this->getSeller($member_seller_id);
+
+		if ($seller_info) {
+			$this->db->query("UPDATE `" . DB_PREFIX . "member` SET seller_status = '0' WHERE member_id = '" . (int)$seller_info['member_id'] . "'");
+		}
+
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "member_seller` WHERE member_seller_id = '" . (int)$member_seller_id . "'");
+	}
+
+	public function approveSeller($member_seller_id) {
+		$seller_info = $this->getSeller($member_seller_id);
+
+		if ($seller_info) {
+			$this->db->query("UPDATE `" . DB_PREFIX . "member_seller` SET status = '1', date_modified = NOW() WHERE member_seller_id = '" . (int)$member_seller_id . "'");
+			$this->db->query("UPDATE `" . DB_PREFIX . "member` SET seller_status = '1' WHERE member_id = '" . (int)$seller_info['member_id'] . "'");
+		}
 	}
 
 	public function getSeller($member_seller_id) {

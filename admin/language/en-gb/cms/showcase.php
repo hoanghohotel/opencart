@@ -3,10 +3,15 @@
 $_['heading_title']      = 'Store Showcase';
 
 // Text
-$_['text_success']       = 'Success: You have modified showcase stores!';
-$_['text_list']          = 'Showcase Store List';
-$_['text_add']           = 'Add Showcase Store';
-$_['text_edit']          = 'Edit Showcase Store';
+$_['text_success']         = 'Success: You have modified showcase stores!';
+$_['text_success_approve'] = 'Success: You have approved the showcase store!';
+$_['text_list']            = 'Showcase Store List';
+$_['text_add']             = 'Add Showcase Store';
+$_['text_edit']            = 'Edit Showcase Store';
+$_['text_pending']         = 'Pending Approval';
+
+// Button
+$_['button_approve']       = 'Approve Showcase';
 
 // Column
 $_['column_image']       = 'Image';

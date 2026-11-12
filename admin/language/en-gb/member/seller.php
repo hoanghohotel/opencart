@@ -4,9 +4,14 @@ $_['heading_title']          = 'Marketplace Sellers';
 
 // Text
 $_['text_success']           = 'Success: You have modified marketplace sellers!';
+$_['text_success_approve']   = 'Success: You have approved the seller account! Their published extensions are now publicly visible.';
 $_['text_list']              = 'Seller List';
 $_['text_add']               = 'Add Seller';
 $_['text_edit']              = 'Edit Seller';
+$_['text_pending']           = 'Pending Approval';
+
+// Button
+$_['button_approve']         = 'Approve Seller';
 
 // Column
 $_['column_username']        = 'Member Username';

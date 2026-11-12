@@ -149,6 +149,14 @@ class ControllerAccountMenu extends Controller {
 				'tooltip' => $this->language->get('text_menu_transaction_tip'),
 				'href'    => $this->url->link('account/transaction', $token, true)
 			);
+
+			$extension_children[] = array(
+				'value'   => 'account/promotion',
+				'icon'    => 'bullhorn',
+				'text'    => $this->language->get('text_menu_promotion'),
+				'tooltip' => $this->language->get('text_menu_promotion_tip'),
+				'href'    => $this->url->link('account/promotion', $token, true)
+			);
 		}
 
 		$extension_children[] = array(

@@ -3,6 +3,16 @@
   <div class="container">
     <div class="row">
       <div class="col-md-9">
+        {% if error_warning %}
+          <div class="alert alert-danger hidden-print"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+        {% if success %}
+          <div class="alert alert-success hidden-print"><i class="fa fa-check-circle"></i> {{ success }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
         <div class="row">
           <div class="col-xs-6">
             <div><img src="{{ store_logo_url }}" title="{{ title }}" alt="{{ logo }}" /></div>
@@ -112,6 +122,11 @@
           <hr />
           <div class="visible-print-block"><small>&copy; {{ text_copyright }} {{ 'now'|date('Y') }} {{ store_name }}</small></div>
           <div class="hidden-print"><a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a>
+            {% if not is_paid %}
+              <form action="{{ pay_action }}" method="post" style="display: inline;">
+                <button type="submit" class="btn btn-success btn-lg"><i class="fa fa-credit-card"></i> {{ button_pay }}</button>
+              </form>
+            {% endif %}
             <button type="button" onclick="window.print();" class="btn btn-danger btn-lg"><i class="fa fa-print"></i> {{ button_print }}</button>
           </div>
         </div>

@@ -13,13 +13,13 @@ class ModelMarketplaceExtension extends Model {
 	}
 
 	public function getExtension($extension_id) {
-		$query = $this->db->query("SELECT DISTINCT e.*, ec.name AS category, m.username, m.image AS member_image, m.date_added AS member_date_added, m.partner_status, m.email AS member_email, (SELECT ms.support_email FROM `" . DB_PREFIX . "member_seller` ms WHERE ms.member_id = e.member_id LIMIT 1) AS support_email, (SELECT COUNT(*) FROM `" . DB_PREFIX . "extension_comment` ecm WHERE ecm.extension_id = e.extension_id AND ecm.parent_id = '0' AND ecm.status = '1') AS comment_total FROM `" . DB_PREFIX . "extension` e LEFT JOIN `" . DB_PREFIX . "extension_category` ec ON (e.extension_category_id = ec.extension_category_id) LEFT JOIN `" . DB_PREFIX . "member` m ON (e.member_id = m.member_id) WHERE e.extension_id = '" . (int)$extension_id . "'");
+		$query = $this->db->query("SELECT DISTINCT e.*, ec.name AS category, m.username, m.image AS member_image, m.date_added AS member_date_added, m.partner_status, m.seller_status, m.email AS member_email, (SELECT ms.support_email FROM `" . DB_PREFIX . "member_seller` ms WHERE ms.member_id = e.member_id LIMIT 1) AS support_email, (SELECT COUNT(*) FROM `" . DB_PREFIX . "extension_comment` ecm WHERE ecm.extension_id = e.extension_id AND ecm.parent_id = '0' AND ecm.status = '1') AS comment_total FROM `" . DB_PREFIX . "extension` e LEFT JOIN `" . DB_PREFIX . "extension_category` ec ON (e.extension_category_id = ec.extension_category_id) LEFT JOIN `" . DB_PREFIX . "member` m ON (e.member_id = m.member_id) WHERE e.extension_id = '" . (int)$extension_id . "'");
 
 		return $query->row;
 	}
 
 	public function getExtensions($data = array()) {
-		$sql = "SELECT e.*, ec.name AS category, m.username, m.image AS member_image, m.date_added AS member_date_added, m.partner_status, (SELECT COUNT(*) FROM `" . DB_PREFIX . "extension_comment` ecm WHERE ecm.extension_id = e.extension_id AND ecm.parent_id = '0' AND ecm.status = '1') AS comment_total FROM `" . DB_PREFIX . "extension` e LEFT JOIN `" . DB_PREFIX . "extension_category` ec ON (e.extension_category_id = ec.extension_category_id) LEFT JOIN `" . DB_PREFIX . "member` m ON (e.member_id = m.member_id) WHERE 1=1";
+		$sql = "SELECT e.*, ec.name AS category, m.username, m.image AS member_image, m.date_added AS member_date_added, m.partner_status, m.seller_status, (SELECT COUNT(*) FROM `" . DB_PREFIX . "extension_comment` ecm WHERE ecm.extension_id = e.extension_id AND ecm.parent_id = '0' AND ecm.status = '1') AS comment_total FROM `" . DB_PREFIX . "extension` e LEFT JOIN `" . DB_PREFIX . "extension_category` ec ON (e.extension_category_id = ec.extension_category_id) LEFT JOIN `" . DB_PREFIX . "member` m ON (e.member_id = m.member_id) WHERE 1=1";
 
 		if (empty($data['ignore_status'])) {
 			if (isset($data['filter_status']) && $data['filter_status'] !== '') {
@@ -33,6 +33,8 @@ class ModelMarketplaceExtension extends Model {
 			} else {
 				$sql .= " AND e.publish = '1'";
 			}
+
+			$sql .= " AND m.seller_status = '1'";
 		}
 
 		if (!empty($data['filter_category_id'])) {
@@ -155,6 +157,8 @@ class ModelMarketplaceExtension extends Model {
 			} else {
 				$sql .= " AND e.publish = '1'";
 			}
+
+			$sql .= " AND m.seller_status = '1'";
 		}
 
 		if (!empty($data['filter_category_id'])) {
@@ -217,7 +221,9 @@ class ModelMarketplaceExtension extends Model {
 	}
 
 	public function getPromotions($extension_category_id = 0, $limit = 3) {
-		$sql = "SELECT DISTINCT e.*, ec.name AS category, m.username, m.partner_status, (SELECT COUNT(*) FROM `" . DB_PREFIX . "extension_comment` ecm WHERE ecm.extension_id = e.extension_id AND ecm.parent_id = '0' AND ecm.status = '1') AS comment_total FROM `" . DB_PREFIX . "extension` e LEFT JOIN `" . DB_PREFIX . "extension_category` ec ON (e.extension_category_id = ec.extension_category_id) LEFT JOIN `" . DB_PREFIX . "member` m ON (e.member_id = m.member_id) LEFT JOIN `" . DB_PREFIX . "extension_promotion` ep ON (e.extension_id = ep.extension_id AND ep.status = '1' AND ep.date_start <= NOW() AND ep.date_end >= NOW()) WHERE e.status = '1' AND e.publish = '1'";
+		$complete_status_id = (int)$this->config->get('config_complete_status_id') ? (int)$this->config->get('config_complete_status_id') : 5;
+
+		$sql = "SELECT DISTINCT e.*, ec.name AS category, m.username, m.partner_status, m.seller_status, (SELECT COUNT(*) FROM `" . DB_PREFIX . "extension_comment` ecm WHERE ecm.extension_id = e.extension_id AND ecm.parent_id = '0' AND ecm.status = '1') AS comment_total FROM `" . DB_PREFIX . "extension` e LEFT JOIN `" . DB_PREFIX . "extension_category` ec ON (e.extension_category_id = ec.extension_category_id) LEFT JOIN `" . DB_PREFIX . "member` m ON (e.member_id = m.member_id) LEFT JOIN `" . DB_PREFIX . "extension_promotion` ep ON (e.extension_id = ep.extension_id AND ep.status = '1' AND ep.order_status_id = '" . (int)$complete_status_id . "' AND ep.date_start <= NOW() AND ep.date_end >= NOW()) WHERE e.status = '1' AND e.publish = '1' AND m.seller_status = '1'";
 
 		if ($extension_category_id) {
 			$sql .= " AND e.extension_category_id = '" . (int)$extension_category_id . "'";

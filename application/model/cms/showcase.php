@@ -83,7 +83,7 @@ class ModelCmsShowcase extends Model {
 	}
 
 	public function editShowcase($showcase_id, $data) {
-		$this->db->query("UPDATE `" . DB_PREFIX . "showcase` SET showcase_category_id = '" . (int)(isset($data['showcase_category_id']) ? $data['showcase_category_id'] : 0) . "', name = '" . $this->db->escape(isset($data['name']) ? $data['name'] : '') . "', link = '" . $this->db->escape(isset($data['link']) ? $data['link'] : '') . "', image = '" . $this->db->escape(isset($data['image']) ? $data['image'] : '') . "', date_launch = '" . $this->db->escape(isset($data['date_launch']) ? $data['date_launch'] : date('Y-m-d')) . "' WHERE showcase_id = '" . (int)$showcase_id . "' AND member_id = '" . (int)$this->member->getId() . "'");
+		$this->db->query("UPDATE `" . DB_PREFIX . "showcase` SET showcase_category_id = '" . (int)(isset($data['showcase_category_id']) ? $data['showcase_category_id'] : 0) . "', name = '" . $this->db->escape(isset($data['name']) ? $data['name'] : '') . "', link = '" . $this->db->escape(isset($data['link']) ? $data['link'] : '') . "', image = '" . $this->db->escape(isset($data['image']) ? $data['image'] : '') . "', date_launch = '" . $this->db->escape(isset($data['date_launch']) ? $data['date_launch'] : date('Y-m-d')) . "', status = '0' WHERE showcase_id = '" . (int)$showcase_id . "' AND member_id = '" . (int)$this->member->getId() . "'");
 	}
 
 	public function deleteShowcase($showcase_id) {

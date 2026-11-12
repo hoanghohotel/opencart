@@ -20,6 +20,9 @@
             <button type="button" class="close" data-dismiss="alert">&times;</button>
           </div>
         {% endif %}
+        {% if not seller_approved %}
+          <div class="alert alert-warning"><i class="fa fa-clock-o"></i> {{ text_seller_pending_notice }} <a href="{{ seller_apply_href }}" class="alert-link">{{ text_seller_account_link }}</a></div>
+        {% endif %}
         <form action="{{ delete }}" method="post" enctype="multipart/form-data" id="form-extension">
           <div class="table-responsive">
             <table id="extension-list" class="table table-bordered table-hover">
@@ -36,7 +39,7 @@
                   {% for extension in extensions %}
                     <tr>
                       <td class="text-left">{{ extension.name }}</td>
-                      <td class="text-left">{% if extension.publish %}<span class="label label-success">{{ text_enabled }}</span> {% else %} <span class="label label-danger">{{ text_disabled }}</span> {% endif %} </td>
+                      <td class="text-left">{% if extension.publish and extension.status and seller_approved %}<span class="label label-success">{{ text_enabled }}</span>{% elseif extension.publish %}<span class="label label-warning">{{ text_pending_approval }}</span>{% else %}<span class="label label-danger">{{ text_disabled }}</span>{% endif %}</td>
                       <td class="text-left">{{ extension.date_added }}</td>
                       <td class="text-right"><a href="{{ extension.view }}" class="btn btn-info">{{ button_view }}</a> <a href="{{ extension.edit }}" class="btn btn-primary">{{ button_edit }}</a> <button type="submit" formaction="{{ extension.delete }}" data-csrf-post="{{ extension.delete }}" onclick="return confirm('{{ text_confirm }}')" class="btn btn-danger">{{ button_delete }}</button></td>
                     </tr>

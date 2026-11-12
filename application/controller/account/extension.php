@@ -35,6 +35,9 @@ class ControllerAccountExtension extends Controller {
 			$data['success'] = '';
 		}
 
+		$data['seller_approved'] = $this->member->isSeller();
+		$data['seller_apply_href'] = $this->url->link('account/seller', 'member_token=' . $this->session->data['member_token'], true);
+
 		$data['extensions'] = array();
 
 		$filter_data = array(
@@ -54,6 +57,7 @@ class ControllerAccountExtension extends Controller {
 				'extension_id' => $result['extension_id'],
 				'name'         => $result['name'],
 				'publish'      => $result['publish'],
+				'status'       => $result['status'],
 				'date_added'   => date($this->language->get('date_format_short'), strtotime($result['date_added'])),
 				'view'         => $this->url->link('marketplace/extension/info', 'extension_id=' . $result['extension_id']),
 				'edit'         => $this->url->link('account/extension/edit', 'member_token=' . $this->session->data['member_token'] . '&extension_id=' . $result['extension_id'], true),
@@ -106,7 +110,11 @@ class ControllerAccountExtension extends Controller {
 
 			$this->model_marketplace_extension->addExtension($post_data);
 
-			$this->session->data['success'] = $this->language->get('text_success_add');
+			if ($this->member->isSeller()) {
+				$this->session->data['success'] = $this->language->get('text_success_add');
+			} else {
+				$this->session->data['success'] = $this->language->get('text_success_add_pending');
+			}
 
 			$this->response->redirect($this->url->link('account/extension', 'member_token=' . $this->session->data['member_token'], true));
 		}

@@ -325,8 +325,9 @@ class ControllerSaleOrder extends Controller {
 		$order_id = isset($this->request->get['order_id']) ? (int)$this->request->get['order_id'] : 0;
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && isset($this->request->post['order_status_id']) && $this->user->hasPermission('modify', 'sale/order')) {
-			$this->model_sale_order->updateOrderStatus($order_id, $this->request->post['order_status_id']);
-			$this->session->data['success'] = $this->language->get('text_success');
+			$comment = isset($this->request->post['comment']) ? $this->request->post['comment'] : '';
+			$this->model_sale_order->updateOrderStatus($order_id, $this->request->post['order_status_id'], $comment);
+			$this->session->data['success'] = $this->language->get('text_success_status_email');
 			$this->response->redirect($this->url->link('sale/order/info', 'user_token=' . $this->session->data['user_token'] . '&order_id=' . $order_id, true));
 		}
 

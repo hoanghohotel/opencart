@@ -68,6 +68,55 @@ class ControllerMarketplacePromotion extends Controller {
 		$this->getList();
 	}
 
+	public function approve() {
+		$this->load->language('marketplace/promotion');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('marketplace/promotion');
+
+		if (isset($this->request->get['promotion_id']) && $this->validateForm()) {
+			$this->model_marketplace_promotion->approvePayment((int)$this->request->get['promotion_id']);
+
+			$this->session->data['success'] = $this->language->get('text_success_approve');
+
+			$this->response->redirect($this->url->link('marketplace/promotion', 'user_token=' . $this->session->data['user_token'], true));
+		}
+
+		$this->getList();
+	}
+
+	public function savePrices() {
+		$this->load->language('marketplace/promotion');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('marketplace/promotion');
+
+		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validateForm()) {
+			$price_keys = array(
+				'config_promotion_price_1w' => '49.00',
+				'config_promotion_price_1m' => '149.00',
+				'config_promotion_price_3m' => '399.00',
+				'config_promotion_price_6m' => '699.00',
+				'config_promotion_price_1y' => '1199.00'
+			);
+
+			foreach ($price_keys as $key => $default) {
+				$val = isset($this->request->post[$key]) && is_numeric($this->request->post[$key]) && (float)$this->request->post[$key] >= 0 ? number_format((float)$this->request->post[$key], 2, '.', '') : $default;
+				$this->db->query("DELETE FROM `" . DB_PREFIX . "setting` WHERE store_id = '0' AND `code` = 'config' AND `key` = '" . $this->db->escape($key) . "'");
+				$this->db->query("INSERT INTO `" . DB_PREFIX . "setting` SET store_id = '0', `code` = 'config', `key` = '" . $this->db->escape($key) . "', `value` = '" . $this->db->escape($val) . "', serialized = '0'");
+				$this->config->set($key, $val);
+			}
+
+			$this->session->data['success'] = $this->language->get('text_success_prices');
+
+			$this->response->redirect($this->url->link('marketplace/promotion', 'user_token=' . $this->session->data['user_token'], true));
+		}
+
+		$this->getList();
+	}
+
 	protected function getList() {
 		$page = isset($this->request->get['page']) ? (int)$this->request->get['page'] : 1;
 
@@ -85,6 +134,15 @@ class ControllerMarketplacePromotion extends Controller {
 
 		$data['add'] = $this->url->link('marketplace/promotion/add', 'user_token=' . $this->session->data['user_token'], true);
 		$data['delete'] = $this->url->link('marketplace/promotion/delete', 'user_token=' . $this->session->data['user_token'], true);
+		$data['save_prices'] = $this->url->link('marketplace/promotion/savePrices', 'user_token=' . $this->session->data['user_token'], true);
+
+		$data['config_promotion_price_1w'] = $this->config->get('config_promotion_price_1w') !== null && $this->config->get('config_promotion_price_1w') !== '' ? $this->config->get('config_promotion_price_1w') : '49.00';
+		$data['config_promotion_price_1m'] = $this->config->get('config_promotion_price_1m') !== null && $this->config->get('config_promotion_price_1m') !== '' ? $this->config->get('config_promotion_price_1m') : '149.00';
+		$data['config_promotion_price_3m'] = $this->config->get('config_promotion_price_3m') !== null && $this->config->get('config_promotion_price_3m') !== '' ? $this->config->get('config_promotion_price_3m') : '399.00';
+		$data['config_promotion_price_6m'] = $this->config->get('config_promotion_price_6m') !== null && $this->config->get('config_promotion_price_6m') !== '' ? $this->config->get('config_promotion_price_6m') : '699.00';
+		$data['config_promotion_price_1y'] = $this->config->get('config_promotion_price_1y') !== null && $this->config->get('config_promotion_price_1y') !== '' ? $this->config->get('config_promotion_price_1y') : '1199.00';
+
+		$complete_status_id = (int)$this->config->get('config_download_status_id') ? (int)$this->config->get('config_download_status_id') : ((int)$this->config->get('config_complete_status_id') ? (int)$this->config->get('config_complete_status_id') : 5);
 
 		$data['promotions'] = array();
 
@@ -98,6 +156,8 @@ class ControllerMarketplacePromotion extends Controller {
 		$results = $this->model_marketplace_promotion->getPromotions($filter_data);
 
 		foreach ($results as $result) {
+			$is_paid = ((int)$result['status'] === 1 && (int)$result['order_status_id'] === $complete_status_id);
+
 			$data['promotions'][] = array(
 				'promotion_id' => $result['promotion_id'],
 				'extension'    => $result['extension_name'],
@@ -106,7 +166,10 @@ class ControllerMarketplacePromotion extends Controller {
 				'total'        => $this->currency->format($result['total'], $this->config->get('config_currency')),
 				'date_start'   => $result['date_start'],
 				'date_end'     => $result['date_end'],
-				'status'       => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'is_paid'      => $is_paid,
+				'order_status' => !empty($result['order_status']) ? $result['order_status'] : ($is_paid ? $this->language->get('text_paid_active') : $this->language->get('text_pending_payment')),
+				'status'       => $is_paid ? $this->language->get('text_paid_active') : $this->language->get('text_pending_payment'),
+				'approve'      => !$is_paid ? $this->url->link('marketplace/promotion/approve', 'user_token=' . $this->session->data['user_token'] . '&promotion_id=' . $result['promotion_id'], true) : '',
 				'edit'         => $this->url->link('marketplace/promotion/edit', 'user_token=' . $this->session->data['user_token'] . '&promotion_id=' . $result['promotion_id'], true)
 			);
 		}

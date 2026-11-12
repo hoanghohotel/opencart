@@ -1,0 +1,79 @@
+{{ header }}
+<div id="account-promotion-form">
+  <div class="page-header">
+    <div class="container">
+      <h1>{{ heading_add }}</h1>
+      <p>{{ text_add_desc }}</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9">
+        {% if error_warning %}
+          <div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error_warning }}
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+          </div>
+        {% endif %}
+        <form action="{{ action }}" method="post" enctype="multipart/form-data">
+          <fieldset>
+            <legend>{{ heading_add }}</legend>
+            <div class="form-group required">
+              <label class="control-label" for="input-extension">{{ entry_extension }}</label>
+              <select name="extension_id" id="input-extension" class="form-control">
+                <option value="0">---</option>
+                {% for extension in extensions %}
+                  {% if extension.extension_id == extension_id %}
+                    <option value="{{ extension.extension_id }}" selected="selected">{{ extension.name }}</option>
+                  {% else %}
+                    <option value="{{ extension.extension_id }}">{{ extension.name }}</option>
+                  {% endif %}
+                {% endfor %}
+              </select>
+              {% if error_extension %}
+                <div class="text-danger">{{ error_extension }}</div>
+              {% endif %}
+            </div>
+
+            <div class="form-group required">
+              <label class="control-label">{{ entry_package }}</label>
+              <div class="list-group">
+                {% for pkg in packages %}
+                  <label class="list-group-item" style="cursor: pointer;">
+                    <input type="radio" name="package" value="{{ pkg.code }}" {% if pkg.code == selected_package %}checked="checked"{% endif %} />
+                    <strong>{{ pkg.label }}</strong>
+                    <span class="badge">{{ pkg.price_formatted }}</span>
+                  </label>
+                {% endfor %}
+              </div>
+              {% if error_package %}
+                <div class="text-danger">{{ error_package }}</div>
+              {% endif %}
+            </div>
+
+            <div class="form-group required">
+              <label class="control-label">{{ entry_payment_option }}</label>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="payment_option" value="balance" {% if payment_option == 'balance' %}checked="checked"{% endif %} />
+                  {{ text_pay_balance_formatted }}
+                </label>
+              </div>
+              <div class="radio">
+                <label>
+                  <input type="radio" name="payment_option" value="invoice" {% if payment_option != 'balance' %}checked="checked"{% endif %} />
+                  {{ text_pay_invoice }}
+                </label>
+              </div>
+            </div>
+          </fieldset>
+          <div class="text-right">
+            <a href="{{ cancel }}" class="btn btn-link">{{ button_cancel }}</a>
+            <button type="submit" class="btn btn-primary"><i class="fa fa-check"></i> {{ button_confirm_pay }}</button>
+          </div>
+        </form>
+      </div>
+      <div class="col-md-3 hidden-xs">{{ menu }}</div>
+    </div>
+  </div>
+</div>
+{{ footer }}

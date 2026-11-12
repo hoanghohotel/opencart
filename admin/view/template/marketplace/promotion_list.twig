@@ -24,6 +24,40 @@
       <button type="button" class="close" data-dismiss="alert">&times;</button>
     </div>
     {% endif %}
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-tags"></i> {{ text_package_prices }}</h3>
+      </div>
+      <div class="panel-body">
+        <form action="{{ save_prices }}" method="post" class="form-horizontal">
+          <div class="row">
+            <div class="col-sm-2">
+              <label class="control-label">{{ entry_price_1w }}</label>
+              <input type="text" name="config_promotion_price_1w" value="{{ config_promotion_price_1w }}" class="form-control" />
+            </div>
+            <div class="col-sm-2">
+              <label class="control-label">{{ entry_price_1m }}</label>
+              <input type="text" name="config_promotion_price_1m" value="{{ config_promotion_price_1m }}" class="form-control" />
+            </div>
+            <div class="col-sm-2">
+              <label class="control-label">{{ entry_price_3m }}</label>
+              <input type="text" name="config_promotion_price_3m" value="{{ config_promotion_price_3m }}" class="form-control" />
+            </div>
+            <div class="col-sm-2">
+              <label class="control-label">{{ entry_price_6m }}</label>
+              <input type="text" name="config_promotion_price_6m" value="{{ config_promotion_price_6m }}" class="form-control" />
+            </div>
+            <div class="col-sm-2">
+              <label class="control-label">{{ entry_price_1y }}</label>
+              <input type="text" name="config_promotion_price_1y" value="{{ config_promotion_price_1y }}" class="form-control" />
+            </div>
+            <div class="col-sm-2" style="padding-top: 25px;">
+              <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-save"></i> {{ button_save_prices }}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-list"></i> {{ text_list }}</h3>
@@ -60,8 +94,8 @@
                   <td class="text-right">{{ promotion.total }}</td>
                   <td class="text-left">{{ promotion.date_start }}</td>
                   <td class="text-left">{{ promotion.date_end }}</td>
-                  <td class="text-left">{{ promotion.status }}</td>
-                  <td class="text-right"><a href="{{ promotion.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                  <td class="text-left">{% if promotion.is_paid %}<span class="label label-success">{{ promotion.status }}</span>{% else %}<span class="label label-warning">{{ promotion.status }}</span>{% endif %}</td>
+                  <td class="text-right">{% if promotion.approve %}<a href="{{ promotion.approve }}" data-toggle="tooltip" title="{{ button_approve }}" class="btn btn-success"><i class="fa fa-check"></i></a> {% endif %}<a href="{{ promotion.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                 </tr>
                 {% endfor %}
                 {% else %}

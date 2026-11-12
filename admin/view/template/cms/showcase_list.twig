@@ -58,8 +58,8 @@
                   <td class="text-left">{{ showcase.category }}</td>
                   <td class="text-left"><a href="{{ showcase.link }}" target="_blank">{{ showcase.link }}</a></td>
                   <td class="text-left">{{ showcase.date_launch }}</td>
-                  <td class="text-left">{{ showcase.status }}</td>
-                  <td class="text-right"><a href="{{ showcase.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                  <td class="text-left">{% if showcase.status_id %}<span class="label label-success">{{ showcase.status }}</span>{% else %}<span class="label label-warning">{{ showcase.status }}</span>{% endif %}</td>
+                  <td class="text-right">{% if showcase.approve %}<a href="{{ showcase.approve }}" data-toggle="tooltip" title="{{ button_approve }}" class="btn btn-success"><i class="fa fa-check"></i></a> {% endif %}<a href="{{ showcase.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                 </tr>
                 {% endfor %}
                 {% else %}

@@ -15,7 +15,22 @@ class ModelMemberPartner extends Model {
 	}
 
 	public function deletePartner($member_partner_id) {
+		$partner_info = $this->getPartner($member_partner_id);
+
+		if ($partner_info) {
+			$this->db->query("UPDATE `" . DB_PREFIX . "member` SET partner_status = '0' WHERE member_id = '" . (int)$partner_info['member_id'] . "'");
+		}
+
 		$this->db->query("DELETE FROM `" . DB_PREFIX . "member_partner` WHERE member_partner_id = '" . (int)$member_partner_id . "'");
+	}
+
+	public function approvePartner($member_partner_id) {
+		$partner_info = $this->getPartner($member_partner_id);
+
+		if ($partner_info) {
+			$this->db->query("UPDATE `" . DB_PREFIX . "member_partner` SET status = '1', date_modified = NOW() WHERE member_partner_id = '" . (int)$member_partner_id . "'");
+			$this->db->query("UPDATE `" . DB_PREFIX . "member` SET partner_status = '1' WHERE member_id = '" . (int)$partner_info['member_id'] . "'");
+		}
 	}
 
 	public function getPartner($member_partner_id) {

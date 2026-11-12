@@ -46,8 +46,9 @@ $_['text_agree']                = 'I agree with the above terms &amp; conditions
 $_['text_yes']                  = 'Yes';
 $_['text_no']                   = 'No';
 $_['text_none']                 = ' --- None --- ';
-$_['text_success_add']          = 'Success: Your seller account has been created!';
+$_['text_success_add']          = 'Success: Your seller application has been submitted and is pending administrator approval! Once approved, your extensions will become publicly visible on the marketplace.';
 $_['text_success_edit']         = 'Success: Your seller account has been updated!';
+$_['text_pending_approval']     = 'Your seller account application is currently pending administrator approval. Your extensions will become publicly visible on the marketplace once your seller account is approved.';
 
 // Entry
 $_['entry_firstname']           = 'First Name';

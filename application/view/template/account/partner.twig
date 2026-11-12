@@ -11,6 +11,9 @@
               <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
           {% endif %}
+          {% if partner_pending %}
+            <div class="alert alert-warning"><i class="fa fa-clock-o"></i> {{ text_pending_approval }}</div>
+          {% endif %}
 
 
           <fieldset>

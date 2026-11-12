@@ -192,7 +192,7 @@ class ControllerSupportPartner extends Controller {
 
 		$partner_info = $this->model_account_partner->getPartner($partner_id);
 
-		if ($partner_info) {
+		if ($partner_info && (!empty($partner_info['status']) || ($this->member->isLogged() && $this->member->getId() == $partner_info['member_id']))) {
 			$store_name = $this->config->get('config_name') ?: 'Store';
 
 			$this->document->setTitle(sprintf(str_replace('{store_name}', $store_name, $this->language->get('heading_title_info')), $partner_info['company']));
@@ -238,6 +238,7 @@ class ControllerSupportPartner extends Controller {
 
 			$showcase_results = $this->model_cms_showcase->getShowcases(array(
 				'filter_member_id' => $partner_info['member_id'],
+				'filter_status'    => 1,
 				'start'            => 0,
 				'limit'            => 3
 			));
@@ -284,7 +285,7 @@ class ControllerSupportPartner extends Controller {
 
 		$partner_info = $this->model_account_partner->getPartner($partner_id);
 
-		if ($partner_info) {
+		if ($partner_info && (!empty($partner_info['status']) || ($this->member->isLogged() && $this->member->getId() == $partner_info['member_id']))) {
 			$this->document->setTitle(sprintf($this->language->get('heading_title_contact'), $partner_info['company']));
 
 			if ($this->member->isLogged()) {

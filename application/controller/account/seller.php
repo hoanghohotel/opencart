@@ -146,6 +146,8 @@ class ControllerAccountSeller extends Controller {
 
 		$seller_info = $this->model_account_seller->getSeller($this->member->getId());
 
+		$data['seller_pending'] = (!empty($seller_info) && empty($seller_info['status']));
+
 		if (!$seller_info) {
 			$this->load->model('account/member');
 			$member_info = $this->model_account_member->getMember($this->member->getId());

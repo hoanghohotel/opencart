@@ -68,6 +68,24 @@ class ControllerCmsShowcase extends Controller {
 		$this->getList();
 	}
 
+	public function approve() {
+		$this->load->language('cms/showcase');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('cms/showcase');
+
+		if (isset($this->request->get['showcase_id']) && $this->validateDelete()) {
+			$this->model_cms_showcase->approveShowcase((int)$this->request->get['showcase_id']);
+
+			$this->session->data['success'] = $this->language->get('text_success_approve');
+
+			$this->response->redirect($this->url->link('cms/showcase', 'user_token=' . $this->session->data['user_token'], true));
+		}
+
+		$this->getList();
+	}
+
 	protected function getList() {
 		$page = isset($this->request->get['page']) ? (int)$this->request->get['page'] : 1;
 
@@ -112,7 +130,9 @@ class ControllerCmsShowcase extends Controller {
 				'category'    => $result['category_name'],
 				'link'        => $result['link'],
 				'date_launch' => $result['date_launch'],
-				'status'      => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'status_id'   => (int)$result['status'],
+				'status'      => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_pending'),
+				'approve'     => !$result['status'] ? $this->url->link('cms/showcase/approve', 'user_token=' . $this->session->data['user_token'] . '&showcase_id=' . $result['showcase_id'], true) : '',
 				'edit'        => $this->url->link('cms/showcase/edit', 'user_token=' . $this->session->data['user_token'] . '&showcase_id=' . $result['showcase_id'], true)
 			);
 		}

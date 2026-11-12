@@ -31,8 +31,9 @@ $_['text_terms_6']                   = '(6) events beyond the reasonable control
 $_['text_terms_7']                   = '(7) loss of use, data, profits, goodwill, or other intangible losses, resulting from the use or the inability to use any or all of {store_name} Services.';
 $_['text_agree']                     = 'I agree with the above terms & conditions';
 $_['text_none']                      = ' --- None --- ';
-$_['text_success_add']               = 'Success: Your partner application has been submitted!';
+$_['text_success_add']               = 'Success: Your partner application has been submitted and is pending administrator approval!';
 $_['text_success_edit']              = 'Success: Your partner information has been updated!';
+$_['text_pending_approval']          = 'Your partner application is currently pending administrator approval. Your partner profile will become publicly listed once approved.';
 
 // Entry
 $_['entry_firstname']                = 'First Name';

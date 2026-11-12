@@ -114,7 +114,12 @@ class ControllerSettingSetting extends Controller {
 			'config_storage_prefix',
 			'config_storage_public_url',
 			'config_storage_acl',
-			'config_storage_keep_local'
+			'config_storage_keep_local',
+			'config_promotion_price_1w',
+			'config_promotion_price_1m',
+			'config_promotion_price_3m',
+			'config_promotion_price_6m',
+			'config_promotion_price_1y'
 		);
 
 		foreach ($config_fields as $field) {
@@ -122,6 +127,20 @@ class ControllerSettingSetting extends Controller {
 				$data[$field] = $this->request->post[$field];
 			} else {
 				$data[$field] = $this->config->get($field);
+			}
+		}
+
+		$promotion_defaults = array(
+			'config_promotion_price_1w' => '49.00',
+			'config_promotion_price_1m' => '149.00',
+			'config_promotion_price_3m' => '399.00',
+			'config_promotion_price_6m' => '699.00',
+			'config_promotion_price_1y' => '1199.00'
+		);
+
+		foreach ($promotion_defaults as $promo_key => $promo_default) {
+			if ($data[$promo_key] === null || $data[$promo_key] === '') {
+				$data[$promo_key] = $promo_default;
 			}
 		}
 

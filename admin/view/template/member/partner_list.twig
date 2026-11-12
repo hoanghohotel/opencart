@@ -58,8 +58,8 @@
                   <td class="text-left">{{ partner.partner_type }}</td>
                   <td class="text-left"><span class="label label-info">{{ partner.partner_tier }}</span></td>
                   <td class="text-left">{{ partner.country }}</td>
-                  <td class="text-left">{{ partner.status }}</td>
-                  <td class="text-right"><a href="{{ partner.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                  <td class="text-left">{% if partner.status_id %}<span class="label label-success">{{ partner.status }}</span>{% else %}<span class="label label-warning">{{ partner.status }}</span>{% endif %}</td>
+                  <td class="text-right">{% if partner.approve %}<a href="{{ partner.approve }}" data-toggle="tooltip" title="{{ button_approve }}" class="btn btn-success"><i class="fa fa-check"></i></a> {% endif %}<a href="{{ partner.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                 </tr>
                 {% endfor %}
                 {% else %}

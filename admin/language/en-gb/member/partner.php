@@ -4,9 +4,14 @@ $_['heading_title']           = 'Certified Partners';
 
 // Text
 $_['text_success']            = 'Success: You have modified certified partners!';
+$_['text_success_approve']    = 'Success: You have approved the certified partner!';
 $_['text_list']               = 'Partner List';
 $_['text_add']                = 'Add Partner';
 $_['text_edit']               = 'Edit Partner';
+$_['text_pending']            = 'Pending Approval';
+
+// Button
+$_['button_approve']          = 'Approve Partner';
 
 // Column
 $_['column_image']            = 'Logo';

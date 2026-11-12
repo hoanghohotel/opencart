@@ -318,7 +318,7 @@ class ControllerMarketplaceExtension extends Controller {
 
 		$extension_info = $this->model_marketplace_extension->getExtension($extension_id);
 
-		if ($extension_info && ($extension_info['status'] || ($this->member->isLogged() && $this->member->getId() == $extension_info['member_id']))) {
+		if ($extension_info && (($extension_info['status'] && $extension_info['publish'] && !empty($extension_info['seller_status'])) || ($this->member->isLogged() && $this->member->getId() == $extension_info['member_id']))) {
 			$this->document->setTitle(sprintf($this->language->get('text_extension_title'), $extension_info['name']));
 
 			$this->document->addStyle('application/view/javascript/lightbox/css/lightbox.css');

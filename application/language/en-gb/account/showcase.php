@@ -7,11 +7,12 @@ $_['heading_form']          = 'Showcase Info';
 $_['text_submit_store']     = 'Submit your store';
 $_['text_showcase_details'] = 'Showcase Details';
 $_['text_screenshot']       = 'Screenshot';
-$_['text_enabled']          = 'Enabled';
+$_['text_enabled']          = 'Approved';
 $_['text_disabled']         = 'Disabled';
+$_['text_pending']          = 'Pending Admin Approval';
 $_['text_no_results']       = 'No results!';
 $_['text_select']           = ' --- Please Select ---';
-$_['text_success_add']      = 'Success: You have submitted your project to the showcase!';
+$_['text_success_add']      = 'Success: You have submitted your project to the showcase! It will be published once approved by an administrator.';
 $_['text_success_delete']   = 'Success: Your showcase project has been deleted!';
 
 // Entry

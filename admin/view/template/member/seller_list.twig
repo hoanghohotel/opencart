@@ -58,8 +58,8 @@
                   <td class="text-left">{{ seller.email }}</td>
                   <td class="text-left">{{ seller.seller_group }}</td>
                   <td class="text-right">{{ seller.commission }}</td>
-                  <td class="text-left">{{ seller.status }}</td>
-                  <td class="text-right"><a href="{{ seller.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
+                  <td class="text-left">{% if seller.status_id %}<span class="label label-success">{{ seller.status }}</span>{% else %}<span class="label label-warning">{{ seller.status }}</span>{% endif %}</td>
+                  <td class="text-right">{% if seller.approve %}<a href="{{ seller.approve }}" data-toggle="tooltip" title="{{ button_approve }}" class="btn btn-success"><i class="fa fa-check"></i></a> {% endif %}<a href="{{ seller.edit }}" data-toggle="tooltip" title="{{ button_edit }}" class="btn btn-primary"><i class="fa fa-pencil"></i></a></td>
                 </tr>
                 {% endfor %}
                 {% else %}

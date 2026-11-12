@@ -68,6 +68,24 @@ class ControllerMemberSeller extends Controller {
 		$this->getList();
 	}
 
+	public function approve() {
+		$this->load->language('member/seller');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('member/seller');
+
+		if (isset($this->request->get['member_seller_id']) && $this->validateForm()) {
+			$this->model_member_seller->approveSeller((int)$this->request->get['member_seller_id']);
+
+			$this->session->data['success'] = $this->language->get('text_success_approve');
+
+			$this->response->redirect($this->url->link('member/seller', 'user_token=' . $this->session->data['user_token'], true));
+		}
+
+		$this->getList();
+	}
+
 	protected function getList() {
 		$page = isset($this->request->get['page']) ? (int)$this->request->get['page'] : 1;
 
@@ -105,7 +123,9 @@ class ControllerMemberSeller extends Controller {
 				'email'            => $result['support_email'] ? $result['support_email'] : $result['email'],
 				'seller_group'     => $result['seller_group'],
 				'commission'       => $result['commission'] . '%',
-				'status'           => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'status_id'        => (int)$result['status'],
+				'status'           => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_pending'),
+				'approve'          => !$result['status'] ? $this->url->link('member/seller/approve', 'user_token=' . $this->session->data['user_token'] . '&member_seller_id=' . $result['member_seller_id'], true) : '',
 				'edit'             => $this->url->link('member/seller/edit', 'user_token=' . $this->session->data['user_token'] . '&member_seller_id=' . $result['member_seller_id'], true)
 			);
 		}

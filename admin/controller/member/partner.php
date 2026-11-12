@@ -68,6 +68,24 @@ class ControllerMemberPartner extends Controller {
 		$this->getList();
 	}
 
+	public function approve() {
+		$this->load->language('member/partner');
+
+		$this->document->setTitle($this->language->get('heading_title'));
+
+		$this->load->model('member/partner');
+
+		if (isset($this->request->get['member_partner_id']) && $this->validateDelete()) {
+			$this->model_member_partner->approvePartner((int)$this->request->get['member_partner_id']);
+
+			$this->session->data['success'] = $this->language->get('text_success_approve');
+
+			$this->response->redirect($this->url->link('member/partner', 'user_token=' . $this->session->data['user_token'], true));
+		}
+
+		$this->getList();
+	}
+
 	protected function getList() {
 		$page = isset($this->request->get['page']) ? (int)$this->request->get['page'] : 1;
 
@@ -113,7 +131,9 @@ class ControllerMemberPartner extends Controller {
 				'partner_type'      => $result['partner_type'],
 				'partner_tier'      => $result['partner_tier'],
 				'country'           => $result['country_name'],
-				'status'            => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_disabled'),
+				'status_id'         => (int)$result['status'],
+				'status'            => $result['status'] ? $this->language->get('text_enabled') : $this->language->get('text_pending'),
+				'approve'           => !$result['status'] ? $this->url->link('member/partner/approve', 'user_token=' . $this->session->data['user_token'] . '&member_partner_id=' . $result['member_partner_id'], true) : '',
 				'edit'              => $this->url->link('member/partner/edit', 'user_token=' . $this->session->data['user_token'] . '&member_partner_id=' . $result['member_partner_id'], true)
 			);
 		}

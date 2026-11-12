@@ -141,11 +141,9 @@ class ControllerAccountPartner extends Controller {
 		$data['action'] = $this->url->link($route, $token, true);
 		$data['cancel'] = $this->url->link('account/account', $token, true);
 
-		$partner_info = array();
+		$partner_info = $this->getPartnerByMember($this->member->getId());
 
-		if ($this->request->server['REQUEST_METHOD'] != 'POST') {
-			$partner_info = $this->getPartnerByMember($this->member->getId());
-		}
+		$data['partner_pending'] = (!empty($partner_info) && empty($partner_info['status']));
 
 		if (isset($this->request->post['firstname'])) {
 			$data['firstname'] = $this->request->post['firstname'];
