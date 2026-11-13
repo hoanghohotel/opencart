@@ -11,6 +11,16 @@
 <meta name="keywords" content="{{ keywords }}" />
 {% endif %}
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+<script>
+(function() {
+  try {
+    var savedTheme = localStorage.getItem('oc_admin_theme') || localStorage.getItem('oc_theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) {}
+})();
+</script>
 <script type="text/javascript" src="view/javascript/jquery/jquery-3.7.1.min.js"></script>
 <script type="text/javascript" src="view/javascript/bootstrap/js/bootstrap.min.js"></script>
 <link href="view/stylesheet/bootstrap.css" type="text/css" rel="stylesheet" />
@@ -23,6 +33,7 @@
 <link href="view/javascript/codemirror/theme/monokai.css" rel="stylesheet" />
 <link href="view/javascript/summernote/summernote.css" rel="stylesheet" />
 <link type="text/css" href="view/stylesheet/stylesheet.css" rel="stylesheet" media="screen" />
+<link type="text/css" href="view/stylesheet/dark-mode.css" rel="stylesheet" media="screen" />
 {% for style in styles %}
 <link type="text/css" href="{{ style.href }}" rel="{{ style.rel }}" media="{{ style.media }}" />
 {% endfor %}
@@ -45,8 +56,10 @@
 <header id="header" class="navbar navbar-static-top">
   <div class="container-fluid">
     <div id="header-logo" class="navbar-header"><a href="{{ home }}" class="navbar-brand"><img src="view/image/logo.png" alt="{{ heading_title }}" title="{{ heading_title }}" /></a></div>
-    {% if logged %}<a href="#" id="button-menu" class="hidden-md hidden-lg"><span class="fa fa-bars"></span></a>
+    {% if logged %}<a href="#" id="button-menu" class="hidden-md hidden-lg"><span class="fa fa-bars"></span></a>{% endif %}
     <ul class="nav navbar-nav navbar-right">
+      <li><a href="#" class="admin-theme-toggle js-admin-theme-toggle" title="{{ text_theme_toggle|default('Toggle Dark / Light Mode') }}"><i class="fa fa-moon-o js-admin-theme-icon"></i></a></li>
+      {% if logged %}
       <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{{ image }}" alt="{{ firstname }} {{ lastname }}" title="{{ username }}" id="user-profile" class="img-circle" />{{ firstname }} {{ lastname }} <i class="fa fa-caret-down fa-fw"></i></a>
         <ul class="dropdown-menu dropdown-menu-right">
           <li><a href="{{ profile }}"><i class="fa fa-user-circle-o fa-fw"></i> {{ text_profile }}</a></li>
@@ -63,6 +76,30 @@
         </ul>
       </li>
       <li><a href="{{ logout }}"><i class="fa fa-sign-out"></i> <span class="hidden-xs hidden-sm hidden-md">{{ text_logout }}</span></a></li>
+      {% endif %}
     </ul>
-    {% endif %} </div>
+  </div>
 </header>
+<script type="text/javascript">
+$(document).ready(function() {
+  function syncAdminThemeUI(theme) {
+    if (theme === 'dark') {
+      $('.js-admin-theme-icon').removeClass('fa-moon-o').addClass('fa-sun-o');
+    } else {
+      $('.js-admin-theme-icon').removeClass('fa-sun-o').addClass('fa-moon-o');
+    }
+  }
+  var currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+  syncAdminThemeUI(currentTheme);
+  $(document).on('click', '.js-admin-theme-toggle', function(e) {
+    e.preventDefault();
+    var nextTheme = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    try {
+      localStorage.setItem('oc_admin_theme', nextTheme);
+      localStorage.setItem('oc_theme', nextTheme);
+    } catch (err) {}
+    syncAdminThemeUI(nextTheme);
+  });
+});
+</script>

@@ -16,8 +16,19 @@
 {% endif %}
 
 <meta name="agentfy_data" content="{{ agentfy_data|e('html_attr') }}" />
+<script>
+(function() {
+  try {
+    var savedTheme = localStorage.getItem('oc_theme');
+    var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var theme = savedTheme ? savedTheme : (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+  } catch (e) {}
+})();
+</script>
 <link href="application/view/stylesheet/bootstrap.css" rel="stylesheet" />
 <link href="application/view/stylesheet/stylesheet.css" rel="stylesheet" />
+<link href="application/view/stylesheet/dark-mode.css" rel="stylesheet" />
 <link href="application/view/javascript/fontawesome/css/font-awesome.min.css" rel="stylesheet" />
 <link href="application/view/javascript/jquery/datetimepicker/bootstrap-datetimepicker.min.css" type="text/css" rel="stylesheet" media="screen" />
 <script src="application/view/javascript/jquery/jquery-3.7.1.min.js"></script>
@@ -76,9 +87,35 @@
           <li class="visible-xs"><a href="{{ account }}">{{ text_account }}</a></li>
           <li class="visible-xs"><a href="{{ logout }}">{{ text_logout }}</a></li>
           {% endif %}
+          <li class="visible-xs"><a href="#" class="js-theme-toggle theme-toggle-mobile" title="{{ text_theme_toggle }}"><i class="fa fa-moon-o js-theme-icon"></i> <span class="js-theme-label">{{ text_dark_mode }}</span></a></li>
         </ul>
-        <div class="navbar-right hidden-xs">{% if not logged %}<a href="{{ login }}" class="btn btn-link navbar-btn">{{ text_login }}</a> <a href="{{ register }}" class="btn btn-black navbar-btn">{{ text_register }}</a>{% else %}<a href="{{ account }}" class="btn btn-link navbar-btn">{{ text_account }}</a> <a href="{{ logout }}" class="btn btn-black navbar-btn">{{ text_logout }}</a>{% endif %}</div>
+        <div class="navbar-right hidden-xs">{% if not logged %}<a href="{{ login }}" class="btn btn-link navbar-btn">{{ text_login }}</a> <a href="{{ register }}" class="btn btn-black navbar-btn">{{ text_register }}</a>{% else %}<a href="{{ account }}" class="btn btn-link navbar-btn">{{ text_account }}</a> <a href="{{ logout }}" class="btn btn-black navbar-btn">{{ text_logout }}</a>{% endif %} <button type="button" class="btn navbar-btn theme-toggle-btn js-theme-toggle" title="{{ text_theme_toggle }}" aria-label="{{ text_theme_toggle }}" data-dark-label="{{ text_dark_mode }}" data-light-label="{{ text_light_mode }}"><i class="fa fa-moon-o js-theme-icon"></i></button></div>
       </div>
     </div>
   </nav>
 </header>
+<script>
+$(document).ready(function() {
+  function syncThemeUI(theme) {
+    var $btn = $('.js-theme-toggle');
+    var darkLabel = $btn.data('dark-label') || 'Dark Mode';
+    var lightLabel = $btn.data('light-label') || 'Light Mode';
+    if (theme === 'dark') {
+      $('.js-theme-icon').removeClass('fa-moon-o').addClass('fa-sun-o');
+      $('.js-theme-label').text(lightLabel);
+    } else {
+      $('.js-theme-icon').removeClass('fa-sun-o').addClass('fa-moon-o');
+      $('.js-theme-label').text(darkLabel);
+    }
+  }
+  var currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+  syncThemeUI(currentTheme);
+  $(document).on('click', '.js-theme-toggle', function(e) {
+    e.preventDefault();
+    var nextTheme = (document.documentElement.getAttribute('data-theme') === 'dark') ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', nextTheme);
+    try { localStorage.setItem('oc_theme', nextTheme); } catch (err) {}
+    syncThemeUI(nextTheme);
+  });
+});
+</script>

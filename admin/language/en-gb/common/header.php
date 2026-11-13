@@ -10,3 +10,6 @@ $_['text_homepage']      = 'OpenCart Homepage';
 $_['text_support']       = 'Support Forum';
 $_['text_documentation'] = 'Documentation';
 $_['text_logout']        = 'Logout';
+$_['text_theme_toggle']  = 'Toggle Dark / Light Mode';
+$_['text_dark_mode']     = 'Dark Mode';
+$_['text_light_mode']    = 'Light Mode';

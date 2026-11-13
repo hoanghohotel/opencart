@@ -22,6 +22,9 @@ $_['text_login']                = 'Login';
 $_['text_register']             = 'Register';
 $_['text_account']              = 'Account';
 $_['text_logout']               = 'Logout';
+$_['text_theme_toggle']         = 'Toggle Dark / Light Mode';
+$_['text_dark_mode']            = 'Dark Mode';
+$_['text_light_mode']           = 'Light Mode';
 $_['text_confirm_action']       = 'Are you sure?';
 
 // Meta Descriptions & Keywords
