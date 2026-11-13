@@ -1,135 +1,7 @@
 @charset "UTF-8";
 @font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-Extralight-Trial.otf') format('opentype');
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-ExtralightItalic-Trial.otf') format('opentype');
-  font-weight: 200;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-Light-Trial.otf') format('opentype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-LightItalic-Trial.otf') format('opentype');
-  font-weight: 300;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-Regular-Trial.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-RegularItalic-Trial.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-Medium-Trial.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-MediumItalic-Trial.otf') format('opentype');
-  font-weight: 500;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-Semibold-Trial.otf') format('opentype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-SemiboldItalic-Trial.otf') format('opentype');
-  font-weight: 600;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-Bold-Trial.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-BoldItalic-Trial.otf') format('opentype');
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-Extrabold-Trial.otf') format('opentype');
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-ExtraboldItalic-Trial.otf') format('opentype');
-  font-weight: 800;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-Ultra-Trial.otf') format('opentype');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar';
-  src: url('fonts/solar/ABCSolar-UltraItalic-Trial.otf') format('opentype');
-  font-weight: 900;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar Display';
-  src: url('fonts/solar/ABCSolarDisplay-Regular-Trial.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar Display';
-  src: url('fonts/solar/ABCSolarDisplay-Semibold-Trial.otf') format('opentype');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'ABC Solar Display';
-  src: url('fonts/solar/ABCSolarDisplay-Bold-Trial.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
+  font-family: 'Source Sans Pro';
+  src: local('Source Sans Pro Regular'), local('SourceSansPro-Regular'), url('fonts/SourceSansPro-Regular.ttf') format('truetype');
   font-display: swap;
 }
 img[width][height] {
@@ -139,7 +11,6 @@ header .navbar-fixed-top {
   min-height: 80px;
 }
 body {
-  font-family: 'ABC Solar', sans-serif;
   padding-top: 80px;
   color: #000000;
 }
